@@ -1,0 +1,140 @@
+\chapter{Thermodynamics of moist air}
+\label{app:thermodynamics}
+
+
+\section*{Ideal gas law}
+
+The ideal gas law is defined as:
+\begin{equation}
+p = \rho\frac{\mathcal{R}}{M}T
+\label{eq:univGasLaw}
+\end{equation}2
+where $p$ is the pressure (Pa), $\rho$ is density (kg~m$^{-3}$), $\mathcal{R}=\num{8.3145598}$ J~mol$^{-1}$K$^{-1}$ is universal gas constant, $M$ is molar mass (kg~mol$^{-1}$) and $T$ is temperature (K). The specific gas constant $R$ (J~kg$^{-1}$K$^{-1}$)is defined as:
+\begin{equation}
+R = \frac{\mathcal{R}}{M}
+\label{eq:R_to_univR}
+\end{equation}
+and substituting \ref{eq:R_to_univR} into \ref{eq:univGasLaw}
+\begin{equation}
+p = \rho R T
+\label{eq:idealGasLaw}
+\end{equation}
+
+\section*{Partial pressures}
+
+Using Dalton's law of partial pressures, the moist air is consisted of partial pressure of dry air (a) and water vapor (v):
+\begin{equation}
+p = \sum_i p_i  = p_v + p_a
+\label{eq:dalton}
+\end{equation}
+and we assume $p_o\\ p_v+p_a$ and $p_c\ll p_v + p_a$, the partial pressure of oxygen 0$_2$and CO$_2$ is negligible. We assuming that all the species are in thermal equilibrium ($T = T_v = T_a$) and so:
+\begin{equation}
+p = \left(\rho_a R_a + \rho_v R_v \right) T
+\end{equation}
+
+The molar mass of dry air and water vapor are $M_a = \num{18.0149}$ g~mol$^{-1}$ and $M_a=\num{28.964}$ g~mol$^{-1}$, and $R_a = \num{287.055}$ and $R_v = \num{461.5}$ J~kg$^{-1}$K$^{-1}$.
+
+Vapor pressure is related to humidity as:
+\begin{equation}
+\frac{p_v}{p_{\textit{vsat}}} = \phi
+\end{equation}
+where $\textrm{RH}=\phi\times 100$, and $p_{\textit{vsat}}$ is the saturation vapor pressure. The saturation vapor pressure can be determined directly from temperature:
+\begin{equation}
+p_{vsat} = 610.78 \exp \left\{\frac{17.269\ (T - 273.15)}{T - 35.85}\right\}
+\end{equation}
+
+\section*{Mass Fractions}
+
+The mass of moist gas mixture is :
+\begin{equation}
+m = m_v + m_a
+\end{equation}
+where the species of moist gas mixture is water vapor ($v$) and dry air ($a$).
+
+The mass concentration $x_i$ (kg$_i$~kg$^{-1}$) of a given species $i$ is defined as:
+\begin{equation}
+x_i \equiv \frac{m_i}{m}
+\end{equation}
+where $m_i$ (kg$_i$) is the mass of species $i$, and $m$ (kg) is the mass of the gas mixture. The mass fractions are related as:
+\begin{equation}
+\sum_i x_i = x_v + x_a = 1
+\label{eq:totalconc}
+\end{equation}
+
+The absolute humidity or mixing ratio or humidity ratio $w$ (kg~kg$^{-1}$) is defined as:
+\begin{equation}
+w \equiv \frac{m_v}{m_a} = \frac{x_v}{x_a}
+\label{eq:def_w}
+\end{equation}
+where it the mass ratio of water vapor to dry air. Substituting, \ref{eq:totalconc} into \ref{eq:def_w} we get
+\begin{equation}
+w = \frac{x_v}{1 - x_v}
+\label{eq:w_xv}
+\end{equation}
+
+We can rewrite \ref{eq:w_xv} to determine $x_v$ from $w$:
+\begin{equation}
+x_v = \frac{w}{1 + w}
+\label{eq:xv_w}
+\end{equation}
+
+We can determine $w$ from $p_v$:
+\begin{equation}
+w = \frac{p_v/R_v T}{p_a/ R_aT} = \frac{p_v}{p_a}\frac{R_a}{R_v}
+\label{eq:w_to_P}
+\end{equation}
+and substituting \ref{eq:dalton} into \ref{eq:w_to_P}, we get:
+\begin{equation}
+w = \frac{p_v}{p-p_v}\frac{R_a}{R_v}
+\label{eq:pv_to_w}
+\end{equation}
+and rewriting \ref{eq:pv_to_w} for $p_v$, we get:
+\begin{equation}
+p_v = \frac{p w}{R_a/R_v+w}
+\label{eq:w_to_pv}
+\end{equation}
+
+\section*{Enthalpy}
+
+The specific enthalpy $h$ (J~kg$^{-1}$) is defined as:
+
+\begin{equation}
+h = e + \frac{p}{\rho}
+\end{equation}
+
+where $e$ is the specific internal energy. For perfect gas, we have:
+\begin{align}
+\mathrm{d}e &= c_v ~\mathrm{d}T\\
+\mathrm{d}h &= c_p ~\mathrm{d}T
+\end{align}
+where $c_v$ and $c_p$ are the specific heats at constant volume and pressure, respectively.
+\begin{assumption}
+	We assume that the moist air is calorically perfect gas, i.e. $c_v=\textit{constant}$, $c_p=\textit{constant}$
+\end{assumption}
+The specific enthalpy is therefore:
+\begin{equation}
+h = c_p \int^T_{T_{\textit{ref}}} \mathrm{d}T = c_p \left(T - T_{\textit{ref}}\right)
+\end{equation}
+where we take $T_{ref}$ at (0 \si{\degreeCelsius}). The specific enthalpy of moist air is 
+\begin{equation}
+h = \sum_i x_i h_i = x_a h_a + x_v h_v
+\end{equation}
+where
+\begin{equation}
+h_a = c_{pa} \left(T - T_{\textit{ref}}\right)
+\end{equation}
+and 
+\begin{equation}
+h_v = c_{pv} \left(  T - T_{\textit{ref}}\right) + L_v
+\end{equation}
+and $L_v$ is the latent heat of vaporization. Thus the specific heat of moist air becomes:
+\begin{equation}
+h = \left(x_a c_{pa} + x_v c_{pv} \right) \left(T - T_{\textit{ref}}\right)  + x_v L_v
+\end{equation}
+
+Typically, for atmospheric flows with relatively low water vapor concentration, we have $x_v c_{pv} \ll x_a c_{pa}$ and so: 
+
+\begin{equation}
+h \approx x_a c_{pa} \left(T - T_{\textit{ref}}\right)  + x_v L_v
+\end{equation}
+

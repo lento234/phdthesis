@@ -1,0 +1,340 @@
+\chapter{Conservation equations of moist fluid flow}
+\label{app:conservation}
+
+This appendix consists of detailed derivation of conservation of mass, momentum, energy and species of moist fluid flow. Additional details are also provided in the thesis of \cite{Defraeye2011}. The following chapter derives the conservation equation as is in the conservative form. 
+
+\section{Conservation principle}
+
+Let us consider a fluid flow in Euclidean vector space ($\mathbb{R}^3$, $||\cdot||$). The volume of fluid of interest (or control volume CV) is $\Omega \in \mathbb{R}^3$, bounded a surface $\partial\Omega$, with coordinate vector $\mvec{x} = (x,y,z) \in \mathbb{R}^3$. An extensive property in $\Omega$ is defined as an integral of the intensive property:
+\begin{equation}
+\Phi \left( \mvec{x},t \right) \equiv \int_\Omega  \phi  \left( \mvec{x},t \right)\;dV
+\end{equation}
+where $\Phi$ is the extensive property of interest, and $\phi$ is the intensive property. For example, the extensive property mass $m$ (kg), is the integral of density $\rho$ (kg~m$^{-3}$), an intensive property of the fluid. 
+
+The Reynolds transport theorem is:
+\begin{quote}
+	\centering
+	Rate of change of $\Phi$ in $\Omega$\\
+	$=$\\
+	Net rate of loss ($-$) or gain ($+$) of $\phi$ at the boundary (\textit{in and out})\\
+	$+$\\
+	Net rate of transfer of $\phi$ in $\Omega$ (\textit{creation or consumption})
+\end{quote}
+which results in the following equation:
+\begin{equation}
+\frac{\mathrm{d}~}{\mathrm{d}t} \Phi (\mvec{x},t) = \frac{\mathrm{d}~}{\mathrm{d}t}\int_{\Omega} \phi\;\mathrm{d}V = -\int_{\partial\Omega} \phi~\mvec{u}\cdot\hat{\mvec{n}}\;\mathrm{d}A + \int_{\Omega} s\;\mathrm{d}V
+\label{eq:reynoldstransportheromem}
+\end{equation}
+where $\mvec{u}$ is velocity, $\hat{\mvec{n}}$ is the normal vector (\textit{pointing outward}), and $s$ is the positive source term in $\Omega$. Using the divergence theorem,  surface integral can be converted into volume integral
+\begin{equation}
+\int_{\partial\Omega} \phi~\mvec{u}\cdot\hat{\mvec{n}}\;\mathrm{d}A = \int_{\Omega} \nabla \cdot (\phi\mvec{u})\;\mathrm{d}V
+\end{equation}
+and so \ref{eq:reynoldstransportheromem} becomes:
+\begin{equation}
+\frac{d}{dt}\int_{\Omega} \phi\;\mathrm{d}V = -\int_{\Omega} \nabla \cdot (\phi\mvec{u})\;\mathrm{d}V + \int_{\Omega} s\;\mathrm{d}V
+\end{equation}
+
+Using the Leinbiz's rules, the integral and derivative is switched assuming the $\phi$ is continuous in time and space:
+\begin{equation}
+\int_{\Omega}  \frac{\partial}{\partial t}\phi\;\mathrm{d}V = -\int_{\Omega} \nabla \cdot (\phi\mvec{u})\;\mathrm{d}V + \int_{\Omega} s\;\mathrm{d}V
+\end{equation}
+and by combining the terms under the same integral simplifies to:
+\begin{equation}
+\frac{\partial \phi}{\partial t} + \nabla \cdot (\phi\mvec{u}) = s
+\end{equation}
+resulting in the well-known conservation form (or divergence form). Note that the second term in the LHS is a dyad or outer product, i.e.:
+\begin{equation}
+\phi {\mvec{u}} \equiv {\phi _i}{\mvec{u}_j} = \left( {\begin{array}{*{20}{c}}
+{{\phi _1}}\\
+{{\phi _2}}\\
+{{\phi _3}}
+\end{array}} \right)\left( {\begin{array}{*{20}{c}}
+{{u_1}}&{{u_2}}&{{u_3}}
+\end{array}} \right) = \left( {\begin{array}{*{20}{c}}
+{{\phi _1}{u_1}}&{{\phi _1}{u_2}}&{{\phi _1}{u_3}}\\
+{{\phi _2}{u_1}}&{{\phi _2}{u_2}}&{{\phi _2}{u_3}}\\
+{{\phi _3}{u_1}}&{{\phi _3}{u_2}}&{{\phi _3}{u_3}}
+\end{array}} \right)
+\end{equation}
+where the product of two rank-1 tensor (\textit{vector}) results in a rank-2 tensor (\textit{tensor}).
+
+\section{Conservation of mass}
+
+The mass of moist air $m$ (kg) is assumed to consist of dry air $m_a$, water vapour $m_v$ and carbon-dioxide (CO$_2$) $m_{c}$.
+\begin{equation}
+m = m_a + m_v + m_{c}
+\end{equation}
+
+\begin{assumption}
+	We do not model variation in oxygen concentration due to photosynthesis, $m_o = \textit{constant}$.
+\end{assumption}
+
+Applying the Reynolds transport theorem for mass, we can derive the conservation of mass in the fluid domain:
+\begin{quote}
+	\centering
+	Rate of change of mass in $\Omega$\\
+	$=$\\
+	Net rate of loss ($-$) or gain ($+$) of density at the boundary\\
+	$+$\\
+	Net rate of transfer of density in $\Omega$
+\end{quote}
+
+The net mass of gas mixture in the domain is given as:
+\begin{equation}
+m = \int_\Omega  \rho \:\mathrm{d}V
+\end{equation}
+where $\rho$ is density of the gas mixture. The conservation principle also applies for each individual species:
+\begin{equation}
+{m_i} = \int_\Omega  {{\rho _i}\:\mathrm{d}V}
+\end{equation}
+
+The conservation of mass of individual species is given as:
+\begin{equation}
+\frac{\mathrm{d}~}{\mathrm{d}t} {m_i} = \frac{\mathrm{d}~}{\mathrm{d}t} \int \limits_{\Omega} \rho_i\;\mathrm{d}V= - \int \limits_{\partial \Omega } \mvec{g}_i\cdot\hat{\mvec{n}}\;\mathrm{d}A + \int \limits_{\Omega} s_{\rho,i}\;\mathrm{d}V
+\end{equation}
+where $\mvec{g}_i$ is the mass flux of species $i$ at the boundary, and $s_{\rho,i}$ is the source of mass in domain $\Omega$. The rate of loss or gain of gas mixture at the boundary of the domain is sum of convection due bulk fluid motion and diffusion resulted by the concentration gradient. The net flux of density from the control volume $\Omega$ is a combined convection-diffusion equation:
+\begin{equation}
+\int \limits_{\partial \Omega } {{{\mvec{g}}_i}}  \cdot \hat{\mvec{n}}\:\mathrm{d}A = \int \limits_{\partial \Omega } {\left( { - {\rho}{D}\nabla \frac{{{\rho _i}}}{{{\rho}}} + {\rho _i}{\mvec{u}}} \right)}  \cdot \hat{\mvec{n}}\:\mathrm{d}A
+\label{eq:masscde}
+\end{equation}
+where $\mvec{g}_i$ is the mass flux of species $i$, $\rho_i/\rho$ is the mass concentration of species $i$, $D$ is the mass diffusivity (m$^2$s) of species $i$ and $\mvec{u}$ is the bulk / mass-averaged velocity:
+\begin{equation}
+{\mvec{u}} = \frac{{{\Sigma _i}{\rho _i}{{\mvec{u}}_i}}}{{{\Sigma _i}{\rho _i}}}
+\end{equation}
+
+The divergence theorem transforms \ref{eq:masscde} into:
+\begin{equation}
+\int \limits_{\partial \Omega } {{{\mvec{g}}_i}}  \cdot \hat{\mvec{n}}\:\mathrm{d}A = \int \limits_\Omega  \nabla  \cdot {{\mvec{g}}_i}\;\mathrm{d}V = \int \limits_\Omega  \nabla  \cdot \left( { - \rho D\nabla \frac{{{\rho _i}}}{{{\rho }}} + {\rho _i}{\mvec{u}}} \right)\;\mathrm{d}V
+\end{equation}
+
+The resulting conservation of mass for individual species is given as:
+\begin{equation}
+\frac{{\partial {\rho _i}}}{{\partial t}} + \nabla  \cdot \left( {{\rho _i}{\mvec{u}} - {\rho}{D}\nabla \frac{{{\rho _i}}}{{{\rho}}}} \right) = {s_{\rho ,i}}
+\end{equation}
+
+We have following system of equation for quaternary mixture of dry air, water vapour and carbon-dioxide:
+\begin{align}
+\frac{{\partial {\rho _a}}}{{\partial t}} + \nabla  \cdot \left( {{\rho _a}{\mvec{u}} - {\rho }{D}\nabla \frac{{{\rho _a}}}{{{\rho }}}} \right) &= {s_{\rho ,a}}\\
+\frac{{\partial {\rho _v}}}{{\partial t}} + \nabla  \cdot \left( {{\rho _v}{\mvec{u}} - {\rho }{D}\nabla \frac{{{\rho _v}}}{{{\rho }}}} \right) &= {s_{\rho ,v}}\\
+\frac{{\partial {\rho _{c}}}}{{\partial t}} + \nabla  \cdot \left( {{\rho _{c}}{\mvec{u}} - {\rho }{D}\nabla \frac{{{\rho _{c}}}}{{{\rho }}}} \right) &= {s_{\rho ,{c}}}
+\end{align}
+where ${s_{\rho ,a}}$, ${s_{\rho ,v}}$ and ${s_{\rho ,c}}$ are the mass source terms (kg~m$^{-3}$s$^{-1}$).
+
+\begin{assumption}
+	We assume there is no dry air generated in the fluid, ${s_{\rho ,a}} = 0$. 
+\end{assumption}
+
+\begin{assumption}
+	We assume that the source of water vapour is only due to leaf transpiration. Water vapor condensation to water droplets or droplet evaporation and sublimation from ice is neglected. Furthermore, mass change due to chemical reaction is not modelled.
+\end{assumption}
+
+The leaves in control volumes $\Omega$ generate water vapour (from the transpiration process) and extract $CO_2$ during photosynthesis. Therefore, the source of water vapour and $CO_2$ in control volume is:
+\begin{align}
+{s_{\rho ,v}} &= a~ g_{v,leaf}\\
+{s_{\rho ,c}} &= a~ g_{c,leaf}
+\end{align}
+where $a$ is the leaf area density (m$^2$m$^{-3}$), and $g_{v,\mathit{leaf}}$ and $g_{c,\mathit{leaf}}$ are the water vapour and $CO_2$ mass flux from the surface of the leaf (kg~m$^{-2}$s$^{-1}$).
+
+Thus the conservation of mass of gas mixture is written as:
+\begin{equation}
+\frac{{\partial {\rho}}}{{\partial t}} + \nabla  \cdot \left( {{\rho }{\mvec{u}}} \right) = s_{\rho,v} + s_{\rho,c}
+\end{equation}
+
+\begin{assumption}
+The order of magnitude of water vapour mass source $\mathcal{O}\left(s_{\rho,v}\right)\approx10^{-4}$ and $CO_2$ mass source $\mathcal{O}\left(s_{\rho,c}\right)\approx10^{-6}$ \citep{Hiraoka2005}. Therefore the mass source of $CO_2$ is negligible compared to water vapour.
+\end{assumption}
+
+\begin{assumption}
+The continuity equation is used to solve the momentum equation. In the momentum equation, the momentum contribution due to the mass source can be assumed to be negligible w.r.t to the drag force terms.
+\end{assumption}
+
+Therefore, when solving the Navier-Stokes equations, the conservation of mass can be simplified to
+\begin{equation}
+\frac{{\partial {\rho}}}{{\partial t}} + \nabla  \cdot \left( {{\rho }{\mvec{u}}}\right) = 0
+\end{equation}
+
+\section{Conservation of momentum}
+
+Newton's second law of motion is given as:
+\begin{equation}
+{\mvec{F}} = \frac{\mathrm{d}~}{{\mathrm{d}t}}m{\mvec{u}}=\frac{\mathrm{d}~}{{\mathrm{d}t}} \int \limits_\Omega  \rho {\mvec{u}}\;\mathrm{d}V
+\end{equation}
+where $\mvec{F}$ is the net force (N). The forces that act on the fluid are body forces (directly on volumetric mass) such as gravitational, electric, magnetic and if we have vegetation if modelled as porous media (source/sink). The vegetation is not directly modelled, but their contribution to the fluid is taken as source and sink terms in conservation equations. The surface forces are acting on the surface of fluid, such as pressure force, normal and shear stresses on the surface. These contribution can be regarded influences from neighboring fluid parcels.
+
+Conservation of momentum is given as: 
+\begin{quote}
+	\centering
+	Rate of change of momentum in $\Omega$\\
+	$=$\\
+	Net rate of loss ($-$) or gain ($+$) of density at the boundary\\
+	$+$\\
+	Net rate of transfer of momentum in $\Omega$
+\end{quote}
+
+In addition to the convective loss of momentum at the boundary, in Reynolds transport theorem, stress at the boundary of the domain results in loss of momentum. The Cauchy stress tensor $\bar{\bar{\sigma}}$ defined as:
+\begin{equation}
+\bar{\bar{\sigma}} = \left( {\begin{array}{*{20}{c}}
+	{{\sigma _{11}}}&{{\sigma _{12}}}&{{\sigma _{13}}}\\
+	{{\sigma _{21}}}&{{\sigma _{22}}}&{{\sigma _{23}}}\\
+	{{\sigma _{31}}}&{{\sigma _{32}}}&{{\sigma _{33}}}
+	\end{array}} \right) = \left( {\begin{array}{*{20}{c}}
+	{{\sigma _x}}&{{\tau _{xy}}}&{{\tau _{xz}}}\\
+	{{\tau _{yx}}}&{{\sigma _y}}&{{\tau _{yz}}}\\
+	{{\tau _{zx}}}&{{\tau _{zy}}}&{{\sigma _z}}
+	\end{array}} \right)
+\end{equation}
+where the diagonal terms are normal stresses and the non-diagonal terms are the shear stresses. The resulting Reynolds transport theorem for momentum equation of a gas mixture, 
+\begin{equation}
+{\mvec{F}} = \frac{\mathrm{d}~}{{\mathrm{d}t}} \int \limits_\Omega  {\rho }{{\mvec{u}}}\mathrm{d}V =  - \int \limits_{\partial\Omega}  \left( \rho \mvec{u}\mvec{u} - \bar{\bar{\sigma}}\right) \cdot \hat{\mvec{n}}\;\mathrm{d}A + \int \limits_\Omega \mvec{f} \mathrm{d}V + \int \limits_\Omega \mvec{s}_{u} \mathrm{d}V
+\end{equation}
+
+Applying the divergence theorem, we get
+\begin{equation}
+\frac{\mathrm{d}~}{{\mathrm{d}t}} \int \limits_\Omega  {\rho }{{\mvec{u}}}\mathrm{d}V =  - \int \limits_{\Omega}  \nabla \cdot \left(\rho \mvec{u} \mvec{u} \right)\; \mathrm{d}V +  \int \limits_\Omega \nabla \cdot \bar{\bar{{\sigma}}}\;\mathrm{d}V + \int \limits_\Omega \mvec{f} \mathrm{d}V + \int \limits_\Omega \mvec{s}_{u} \mathrm{d}V
+\end{equation}
+
+And combining under same integral, assuming momentum is continuous in space and time:
+\begin{equation}
+\int \limits_\Omega \left[ \frac{\partial}{\partial t} \left(\rho \mvec{u} \right) + \nabla \cdot \left(\rho \mvec{u}\mvec{u} \right) - \nabla \cdot \bar{\bar{{\sigma}}} - \mvec{f} -  \mvec{s}_{u} \right]\; \mathrm{d}V = 0
+\end{equation}
+
+Therefore, the following relationship also satisfies:
+\begin{equation}
+\frac{\partial}{\partial t} \left(\rho \mvec{u} \right) + \nabla \cdot \left(\rho \mvec{u}\mvec{u} \right) = \nabla \cdot \bar{\bar{{\sigma}}} +  \mvec{f} +  \mvec{s}_{u}
+\end{equation}
+
+The cauchy stress tensor $\bar{\bar{{\sigma}}}$ can be decomposed into the deviatoric and the hydrostatic component:
+\begin{equation}
+\bar{\bar{{\sigma}}} =  \underbrace{ \frac{1}{3}\mathrm{tr}\left(\bar{\bar{{\sigma}}}\right) \textbf{I} }_\text{hydrostatic}  + \underbrace{ \bar{\bar{{\sigma}}} - \frac{1}{3}\mathrm{tr}\left(\bar{\bar{{\sigma}}} \right)\textbf{I} }_\text{deviatoric}
+\end{equation}
+
+The hydrostatic stress component is the isotropic pressure, $\mathrm{tr}\left(\bar{\bar{{\sigma}}} \right)/3 = -p$ and the deviatoric component is the shear-stress tensor $\bar{\bar{{\tau}}}$. Thus, the Cauchy stress tensor becomes:
+\begin{equation}
+\bar{\bar{\sigma}} = -p\textbf{I} + \bar{\bar{{\tau}}}
+\end{equation}
+
+\begin{assumption}
+	We assume Newtonian fluid, and therefore the viscous shear stress is symmetric and assumed to be linearly proportional to the local strain rate and equivalently the velocity gradient. 
+\end{assumption}
+
+Applying the Newtonian fluid hypothesis:
+\begin{equation}
+\bar{\bar{{\tau}}} = \mu \left( \nabla \mvec{u} + \left(\nabla \mvec{u} \right)^T - \frac{2}{3} \left(\nabla \cdot \mvec{u} \right) \textbf{I} \right) + \lambda \left(\nabla \cdot \mvec{u} \right)\textbf{I}
+\end{equation}
+where $\mu$ is the first coefficient of viscosity (i.e. dynamic viscosity), and $\lambda$ is the second coefficient of viscosity. Thus:
+\begin{equation}
+\begin{split}
+\frac{\partial}{\partial t} \left(\rho \mvec{u} \right) &+ \nabla \cdot \left(\rho \mvec{u}\mvec{u} \right) = \\
+&\nabla \cdot \left[ -p\textbf{I} + \mu \left( \nabla \mvec{u} + \left(\nabla \mvec{u} \right)^T - \frac{2}{3} \left(\nabla \cdot \mvec{u} \right) \textbf{I} \right) + \lambda \left(\nabla \cdot \mvec{u} \right)\textbf{I}\right]\\
+& + \mvec{f} +  \mvec{s}_{u}
+\end{split}
+\end{equation}
+and so:
+\begin{equation}
+\begin{split}
+\frac{\partial}{\partial t} \left(\rho \mvec{u} \right) &+ \nabla \cdot \left(\rho \mvec{u}\mvec{u} \right) = - \nabla p + \nabla \cdot \left[ \mu \left( \nabla \mvec{u} + \left(\nabla \mvec{u} \right)^T \right) \right] \\
+& + \nabla \cdot \left[ \left( \lambda - \frac{2}{3}\mu \right) \left(\nabla \cdot \mvec{u} \right) \textbf{I} \right] +  \mvec{f} +  \mvec{s}_{u}
+\end{split}
+\end{equation}
+
+\begin{assumption}
+We assume the only body forces are due to gravitational acceleration.
+\end{assumption}
+
+\begin{equation}
+\begin{split}
+\frac{\partial}{\partial t} \left(\rho \mvec{u} \right) &+ \nabla \cdot \left(\rho \mvec{u}\mvec{u} \right) = - \nabla p + \nabla \cdot \left[ \mu \left( \nabla \mvec{u} + \left(\nabla \mvec{u} \right)^T \right) \right] \\
+& + \nabla \cdot \left[ \left( \lambda - \frac{2}{3}\mu \right) \left(\nabla \cdot \mvec{u} \right) \textbf{I} \right] +  \rho \mvec{g} +  \mvec{s}_{u}
+\end{split}
+\end{equation}
+
+The source terms due to vegetation is:
+\begin{equation}
+\mvec{s}_u = - \rho c_d a \left|\mvec{u}\right| \mvec{u}
+\end{equation}
+
+\section{Conservation of Energy}
+
+First law of thermodynamics:
+\begin{equation}
+dE = \delta Q + \delta W
+\end{equation}
+where $dE$ is the change in total internal energy of the system, $\delta Q$ is the heat added to the system, and $\delta W$ is the work done on the system. The total energy per unit mass of mixture is:
+\begin{equation}
+E = e + \frac{\left| \mvec{u} \right|^2}{2} + gz 
+\end{equation}
+where $e$ is the internal energy $|\mvec{u}|^2/2$ is the kinetic energy, and $gz$ is the potential energy. The internal energy of a gas mixture can be related to enthalpy and kinetic theory of gas:
+\begin{equation}
+e = h - RT = h - \frac{p}{\rho}
+\end{equation}
+where $R$ is the gas constant. The total enthalpy of the gas mixture is defined in Appendix \ref{app:thermodynamics}. Therefore, total energy of the gas mixture is:
+\begin{equation}
+E = \sum_i x_i h_i - \frac{p}{\rho} + \frac{\left| \mvec{u} \right|^2}{2} + gz
+\label{eq:energysimple}
+\end{equation}
+
+The conservation of energy is given as:
+\begin{equation}
+\frac{\partial }{{\partial t}}\left( {{\rho }{E}} \right) + \nabla  \cdot \left( {{\rho }{E}{\mvec{u}}} \right) =  - \nabla  \cdot {\mvec{q}} - \nabla  \cdot \left( {{p}{\mvec{u}}} \right) - \nabla  \cdot \left(  \bar{\bar{{\tau}}} \cdot \mvec{u} \right) + s_h
+\label{eq:energy1}
+\end{equation}
+where $\nabla \cdot \left(p\mvec{u}\right)$ is the work done due to pressure force, and $\nabla  \cdot \left(  \bar{\bar{{\tau}}} \cdot \mvec{u} \right)$ is the work done due to viscous force, and $s_h$ rate of energy added into the system, i.e. the energy source.
+
+Substituting \ref{eq:energysimple} into \ref{eq:energy1} gives:
+\begin{equation}
+\begin{split}
+&\frac{\partial }{\partial t} \left\{\rho \left( \sum_i x_i h_i  - \frac{p}{\rho} + \frac{\left| \mvec{u} \right|^2}{2} + gz  \right) \right\}\\
+& \hspace{5em} + \nabla  \cdot \left\{ \rho \left(   \sum_i x_i h_i  - \frac{p}{\rho} + \frac{\left| \mvec{u} \right|^2}{2} + gz  \right) \mvec{u} \right\} \\
+& \hspace{10em}  =  - \nabla  \cdot \mvec{q} + s_h
+\end{split}
+\end{equation}
+and taking $\rho$ inside and substituting $\rho_i = \rho x_i $ gives:
+\begin{equation}
+\begin{split}
+&\frac{\partial }{\partial t} \left( \sum_i \rho_i h_i  - p + \frac{\rho \left| \mvec{u} \right|^2}{2} + \rho gz  \right) \\
+& \hspace{5em} + \nabla  \cdot \left\{ \left(   \sum_i \rho_i h_i  - p + \frac{\rho \left| \mvec{u} \right|^2}{2} + \rho gz  \right) \mvec{u} \right\} \\
+& \hspace{10em} =  - \nabla  \cdot \mvec{q} + s_h
+\end{split}
+\label{eq:energy2}
+\end{equation}
+
+\begin{assumption}
+	We assume pressure, potential energy and kinetic energy variation is small. 
+\end{assumption}	
+
+Therefore, Eq. \ref{eq:energy2} simplifies to:
+\begin{equation}
+\frac{\partial }{\partial t} \left( \sum_i \rho_i h_i \right) +   \nabla  \cdot \left( \sum_i \rho_i h_i \mvec{u}\right) =  - \nabla  \cdot \mvec{q} + s_h
+\end{equation}
+and decomposing for different species gives:
+\begin{align}
+	\frac{\partial }{\partial t} \left( \rho_a h_a \right) +   \nabla  \cdot \left( \rho_a h_a \mvec{u}\right) =  - \nabla  \cdot \mvec{q} + s_{h,a}\\
+	\frac{\partial }{\partial t} \left( \rho_v h_v \right) +   \nabla  \cdot \left( \rho_v h_v \mvec{u}\right) =  - \nabla  \cdot \mvec{q} + s_{h,v}
+\end{align}
+
+The energy source for dry air is:
+\begin{equation}
+s_{h,a} = a~ q_{sen,leaf,a}
+\end{equation}
+where $a$ is the leaf area density (m$^{2}$~m$^{-3}$) and
+\begin{equation}
+q_{sen,leaf,a} = h_c \left(T_l - T\right)
+\end{equation}
+is the sensible heat flux (W~m$^{-2}$) with $h_c$ the convective heat transfer coefficient, $T_l$ is the leaf temperature, and $T$ is the air temperature. The energy source of water vapor $s_{h,v}$ is defined as:
+\begin{equation}
+s_{h,v} = a ~ \left( q_{sen,leaf,v}  + q_{lat,leaf} \right)
+\end{equation}
+where:
+\begin{equation}
+q_{sen,leaf,v} = c_{p,v} \left(T_l - T\right) ~ g_{v,leaf}
+\end{equation}
+with $c_{p,v}$ the specific heat capacity of water vapor, $g_{v,leaf}$ is the leaf transpiration rate and
+\begin{equation}
+q_{lat,leaf} = k_s \frac{p_{v,sat}(T_l) - p_v}{p}
+\end{equation}
+is the latent heat flux, $k_s$ is the stomatal conductance, $p_{v,sat}(T_l)$ is the saturation vapor pressure at leaf surface, and $p_v$ is the partial vapor pressure. Finally, the energy source of CO$_2$ is 
+\begin{equation}
+q_{sen,leaf,c} = c_{p,c} \left(T_l - T\right)~A_n
+\end{equation}
+where $A_n$ is the CO$_2$ assimilation rate.
+

@@ -1,0 +1,230 @@
+\chapter{Statistics of turbulent flow}
+\label{app:statistics}
+
+\section*{Probability}
+
+We define $X$ a random (stochastic) variable of the turbulent flow with a set of outcomes $X = \left\{x_1, x_2, ..., x_n\right\}$. The mean of a random variable $X$ is defined as:
+\begin{equation}
+{\langle X \rangle} \equiv \mathbb{E} \left[X \right] = \frac{1}{N} \sum_{n=1}^{N} x_{n}
+\end{equation}
+where $\langle X \rangle$ is the stochastic mean, or statistical average or expected value, or ensemble average \citep{Sagaut,Pope} of $N$ realization assuming that each realization $x_n$ is independent and are of the same distribution, i.e. \textit{independent and identically distributed} (i.i.d)  The \textit{central-limit theorem} states that as $N$ approaches to infinity, the distribution of $X$ become normal (Gaussian) with a probability density function (PDF) of:
+\begin{equation}
+f(x_n;\mu, \sigma^2) = \frac{1}{\sigma \sqrt{2\pi}} \exp \left\{ -\frac{1}{2} \left(\frac{x_n - \mu}{\sigma}\right)^2 \right\}
+\end{equation}
+where $\mu$ is the mean. The $r$-th centered moment of $X$ is defined as:
+\begin{equation}
+\mu^r = \frac{1}{N} \sum_{n=1}^{N} \left( x_n - \langle X \rangle\right)^r
+\end{equation}
+with variance of $X$ denoted as $\mathrm{Var}\left(X\right)$ and is the second order centered moment:
+\begin{equation}
+\mathrm{Var}\left(X\right)\equiv \mathbb{E} \left[ \left(X - \mu\right)^2 \right] = \frac{1}{N} \sum_{n=1}^{N} \left( x_n - \langle X \rangle\right)^2
+\end{equation}
+and the standard deviation is simply:
+\begin{equation}
+\sigma = \sqrt{ \mathrm{Var}\left(X\right) }
+\end{equation}
+
+The higher-order moments also provide additional informational such as \textit{skewness} (3$^{\mathrm{rd}}$-order) which measures the asymmetry of the PDF and the \textit{kurtosis} (4$^{\mathrm{th}}$-order) which measures the peakedness of the PDF.
+
+The covariance of two random variables $X$ and $Y$ is defined as:
+\begin{equation}
+\mathrm{Cov}\left(X, Y \right) \equiv \mathbb{E} \left[ \left(X - \mu_{X}\right) \left(Y - \mu_{Y}\right) \right] = \frac{1}{N} \sum_{n=1}^{N} \left( x_n - \langle X \rangle\right)  \left( y_n - \langle Y \rangle\right)
+\end{equation}
+
+
+\section*{Reynolds decomposition}
+
+The stochastic variable of the turbulent flow such as the velocity $u$ can be decomposed into mean $\langle u \rangle$ and turbulent component $u'$. The turbulent fluctuation $u'$ of the random variable is defined as:
+\begin{equation}
+u' = u - \langle u \rangle
+\end{equation}
+and by definition $\langle u' \rangle \equiv 0$. So, the flow field is decomposed into:
+\begin{equation}
+u = \langle \phi \rangle + \phi' = \overline{\phi} + \phi'
+\end{equation}
+
+Assuming an ergodic process, we have that:
+\begin{equation}
+\langle \phi \rangle = \overline{\phi} = \lim\limits_{T\rightarrow\infty}\frac{1}{T} \int_{0}^{T} \phi(t)\;\mathrm{d}t
+\end{equation}
+the time average is the same as average in the probability space.
+
+\section*{Time-averaged Navier-Stokes}
+
+The mean velocity is defined as:
+\begin{equation}
+\overline{u} = \frac{1}{N} \sum_n^N u_n
+\end{equation}
+of $N$ realizations assuming i.i.d. The variance is defined as:
+\begin{equation}
+\overline{u'^2} = \frac{1}{N-1} \sum_n^N \left(u_n - \overline{u} \right)^2
+\end{equation}
+with the Bessel's correction and $\sqrt{\overline{u'^2}} = \sigma_u$ is the standard deviation. The turbulent intensity $I_u$ of $u$ is defined as:
+\begin{equation}
+I_u = \frac{\sigma_u}{\overline{u}}
+\end{equation}
+
+ The covariance is defined as:
+\begin{equation}
+\overline{u'v'} = \frac{1}{N-1} \sum_n^N \left(u_n - \overline{u} \right) \left(v_n - \overline{v} \right)
+\end{equation}
+
+For a vector velocity field $\mvec{u} = (u,v,w)$, the covariance matrix is given as:
+\begin{equation}
+\overline{\mvec{u}'\mvec{u}'} = \left[ {\begin{array}{*{20}{c}}
+{\overline{u'u'}}&{\overline{u'v'}}&{\overline{u'w'}}\\
+{}&{\overline{v'v'}}&{\overline{v'w'}}\\
+{}&{}&{\overline{w'w'}}
+\end{array}} \right]
+\end{equation}
+and is symmetric and positive semi-definite. The covariance matrix in the context of turbulent flow is known as the \textit{Reynolds stress tensor} $\mathbf{R}$. The turbulent kinetic energy (TKE) is defined as:
+\begin{equation}
+k \equiv \frac{1}{2} \mathrm{tr} \left(\mathbf{R}\right) = \frac{1}{2} \left(\overline{u'u'} + \overline{v'v'} + \overline{w'w'}\right)
+\end{equation}
+
+\section*{Sample uncertainty}
+
+The standard error (SE) of the sample mean velocity $\overline{u}$ is given as:
+\begin{equation}
+\mathrm{SE}_{\overline{u}} \equiv \sqrt{\frac{\mathrm{Var}\left(u\right)}{N}} = \sqrt{\frac{\sigma_u^2}{N}} = \frac{\sigma_u}{\sqrt{N}}
+\end{equation}
+and quantifies the uncertainty of the mean velocity \citep{Wieneke2017}. The standard error of sample variance of $u$ is:
+\begin{equation}
+\mathrm{SE}_{\sigma_{u}} \equiv \sqrt{\frac{\mathrm{Var}\left(\sigma_{u}^2\right)}{N}} = \sqrt{\frac{2\sigma_{u}^4}{N-1}} = \sigma_{u}^2 \sqrt{\frac{2}{N-1}}
+\end{equation}
+
+We assume uncorrelated samples $N$, however if the population is correlated, the effective number of independent samples $N_{\textit{eff}}$ is defined as:
+\begin{equation}
+N_{\textit{eff}} = \frac{N}{\sum_{-\infty}^{\infty} \rho \left(n \Delta t\right)} \cong \frac{T}{2 T_{\textit{int}}}
+\end{equation}
+where $\rho$ is the auto-correlation coefficient, $\Delta t$ is the sample frequency, $T_{\textit{int}}$ is the integral time scale.
+
+where $Z_{\alpha/2}$ is the coefficient of confident ( $Z_{\alpha/2}=1.96$ for confidence level of 95\%) and the relative standard error on the standard deviation (i.e $\sqrt{R_{ii}}$) is:
+\begin{equation}
+\epsilon_{\sigma_{u_i}} = \frac{Z_{\alpha/2}}{\sqrt{N}}
+\end{equation}
+
+The statistics of the flow field can be determined by performing multiple measurements of size $N$ and performing statistics of measurement such as mean, standard deviation`and further higher-moments. The primary requirements of constructing statistics is that measurement samples are \textit{independent and identically distributed} (or iid). To obtain iid. sample, we require the samples to be uncorrelated (i.e. independent) from each other. This can be ensured by enforcing acquisition frequency of the samples are larger than the integral time scale, satisfying the Nyquist sampling theorem:
+
+\begin{equation}
+f_{acq} \le \frac{1}{2 \mathcal{T}}
+\end{equation}
+
+where $f_{acq}$ is acquisition frequency and $T_I$ is the integral time scale. A crude estimate of the $T_I$ is from the characteristics length and speed:
+
+\begin{equation}
+\mathcal{T} = \frac{\mathcal{L}}{U}
+\end{equation}
+
+and so:
+
+\begin{equation}
+f_{acq} \le \frac{U}{2 \mathcal{L}}
+\end{equation}
+
+Ensuring the sampling rate below $f_{acq}$, the obtained sample population can be ensured to be a normal distribution. Thus, the probabilistic and statistical methods can be applied to the sample population, such as calculating the mean, std. deviation and so on.
+
+
+
+\section{Dimensional analysis}
+
+\subsection*{Reynolds number}
+
+\begin{equation}
+Re = \frac{U L}{\nu}
+\end{equation}
+
+\subsection*{Turbulent cascade}
+The turbulent cascade proposed by Richardson consists of three scales: Injection scale, Inertial scale and dissipative scale. The injection scale corresponds to the scale where the driving energy of the flow resides and is where the energy cascade starts. The dissipative scale is where the energy cascade stops and is dominated by dissipation to thermal energy. The inertial scale is in between the energy scale and the dissipative scale.
+
+\subsection*{Kolmogorov scales}
+
+Length scale:
+\begin{equation}
+\eta \sim \left(\frac{\nu^3}{\varepsilon}\right)^{1/4}
+\end{equation}
+
+Time scale:
+\begin{equation}
+\tau \sim \left(\frac{\nu}{\varepsilon}\right)^{1/2}
+\end{equation}
+
+
+\section*{Turbulent kinetic energy production}
+
+TKE or $k$ is 
+
+\begin{equation}
+k = \frac{1}{2} \mathrm{tr}(\overline{\mvec{u}'\mvec{u}'}) = \frac{1}{2} \overline{u_i' u_i'}
+\end{equation}
+
+Transport of TKE:
+\begin{equation}
+\begin{split}
+\frac{\partial k}{\partial t} + \overline{\mvec{u}}\cdot\nabla k = \nabla \cdot &\left( - \frac{\overline{\mvec{u}'p'}}{\rho}- \overline{(\mvec{u}'\cdot\mvec{u}')\mvec{u}'} + \nu \nabla k\right) \\
+&\underbrace{ - \overline{\mvec{u}'\mvec{u}'}:\nabla\overline{\mvec{u}}}_{\mathcal{P}} - \underbrace{ \nu \overline{\nabla \mvec{u}'\nabla \mvec{u}'} }_{\varepsilon}
+\end{split}
+\end{equation}
+where $\nabla \cdot \left( \overline{\mvec{u}'p'} / \rho \right)$ is pressure diffusion, $\nabla \cdot \overline{(\mvec{u}'\cdot\mvec{u}')\mvec{u}'}$ is turbulence transport, $\nu\nabla^2k$ is molecular viscous transport, $- \overline{\mvec{u}'\mvec{u}'}:\nabla\overline{\mvec{u}}$ is TKE production and $-\nu \overline{\nabla \mvec{u}'\nabla \mvec{u}'}$ is TKE dissipation. The closure for TKE is based on gradient diffusion hypothesis
+\begin{equation}
+\frac{\overline{\mvec{u}'p'}}{\rho} + \overline{(\mvec{u}'\cdot\mvec{u}')\mvec{u}'} = - \frac{\nu_t}{\sigma_k} \nabla k
+\end{equation}
+and so:
+\begin{equation}
+\frac{\partial k}{\partial t} + \overline{\mvec{u}}\cdot\nabla k = \nabla \cdot \left[ \left( \nu + \frac{\nu_t}{\sigma_k} \right) \nabla k\right] + \mathcal{P}_k - \varepsilon
+\end{equation}
+or in Einstein notation:
+\begin{equation}
+\pde{k}{t} + \overline{u}_j\pde{k}{x_j} = \pde{}{x_j}\left[\left( \nu + \frac{\nu_t}{\sigma_k} \right) \pde{k}{x_j}\right] + \mathcal{P}_k - \varepsilon
+\end{equation}
+
+The TKE production $\mathcal{P}_k$ is defined as:
+\begin{equation}
+\begin{split}
+\mathcal{P}_k \equiv  - \overline{\mvec{u}'\mvec{u}'}:\nabla\overline{\mvec{u}} =& \overline{u'u'}\frac{\partial \overline{u}}{\partial x} + \overline{v'v'}\frac{\partial \overline{v}}{\partial y} + \overline{w'w'}\frac{\partial \overline{w}}{\partial z}\\
+&+ \overline{u'v'} \left( \frac{\partial \overline{u}}{\partial y} + \frac{\partial \overline{v}}{\partial x}  \right)\\
+&+ \overline{u'w'} \left( \frac{\partial \overline{u}}{\partial z}  + \frac{\partial \overline{w}}{\partial x}  \right)\\
+&+ \overline{v'w'} \left( \frac{\partial \overline{v}}{\partial z}  + \frac{\partial \overline{w}}{\partial y}  \right)
+\end{split}
+\end{equation}
+and in Einstein notation:
+\begin{equation}
+\mathcal{P}_k \equiv - \overline{u'_i u'_j}\pde{\overline{u_i}}{x_j}
+\end{equation}
+
+
+\section*{Turbulent dissipation rate}
+
+The TKE dissipation rate or (TDR) $\varepsilon$ is defined as:
+\begin{equation}
+\varepsilon \equiv 2 \nu \overline{\textbf{s}':\textbf{s}'}
+\end{equation}
+where 
+\begin{equation}
+\textbf{s}' = \frac{1}{2} \left(\nabla \mvec{u}' + \left(\nabla \mvec{u}'\right)^T\right)
+\end{equation}
+and in Einstein notation is defined as:
+\begin{equation}
+\varepsilon  \equiv 2\nu \overline {{s'_{\textit{ij}}}{s'_{\textit{ij}}}}  = \nu \overline {\left( {\frac{{\partial {u'_i}}}{{\partial {x_j}}} + \frac{{\partial {u'_j}}}{{\partial {x_i}}}} \right) \cdot \left( {\frac{{\partial {u'_i}}}{{\partial {x_j}}} + \frac{{\partial {u'_j}}}{{\partial {x_i}}}} \right)}
+\end{equation}
+
+
+\section*{Bousinessq hypothesis}
+
+\begin{equation}
+- \overline {\mvec{u}'\mvec{u}'}  + \frac{2}{3}k \textbf{I} = {\nu_t}\left( \nabla \overline{\mvec{u}} + \left(\nabla \overline{\mvec{u}}\right)^T \right)
+\end{equation}
+where
+\begin{equation}
+\overline{\textbf{s}} = \frac{1}{2}\left( \nabla \overline{\mvec{u}} + \left(\nabla \overline{\mvec{u}}\right)^T \right)
+\end{equation}
+
+and the error of Bousinessq hypothesis: 
+\begin{equation}
+\epsilon_t = \left\| \textbf{a} - 2{\nu_t}\overline {\textbf{s} } \right\|
+\end{equation}
+
+The eddy-viscosity is closed using $k-\varepsilon$ equations:
+\begin{equation}
+\nu_t = C_{\mu}\frac{k^2}{\varepsilon}
+\end{equation}

@@ -1,0 +1,59 @@
+% ****************************************************************************
+% chapterthumbs.sty
+% 
+% Copyright (C) 2018 Lento Manickathan
+% 
+% Description: Style package to make chapter thumbs
+% 
+% Date: 23rd Oct 2018
+%
+% ****************************************************************************
+
+
+\RequirePackage{fancytabs}
+\RequirePackage{ifthen}
+
+\fancytabsLeftColor{gray!80}
+\fancytabsRightColor{gray!80}
+\fancytabsHeight{3cm}
+\fancytabsStyle{\color{white}\large\scshape}
+
+\newcommand{\leftfancytab}[2]{%
+	\begin{tikzpicture}[remember picture,overlay]%
+	\node[yshift={-1*(\the\tab@top+\the\tab@height/2+
+		mod(#2-1-\tab@floor,\tab@count)*
+		(\the\tab@height+\the\tab@gap))},
+	%              xshift=-0.5*\the\tab@width]
+	xshift=0.0*\the\tab@width,inner sep=0,outer sep=0,draw=gray!80]
+	at (current page.north west) {
+		\tikz\shade[shading=axis,bottom color=\tab@leftcolor,inner sep=0,outer sep=0,
+		top color=\tab@rightcolor,shading angle=-90]
+		(0,0) rectangle (\the\tab@width,\the\tab@height)
+		node[rotate=0,draw=gray!80]
+		at (0.4*\the\tab@width,0.5*\the\tab@height) % 		at (\tab@texthpos*\the\tab@width,\tab@textvpos*\the\tab@height)
+		{\rotatebox{90}{\tab@style Chapter #1}};%
+	};%
+	\end{tikzpicture}%
+}
+
+\newcommand{\rightfancytab}[2]{%
+	\begin{tikzpicture}[remember picture,overlay]%
+	\node[yshift={-1*(\the\tab@top+\the\tab@height/2+
+		mod(#2-1-\tab@floor,\tab@count)*
+		(\the\tab@height+\the\tab@gap))},
+	%              xshift=-0.5*\the\tab@width]
+	xshift=-1.*\the\tab@width,inner sep=0,outer sep=0,draw=gray!80]
+	at (current page.north east) {
+		\tikz\shade[shading=axis,bottom color=\tab@leftcolor,inner sep=0,outer sep=0,
+		top color=\tab@rightcolor,shading angle=90]
+		(0,0) rectangle (\the\tab@width,\the\tab@height)
+		node[rotate=0,draw=gray!80]
+		at (0.4*\the\tab@width,0.5*\the\tab@height) % 		at (\tab@texthpos*\the\tab@width,\tab@textvpos*\the\tab@height)
+		{\rotatebox{-90}{\tab@style Chapter #1}};%
+	};%
+	\end{tikzpicture}%
+}
+
+\cohead[\if@mainmatter \ifthenelse{\equal{\chapapp}{\chaptername}}{\rightfancytab{\thechapter}{\thechapter}}{} \fi]{\if@mainmatter\ifthenelse{\equal{\chapapp}{\chaptername}}{\rightfancytab{\thechapter}{\thechapter}}{} \fi}
+
+\cehead[\if@mainmatter \ifthenelse{\equal{\chapapp}{\chaptername}}{\leftfancytab{\thechapter}{\thechapter}}{} \fi]{\if@mainmatter\ifthenelse{\equal{\chapapp}{\chaptername}}{\leftfancytab{\thechapter}{\thechapter}}{} \fi}

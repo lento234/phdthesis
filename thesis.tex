@@ -1,0 +1,178 @@
+
+%------------------------------------------------------------
+% Create document
+\documentclass[
+ 10pt,
+ %	    a5paper,
+ a4paper,
+ footinclude=true,
+ headinclude=true,
+ numbers=noenddot,
+]{scrbook}
+%------------------------------------------------------------
+
+%------------------------------------------------------------
+% Thesis description
+\newcommand{\myTitle}{Impact of Vegetation on Urban Microclimate}
+\newcommand{\myName}{Lento Manickathan}
+\newcommand{\myProf}{Jan Carmeliet}
+\newcommand{\myDepartment}{Department of Mechanical and Process Engineering}
+\newcommand{\myUni}{\protect{ETH Z\"urich}}
+\newcommand{\myLocation}{Z\"urich}
+\newcommand{\myTime}{2018}
+\newcommand{\myMonthYear}{May 2018}
+%------------------------------------------------------------
+
+%------------------------------------------------------------
+% preamble
+\usepackage{style/preamble}
+%------------------------------------------------------------
+		
+\begin{document}
+	
+	%------------------------------------------------------------
+	% Initial setups
+	\selectlanguage{american}
+	%------------------------------------------------------------
+
+	\frontmatter
+	
+		%------------------------------------------------------------
+		% Titlepage
+%		\include{frontbackmatter/titlepage} 
+%		\include{frontbackmatter/titleback}
+		%------------------------------------------------------------
+	
+		%------------------------------------------------------------
+		% The cool front citation
+%		\include{frontbackmatter/frontquote}
+		%------------------------------------------------------------
+	
+		%------------------------------------------------------------
+		% The cool front citation
+%		\include{frontbackmatter/propositions}
+		%------------------------------------------------------------
+		
+		%------------------------------------------------------------
+		% Abstract
+%		\include{frontbackmatter/abstract}
+		%------------------------------------------------------------
+		
+		%------------------------------------------------------------
+		% Acknowledgements
+		%\cleardoublepage
+%		\include{frontbackmatter/acknowledgements}
+		%------------------------------------------------------------
+		
+		%------------------------------------------------------------
+		% Publications
+		%\cleardoublepage
+%		\input{frontbackmatter/publications.tex}
+		%------------------------------------------------------------
+		
+		%------------------------------------------------------------
+		% Notation
+		\include{frontbackmatter/notation}
+		%------------------------------------------------------------
+		
+		%------------------------------------------------------------
+		% Acronyms
+		%\include{frontbackmatter/acronyms}
+		%------------------------------------------------------------
+	
+		%------------------------------------------------------------
+		% Contents
+		\cleardoublepage
+		\addtocontents{toc}{\protect\vspace{10pt}}	
+		\include{frontbackmatter/contents}
+		\cleardoublepage
+		%------------------------------------------------------------
+
+	\mainmatter
+
+%		% ---------------------------------------------------------
+%		% Input flipcard animation
+%		\rfoot[]{\setlength{\unitlength}{1mm}
+%		\begin{picture}(0,0)
+%			\put(-10,-5){\includegraphics[scale=0.1]{./figures/style/flipbook/pic\thepage.png}}
+%		\end{picture}}
+%		% ---------------------------------------------------------
+		
+		%------------------------------------------------------------
+		% Chapter 1: Introduction
+%		\include{chapters/ch01_introduction/ch01_introduction}
+		%------------------------------------------------------------
+		
+		%------------------------------------------------------------
+		% Chapter 2: State of the Art
+%		\include{chapters/ch02_stateoftheart/ch02_stateoftheart}
+		%------------------------------------------------------------
+		
+		%------------------------------------------------------------
+		% Chapter 3: Numerical model / Governing equations
+		\include{chapters/ch03_numericalmodelsimple/ch03_numericalmodelsimple}
+		%------------------------------------------------------------
+	
+		%------------------------------------------------------------
+		% Chapter 4: Wind tunnel study of model trees
+%		\include{chapters/ch04_experimentalstudymodels/ch04_experimentalstudymodels}
+		%------------------------------------------------------------
+		
+		%------------------------------------------------------------
+		% Chapter 5: Microclimate study
+%		\input{chapters/ch05_microclimatestudy/ch05_microclimatestudy}
+		%------------------------------------------------------------
+	
+		%------------------------------------------------------------
+		% Chapter 6: Numerical study / Urban microclimate
+		\include{chapters/ch06_wtcfdcomparison/ch06_wtcfdcomparison}
+		%------------------------------------------------------------
+		
+		%------------------------------------------------------------
+		% Chapter 7: Numerical study / Urban microclimate
+		\include{chapters/ch07_numericalmodel/ch07_numericalmodel}
+		%------------------------------------------------------------
+	
+		%------------------------------------------------------------
+		% Chapter 8: Urban street-canyon parameteric study
+%		\input{chapters/ch08_numericalstudy/ch08_numericalstudy}
+		%------------------------------------------------------------
+	
+		%------------------------------------------------------------
+		% Chapter 9: Conclusions
+%		\include{chapters/ch09_conclusion/ch09_conclusion}
+		%------------------------------------------------------------
+		
+		%------------------------------------------------------------
+		% Appendix
+		\appendix
+%		\include{appendix/thermodynamics}	
+%		\include{appendix/conservationequations}
+%		\include{appendix/statistics}
+		%------------------------------------------------------------
+
+	\backmatter
+			
+		%------------------------------------------------------------
+		% Bibliography
+		\include{frontbackmatter/bibliography}
+		%------------------------------------------------------------
+	
+		%------------------------------------------------------------
+		% Bibliography
+%			\include{frontbackmatter/afterword}
+		%------------------------------------------------------------
+	
+		%------------------------------------------------------------
+		% CV
+%			\include{frontbackmatter/cv}
+%			\pagebreak
+		%------------------------------------------------------------
+		
+		%------------------------------------------------------------
+		% Colophon
+		\pagebreak
+		\include{frontbackmatter/colophon}
+		%------------------------------------------------------------
+			
+\end{document}
