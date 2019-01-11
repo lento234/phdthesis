@@ -1,5 +1,0 @@
-[0] Config.pm:343> INFO - This is Biber 2.5
-[0] Config.pm:346> INFO - Logfile is 'preamble.blg'
-[42] biber-darwin:290> INFO - === Tue Aug 28, 2018, 13:30:34
-[152] Utils.pm:165> ERROR - Cannot find control file 'preamble.bcf'! - did you pass the "backend=biber" option to BibLaTeX?
-[152] Biber.pm:112> INFO - ERRORS: 1
