@@ -12,7 +12,7 @@ In this chapter, the numerical method for modeling vegetation inside an urban ar
 
 \subsection{Composition of the porous material}
 
-The building materials and the soil is considered as a porous material consisting of three phases: solid phase (denoted with $s$), liquid phase referring to liquid water ($l$) and the air phase which is split into dry air ($a$) and water vapor $v$ \citep{Defraeye2011, Saneinejad2013, Carmaliet2005,Janssen2002}. The open porosity $\phi_o$ (m$^3$\,m$^{-3}$) of the porous material is defined as:
+The building materials and the soil is considered as a porous material consisting of three phases: solid phase (denoted with $s$), liquid phase referring to liquid water ($l$) and the air phase which is split into dry air ($a$) and water vapor $v$ \citep{Defraeye2011, Saneinejad2013, Carmeliet2005,Janssen2002}. The open porosity $\phi_o$ (m$^3$\,m$^{-3}$) of the porous material is defined as:
 \begin{equation}
 \phi_o = \frac{V_{\mathit{pore}}}{V}
 \end{equation}
@@ -32,20 +32,20 @@ S_l = \frac{\phi_{\textit{o,l}}}{\phi_o}
 \end{equation}
 with $\phi_{\textit{o,l}}$ being the amount of liquid water occupied inside the open pores and $\rho_a$, $\rho_l$ being the air and liquid water densities, respectively. The total moisture content $w$ (kg\,m$^{-3}$) inside the porous material is simply the sum of liquid water and water vapor:
 \begin{equation}
-w = w_l + w_v
+w = w_l + w_vpwd
 \end{equation}
 
 \subsection{Water potential}
 
-Water potential is a universal parameter for determine the water status in any medium \citep{nobel2009physicochemical}. In the thesis, we use it to define the water status of multiple domains such as solid porous materials (soil and building facades), plant xylem, and air. The water potential $\psi$ (Pa) describes the chemical potential of water $\mu$ (J\,mol$^{-1}$) with respect to chemical potential of pure water $\mu^{o,l}$ (J\,mol$^{-1}$) at the same temperature, standard atmosphere and at zero level:
+Water potential is a universal parameter to determine the \textit{water status} in any medium \citep{nobel2009physicochemical}. In the thesis, we use it to define the water status of multiple domains such as solid porous materials (soil and building facades), plant xylem, and air. The water potential $\psi$ (Pa) describes the chemical potential of water $\mu$ (J\,mol$^{-1}$) with respect to chemical potential of pure water $\mu^{o,l}$ (J\,mol$^{-1}$) at the same temperature, standard atmosphere and at zero level:
 \begin{equation}
 \psi = \frac{\mu - \mu^{o,l}}{V^o_l}
 \end{equation}
-where $V^o_l = 18.05 \num{e-3}$ m$^3$\,mol$^{-1}$ is the molar volume of pure water in liquid phase. We can see that water potential of pure water at $298$ K is therefore $0$ Pa. The water tends to move towards a region where $\mu-\mu^{o_w}$ is lowers, i.e. in the direction of $-\nabla\psi$. The water potential is related to due pressure potential, osmotic potential, matrix potential, and gravitational potential. In our study, we assume that the pressure potential gradient is negligible in the solid, we ignored the influence of osmotic potential $\psi_o$ (Pa) as we assume we have a non-saline porous material and so only the matrix potential and gravitation potential influences the water transport:
+where $V^o_l = 18.05 \num{e-3}$ m$^3$\,mol$^{-1}$ is the molar volume of pure water in liquid phase. The water potential for pure water at standard atmosphere is $\psi = 0$ Pa. The water tends to move towards a region where $\mu-\mu^{o_w}$ is lower, i.e. in the direction of $-\nabla\psi$. The water potential is related to pressure potential, osmotic potential, matrix potential, and gravitational potential. In our study, we assume that the pressure potential gradient is negligible in the solid and we ignore the influence of osmotic potential $\psi_o$ (Pa) as we assume we have a non-saline porous material. Therefore, only the matrix potential and gravitation potential influences the water transport:
 \begin{equation}
 \psi = \underbrace{p_c}_{\psi_c} + \underbrace{\rho_l g z}_{\psi_g}
 \end{equation}
-where $\psi_c = p_c$ (Pa) is the capillary potential due to capillary pressure, and $\psi_g = \rho_l g h$ (Pa) is the gravitational potential with $g = |\mvec{g}|$ (m\,s$^{-2}$) where $\mvec{g}$ is the gravitational acceleration. The contribution of the matrix potential is represented with the capillary pressure. The capillary pressure $p_c$ is defined as the difference between liquid $p_l$ and the gas phase $p_g$:
+where $\psi_c = p_c$ (Pa) is the capillary potential due to capillary pressure, which represents the contribution of the matrix potential, and $\psi_g = \rho_l g h$ (Pa) is the gravitational potential with $g = |\mvec{g}|$ (m\,s$^{-2}$) where $\mvec{g}$ is the gravitational acceleration. The capillary pressure $p_c$ is defined as the difference between liquid and gas phase pressure, $p_l$ and $p_g$, respectively:
 \begin{equation}
 p_c =  p_l - p_g
 \end{equation}
@@ -58,22 +58,54 @@ The gravitational potential $\psi_g$ (Pa) is defined as:
 \begin{equation}
 \psi_g = - \rho \mvec{g} \cdot \mvec{x} = \rho g z
 \end{equation}
-where $g = |\mvec{g}|$ with $z$ oriented upward. Thus, by taking in account of the capillary and gravitation water potential, the transport of water can be described in building materials and more importantly, soil where the plant roots are present.
+where $g = |\mvec{g}|$ with $z$ oriented upward. Thus, by taking the capillary and gravitational water potentials into account, the transport of water can be described in building materials and, more importantly, soil where the plant roots are present.
 
 \subsection{Coupled transport of heat and mass}
 
+\subsubsection*{Conservation of mass}
 The conservation of mass in the solid domain is defined as:
 \begin{align}
-\pde{w_s}{t} &= 0 \\
-\pde{w_a}{t} + \nabla \cdot \left(w_a\mvec{u}_a \right) &= 0 \\
-\pde{w_l + w_v}{t} + \nabla \cdot \left(w_l\mvec{u}_l + w_v\mvec{u}_v \right) &= 0
+\pde{w_s}{t} &= 0 \label{eq:solidcom} \\ 
+\pde{w_a}{t} + \nabla \cdot \left(w_a\mvec{u}_a \right) &= 0 \label{eq:aircom} \\ 
+\pde{w_l + w_v}{t} + \nabla \cdot \left(w_l\mvec{u}_l + w_v\mvec{u}_v \right) &= 0 \label{eq:liqcom}
 \end{align}
-assuming that solid matrix does not move, mass of different phases only change due to evaporation or condensation. Other phenomena such as melting, freezing, sublimation and deposition are neglected. As we are only interested in the rate of change of moisture content $w = w_l + w_g$, we conservation of mass in the solid domain is simply:
+assuming that solid matrix does not move, mass of different phases only change due to evaporation or condensation. Other phenomena such as melting, freezing, sublimation and deposition are neglected. As we are only interested in the rate of change of moisture content $w = w_l + w_g$, we conservation of mass in the solid domain is simplify \cref{eq:liqcom}:
 \begin{equation}
  \pde{w}{t} = - \nabla \cdot \left(\mvec{g}_l + \mvec{g}_v \right)
 \end{equation}
-where $\mvec{g}_l$ and $\mvec{g}_v$ (kg\,m$^{-2}$\,s$^{-1}$) are liquid water and water vapor fluxes, respectively.
+where $\mvec{g}_l \equiv w_l\mvec{u}_l$ and $\mvec{g}_v \equiv w_v\mvec{u}_v$ (kg\,m$^{-2}$\,s$^{-1}$) are liquid water and water vapor fluxes, respectively. The contribution of root water uptake due to plant transpiration is introduced through the source term $s_r$ (kg\,m$^{-3}$\,s$^{-1}$):
+\begin{equation}
+\pde{w}{t} = - \nabla \cdot \left(\mvec{g}_l + \mvec{g}_v \right) + s_r
+\end{equation}
 
+The sink term due to root water uptake is explained in detail later in \cref{sec:spac}. The conservation of mass is solved in $p_c$-form Richards equation and is given as:
+\begin{equation}
+\frac{\partial w}{\partial p_c} \frac{\partial p_c}{\partial t} = -  \nabla \cdot \left(\mvec{g}_l + \mvec{g}_v\right) + s_{r}
+\end{equation}
+
+Therefore, the change in water content in the porous material is simply due to the liquid and vapor fluxes, and root water uptake. The liquid water flux $\mvec{g}_l$ in porous media is given by:
+\begin{equation}
+\mvec{g}_l = - K_{\textit{lp}} \nabla \left(p_c + \rho_l g z\right)
+\end{equation}
+and assumes the air pressure effects be negligible with respect to capillary and gravitational effects, where $K_{\textit{lp}}$ (s) the liquid water permeability. We assume that the liquid water permeability is only due to pressure gradient, and the influence of thermal gradient is neglected \citep{Carmeliet2005}. The water vapor flux in the porous media is given by:
+\begin{equation}
+\mvec{g}_v = K_{\textit{vp}}\nabla p_c + K_{\textit{vT}}\nabla T
+\end{equation}
+where
+\begin{equation}
+K_{\textit{vp}} = - \delta_v \frac{p_v}{\rho_l R_v T}
+\end{equation}
+is the water vapor permeability (s) due to pressure, 
+\begin{equation}
+K_{\textit{vT}} = - \delta_v \frac{p_v}{\rho_l R_v T^2}\left(\rho_l L_v - p_c\right)
+\end{equation}
+is the water vapor permeability (s) due to temperature, and $\delta_v$ is the water vapor diffusion coefficient (s) \citep{Carmeliet2005, Defraeye2011, Saneinejad2013, Kubilay2014b}:
+\begin{equation}
+\delta_v = \frac{D_{\textit{va,mat}}}{R_v T}
+\end{equation}
+where $D_{\textit{va,mat}}$ (m$^2$\,s$^{-1}$) is the binary apparent diffusion coefficient between dry air and water vapor.
+
+\subsubsection*{Conservation of energy}
 The conservation of energy is given as:
 \begin{equation}
 \frac{\partial h}{\partial t} + \nabla \cdot \left(h \mvec{u}\right) = - \nabla \cdot \mvec{q}
@@ -82,7 +114,7 @@ where $h$ (J\,kg$^{-1}$) is the enthalpy of total solid domain:
 \begin{equation}
 h = \sum_i w_i h_i = w_s h_s + w_a h_a + w_l h_l + w_v h_v
 \end{equation}
-and assuming that contribution of soil and liquid water is much higher than dry air and water vapor, we can simply to:
+and assuming that thermal contribution of soil and liquid water is much higher than dry air and water vapor, we can simply to:
 \begin{equation}
 \frac{\partial}{\partial t}\left(w_s h_s + w_l h_l\right) = - \nabla \cdot \mvec{q} - \nabla \cdot \left(w_l h_l \mvec{u}_l + w_v h_v \mvec{u}_v\right)
 \end{equation}
@@ -90,55 +122,26 @@ or equivalently written as:
 \begin{equation}
 \frac{\partial}{\partial t}\left(w_s h_s + w_l h_l\right) = - \nabla \cdot \mvec{q} - \nabla \cdot \left(h_l \mvec{g}_l + h_v \mvec{g}_v\right)
 \end{equation}
-where the enthalpy of liquid water $h_l$ and water vapor $h_v$ is defined as:
+where the enthalpy of liquid water $h_l$ and water vapor $h_v$ are defined as:
 \begin{align}
 h_l &= c_{p,l} \left(T - T_{\textit{ref}}\right)\\
 h_v &= c_{p,v} \left(T - T_{\textit{ref}}\right) + L_v
 \end{align}
-where $L_v$ is the latent heat of vaporization of water. In the present study, the conservation of mass and energy is coupled together as a heat and mass model (HAM) according to \citep{Janssen2002,Defraeye2011,Carmeliet2005,Saneinejad2013,Kubilay2018}. The conservation of mass resulting in a $p_c$-form Richards equation is given as:
+where $L_v$ is the latent heat of vaporization of water. The heat conduction $\mvec{q}$ (W\,m$^{-2}$) is given by Fourier's law as:
 \begin{equation}
-\frac{\partial w}{\partial p_c} \frac{\partial p_c}{\partial t} = -  \nabla \cdot \left(\mvec{g}_l + \mvec{g}_v\right) + s_{r}
+\mvec{q} = -\lambda \nabla T
 \end{equation}
-where $\mvec{g}_l$ and $\mvec{g}_v$ are the water liquid and water vapor fluxes (kg\,m$^{-2}$\,s$^{-1}$) and $s_r$ is the root water uptake (kg\,m$^{-3}$\,s$^{-1}$) due to plant leaf transpiration. The sink term due to root water uptake is explained in detail later in \cref{sec:spac}.
-
-The conservation of energy is written as  
+where $T$ (K) is temperature, $\lambda$ (W\,m$^{-1}$\,K$^{-1}$) is thermal conductivity. The conservation of energy is written as  
 \begin{equation}
 \begin{split}
 &\left(c_{\textit{ps}} w_s + c_{\textit{pl}} w\right)\frac{\partial T}{\partial t} + \left[c_{pl} \left(T - T_{\textit{ref}}\right) \frac{\partial w}{p_c}\right]\frac{\partial p_c}{\partial t} =\\
 & - \nabla \cdot \bigg\{ {\mvec{q} + \underbrace{ c_{\textit{pl}} \left(T - T_{\textit{ref}}\right)\mvec{g}_l}_{\mvec{q}_l} + \underbrace{ \Big[c_{\textit{pv}} \left(T - T_{\textit{ref}}\right) + L_v\Big]\mvec{g}_v}_{\mvec{q}_v} } \bigg\}
 \end{split}
 \end{equation}
-where $\mvec{q}$ (W\,m$^{-2}$) is the heat conduction given by Fourier's law as:
-\begin{equation}
-\mvec{q} = -\lambda \nabla T
-\end{equation}
-where $T$ (K) is temperature, $\lambda$ (W\,m$^{-1}$\,K$^{-1}$) is thermal conductivity. Therefore, the change in water content in the porous material is simply due to the liquid and vapor fluxes, and root water uptake. The liquid water flux in porous media is given by:
-\begin{equation}
-\mvec{g}_l = - K_{\textit{lp}} \nabla \left(p_c + \rho_l g z\right)
-\end{equation}
-and assumes the air-pressure effects is negligible with respect to capillary and gravitational effects with $K_{\textit{lp}}$ (s) the liquid water permeability. We assume that the liquid water permeability is only due to pressure gradient, and the influence of thermal gradient is neglected \citep{Carmeliet2005}. The water vapor flux in the porous media is given by:
-\begin{equation}
-	\mvec{g}_v = K_{\textit{vp}}\nabla p_c + K_{\textit{vT}}\nabla T
-\end{equation}
-where
-\begin{equation}
-	K_{\textit{vp}} = - \delta_v \frac{p_v}{\rho_l R_v T}
-\end{equation}
-is the water vapor permeability due to pressure (s), 
-\begin{equation}
-	K_{\textit{vT}} = - \delta_v \frac{p_v}{\rho_l R_v T^2}\left(\rho_l L_v - p_c\right)
-\end{equation}
-is the water vapor permeability due to temperature (s), and $\delta_v$ is the water vapor diffusion coefficient (s) \citep{Carmeliet2005, Defraeye2011, Saneinejad2013, Kubilay2014b}:
-\begin{equation}
-\delta_v = \frac{D_{\textit{va,mat}}}{R_v T}
-\end{equation}
 
-Thus, the heat and mass conservation in the porous media is therefore written as:
-%\begin{align}
-%&C_{\textit{mm}}\frac{\partial p_c}{\partial t} = \nabla \cdot \left( K_{lp} \nabla \left(p_c + \rho_l g z\right) + K_{\textit{vp}}\nabla p_c + K_{\textit{vT}}\nabla T\right) + s_{r}\\
-%&C_{\textit{TT}}\frac{\partial T}{\partial t} + C_{\textit{Tp}}\frac{\partial p_c}{\partial t} = \nabla \cdot \left(\lambda \nabla T +  K_{\textit{lp}} c_{\textit{pl}} \left(T - T_{\textit{ref}}\right)  \nabla p_c \left( + \rho_l g z\right) - \mvec{q}_v \right)
-%\end{align}
+\subsubsection*{Coupled form}
 
+In the present study, the conservation of mass and energy is coupled together as a heat and mass model (HAM) according to \citep{Janssen2002,Defraeye2011,Carmeliet2005,Saneinejad2013,Kubilay2018}. Thus, the heat and mass conservation in the porous media is therefore written as:
 \begin{align}
 	&\begin{aligned}
 		\mathllap{C_{\textit{mm}}\frac{\partial p_c}{\partial t}} = \nabla \cdot \Big( K_{lp} \nabla &\left(p_c + \rho_l g z\right)\\
@@ -151,8 +154,6 @@ Thus, the heat and mass conservation in the porous media is therefore written as
 					&- K_{\textit{vT}} \Big[c_{\textit{pv}} \left(T - T_{\textit{ref}}\right) + L_v\Big] \nabla T \bigg)
 	\end{aligned}
 \end{align}
-
-
 where the capacity terms are:
 \begin{align}
 C_{\textit{mm}} &= \pde{w}{p_c} \\
