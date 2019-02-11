@@ -32,7 +32,7 @@ S_l = \frac{\phi_{\textit{o,l}}}{\phi_o}
 \end{equation}
 with $\phi_{\textit{o,l}}$ being the amount of liquid water occupied inside the open pores and $\rho_a$, $\rho_l$ being the air and liquid water densities, respectively. The total moisture content $w$ (kg\,m$^{-3}$) inside the porous material is simply the sum of liquid water and water vapor:
 \begin{equation}
-w = w_l + w_vpwd
+w = w_l + w_v
 \end{equation}
 
 \subsection{Water potential}
@@ -62,108 +62,121 @@ where $g = |\mvec{g}|$ with $z$ oriented upward. Thus, by taking the capillary a
 
 \subsection{Coupled transport of heat and mass}
 
-\subsubsection*{Conservation of mass}
 The conservation of mass in the solid domain is defined as:
 \begin{align}
 \pde{w_s}{t} &= 0 \label{eq:solidcom} \\ 
 \pde{w_a}{t} + \nabla \cdot \left(w_a\mvec{u}_a \right) &= 0 \label{eq:aircom} \\ 
 \pde{w_l + w_v}{t} + \nabla \cdot \left(w_l\mvec{u}_l + w_v\mvec{u}_v \right) &= 0 \label{eq:liqcom}
 \end{align}
-assuming that solid matrix does not move, mass of different phases only change due to evaporation or condensation. Other phenomena such as melting, freezing, sublimation and deposition are neglected. As we are only interested in the rate of change of moisture content $w = w_l + w_g$, we conservation of mass in the solid domain is simplify \cref{eq:liqcom}:
+assuming that solid matrix does not move, mass of different phases only change due to evaporation or condensation. Other phenomena such as melting, freezing, sublimation and deposition are neglected. As we are only interested in the rate of change of moisture content $w = w_l + w_g$, we are only interested in \cref{eq:liqcom} and conservation of mass simplifies to:
 \begin{equation}
  \pde{w}{t} = - \nabla \cdot \left(\mvec{g}_l + \mvec{g}_v \right)
 \end{equation}
-where $\mvec{g}_l \equiv w_l\mvec{u}_l$ and $\mvec{g}_v \equiv w_v\mvec{u}_v$ (kg\,m$^{-2}$\,s$^{-1}$) are liquid water and water vapor fluxes, respectively. The contribution of root water uptake due to plant transpiration is introduced through the source term $s_r$ (kg\,m$^{-3}$\,s$^{-1}$):
+where $\mvec{g}_l \equiv w_l\mvec{u}_l$ (kg\,m$^{-2}$\,s$^{-1}$) and $\mvec{g}_v \equiv w_v\mvec{u}_v$ (kg\,m$^{-2}$\,s$^{-1}$) are defined as the liquid water and water vapor fluxes, respectively. Additionally, the contribution of root water uptake due to plant transpiration is introduced through the source term $s_r$ (kg\,m$^{-3}$\,s$^{-1}$):
 \begin{equation}
 \pde{w}{t} = - \nabla \cdot \left(\mvec{g}_l + \mvec{g}_v \right) + s_r
+\label{eq:com4}
 \end{equation}
 
-The sink term due to root water uptake is explained in detail later in \cref{sec:spac}. The conservation of mass is solved in $p_c$-form Richards equation and is given as:
+The sink term due to root water uptake is explained in detail later in \cref{sec:spac}. In this thesis, the conservation of mass is solved using the $p_c$-form Richards equation, where \cref{eq:com4} becomes:
 \begin{equation}
 \frac{\partial w}{\partial p_c} \frac{\partial p_c}{\partial t} = -  \nabla \cdot \left(\mvec{g}_l + \mvec{g}_v\right) + s_{r}
+\label{eq:com5}
 \end{equation}
-
-Therefore, the change in water content in the porous material is simply due to the liquid and vapor fluxes, and root water uptake. The liquid water flux $\mvec{g}_l$ in porous media is given by:
+with $C_{mm} \equiv \partial w/ \partial p_c$ (kg\,m$^{-3}$\,Pa$^{-1}$) is defined as the moisture capacity. Thus, the change in water content in the porous material is simply due to the liquid and vapor fluxes, and root water uptake. The liquid water flux $\mvec{g}_l$ in porous media is given by:
 \begin{equation}
 \mvec{g}_l = - K_{\textit{lp}} \nabla \left(p_c + \rho_l g z\right)
+\label{eq:liquidflux}
 \end{equation}
 and assumes the air pressure effects be negligible with respect to capillary and gravitational effects, where $K_{\textit{lp}}$ (s) the liquid water permeability. We assume that the liquid water permeability is only due to pressure gradient, and the influence of thermal gradient is neglected \citep{Carmeliet2005}. The water vapor flux in the porous media is given by:
 \begin{equation}
 \mvec{g}_v = K_{\textit{vp}}\nabla p_c + K_{\textit{vT}}\nabla T
+\label{eq:vaporflux}
 \end{equation}
 where
 \begin{equation}
 K_{\textit{vp}} = - \delta_v \frac{p_v}{\rho_l R_v T}
 \end{equation}
-is the water vapor permeability (s) due to pressure, 
+is the water vapor permeability (s) due to pressure,  
 \begin{equation}
 K_{\textit{vT}} = - \delta_v \frac{p_v}{\rho_l R_v T^2}\left(\rho_l L_v - p_c\right)
 \end{equation}
-is the water vapor permeability (s) due to temperature, and $\delta_v$ is the water vapor diffusion coefficient (s) \citep{Carmeliet2005, Defraeye2011, Saneinejad2013, Kubilay2014b}:
+is the water vapor permeability (s) due to temperature, and
 \begin{equation}
 \delta_v = \frac{D_{\textit{va,mat}}}{R_v T}
 \end{equation}
-where $D_{\textit{va,mat}}$ (m$^2$\,s$^{-1}$) is the binary apparent diffusion coefficient between dry air and water vapor.
+is the water vapor diffusion coefficient (s) where $D_{\textit{va,mat}}$ (m$^2$\,s$^{-1}$) is the binary apparent diffusion coefficient between dry air and water vapor \citep{Carmeliet2005, Defraeye2011, Saneinejad2013, Kubilay2014b}. Thus, substituting the fluxes \cref{eq:liquidflux,eq:vaporflux} into \cref{eq:com5}, the expanded form of conservation of mass is given as:
+\begin{equation}
+C_{\textit{mm}}\frac{\partial p_c}{\partial t} = \nabla \cdot \Big( K_{lp} \nabla \left(p_c + \rho_l g z\right) + K_{\textit{vp}}\nabla p_c + K_{\textit{vT}}\nabla T \Big) + s_r
+\label{eq:com6}
+\end{equation}
 
-\subsubsection*{Conservation of energy}
 The conservation of energy is given as:
 \begin{equation}
 \frac{\partial h}{\partial t} + \nabla \cdot \left(h \mvec{u}\right) = - \nabla \cdot \mvec{q}
+\label{eq:coe1}
 \end{equation}
 where $h$ (J\,kg$^{-1}$) is the enthalpy of total solid domain:
 \begin{equation}
 h = \sum_i w_i h_i = w_s h_s + w_a h_a + w_l h_l + w_v h_v
+\label{eq:enthalphy1}
 \end{equation}
-and assuming that thermal contribution of soil and liquid water is much higher than dry air and water vapor, we can simply to:
+assuming that thermal contribution of soil and liquid water is much higher than dry air and water vapor. The heat conduction $\mvec{q}$ (W\,m$^{-2}$) is given by Fourier's law as:
+\begin{equation}
+\mvec{q} = -\lambda \nabla T
+\label{eq:fourierlaw}
+\end{equation}
+where $T$ (K) is temperature, $\lambda$ (W\,m$^{-1}$\,K$^{-1}$) is thermal conductivity. Substituting \cref{eq:enthalphy1} into \cref{eq:coe1} gives:
 \begin{equation}
 \frac{\partial}{\partial t}\left(w_s h_s + w_l h_l\right) = - \nabla \cdot \mvec{q} - \nabla \cdot \left(w_l h_l \mvec{u}_l + w_v h_v \mvec{u}_v\right)
 \end{equation}
 or equivalently written as:
 \begin{equation}
 \frac{\partial}{\partial t}\left(w_s h_s + w_l h_l\right) = - \nabla \cdot \mvec{q} - \nabla \cdot \left(h_l \mvec{g}_l + h_v \mvec{g}_v\right)
+\label{eq:coe2}
 \end{equation}
 where the enthalpy of liquid water $h_l$ and water vapor $h_v$ are defined as:
 \begin{align}
-h_l &= c_{p,l} \left(T - T_{\textit{ref}}\right)\\
-h_v &= c_{p,v} \left(T - T_{\textit{ref}}\right) + L_v
+h_l &= c_{p,l} \left(T - T_{\textit{ref}}\right) \label{eq:enthalphyl}\\
+h_v &= c_{p,v} \left(T - T_{\textit{ref}}\right) + L_v \label{eq:enthalphyv}
 \end{align}
-where $L_v$ is the latent heat of vaporization of water. The heat conduction $\mvec{q}$ (W\,m$^{-2}$) is given by Fourier's law as:
-\begin{equation}
-\mvec{q} = -\lambda \nabla T
-\end{equation}
-where $T$ (K) is temperature, $\lambda$ (W\,m$^{-1}$\,K$^{-1}$) is thermal conductivity. The conservation of energy is written as  
+and $L_v$ is the latent heat of vaporization of water. Substituting \cref{eq:enthalphyl,eq:enthalphyv} into \cref{eq:coe2}, the conservation of energy is given as:
 \begin{equation}
 \begin{split}
 &\left(c_{\textit{ps}} w_s + c_{\textit{pl}} w\right)\frac{\partial T}{\partial t} + \left[c_{pl} \left(T - T_{\textit{ref}}\right) \frac{\partial w}{p_c}\right]\frac{\partial p_c}{\partial t} =\\
 & - \nabla \cdot \bigg\{ {\mvec{q} + \underbrace{ c_{\textit{pl}} \left(T - T_{\textit{ref}}\right)\mvec{g}_l}_{\mvec{q}_l} + \underbrace{ \Big[c_{\textit{pv}} \left(T - T_{\textit{ref}}\right) + L_v\Big]\mvec{g}_v}_{\mvec{q}_v} } \bigg\}
 \end{split}
+\label{eq:coe3}
 \end{equation}
-
-\subsubsection*{Coupled form}
-
-In the present study, the conservation of mass and energy is coupled together as a heat and mass model (HAM) according to \citep{Janssen2002,Defraeye2011,Carmeliet2005,Saneinejad2013,Kubilay2018}. Thus, the heat and mass conservation in the porous media is therefore written as:
+where the capacity terms are:
 \begin{align}
-	&\begin{aligned}
-		\mathllap{C_{\textit{mm}}\frac{\partial p_c}{\partial t}} = \nabla \cdot \Big( K_{lp} \nabla &\left(p_c + \rho_l g z\right)\\
-				   	 	 & + K_{\textit{vp}}\nabla p_c + K_{\textit{vT}}\nabla T \Big) + s_{r}
-	\end{aligned}\\
-	&\begin{aligned}
+C_{\textit{TT}} &=  c_{\textit{ps}}w_s + c_{\textit{pl}}w \label{eq:cap1} \\
+C_{\textit{Tp}} &=  c_{\textit{pl}} \left( T - T_{\mathit{ref}}\right) \pde{w}{p_c} \label{eq:cap2} 
+\end{align}
+
+Substituting liquid and vapour fluxes, \cref{eq:liquidflux,eq:vaporflux}, respectively, thermal capacities \cref{eq:cap1,eq:cap2} and heat conduction \cref{eq:fourierlaw} into conservation of energy expands \cref{eq:coe3} to:
+\begin{align}
+\begin{aligned}
 		\mathllap{C_{\textit{TT}}\frac{\partial T}{\partial t} + C_{\textit{Tp}}\frac{\partial p_c}{\partial t}} = \nabla \cdot \bigg(\lambda \nabla T &+  K_{\textit{lp}} c_{\textit{pl}} \left(T - T_{\textit{ref}}\right)  \nabla p_c \\
 					&+ K_{\textit{lp}} c_{\textit{pl}} \left(T - T_{\textit{ref}}\right) \rho_l g z\\
 					&- K_{\textit{vp}} \Big[c_{\textit{pv}} \left(T - T_{\textit{ref}}\right) + L_v\Big] \nabla p_c \\ 
 					&- K_{\textit{vT}} \Big[c_{\textit{pv}} \left(T - T_{\textit{ref}}\right) + L_v\Big] \nabla T \bigg)
-	\end{aligned}
-\end{align}
-where the capacity terms are:
-\begin{align}
-C_{\textit{mm}} &= \pde{w}{p_c} \\
-C_{\textit{TT}} &=  c_{\textit{ps}}w_s + c_{\textit{pl}}w \\
-C_{\textit{Tp}} &=  c_{\textit{pl}} \left( T - T_{\mathit{ref}}\right) \pde{w}{p_c}
+\end{aligned}
 \end{align}
 
 \subsection{Linearized heat and mass transport equation}
+In the present study, the conservation of mass and energy is coupled together as a heat and mass model (HAM) according to \citep{Janssen2002,Defraeye2011,Carmeliet2005,Saneinejad2013,Kubilay2018}. Due to the shape of the water retention curve and the hydraulic conductivity curve, the Richards equation is highly non-linear as shown in .
 
-In this section, the numerical approach of solving the coupled heat and mass transport for the solid material is detailed. Due to the shape of the water retention curve and the hydraulic conductivity curve, the Richards equation is highly non-linear. Therefore, the numerical solution of the equation is very sensitive to convergence tolerance and requires linearization techniques to maintain accuracy and computational efficiency. Therefore, methods such as fixed-point Picard iterations is used to solve the non-linear equations. More details on the discretization is provided in \cite{Liu2012,Janssen2002,Kubilay2018}. The linearized form of moisture transport equation is given as:
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\textwidth]{\figdir/domain-crop.pdf}
+	\caption{}
+	\label{fig:domain}
+\end{figure}
+
+
+
+Therefore, the numerical solution of the equation is very sensitive to convergence tolerance and requires linearization techniques to maintain accuracy and computational efficiency. Therefore, methods such as fixed-point Picard iterations is used to solve the non-linear equations. More details on the discretization is provided in \cite{Liu2012,Janssen2002,Kubilay2018}. The conservation of mass (i.e., the moisture transport equation), \cref{eq:com6}, in the linearized form is given as:
 \begin{equation}
 \begin{split}
 C^{n+1,k}_{\textit{mm}}\frac{p_c^{n+1,k+1}-p_c^{n}}{\Delta t} = \nabla \cdot \Big( K_{\textit{lp}}^{n+1,k} &\nabla \left(p_c^{n+1,k+1} + \rho_l g z\right)\\
