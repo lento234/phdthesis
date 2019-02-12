@@ -61,14 +61,15 @@ The gravitational potential $\psi_g$ (Pa) is defined as:
 where $g = |\mvec{g}|$ with $z$ oriented upward. Thus, by taking the capillary and gravitational water potentials into account, the transport of water can be described in building materials and, more importantly, soil where the plant roots are present.
 
 \subsection{Coupled transport of heat and mass}
-
+\label{subsec:ctoham}
+\subsubsection*{Conservation of mass}
 The conservation of mass in the solid domain is defined as:
 \begin{align}
 \pde{w_s}{t} &= 0 \label{eq:solidcom} \\ 
 \pde{w_a}{t} + \nabla \cdot \left(w_a\mvec{u}_a \right) &= 0 \label{eq:aircom} \\ 
 \pde{w_l + w_v}{t} + \nabla \cdot \left(w_l\mvec{u}_l + w_v\mvec{u}_v \right) &= 0 \label{eq:liqcom}
 \end{align}
-assuming that solid matrix does not move, mass of different phases only change due to evaporation or condensation. Other phenomena such as melting, freezing, sublimation and deposition are neglected. As we are only interested in the rate of change of moisture content $w = w_l + w_g$, we are only interested in \cref{eq:liqcom} and conservation of mass simplifies to:
+assuming that solid matrix does not move, mass of different phases only change due to evaporation or condensation. Other phenomena such as melting, freezing, sublimation and deposition are neglected. Assuming dry air does not contribute to moisture storage, i.e., $\partial w_a / \partial t = 0$, the conservation of mass simplifies to rate of change of moisture content $w = w_l + w_v$, from \cref{eq:liqcom}:
 \begin{equation}
  \pde{w}{t} = - \nabla \cdot \left(\mvec{g}_l + \mvec{g}_v \right)
 \end{equation}
@@ -111,6 +112,7 @@ C_{\textit{mm}}\frac{\partial p_c}{\partial t} = \nabla \cdot \Big( K_{lp} \nabl
 \label{eq:com6}
 \end{equation}
 
+\subsubsection*{Conservation of energy}
 The conservation of energy is given as:
 \begin{equation}
 \frac{\partial h}{\partial t} + \nabla \cdot \left(h \mvec{u}\right) = - \nabla \cdot \mvec{q}
@@ -121,26 +123,31 @@ where $h$ (J\,kg$^{-1}$) is the enthalpy of total solid domain:
 h = \sum_i w_i h_i = w_s h_s + w_a h_a + w_l h_l + w_v h_v
 \label{eq:enthalphy1}
 \end{equation}
-assuming that thermal contribution of soil and liquid water is much higher than dry air and water vapor. The heat conduction $\mvec{q}$ (W\,m$^{-2}$) is given by Fourier's law as:
+and heat conduction $\mvec{q}$ (W\,m$^{-2}$) is given by Fourier's law as:
 \begin{equation}
 \mvec{q} = -\lambda \nabla T
 \label{eq:fourierlaw}
 \end{equation}
-where $T$ (K) is temperature, $\lambda$ (W\,m$^{-1}$\,K$^{-1}$) is thermal conductivity. Substituting \cref{eq:enthalphy1} into \cref{eq:coe1} gives:
+where $T$ (K) is temperature, $\lambda$ (W\,m$^{-1}$\,K$^{-1}$) is thermal conductivity.
+
+Substituting \cref{eq:enthalphy1} into \cref{eq:coe1} expands to:
 \begin{equation}
-\frac{\partial}{\partial t}\left(w_s h_s + w_l h_l\right) = - \nabla \cdot \mvec{q} - \nabla \cdot \left(w_l h_l \mvec{u}_l + w_v h_v \mvec{u}_v\right)
+\frac{\partial}{\partial t}\left(w_s h_s + w_a h_a + w_l h_l + w_v h_v \right) + \nabla \cdot \left(w_a \mvec{g}_a + w_l \mvec{g}_l + w_v \mvec{g}_v\right) = - \nabla \cdot \mvec{q}
+\label{eq:coe1p1}
 \end{equation}
-or equivalently written as:
+and assuming dry air and water vapor does not contribute to heat storage, i.e., $\partial w_a h_a / \partial t \approx 0$ and $\partial w_v h_v / \partial t \approx 0$, and convection term of dry air is negligible $\nabla \cdot w_a \mvec{g}_a \approx 0$, \cref{eq:coe1p1} simplified to:
 \begin{equation}
-\frac{\partial}{\partial t}\left(w_s h_s + w_l h_l\right) = - \nabla \cdot \mvec{q} - \nabla \cdot \left(h_l \mvec{g}_l + h_v \mvec{g}_v\right)
-\label{eq:coe2}
+\frac{\partial \left(w_s h_s + w_l h_l \right)}{\partial t} + \nabla \cdot \left(w_l \mvec{g}_l + w_v \mvec{g}_v\right) = - \nabla \cdot \mvec{q}
+\label{eq:coe1p2}
 \end{equation}
-where the enthalpy of liquid water $h_l$ and water vapor $h_v$ are defined as:
+
+The enthalpies of solid $h_s$, liquid water $h_l$ and water vapor $h_v$ are defined as:
 \begin{align}
-h_l &= c_{p,l} \left(T - T_{\textit{ref}}\right) \label{eq:enthalphyl}\\
-h_v &= c_{p,v} \left(T - T_{\textit{ref}}\right) + L_v \label{eq:enthalphyv}
+h_s &= c_{ps} \left(T - T_{\textit{ref}}\right) \label{eq:enthalphys}\\
+h_l &= c_{pl} \left(T - T_{\textit{ref}}\right) \label{eq:enthalphyl}\\
+h_v &= c_{pv} \left(T - T_{\textit{ref}}\right) + L_v \label{eq:enthalphyv}
 \end{align}
-and $L_v$ is the latent heat of vaporization of water. Substituting \cref{eq:enthalphyl,eq:enthalphyv} into \cref{eq:coe2}, the conservation of energy is given as:
+and $L_v$ is the latent heat of vaporization of water. Substituting \cref{eq:enthalphys,eq:enthalphyl,eq:enthalphyv} into \cref{eq:coe1p2}, the conservation of energy is given as:
 \begin{equation}
 \begin{split}
 &\left(c_{\textit{ps}} w_s + c_{\textit{pl}} w\right)\frac{\partial T}{\partial t} + \left[c_{pl} \left(T - T_{\textit{ref}}\right) \frac{\partial w}{p_c}\right]\frac{\partial p_c}{\partial t} =\\
@@ -148,13 +155,12 @@ and $L_v$ is the latent heat of vaporization of water. Substituting \cref{eq:ent
 \end{split}
 \label{eq:coe3}
 \end{equation}
-where the capacity terms are:
+where:
 \begin{align}
 C_{\textit{TT}} &=  c_{\textit{ps}}w_s + c_{\textit{pl}}w \label{eq:cap1} \\
 C_{\textit{Tp}} &=  c_{\textit{pl}} \left( T - T_{\mathit{ref}}\right) \pde{w}{p_c} \label{eq:cap2} 
 \end{align}
-
-Substituting liquid and vapour fluxes, \cref{eq:liquidflux,eq:vaporflux}, respectively, thermal capacities \cref{eq:cap1,eq:cap2} and heat conduction \cref{eq:fourierlaw} into conservation of energy expands \cref{eq:coe3} to:
+are the thermal capacity terms. Substituting liquid and vapour fluxes, \cref{eq:liquidflux,eq:vaporflux}, respectively, thermal capacities \cref{eq:cap1,eq:cap2} and heat conduction \cref{eq:fourierlaw} into conservation of energy expands \cref{eq:coe3} to:
 \begin{align}
 \begin{aligned}
 		\mathllap{C_{\textit{TT}}\frac{\partial T}{\partial t} + C_{\textit{Tp}}\frac{\partial p_c}{\partial t}} = \nabla \cdot \bigg(\lambda \nabla T &+  K_{\textit{lp}} c_{\textit{pl}} \left(T - T_{\textit{ref}}\right)  \nabla p_c \\
@@ -165,18 +171,10 @@ Substituting liquid and vapour fluxes, \cref{eq:liquidflux,eq:vaporflux}, respec
 \end{align}
 
 \subsection{Linearized heat and mass transport equation}
-In the present study, the conservation of mass and energy is coupled together as a heat and mass model (HAM) according to \citep{Janssen2002,Defraeye2011,Carmeliet2005,Saneinejad2013,Kubilay2018}. Due to the shape of the water retention curve and the hydraulic conductivity curve, the Richards equation is highly non-linear as shown in .
 
-\begin{figure}[h]
-	\centering
-	\includegraphics[width=\textwidth]{\figdir/domain-crop.pdf}
-	\caption{}
-	\label{fig:domain}
-\end{figure}
+In the present study, the conservation of mass and energy is coupled together as a heat and mass model (HAM) according to \citep{Janssen2002,Defraeye2011,Carmeliet2005,Saneinejad2013,Kubilay2018}. Due to the shape of the water retention curve and the hydraulic conductivity curve, as shown in\cref{fig:wrc}, the Richards equation is highly non-linear. Therefore, the numerical solution of the equation is very sensitive to convergence tolerance and requires linearization techniques to maintain accuracy and computational efficiency. So, methods such as fixed-point Picard iterations is used to solve the non-linear equations. More details on the discretization is provided in \cite{Liu2012,Janssen2002,Kubilay2018}. 
 
-
-
-Therefore, the numerical solution of the equation is very sensitive to convergence tolerance and requires linearization techniques to maintain accuracy and computational efficiency. Therefore, methods such as fixed-point Picard iterations is used to solve the non-linear equations. More details on the discretization is provided in \cite{Liu2012,Janssen2002,Kubilay2018}. The conservation of mass (i.e., the moisture transport equation), \cref{eq:com6}, in the linearized form is given as:
+The conservation of mass (i.e., the moisture transport equation), \cref{eq:com6}, in the linearized form is given as:
 \begin{equation}
 \begin{split}
 C^{n+1,k}_{\textit{mm}}\frac{p_c^{n+1,k+1}-p_c^{n}}{\Delta t} = \nabla \cdot \Big( K_{\textit{lp}}^{n+1,k} &\nabla \left(p_c^{n+1,k+1} + \rho_l g z\right)\\
@@ -185,7 +183,7 @@ C^{n+1,k}_{\textit{mm}}\frac{p_c^{n+1,k+1}-p_c^{n}}{\Delta t} = \nabla \cdot \Bi
 + s_r^{n+1,k+1}&
 \end{split}
 \end{equation}
-where the capacity, permeabilities and temperature are determined from the previous Picard iteration ($k$). The subscript ($n$) denotes the global (i.e., outer) time step of $t$ and $k$ denoting the internal Picard iteration step. When the Picard solution approaches converges, $p_c^{n+1,k} \rightarrow p_c^{n+1,k+1}$ and the influence of $\partial{w}/\partial p_c$ becomes negligible. This can results in larger mass conservation errors and can be minimized by using mixed-from:
+where the capacity, permeabilities and temperature are determined from the previous Picard iteration ($k$). The subscript ($n$) denotes the global (i.e., outer) time step of $t$ and $k$ denoting the internal Picard iteration step. When the Picard solution approaches convergence, i.e., $p_c^{n+1,k} \rightarrow p_c^{n+1,k+1}$, $\partial{w}/\partial p_c$ becomes negligible resulting in larger mass conservation errors. The error is minimized by formulating the Richard's equation in mixed-form \citep{Liu2012}:
 \begin{equation}
 \begin{split}
 C^{n+1,k}_{\textit{mm}}\frac{p_c^{n+1,k+1}-p_c^{n}}{\Delta t} = \nabla \cdot \Big( K_{\textit{lp}}^{n+1,k} &\nabla \left(p_c^{n+1,k+1} + \rho_l g z\right)\\
@@ -194,8 +192,16 @@ C^{n+1,k}_{\textit{mm}}\frac{p_c^{n+1,k+1}-p_c^{n}}{\Delta t} = \nabla \cdot \Bi
 + s_r^{n+1,k+1} &- \frac{w^{n+1,k+1}-w^n}{\Delta t}
 \end{split}
 \end{equation}
+where an additional moisture change term is added.
 
-Similarly, the linearized form of the heat equation is defined as:
+\begin{figure}[t]
+	\centering
+	\includegraphics[width=0.5\textwidth]{\figdir/waterretentioncurve-crop.pdf}
+	\caption{Typical non-linear moisture water retention curve for a material which is capillary saturated.}
+	\label{fig:wrc}
+\end{figure}
+
+The linearized form of the heat equation is given as:
 \begin{equation}
 \begin{split}
 	C_{\textit{TT}}^{n+1,k}& \frac{T^{n+1,k+1}-T^{n}}{\Delta t} = \nabla \cdot \bigg(\lambda \nabla T^{n+1,k+1} \\
@@ -227,79 +233,109 @@ The system of linear equations is solved by Krylov subspace iteration solver, i.
 \end{equation}
 where $\delta p_c = \delta T = 10^{-2}$.
 
-\section{Soil-Plant-Atmospheric Continuum}
+\section{Soil-Plant-Atmosphere Continuum}
 \label{sec:spac}
 
-In the present study, the components of the water potential inside the plants are not directly determined. The soil-plant-atmosphere continuum model that is integrated into the vegetation model is described in this section, implemented according the state-of-art techniques: \citep{Volpe2013,Manoli2014,Launiainen2015,Idso1977,Manzoni2011,Farquhar1980}. The root-system of the plants are represented as a network-like structure assuming cooperative strategy among the individual roots and a bulk plant transpiration through a single xylem is assumed.
+In the present study, the components of the water potential inside the plants are not directly determined. The soil-plant-atmosphere continuum model that is integrated into the vegetation model is described in this section, implemented according the state-of-art techniques: \citep{Volpe2013,Manoli2014,Launiainen2015,Idso1977,Manzoni2011,Farquhar1980}. The root-system of the plants are represented as a network-like structure assuming cooperative strategy among the individual roots and a bulk plant transpiration through a single xylem. We assume no water storage inside the plant and therefore, the water flux from soil to root $G_{\textit{v,root}}$, from root to leaf through xylem $G_{\textit{v,xylem}}$, and from leaf to air $G_{\textit{v,leaf}}$ is in equilibrium, as depicted in \cref{fig:SPAC_waterbalance}:
+\begin{equation}
+G_{\textit{v,root}} = G_{\textit{v,xylem}} = G_{\textit{v,leaf}}
+\end{equation}
+and so, the atmospheric evaporative demand (AED) is dependent on the water availability near the roots of the plants.
+
+\begin{figure}[t]
+	\centering
+	\includegraphics[width=0.5\textwidth]{\figdir/SPAC_waterbalance-crop.pdf}
+	\caption{Soil-Plant-Atmosphere Continuum: Water balance}
+	\label{fig:SPAC_waterbalance}
+\end{figure}
 
 \subsection{Water transport in soil-root system}
 
-The hydraulic conductivity in soil $K$ (m\,s$^{-1}$) is given as:
+The sink in soil moisture $s_r$ (kg\,m$^{-3}$\,s$^{-1}$) due to root water uptake as given in \cref{eq:com6} is simply defined as:
 \begin{equation}
-K(\mvec{x}) = K_{\textit{lp}}(\mvec{x}) ~ |\mvec{g}|
+s_r = r ~ g_{\textit{v,root}}
 \end{equation}
-where $K_l$ (s) is the liquid permeability defined in the previous section and function on the moisture content. The soil conductance in the root region $k_s$ (s$^{-1}$) is:
+where $r$ (m$^2$\,m$^{-3}$) is the root area density and $g_{\textit{v,root}}$ (kg\,m$^{-2}$\,s$^{-1}$) is the root water uptake, i.e., the flux of water from root to soil. It is defined as:
 \begin{equation}
-k_s(\mvec{x}) = \alpha ~ K(\mvec{x}) ~ r(\mvec{x})
+g_{\textit{v,root}} = k_{sr}^*\left(\psi_s - \psi_R\right)
 \end{equation}
-where $\alpha$ is 
+where $k_{sr}^*$ (s\,m$^{-1}$) is effective conductance of the soil-root system (i.e., rhizosphere), $\psi_s$ (Pa) is the soil water potential, and $\psi_R$ (Pa) is the (bulk) root water potential. The effective conductance of the soil-root system (or rhizosphere) $k_{sr}^*$ (s\,m$^{-1}$) is given as:
+\begin{equation}
+k_{sr}^* = \frac{1}{|\mvec{g}|} \frac{k_s~k_r}{k_s + k_r}
+\end{equation}
+where $\mvec{g}$ (m\,s$^{-2}$) is the gravitational acceleration, $k_s$ (s$^{-1}$) is the soil conductance in the root region, and $k_r$ (s$^{-1}$) is the conductance of the root system. The soil conductance in the root region $k_s$ (s$^{-1}$) is defined as:
+\begin{equation}
+k_s = \alpha ~ K ~ r
+\end{equation}
+where
 \begin{equation}
 \alpha =  \sqrt{\left(\frac{L}{\textit{RAI}}\right) \frac{1}{d}}
 \end{equation}
-and $d$ is the root diameter and $\textit{RAI} = \int r~\mathrm{d}z$ is the root area index (m$^2$\,m$^{-2}$) and is the vertical integral of the root area density $r$ (m$^{2}$\,m$^{-3}$). The conductance of the root system $k_r$ (s$^{-1}$) is given as:
+$d$ (m) is the root diameter, $\textit{RAI} = \int r~\mathrm{d}z$ is the root area index (m$^2$\,m$^{-2}$). The hydraulic conductivity in soil $K$ (m\,s$^{-1}$) is given as:
 \begin{equation}
-k_r(\mvec{x}) = r(\mvec{x})\frac{\Delta z}{\beta}
+K = K_{\textit{lp}} ~ |\mvec{g}|
 \end{equation}
-where $\Delta z$ is the vertical height of the root layer mesh and $\beta = \num{3e8}$ s. The effective conductance of the soil-root system (or rhizosphere) $k_{sr}^*$ (s\,m$^{-1}$) is given as:
+where $K_{\textit{lp}}$ (s) being the liquid permeability defined in the \cref{subsec:ctoham}. Finally, the conductance of the root system $k_r$ (s$^{-1}$) is given as:
 \begin{equation}
-k_{sr}^*\left(\mvec{x}\right)  = \frac{1}{|\mvec{g}|} \frac{k_s\left(\mvec{x}\right)  k_r\left(\mvec{x}\right) }{k_s\left(\mvec{x}\right)  + k_r\left(\mvec{x}\right) }
+k_r = r \frac{\Delta z}{\beta}
 \end{equation}
+where $\Delta z$ is the vertical height of the root layer mesh and $\beta = \num{3e8}$ s. 
 
-The sink in soil moisture $s_r$ (kg\,m$^{-3}$\,s$^{-1}$) is given as:
-\begin{equation}
-s_r(\mvec{x})  = r(\mvec{x}) ~ g_{v,root}(\mvec{x})
-\end{equation}
-where $g_{v,root}$ is the root water uptake (kg\,m$^{-2}$\,s$^{-1}$)
-\begin{equation}
-g_{v,root}(\mvec{x})  = k_{sr}^*(\mvec{x})  \left(\psi_s(\mvec{x})  - \psi_R\right)
-\end{equation}
-and simply dependent on the soil-root system conductance, soil water potential $\psi_s$ and the (bulk) root water potential $\psi_R$. The resulting net sink is soil moisture $G_{\textit{v,root}}$ (kg\,s$^{-1}$) due to transpiration is thus:
-\begin{equation}
-G_{\textit{v,root}} = \int_{\Omega_s} r(\mvec{x}) g_{v,root}(\mvec{x})~\mathrm{d}V
-\end{equation}
-where $\Omega_s$ is the soil domain. The water uptake from the root is equal to the water transport in the xylem as so:
-\begin{equation}
-G_{\textit{v,root}} = G_{\textit{v,xylem}}
-\end{equation}
+\begin{figure}[t]
+	\centering
+	\includegraphics[width=0.65\textwidth]{\figdir/SPAC_root_v2-crop.pdf}
+	\caption{Soil-Plant-Atmosphere Continuum: Water transport in soil-root system}
+	\label{fig:SPAC_root}
+\end{figure}
 
-\subsection{Water transport in xylem-leaf system}
+Thus, the net root water uptake from the soil domain $G_{\textit{v,root}}$ (kg\,s$^{-1}$) is given as:
+\begin{equation}
+G_{\textit{v,root}} = \int_{\Omega_s} s_r~\mathrm{d}V = \int_{\Omega_s} r~g_{\textit{v,root}}~\mathrm{d}V
+\end{equation}
+where $\Omega_s$ denotes the soil domain. 
 
-The plant xylem conductance is modeled using a ``\textit{vulnerability curve}'' approach, where xylem conductance becomes exponentially smaller with increasing leaf water potential \citep{Volpe2013}. This empirical model is based on plant response to the vulnerability to xylem cavitation and embolism that could occur at high water potential gradients. The xylem conductance $k_x$ (m\,Pa$^{-1}$\,s$^{-1}$) is given by:
-\begin{equation}
-k_x(\psi_L) = k_{\textit{x,max}} \exp \left\{ - \left( - \frac{\psi_L}{d}\right)^c \right\}
-\end{equation}
-where $k_{\textit{x,max}}$ (m\,Pa$^{-1}$\,s$^{-1}$) is the maximum xylem conductance, $c$ and $d$ are fit coefficients \citep{Volpe2013}, and $\psi_L$ (Pa) is the (bulk) leaf water potential. The effective xylem conductance $k_x^*$ (s\,m$^{-1}$) of water is:
-\begin{equation}
-k_x^* (\psi_L)= k_x(\psi_L) ~ \rho_l
-\end{equation}
-Thus, the water flux though the plant in xylem $g_{\textit{v,xylem}}$ (kg\,m$^{-2}$\,s$^{-1}$) is given as:
+%The water uptake from the root is equal to the water transport in the xylem as so:
+%\begin{equation}
+%G_{\textit{v,root}} = G_{\textit{v,xylem}}
+%\end{equation}
+
+\subsection{Water transport in xylem}
+
+The water flux through the plant in xylem $g_{\textit{v,xylem}}$ (kg\,m$^{-2}$\,s$^{-1}$) is defined as:
 \begin{equation}
 g_{\textit{v,xylem}}(\psi_L) = k_x^* \left(\psi_R - \psi_L\right)
 \end{equation}
-where is governed by the water potential gradient. The net water flux $G_{\textit{v,xylem}}$  (kg\,s$^{-1}$) is given as:
+where $k_x^*$ (s\,m$^{-1}$) is the effective xylem conductance, $\psi_R$ (Pa) is the (bulk) root water potential, and $\psi_L$ (Pa) is the (bulk) leaf water potential. The net water flux $G_{\textit{v,xylem}}$ (kg\,s$^{-1}$) is given as:
 \begin{equation}   
-G_{\textit{v,xylem}}(\psi_L) = \int_{\partial\Omega_{x|s}} g_{\textit{v,xylem}}(\psi_L)~\mathrm{d}A = g_{\textit{v,xylem}} A_x
+G_{\textit{v,xylem}} = \int_{\partial\Omega_{x|s}} g_{\textit{v,xylem}}~\mathrm{d}A = g_{\textit{v,xylem}} A_x
 \end{equation}
-where $A_x$ (m$^2$) is the xylem cross-sectional area, assuming that the net water flux through the xylem is equal (i.e. no water storage).
+where $A_x$ (m$^2$) is the xylem cross-sectional area. The effective xylem conductance $k_x^*$ (s\,m$^{-1}$) of water is:
+\begin{equation}
+k_x^* = k_x ~ \rho_l
+\end{equation}
+where plant xylem conductance $k_x$ (m\,Pa$^{-1}$\,s$^{-1}$) is modeled using a ``\textit{vulnerability curve}'' approach. The xylem conductance becomes exponentially smaller with increasing leaf water potential \citep{Volpe2013}. This empirical model is based on plant response to the vulnerability to xylem cavitation and embolism that could occur at high water potential gradients. The xylem conductance $k_x$ (m\,Pa$^{-1}$\,s$^{-1}$) is defined by:
+\begin{equation}
+k_x = k_{\textit{x,max}} \exp \left\{ - \left( - \frac{\psi_L}{d}\right)^c \right\}
+\end{equation}
+where $k_{\textit{x,max}}$ (m\,Pa$^{-1}$\,s$^{-1}$) is the maximum xylem conductance, and $c$ and $d$ are fit-coefficients \citep{Volpe2013}.
 
-Similarly, the net flux of water in xylem should be equal to the net transpiration rate, as storage is negligible. Therefore, 
-\begin{equation}
-G_{\textit{v,xylem}} = G_{\textit{v,leaf}}
-\end{equation}
-and moreover,
-\begin{equation}
-G_{\textit{v,root}}  = G_{\textit{v,xylem}} = G_{\textit{v,leaf}}
-\end{equation}
+
+\begin{figure}[t]
+	\centering
+	\includegraphics[width=0.65\textwidth]{\figdir/SPAC_xylem-crop.pdf}
+	\caption{Soil-Plant-Atmosphere Continuum: Water transport in xylem}
+	\label{fig:SPAC_xylem}
+\end{figure}
+
+
+%Similarly, the net flux of water in xylem should be equal to the net transpiration rate, as storage is negligible. Therefore, 
+%\begin{equation}
+%G_{\textit{v,xylem}} = G_{\textit{v,leaf}}
+%\end{equation}
+%and moreover,
+%\begin{equation}
+%G_{\textit{v,root}}  = G_{\textit{v,xylem}} = G_{\textit{v,leaf}}
+%\end{equation}
 
 \subsection{Water transport from leaf to air}
 
@@ -326,11 +362,11 @@ k_x^* \left( \psi_R - \psi_L \right) A_x = \int_{\Omega_a} a~g_{\textit{v,leaf}}
 \end{equation}
 Therefore, the root water potential $\psi_R$ can be determined once leaf water potential $\psi_L$ (Pa), net plant transpiration rate $G_{\textit{v,leaf}}$ (kg\,s$^{-1}$), effective xylem conductance $k_x^*$ (s\,m$^{-1}$) and xylem cross-section area $A_x$ (m$^2$):
 \begin{equation}
-\psi_R \left(\psi_L\right) = \psi_L  + \frac{G_{\textit{v,leaf}}}{A_x k_x^*}
+\psi_R = \psi_L  + \frac{G_{\textit{v,leaf}}}{A_x k_x^*}
 \end{equation}
 The assumption is that water extract by roots only feed the transpiration and storage inside the plant is neglected. Furthermore, one can also take in account of the gravitation potential change due to tree height:
 \begin{equation}
-\psi_R \left(\psi_L\right) = \psi_L  + \frac{G_{\textit{v,leaf}}}{A_x k_x^*} + \rho_l g H
+\psi_R = \psi_L  + \frac{G_{\textit{v,leaf}}}{A_x k_x^*} + \underbrace{\rho_l g H}_{\psi_g}
 \end{equation}
 however, with a tree height of $H = 10$ m, the additional potential is only $\psi_g = 0.1$ MPa.
 
