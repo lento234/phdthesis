@@ -239,19 +239,20 @@ where $\delta p_c = \delta T = 10^{-2}$.
 In the present study, the components of the water potential inside the plants are not directly determined. The soil-plant-atmosphere continuum model that is integrated into the vegetation model is described in this section, implemented according the state-of-art techniques: \citep{Volpe2013,Manoli2014,Launiainen2015,Idso1977,Manzoni2011,Farquhar1980}. The root-system of the plants are represented as a network-like structure assuming cooperative strategy among the individual roots and a bulk plant transpiration through a single xylem. We assume no water storage inside the plant and therefore, the water flux from soil to root $G_{\textit{v,root}}$, from root to leaf through xylem $G_{\textit{v,xylem}}$, and from leaf to air $G_{\textit{v,leaf}}$ is in equilibrium, as depicted in \cref{fig:SPAC_waterbalance}:
 \begin{equation}
 G_{\textit{v,root}} = G_{\textit{v,xylem}} = G_{\textit{v,leaf}}
+\label{eq:massfluxeq}
 \end{equation}
 and so, the atmospheric evaporative demand (AED) is dependent on the water availability near the roots of the plants.
 
 \begin{figure}[t]
 	\centering
 	\includegraphics[width=0.5\textwidth]{\figdir/SPAC_waterbalance-crop.pdf}
-	\caption{Soil-Plant-Atmosphere Continuum: Water balance}
+	\caption{Soil-Plant-Atmosphere Continuum: The water balance between plant transpiration and root water uptake, $G_{\textit{v,root}} = G_{\textit{v,xylem}} = G_{\textit{v,leaf}}$.}
 	\label{fig:SPAC_waterbalance}
 \end{figure}
 
 \subsection{Water transport in soil-root system}
 
-The sink in soil moisture $s_r$ (kg\,m$^{-3}$\,s$^{-1}$) due to root water uptake as given in \cref{eq:com6} is simply defined as:
+The sink term $s_r$ (kg\,m$^{-3}$\,s$^{-1}$) due to root water uptake in soil moisture transport equation (\cref{eq:com6}) is simply defined as:
 \begin{equation}
 s_r = r ~ g_{\textit{v,root}}
 \end{equation}
@@ -271,7 +272,7 @@ where
 \begin{equation}
 \alpha =  \sqrt{\left(\frac{L}{\textit{RAI}}\right) \frac{1}{d}}
 \end{equation}
-$d$ (m) is the root diameter, $\textit{RAI} = \int r~\mathrm{d}z$ is the root area index (m$^2$\,m$^{-2}$). The hydraulic conductivity in soil $K$ (m\,s$^{-1}$) is given as:
+$d$ (m) is the root diameter, $L$ (m) is the root-depth height, and $\textit{RAI} = \int r~\mathrm{d}z$ is the root area index (m$^2$\,m$^{-2}$). The hydraulic conductivity in soil $K$ (m\,s$^{-1}$) is given as:
 \begin{equation}
 K = K_{\textit{lp}} ~ |\mvec{g}|
 \end{equation}
@@ -283,8 +284,9 @@ where $\Delta z$ is the vertical height of the root layer mesh and $\beta = \num
 
 \begin{figure}[t]
 	\centering
+e
 	\includegraphics[width=0.65\textwidth]{\figdir/SPAC_root_v2-crop.pdf}
-	\caption{Soil-Plant-Atmosphere Continuum: Water transport in soil-root system}
+	\caption{Soil-Plant-Atmosphere Continuum: The water transport in soil-root system.}
 	\label{fig:SPAC_root}
 \end{figure}
 
@@ -308,6 +310,7 @@ g_{\textit{v,xylem}}(\psi_L) = k_x^* \left(\psi_R - \psi_L\right)
 where $k_x^*$ (s\,m$^{-1}$) is the effective xylem conductance, $\psi_R$ (Pa) is the (bulk) root water potential, and $\psi_L$ (Pa) is the (bulk) leaf water potential. The net water flux $G_{\textit{v,xylem}}$ (kg\,s$^{-1}$) is given as:
 \begin{equation}   
 G_{\textit{v,xylem}} = \int_{\partial\Omega_{x|s}} g_{\textit{v,xylem}}~\mathrm{d}A = g_{\textit{v,xylem}} A_x
+\label{eq:netwaterflux_xylem}
 \end{equation}
 where $A_x$ (m$^2$) is the xylem cross-sectional area. The effective xylem conductance $k_x^*$ (s\,m$^{-1}$) of water is:
 \begin{equation}
@@ -323,10 +326,9 @@ where $k_{\textit{x,max}}$ (m\,Pa$^{-1}$\,s$^{-1}$) is the maximum xylem conduct
 \begin{figure}[t]
 	\centering
 	\includegraphics[width=0.65\textwidth]{\figdir/SPAC_xylem-crop.pdf}
-	\caption{Soil-Plant-Atmosphere Continuum: Water transport in xylem}
+	\caption{Soil-Plant-Atmosphere Continuum: The water transport in plant xylem.}
 	\label{fig:SPAC_xylem}
 \end{figure}
-
 
 %Similarly, the net flux of water in xylem should be equal to the net transpiration rate, as storage is negligible. Therefore, 
 %\begin{equation}
@@ -341,9 +343,22 @@ where $k_{\textit{x,max}}$ (m\,Pa$^{-1}$\,s$^{-1}$) is the maximum xylem conduct
 
 The leaf transpiration rate $g_{\textit{v,leaf}}$ (kg\,m$^{-2}$s$^{-1}$) is defined in \cref{ch:parametricstudy}, and is simply defined as:
 \begin{equation}
-g_{\textit{v,leaf}} = k_{st,v}^* \left(p_{\textit{v,leaf}} - p_v\right)
+g_{\textit{v,leaf}} = k_{st,v}^* \left(\frac{p_{\textit{v,leaf}} - p_v}{p}\right)
 \end{equation}
-where $k_{st,v}^*$ (s\,m$^{-1}$) is the effective stomatal conductance to water vapor, $p_{\textit{v,leaf}}$ (Pa) is the leaf surface vapor pressure and $p_v$ (Pa) is the atmospheric vapor pressure. The net plant transpiration rate is given as:
+where $p_{\textit{v,leaf}}$ (Pa) is the vapor pressure at the leaf, $p_v$ (Pa) is the ambient vapor pressure, $p$ (Pa) is ambient pressure, and $k_{st,v}^*$ (kg\,m$^{-2}$\,s$^{-1}$) is the effective stomatal conductance to water vapor. It is defined as:
+\begin{equation}
+k_{\textit{st,v}}^* = M_w~k_{\textit{st,v}}
+\end{equation}
+where $M_v = \num{1.8015e-2}$ kg\,mol$^{-1}$ is the molar mass of water vapor and $k_{\textit{st,v}}$ (mol$\,$m$^{-2}$$\,$s$^{-1}$) is the stomatal conductance to water vapor in molar units (the molar unit is commonly used in plant-science community). The stomatal conductance to water vapor is described in detail in \cref{subsec:sm}.
+
+\begin{figure}[t]
+	\centering
+	\includegraphics[width=0.65\textwidth]{\figdir/SPAC_leaf-crop.pdf}
+	\caption{Soil-Plant-Atmosphere Continuum: The water transport from leaf to air.}
+	\label{fig:SPAC_leaf}
+\end{figure}
+
+The net plant transpiration rate $G_{\textit{v,leaf}}$ (kg\,s$^{-1}$) is given as:
 %The stomatal condutance is given as:
 %\begin{equation}
 %k_s = \frac{\rho}{p} \frac{R_a}{R_v} \frac{1}{r_a + r_s} 
@@ -351,45 +366,61 @@ where $k_{st,v}^*$ (s\,m$^{-1}$) is the effective stomatal conductance to water 
 %and so the net plant transpiration is given as:
 \begin{equation}
 G_{\textit{v,leaf}} = \int_{\Omega_a} a~g_{\textit{v,leaf}}~\mathrm{d}V
+\label{eq:netwaterflux_leaf}
 \end{equation}
-where $a$ (m$^2$\,m$^{-3}$) is the leaf area density. The water mass flux to the atmosphere is assumed to be in equilibrium with the water vapor flux through xylem:
+where $a$ (m$^2$\,m$^{-3}$) is the leaf area density and $\Omega_a$ denotes the air domain. As the water mass flux to the atmosphere is in equilibrium with the water vapor flux through xylem, i.e., as shown in \cref{eq:massfluxeq}, we can equate \cref{eq:netwaterflux_leaf} to \cref{eq:netwaterflux_xylem}:
 \begin{equation}
-G_{\textit{v,xylem}}  = G_{\textit{v,leaf}} 
+G_{\textit{v,leaf}} = G_{\textit{v,xylem}}
 \end{equation}
 and so:
 \begin{equation}
-k_x^* \left( \psi_R - \psi_L \right) A_x = \int_{\Omega_a} a~g_{\textit{v,leaf}}~\mathrm{d} V
+G_{\textit{v,leaf}} = k_x^* \left( \psi_R - \psi_L \right) A_x
 \end{equation}
-Therefore, the root water potential $\psi_R$ can be determined once leaf water potential $\psi_L$ (Pa), net plant transpiration rate $G_{\textit{v,leaf}}$ (kg\,s$^{-1}$), effective xylem conductance $k_x^*$ (s\,m$^{-1}$) and xylem cross-section area $A_x$ (m$^2$):
+Therefore, we can determine the root water potential $\psi_R$ as follows:
 \begin{equation}
 \psi_R = \psi_L  + \frac{G_{\textit{v,leaf}}}{A_x k_x^*}
 \end{equation}
-The assumption is that water extract by roots only feed the transpiration and storage inside the plant is neglected. Furthermore, one can also take in account of the gravitation potential change due to tree height:
+and is simply dependent on the leaf water potential $\psi_L$ (Pa), the net plant transpiration rate $G_{\textit{v,leaf}}$ (kg\,s$^{-1}$), effective xylem conductance $k_x^*$ (s\,m$^{-1}$), and the xylem cross-sectional area $A_x$ (m$^2$). Additionally, we can also take in account of the influence of graviational potential change due to height of the plant as follows:
 \begin{equation}
 \psi_R = \psi_L  + \frac{G_{\textit{v,leaf}}}{A_x k_x^*} + \underbrace{\rho_l g H}_{\psi_g}
 \end{equation}
-however, with a tree height of $H = 10$ m, the additional potential is only $\psi_g = 0.1$ MPa.
+For a plant with a plant canopy height of $H = 10$ m, the additional potential is $\psi_g = 0.1$ MPa and typically is negligible compared to the contribution of leaf water potential.
 
 
-\subsection{Improved stomatal model}
-
-The photosynthetic reaction takes light, water and CO$_2$ and creates carbohydrate and oxygen:
+\subsection{Stomatal model with water stress sensitivity}
+\label{subsec:sm}
+	
+The photosynthetic reaction creates carbohydrate and oxygen from light, water, and CO$_2$. Therefore, the photosynthetic rate $f_c$ (mol\,m$^{-2}$\,s$^{-1}$) defined as the rate of CO$_2$ assimilated by the plant (i.e., denoted also as $A_n$ (in plant-science) or $G_{\textit{c,leaf}}$ (in building physics), also known as assimilation rate) is directly related to atmospheric condition such as CO$_2$ concentration, availability of light and temperature. The assimilation rate is defined through Fickian diffusion law as:
+The Fickian diffusion through stomata is given as:
 \begin{equation}
-\mathrm{light} + 6~\mathrm{H}_2\mathrm{O} + 6~\mathrm{C}\mathrm{O}_2 \rightarrow \mathrm{C}_6\mathrm{H}_{12}\mathrm{O}_6  + 6~\mathrm{O}_2 
+f_c = k_{\textit{st}} \left(c_a - c_i\right)
+\label{eq:fickassim}
 \end{equation}
-and additional moisture is lost by evaporation when stomatal cavity is exposed to atmosphere. Therefore, the photosynthetic process is directly related to atmospheric condition such as CO$_2$ concentration, availability of light and temperature. Furthermore, the transpiration rate is also dependent on the atmospheric humidity and the availability of water for transpiration \citep{Ball1987,Leuning1995}. Based on these conditions, a generally accepted theory is the plant regulates the stomatal aperature to optimize the photosynthetic rate for a given transpiration rate. Moreover, the function of vegetation can be simplified as just maximizing the photosynthesis (or CO$_2$ assimilation) for a given transpiration rate (water use) \citep{Medlyn2011}. The water use efficiency or WUE quantifies the efficiency of the plant of reaching this target. The WUE is defined as:
+where $k_{st}$ (mol\,m$^{-2}$\,s$^{-1}$) is the (molar) stomatal condutance to CO$_2$ (note that for now we neglect the boundary layer conductance), $c_i$ (mol\,mol$^{-1}$) is the intercellular CO$_2$ concentration, and $c_a$ (mol\,mol$^{-1}$) is the ambient CO$_2$ concentration. However, during the opening of the stomata, additional moisture is lost by evaporation due to exposure of stomatal cavity to the atmosphere. Therefore, the transpiration rate $f_v$ (mol\,m$^{-2}$\,s$^{-1}$) (i.e. denoted also as $f_e$ (in plant-science) or $G_{\textit{v,leaf}}$ (in building physics), and also known as water use) is dependent on the atmospheric humidity and the availability of water for transpiration \citep{Ball1987,Leuning1995}. It is similarly described, based on Fickian diffusion process:
+\begin{equation}
+f_v = k_{\textit{st,v}} \left(\frac{p_{v,i} - p_v}{p}\right)
+\label{eq:fv}
+\end{equation}
+where $k_{\textit{st,v}}$ (mol\,m$^{-2}$\,s$^{-1}$) is the (molar) stomatal condutance to water vapor, $p_{v,i}$ (Pa) is the intercellular vapor pressure, and $p_v$ (Pa) is the ambient vapor pressure. The water vapor stomatal conductance is related to the CO$_2$ stomatal condutance as:
+\begin{equation}
+k_{\textit{st,v}} = a_c ~ k_{\textit{st}}
+\end{equation}
+where $a_c = 1.6$ is the relative diffusion of water vapor to CO$_2$. Furthermore, $p_{v,i} = p_{v,sat}\left(T_l\right)$ (Pa) where the intercellular vapor pressure inside the stomatal cavity is assumed to be at saturation at the leaf temperature $T_l$. 
+
+So, the stomatal regulatory function is can be modeled through appropriate stomatal conductance. A generally accepted theory of plant response is that the plant regulates the stomatal aperature to optimize the photosynthetic rate for a given transpiration rate. Thus, the function of vegetation can be simplified as just maximizing the photosynthesis (or CO$_2$ assimilation) for a given transpiration rate (water use) \citep{Medlyn2011} and the water use efficiency (WUE) quantifies the efficiency of the plant of reaching this target:
 \begin{equation}
 \textit{WUE} = \frac{f_c}{f_v}
+\label{eq:wue}
 \end{equation}
-where $f_c$ (mol\,m$^{-2}$\,s$^{-1}$) is the CO$_2$ assimilation rate (i.e., denoted also as $A_n$ (in plant-science) or $G_{\textit{c,leaf}}$ (in building physics), also known as photosynthesis rate) and $f_v$  (mol\,m$^{-2}$\,s$^{-1}$) is the transpiration rate (i.e. denoted also as $f_e$ (in plant-science) or $G_{\textit{v,leaf}}$ (in building physics), also known as water use).  
 
-The stomatal optimality model reflects the theory of the stomatal behavior \citep{Cowan1978}. The optimal stomatal control is derived from the minimization problem described by the Lagrangian:
+The ``\textit{stomatal optimality model}'' reflects the theory of such stomatal behavior \citep{Cowan1978}. The optimal stomatal control is derived from the minimization problem described by the Lagrangian:
 \begin{equation} 
-\mathcal{L}(k_{st}) = f_c - \lambda f_c
+\mathcal{L}(k_{st}) = f_c - \lambda f_v
 \end{equation}
-where $\lambda$ (mol\,mol$^{-1}$) is a Lagrange multiplier and represents the marginal water cost of plant carbon gain \citep{Medlyn2011,Katul2010,Manoli2014} and $f_c = f_c(k_{st})$ and $f_v=f_v(k_{st})$ where both assimilation rate and transpiration rate are both dependent on the stomatal conductance $k_{\textit{st}}$ (mol\,m$^{-2}$\,s$^{-1}$) (i.e. $g_s$ (in plant-science) or $h_{c,m}$ (in building-physics) or $1/r_s$ where $r_s$ is stomatal resistance). \cite{Cowan1978} shows that optimal stomatal behaviour is at the minima of the Lagrangian:
+where $\lambda$ (mol\,mol$^{-1}$) is a Lagrange multiplier and represents the marginal water cost of plant carbon gain \citep{Medlyn2011,Katul2010,Manoli2014} and $f_c = f_c(k_{st})$ and $f_v=f_v(k_{st})$ are a function of stomatal conductance. \cite{Cowan1978} shows that optimal stomatal behaviour is at the minima of the Lagrangian:
 \begin{equation}
 \pde{\mathcal{L}}{k_{st}} = 0
+\label{eq:lagrangian1}
 \end{equation}
 leading to the following constraint:
 \begin{equation}
@@ -400,222 +431,320 @@ or simply:
 \lambda = \pde{f_v}{f_c} 
 \end{equation}
 
-Following, these constraints, the stomatal conductance is can be determined with additional closure model for assimilation rate and transpiration rate. The assimilation rate $f_c$ can be described from the perspective of photochemical reaction model and the Fickian diffusion model from the stomatal cavity. 
-
-The Farquhar model of photosynthesis describing the biochemical demand function is given as:
+Following these constraints, the stomatal conductance $k_{\textit{st}}$ can be determined, given that unknowns in the assimilation rate $f_c$ are closed. To provide a closure for the assimilation rate, the assimilation rate $f_c$ described from the perspective of photochemical reaction model is also used. The Farquhar model of photosynthesis describing the biochemical demand function is given as:
 \begin{equation}
-f_c = \frac{a_1 c_i}{a_2 + sc_a}
+f_c = \frac{a_1 c_i}{a_2 + s~c_a}
+\label{eq:bioassim}
 \end{equation}
-where $c_i$ (mol\,mol$^{-1}$)  is the intercellular CO$_2$ concentration, $c_a$ (mol\,mol$^{-1}$) is the ambient CO$_2$ concentration, and $a_1$ and $a_2$ are parameters dependent on whether photosynthetic reaction rate is limited by light or Rubisco (Rubilose bisphosphate (RuBP) carboxylase-oxygenase) \citep{Katul2010, Farquhar1980} and $s=0.7$ is the constant representing long-term intercellular to ambient CO$_2$ concentration ratio \citep{Volpe2013}. Note that we use a linearized model assuming $c_p \ll c_i$ where $c_p$ is the CO$_2$ compensation point. As the photosynthesis can either be light-limited or Rubisco limited, the true assimilation rate $f_c$ is given as:
+where $c_i$ (mol\,mol$^{-1}$)  is the intercellular CO$_2$ concentration, $c_a$ (mol\,mol$^{-1}$) is the ambient CO$_2$ concentration, and $a_1$ and $a_2$ are parameters dependent on whether photosynthetic reaction rate is limited by light or RuBisCO (Rubilose bisphosphate (RuBP) carboxylase-oxygenase) \citep{Katul2010, Farquhar1980}, and $s=0.7$ is the constant representing long-term intercellular to ambient CO$_2$ concentration ratio \citep{Volpe2013}. A detailed description of calculating $a_1$ and $a_2$ are given in \cref{subsubsec:ar}.
+
+%Therefore,
+%The Fickian diffusion through stomata is given as:
+%\begin{align}
+%f_c &= k_{\textit{st}} \left(c_a - c_i\right) \\
+%f_v &= k_{\textit{st,v}} \left(\frac{p_{v,i} - p_v}{p}\right)
+%\end{align}
+%where $k_{\textit{st,v}}$ (mol\,m$^{-2}$\,s$^{-1}$) is the stomatal condutance to water vapor:
+%\begin{equation}
+%k_{\textit{st,v}} = a_c k_{\textit{st}} 
+%\end{equation}
+%where $a_c = 1.6$ is the relative diffusion of water vapor to CO$_2$. Furthermore, $p_{v,i} = p_{v,sat}\left(T_l\right)$ (Pa) is the intercellular vapor pressure inside the stomatal cavity assumed to be at saturation at the leaf temperature $T_l$. 
+
+To solve for the stomatal conductance $k_{st}$, the remaining unknown is the intercellular CO$_2$ concentration $c_i$. We can determine this by equating Fickian CO$_2$ flux (\cref{eq:fickassim}) to the Farquhar biochemical demand (\cref{eq:bioassim}):
+\begin{equation}
+f_c = \frac{a_1 c_i}{a_2 + s c_a} = k_{st} \left(c_a - c_i\right)
+\end{equation}
+and rewriting it for $c_i$, we get:
+\begin{equation}
+c_i = c_a \frac{a_2 + s c_a}{a_1/k_{st} + a_2 + s c_a}
+\label{eq:ci}
+\end{equation}
+So, substituting \cref{eq:ci} back into the biochemical demand function (\cref{eq:bioassim}), the assimilation rate becomes a closed-problem:
+\begin{equation}
+f_c = \frac{k_{st} a_1 c_a}{a_1 + k_{st} \left(a_2 + s c_a\right)}
+\label{eq:fc2}
+\end{equation}
+where only the $k_{st}$ is the remaining unknown. Finally, the stomatal conductance $k_{\textit{st}}$ can be determined by solving \cref{eq:lagrangian1}:
+\begin{equation}
+\pde{\mathcal{L}}{k_{st}} = \pde{f_c}{k_{st}} - \lambda \pde{f_v}{k_{st}} = 0
+\label{eq:lagrangian2}
+\end{equation}
+Substituting \cref{eq:fc2} and \cref{eq:fv} into \cref{eq:lagrangian2}, we have:
+\begin{equation}
+\pde{}{k_{st}} \left[ \left(\frac{k_{st} a_1 c_a}{a_1 + k_{st} \left(a_2 + s c_a\right)}\right)- \lambda a_c k_{\textit{st}} \textit{VPD} \right] = 0
+\label{eq:lagrangian3}
+\end{equation}
+where $\textit{VPD} \equiv \left(p_{v,i} - p_v \right)/p$ (mol\,mol$^{-1}$). Solving \cref{eq:lagrangian3}, we get:
+\begin{equation}
+\frac{a_1^2 c_a}{\left[a_1 + k_{st} \left(a_2 + s c_a\right)\right]^2}- \lambda a_c \textit{VPD} = 0
+\end{equation}
+and rewriting it for $k_{\textit{st}}$, we obtain:
+\begin{equation}
+k_{\textit{st}} = \frac{a_1}{a_2 + s\,c_a} \left( -1 + \sqrt{\frac{c_a}{a_c \lambda \textit{VPD}}} \right)
+\label{eq:kst}
+\end{equation}
+Additionally, in literature it is known that stomata does not completely close during night allowing for respiration. Therefore, taking this into account:
+\begin{equation}
+k_{\textit{st}} = \frac{a_1}{a_2 + s\,c_a} \left( -1 + \sqrt{\frac{c_a}{a_c \lambda \textit{VPD}}} \right) + k_{\textit{st,n}}
+\end{equation}
+where $k_{\textit{st,n}}$ (mol\,m$^{-2}$\,s$^{-1}$) is the nocturnal stomatal conductance ($k_{\textit{st,n}} = 0.018$ mol\,m$^{-2}$\,s$^{-1}$, \citep{Manoli2014}). Thus, we obtain a stomatal model that is a function of the CO$_2$ assimilation (through parameters $a_1$, $a_2$ and $c_a$), atmospheric evaporative demand (AED) (through parameter $\textit{VPD}$), and the Lagrangian multipier $\lambda$ which represents the marginal water cost of plant carbon gain. Therefore, $\lambda$ reflects the sensitivity to water availability is also commonly known as the \textit{marginal water use efficiency}. It is empirically related to the leaf water potential $\lambda = \lambda(\psi_L)$ \citep{Manoli2014,Katul2010} and so, the stomatal response change to water availability is reflected through the change in leaf water potential $\psi_L$. The marginal WUE is determined from experimental measurements of plant photosynthesis, transpiration and stomatal conductance, and solving for the gradient of 
+\cref{eq:wue}. An empirical model of marginal WUE, $\lambda$, as a function of leaf water potential $\psi_L$ \citep{Manoli2014,Katul2010}, is given as:
+\begin{equation}
+\lambda \left(\psi_L\right) = \lambda_{\textit{max}}^* \frac{c_a}{c_a^*}\exp \left\{-\beta \Big( \langle \psi_L \rangle_{\textit{24h}} - \psi_{\textit{L,max}}\Big)^2\right\}
+\label{eq:mwue}
+\end{equation}
+where $\psi_L$ is assumed to vary slowly such that $\langle \psi_L \rangle_{\textit{24h}}$ is fixed within the secant iteration, $\lambda_{max}^*$ is the marginal WUE under well-watered soil condition at reference CO$_2$ concentration $c_a^*=400$ $\mu$mol~mol$^{-1}$ or parts-per-million (ppm), $\beta$ is the plant-specific sensitivity parameter \citep{Huang2017}.
+
+Now that, we have closed $k_{\textit{st}}$ through \cref{eq:kst}, the intercellular CO$_2$ equation can be further simplified. Substituting \cref{eq:kst} into \cref{eq:ci}, it becomes:
+\begin{equation}
+c_i = \left(c_a - \sqrt{a_c\,\lambda\, \textit{VPD}\, c_a} \right)
+\label{eq:ci2}
+\end{equation}
+meaning that it is only dependent on the ambient CO$_2$ concentration, vapor pressure deficit, and the marginal water use efficiency. Substituting \cref{eq:ci2} into \cref{eq:fc2}, gives:
+\begin{equation}
+f_c = \frac{a_1\,c_a}{a_2 + s\,c_a}\left(1-\sqrt{a_c\, \lambda\, \textit{VPD}\, c_a}\right)
+\end{equation} 
+
+%and thus closing the (with the exception of $\lambda$) the photosynthetic rate. So far, the stomatal conductance model is derived by neglecting the contribution of boundary layer conductance $k_{b}$ (i.e. $g_b$ (in plant-science), or inverse of boundary layer resistance $r_b$, assumed to be equivalent to aerodynamic resistance $r_a$). Therefore, the effective stomatal conductance $k_{st}^*$ is defined as:
+%\begin{equation}
+%k_{st}^* = \frac{k_{st} k_b}{k_{st} + k_b}
+%\end{equation}
+%assuming the resistance are in series. Therefore, the plant fluxes into atmosphere become:
+%\begin{align}
+%f_{c} &= k_{st}^* f_c \\
+%f_{v} &= k_{st,v}^*  f_v
+%\end{align}
+%Furthermore, the fluxes in units kg\,m$^{-2}$\,s$^{-1}$ can be simply determined as:
+%\begin{align}
+%g_{c,leaf} &= M_c f_c \\
+%g_{v,leaf} &= M_v f_v
+%\end{align}
+%where $M_c = \num{4.401e-2}$ kg\,mol$^{-1}$ and $M_v = \num{1.8015e-2}$ kg\,mol$^{-1}$ are the molar mass of CO$_2$ and water vapor, respectively. 
+
+
+
+\subsection{Assimilation rate}
+\label{subsubsec:ar}
+
+As the photosynthesis can either be \textit{light-limited} or \textit{Rubisco-limited}, the true assimilation rate $f_c$ is given as:
 \begin{equation}
 f_c = \min \left(f_{c}^l, f_c^r\right) 
 \end{equation}
-where $f_c^l$ is the light-limited assimilation rate and $f_c^r$ is the Rubsico limited assimilation rate. Note that it is also possible to incorporate the dark (or night) respiration and in that case $f_c = \min \left(f_c^l, f_c^r\right) - r_d$, but is simplified in our study.
-
+where $f_c^l$ is the assimilated limited by light and $f_c^r$ is assimilation rate limited by RuBisCO. Note that it is also possible to incorporate the dark (or night) respiration and in that case $f_c = \min \left(f_c^l, f_c^r\right) - r_d$, but is not modeled in our study.
+	
 \subsubsection*{Light-limited}
-When the assimilation (or photosynthesis) rate is \textit{light-limited}:
+
+If assimilation is \textit{light-limited}, $a_1$ and $a_2$ is defined as \citep{Manoli2014,Katul2010}:
 \begin{equation}
-a_1(\mvec{x}) = \alpha_p e_m Q_p = \gamma Q_p(\mvec{x})
+a_1 = \underbrace{\alpha_p e_m}_{\gamma} Q_p
+\label{eq:fcl_a1}
 \end{equation}
 and 
 \begin{equation}
-a_2(\mvec{x}) = 2c_p(\mvec{x})
+a_2 = 2\,c_p
+\label{eq:fcl_a2}
 \end{equation}
-where $\alpha_p$ is the leaf absorptivity of photosynthetically active radiation (PAR), $e_m$ is the maximum quantum efficiency of the leaf, $\gamma = 0.015$ is the apparent quantum yield, $Q_p$ (mol\,m$^{-2}$\,s$^{-1}$) is the flux of incoming PAR and $c_p$ (mol\,mol$^{-1}$) is the the CO$_2$ compensation point with:
+where $\alpha_p$ is the leaf absorptivity of photosynthetically active radiation (PAR), $e_m$ is the maximum quantum efficiency of the leaf, $\gamma = 0.015$ is the apparent quantum yield, $Q_p$ (mol\,m$^{-2}$\,s$^{-1}$) is the flux of incoming PAR, and $c_p$ (mol\,mol$^{-1}$) is the the CO$_2$ compensation point. The CO$_2$ compensation point is determined as:
 \begin{equation}
-c_p(\mvec{x}) = \frac{K_c(\mvec{x})}{2 K_o(\mvec{x})} C_{\textit{o,a}} \frac{k_o}{k_c}
+c_p = \frac{K_c}{2\,K_o} C_{\textit{o,a}} \frac{k_o}{k_c}
+\label{eq:cp}
 \end{equation}
-where $k_c = 2.5$ s$^{-1}$ and  $k_o = 0.18 k_c$ \citep{Farquhar1980}. Therefore, the light-limited assimilation rate is:
+where $k_c = 2.5$ s$^{-1}$ and $k_o = 0.18 k_c$, and:
+\begin{align}
+K_c &= K_{c,25} \exp\left\{ \gamma_c \left(T_l - 298.15\right)\right\} \\
+K_o &= K_{o,25} \exp\left\{ \gamma_o \left(T_l - 298.15\right)\right\}
+\end{align}
+are Michaelis constant for CO$_2$ and O$_2$ inhibition (referenced at $25$ $^{\circ}$C), and $C_{\textit{o,a}} = 0.21$ mol\,mol$^{-1}$ is the oxygen concentration in the atmosphere \citep{Farquhar1980}, with $K_{c,25} = \num{3e-3}$ mol\,mol$^{-1}$, and $K_{o,25} = 0.3$ mol\,mol$^{-1}$. Thus, substituting \cref{eq:cp} into \cref{eq:fcl_a2}, and  \cref{eq:fcl_a1,eq:fcl_a2} into \cref{eq:fc2}, we get the light-limited assimilation rate $f_c^l$ as:
 \begin{equation}
-f_c^l (\mvec{x}) = \frac{\gamma Q_p(\mvec{x})  c_i(\mvec{x}) }{2c_p(\mvec{x}) + s c_a(\mvec{x})}
+f_c^l = \frac{\gamma\,Q_p\,c_i}{2\,c_p + s\,c_a}
 \end{equation}
 
 \subsubsection*{Rubisco-limited}
 
-If the assimilation rate is \textit{Rubisco-limited}:
+If the assimilation rate is \textit{Rubisco-limited}, $a_1$ and $a_2$ is defined as \citep{Manoli2014,Katul2010}:
 \begin{equation}
-a_1(\mvec{x}) = V_{\textit{cmax}}(\mvec{x})
+a_1 = V_{\textit{cmax}}
+\label{eq:fcr_a1}
 \end{equation} 
 and
 \begin{equation}
-a_2(\mvec{x}) = K_c(\mvec{x})\left(1 + \frac{C_{\textit{o,a}}}{K_o(\mvec{x})}\right)
+a_2 = K_c \left(1 + \frac{C_{\textit{o,a}}}{K_o}\right)
+\label{eq:fcr_a2}
 \end{equation} 
-where $V_{\textit{c,max}}$ is the maximum carboxylation capacity (referenced at 25 $^{\circ}$C), $K_c$ and $K_o$ are Michaelis constant for CO$_2$ and O$_2$ inhibition (referenced at 25 $^{\circ}$C), and $C_{\textit{o,a}} = 0.21$ mol\,mol$^{-1}$ is the oxygen concentration in the atmosphere. The maximum carboxylation capacity is given as:
+where $V_{\textit{c,max}}$ is the maximum carboxylation capacity (referenced at $25$ $^{\circ}$C). The maximum carboxylation capacity is given as:
 \begin{equation}
-V_{\textit{cmax}}(\mvec{x}) = V_{\textit{cmax,25}} \frac{ \exp\left\{ 0.088 \left(T_l(\mvec{x}) - 298.15\right)\right\} }{1 + \exp\left\{0.29\left(T_l(\mvec{x}) - 314.15\right)\right\} }
+V_{\textit{cmax}} = V_{\textit{cmax,25}} \frac{ \exp\left\{ 0.088 \left(T_l - 298.15\right)\right\} }{1 + \exp\left\{0.29\left(T_l - 314.15\right)\right\} }
 \end{equation}
-and $K_c$ and $K_o$ are
-\begin{align}
-K_c(\mvec{x}) &= K_{c,25} \exp\left\{ \gamma_c \left(T_l(\mvec{x}) - 298.15\right)\right\} \\
-K_o(\mvec{x}) &= K_{o,25} \exp\left\{ \gamma_o \left(T_l(\mvec{x}) - 298.15\right)\right\}
-\end{align}
 where $T_l$ (K) is the leaf temperature, $V_{\textit{cmax,25}} = \num{5.9e-5}$ mol\,m$^{-2}$\,s$^{-1}$,
-$\gamma_c = 0.074$, $\gamma_o = 0.015$, $K_{c,25} = \num{3e-3}$ mol\,mol$^{-1}$ and $K_{o,25} = 0.3$ mol\,mol$^{-1}$. Therefore, the Rubsico-limited assimilation rate is:
+$\gamma_c = 0.074$, and $\gamma_o = 0.015$. Thus, substituting \cref{eq:fcr_a1,eq:fcr_a2} into \cref{eq:fc2}, the Rubsico-limited assimilation rate is given as:
 \begin{equation}
-f_c^r(\mvec{x}) = \frac{V_{\textit{cmax}}(\mvec{x}) c_i}{K_c(\mvec{x}) \left(1 + \frac{C_{o,a}}{K_o(\mvec{x})}\right) + s c_a(\mvec{x})}
+f_c^r = \frac{V_{\textit{cmax}}\,c_i}{K_c \left(1 + \frac{C_{o,a}}{K_o}\right) + s\,c_a}
 \end{equation}
+%
+%The Fickian diffusion through stomata is given as:
+%\begin{align}
+%f_c &= k_{\textit{st}} \left(c_a - c_i\right) \\
+%f_v &= k_{\textit{st,v}} \left(\frac{p_{v,i} - p_v}{p}\right)
+%\end{align}
+%where $k_{\textit{st,v}}$ (mol\,m$^{-2}$\,s$^{-1}$) is the stomatal condutance to water vapor:
+%\begin{equation}
+%k_{\textit{st,v}} = a_c k_{\textit{st}} 
+%\end{equation}
+%where $a_c = 1.6$ is the relative diffusion of water vapor to CO$_2$. Furthermore, $p_{v,i} = p_{v,sat}\left(T_l\right)$ (Pa) is the intercellular vapor pressure inside the stomatal cavity assumed to be at saturation at the leaf temperature $T_l$. Thus, equating Fickian CO$_2$ flux to the Farquhar biochemical demand, we have:
+%\begin{equation}
+%f_c = \frac{a_1 c_i}{a_2 + s c_a} = k_{st} \left(c_a - c_i\right)
+%\end{equation}
+%where $c_i$ is the unknown. Rewriting, we get:
+%\begin{equation}
+%c_i = c_a \frac{a_2 + s c_a}{a_1/k_{st} + a_2 + s c_a}
+%\end{equation}
+%and substituting $c_i$ into the biochemical demand function, the assimilation rate is a closed-problem as:
+%\begin{equation}
+%f_c = \frac{k_{st} a_1 c_a}{a_1 + k_{st} \left(a_2 + s c_a\right)}
+%\end{equation}
+%
+%Thus, the stomatal conductance can be finally obtained from the minimizing the problem:
+%\begin{equation}
+%\pde{\mathcal{L}}{k_{st}} = \pde{f_c}{k_{st}} - \lambda \pde{f_v}{k_{st}} = 0
+%\end{equation}
+%which becomes:
+%\begin{equation}
+%\pde{}{k_{st}} \left[ \left(\frac{k_{st} a_1 c_a}{a_1 + k_{st} \left(a_2 + s c_a\right)}\right)- \lambda a_c k_st \textit{VPD} \right] = 0
+%\end{equation}
+%where $\textit{VPD} = \left(p_{v,i} - p_v \right)/p$ (mol\,mol$^{-1}$). The derivative becomes:
+%\begin{equation}
+%\frac{a_1^2 c_a}{\left[a_1 + k_{st} \left(a_2 + s c_a\right)\right]^2}- \lambda a_c \textit{VPD} = 0
+%\end{equation}
+%
+%Therefore, solving for $k_{\textit{st}}$ we obtain:
+%\begin{equation}
+%k_{\textit{st}}(\mvec{x}) = \frac{a_1(\mvec{x}) }{a_2(\mvec{x})  + s c_a(\mvec{x}) } \left( -1 + \sqrt{\frac{c_a(\mvec{x}) }{a_c \lambda(\psi_l)  VPD(\mvec{x}) }} \right)
+%\end{equation}
+%where the marginal water use is empirically related to the leaf water potential $\lambda = \lambda(\psi_l)$ \citep{Manoli2014,Katul2010}. Therefore, the stomatal response change to water availability is reflected through the change in leaf water potential $\psi_l$.  Additionally, in literature it is known that stomata does not completely close during night allowing for respiration. Therefore, taking this into account:
+%\begin{equation}
+%k_{\textit{st}}(\mvec{x}) = \frac{a_1(\mvec{x}) }{a_2(\mvec{x})  + s c_a(\mvec{x}) } \left( -1 + \sqrt{\frac{c_a(\mvec{x}) }{a_c \lambda(\psi_l)  VPD(\mvec{x}) }} \right) + k_{\textit{st,n}}
+%\end{equation}
+%where $k_{\textit{st,n}}$ (mol\,m$^{-2}$\,s$^{-1}$) is the nocturnal stomatal conductance ($k_{\textit{st,n}} = 0.018$ mol\,m$^{-2}$\,s$^{-1}$ \citep{Manoli2014}). The intercellular CO$_2$ concentration simplifies to:
+%\begin{equation}
+%c_i = c_a \left(1 - \sqrt{\frac{a \lambda \textit{VPD} }{c_a}} \right)
+%\end{equation}
+%and thus closing the (with the exception of $\lambda$) the photosynthetic rate. So far, the stomatal conductance model is derived by neglecting the contribution of boundary layer conductance $k_{b}$ (i.e. $g_b$ (in plant-science), or inverse of boundary layer resistance $r_b$, assumed to be equivalent to aerodynamic resistance $r_a$). Therefore, the effective stomatal conductance $k_{st}^*$ is defined as:
+%\begin{equation}
+%k_{st}^* = \frac{k_{st} k_b}{k_{st} + k_b}
+%\end{equation}
+%assuming the resistance are in series. Therefore, the plant fluxes into atmosphere become:
+%\begin{align}
+%	f_{c} &= k_{st}^* f_c \\
+%	f_{v} &= k_{st,v}^*  f_v
+%\end{align}
+%Furthermore, the fluxes in units kg\,m$^{-2}$\,s$^{-1}$ can be simply determined as:
+%\begin{align}
+%g_{c,leaf} &= M_c f_c \\
+%g_{v,leaf} &= M_v f_v
+%\end{align}
+%where $M_c = \num{4.401e-2}$ kg\,mol$^{-1}$ and $M_v = \num{1.8015e-2}$ kg\,mol$^{-1}$ are the molar mass of CO$_2$ and water vapor, respectively. 
 
-The Fickian diffusion through stomata is given as:
-\begin{align}
-f_c &= k_{\textit{st}} \left(c_a - c_i\right) \\
-f_v &= k_{\textit{st,v}} \left(\frac{p_{v,i} - p_v}{p}\right)
-\end{align}
-where $k_{\textit{st,v}}$ (mol\,m$^{-2}$\,s$^{-1}$) is the stomatal condutance to water vapor:
-\begin{equation}
-k_{\textit{st,v}} = a_c k_{\textit{st}} 
-\end{equation}
-where $a_c = 1.6$ is the relative diffusion of water vapor to CO$_2$. Furthermore, $p_{v,i} = p_{v,sat}\left(T_l\right)$ (Pa) is the intercellular vapor pressure inside the stomatal cavity assumed to be at saturation at the leaf temperature $T_l$. Thus, equating Fickian CO$_2$ flux to the Farquhar biochemical demand, we have:
-\begin{equation}
-f_c = \frac{a_1 c_i}{a_2 + s c_a} = k_{st} \left(c_a - c_i\right)
-\end{equation}
-where $c_i$ is the unknown. Rewriting, we get:
-\begin{equation}
-c_i = c_a \frac{a_2 + s c_a}{a_1/k_{st} + a_2 + s c_a}
-\end{equation}
-and substituting $c_i$ into the biochemical demand function, the assimilation rate is a closed-problem as:
-\begin{equation}
-f_c = \frac{k_{st} a_1 c_a}{a_1 + k_{st} \left(a_2 + s c_a\right)}
-\end{equation}
-
-Thus, the stomatal conductance can be finally obtained from the minimizing the problem:
-\begin{equation}
-\pde{\mathcal{L}}{k_{st}} = \pde{f_c}{k_{st}} - \lambda \pde{f_v}{k_{st}} = 0
-\end{equation}
-which becomes:
-\begin{equation}
-\pde{}{k_{st}} \left[ \left(\frac{k_{st} a_1 c_a}{a_1 + k_{st} \left(a_2 + s c_a\right)}\right)- \lambda a_c k_st \textit{VPD} \right] = 0
-\end{equation}
-where $\textit{VPD} = \left(p_{v,i} - p_v \right)/p$ (mol\,mol$^{-1}$). The derivative becomes:
-\begin{equation}
-\frac{a_1^2 c_a}{\left[a_1 + k_{st} \left(a_2 + s c_a\right)\right]^2}- \lambda a_c \textit{VPD} = 0
-\end{equation}
-
-Therefore, solving for $k_{\textit{st}}$ we obtain:
-\begin{equation}
-k_{\textit{st}}(\mvec{x}) = \frac{a_1(\mvec{x}) }{a_2(\mvec{x})  + s c_a(\mvec{x}) } \left( -1 + \sqrt{\frac{c_a(\mvec{x}) }{a_c \lambda(\psi_l)  VPD(\mvec{x}) }} \right)
-\end{equation}
-where the marginal water use is empirically related to the leaf water potential $\lambda = \lambda(\psi_l)$ \citep{Manoli2014,Katul2010}. Therefore, the stomatal response change to water availability is reflected through the change in leaf water potential $\psi_l$.  Additionally, in literature it is known that stomata does not completely close during night allowing for respiration. Therefore, taking this into account:
-\begin{equation}
-k_{\textit{st}}(\mvec{x}) = \frac{a_1(\mvec{x}) }{a_2(\mvec{x})  + s c_a(\mvec{x}) } \left( -1 + \sqrt{\frac{c_a(\mvec{x}) }{a_c \lambda(\psi_l)  VPD(\mvec{x}) }} \right) + k_{\textit{st,n}}
-\end{equation}
-where $k_{\textit{st,n}}$ (mol\,m$^{-2}$\,s$^{-1}$) is the nocturnal stomatal conductance ($k_{\textit{st,n}} = 0.018$ mol\,m$^{-2}$\,s$^{-1}$ \citep{Manoli2014}). The intercellular CO$_2$ concentration simplifies to:
-\begin{equation}
-c_i = c_a \left(1 - \sqrt{\frac{a \lambda \textit{VPD} }{c_a}} \right)
-\end{equation}
-and thus closing the (with the exception of $\lambda$) the photosynthetic rate. So far, the stomatal conductance model is derived by neglecting the contribution of boundary layer conductance $k_{b}$ (i.e. $g_b$ (in plant-science), or inverse of boundary layer resistance $r_b$, assumed to be equivalent to aerodynamic resistance $r_a$). Therefore, the effective stomatal conductance $k_{st}^*$ is defined as:
-\begin{equation}
-k_{st}^* = \frac{k_{st} k_b}{k_{st} + k_b}
-\end{equation}
-assuming the resistance are in series. Therefore, the plant fluxes into atmosphere become:
-\begin{align}
-	f_{c} &= k_{st}^* f_c \\
-	f_{v} &= k_{st,v}^*  f_v
-\end{align}
-Furthermore, the fluxes in units kg\,m$^{-2}$\,s$^{-1}$ can be simply determined as:
-\begin{align}
-g_{c,leaf} &= M_c f_c \\
-g_{v,leaf} &= M_v f_v
-\end{align}
-where $M_c = \num{4.401e-2}$ kg\,mol$^{-1}$ and $M_v = \num{1.8015e-2}$ kg\,mol$^{-1}$ are the molar mass of CO$_2$ and water vapor, respectively. 
-
-\subsection{Marginal water use}
-%The simplified effective stomatal conductance $k_{st,v}^*$ (s~m$^{-1}$) is defined in \cref{ch:parametricstudy} and is given as:
+%\subsection{Marginal water use}
+%%The simplified effective stomatal conductance $k_{st,v}^*$ (s~m$^{-1}$) is defined in \cref{ch:parametricstudy} and is given as:
+%%\begin{equation}
+%%k_{st,v}^* = \frac{\rho}{p} \frac{R_a}{R_v} \frac{1}{r_a + r_s} 
+%%\end{equation}
+%%where $r_a$ (s~m$^{-1}$) and $r_s$ (s~m$^{-1}$) are aerodynamic and stomatal conductance respectively. The effective stomatal conductance can also be rewritten in the conductance form:
+%%\begin{equation}
+%%k_{st,v}^* = \frac{\rho}{p} a_c \frac{\tilde{k}_{st} \tilde{k}_{a}}{\tilde{k}_{st}+\tilde{k}_a} 
+%%\end{equation}
+%%?????? , check???
+%%where $a_c = R_v/R_a$ and $\tilde{k}_{st}$ and $\tilde{k}_a$ are stomatal and aerodynamic condutance in non-standard unit of m~s$^{-1}$. The common notation used by plant scientist is mol~m$^{-2}$~s$^{-1}$, and is converted simply using:
+%%\begin{equation}
+%%k_{st} = \frac{M_w}{\rho} \tilde{k}_{st}
+%%\end{equation} 
+%%where $M_w$ (kg~mol$^{-1}$) is molar mass of water. Therefore, the more common form of effective stomatal conductance to water vapor is:
+%%\begin{equation}
+%%k_{st,v}^* = \frac{1}{p} M_w a_c \frac{k_{st} k_{a}}{k_{st}+k_a} 
+%%\end{equation}
+%%where $k_{\textit{st}}$ is the stomatal condutance of CO$_2$. A more advanced stomatal model, that can not only respond to atmospheric conditions such as radiation, humidity and temperature, we need a stomatal model that can respond to the water availability.
+%%
+%%he advanced model is derived from the stomtal optimility hypothesis of maximizing leaf-level gas exchange that follows the the lagrangian:
+%%
+%%
+%%\begin{equation} 
+%%\mathcal{L} = A_n - \lambda f_e
+%%\end{equation}
+%%such that the lagrange multiplier $\lambda$ is given as:
+%%\begin{equation}
+%%\pde{A_n}{k_{st}} = \lambda \pde{f_e}{k_{st}}
+%%\end{equation}
+%%and is typically referred to as t
+%
+%The marginal water use efficiency (WUE) $\lambda$ or the cost-parameter for the cost of water lost from leaves. 
+%
+%The marginal WUE should change over time depending on the water availability \cite{Manzoni2011}.  The marginal WUE is estimated from photosynthesis, transpiration and stomatal conductance measurement, obtained simply from the gradient of WUE:
 %\begin{equation}
-%k_{st,v}^* = \frac{\rho}{p} \frac{R_a}{R_v} \frac{1}{r_a + r_s} 
-%\end{equation}
-%where $r_a$ (s~m$^{-1}$) and $r_s$ (s~m$^{-1}$) are aerodynamic and stomatal conductance respectively. The effective stomatal conductance can also be rewritten in the conductance form:
-%\begin{equation}
-%k_{st,v}^* = \frac{\rho}{p} a_c \frac{\tilde{k}_{st} \tilde{k}_{a}}{\tilde{k}_{st}+\tilde{k}_a} 
-%\end{equation}
-%?????? , check???
-%where $a_c = R_v/R_a$ and $\tilde{k}_{st}$ and $\tilde{k}_a$ are stomatal and aerodynamic condutance in non-standard unit of m~s$^{-1}$. The common notation used by plant scientist is mol~m$^{-2}$~s$^{-1}$, and is converted simply using:
-%\begin{equation}
-%k_{st} = \frac{M_w}{\rho} \tilde{k}_{st}
-%\end{equation} 
-%where $M_w$ (kg~mol$^{-1}$) is molar mass of water. Therefore, the more common form of effective stomatal conductance to water vapor is:
-%\begin{equation}
-%k_{st,v}^* = \frac{1}{p} M_w a_c \frac{k_{st} k_{a}}{k_{st}+k_a} 
-%\end{equation}
-%where $k_{\textit{st}}$ is the stomatal condutance of CO$_2$. A more advanced stomatal model, that can not only respond to atmospheric conditions such as radiation, humidity and temperature, we need a stomatal model that can respond to the water availability.
-%
-%he advanced model is derived from the stomtal optimility hypothesis of maximizing leaf-level gas exchange that follows the the lagrangian:
-%
-%
-%\begin{equation} 
-%\mathcal{L} = A_n - \lambda f_e
-%\end{equation}
-%such that the lagrange multiplier $\lambda$ is given as:
-%\begin{equation}
-%\pde{A_n}{k_{st}} = \lambda \pde{f_e}{k_{st}}
-%\end{equation}
-%and is typically referred to as t
-
-The marginal water use efficiency (WUE) $\lambda$ or the cost-parameter for the cost of water lost from leaves. The marginal WUE should change over time depending on the water availability \cite{Manzoni2011}.  The marginal WUE is estimated from photosynthesis, transpiration and stomatal conductance measurement, obtained simply from the gradient of WUE:
-\begin{equation}
-\textit{WUE} = \frac{f_c}{f_v}
-\end{equation}
-
-The observations derive a marginal WUE as a function of leaf water potential $\psi_L$:
-\begin{equation}
-\lambda \left(\psi_L\right) = \lambda_{\textit{max}}^* \frac{c_a}{c_a^*}\exp \left\{-\beta \Big( \langle \psi_L \rangle_{\textit{24h}} - \psi_{\textit{L,max}}\Big)^2\right\}
-\label{eq:mWUE}
-\end{equation}
-where $\psi_L$ is assumed to vary slowly such that $\langle \psi_L \rangle_{\textit{24h}}$ is fixed within the secant iteration, $\lambda_{max}^*$ is the marginal WUE under well-watered soil condition at reference CO$_2$ concentration $c_a^*=400$ $\mu$mol~mol$^{-1}$ or parts-per-million (ppm), $\beta$ is the plant-specific sensitivity parameter \citep{Huang2017}.
-
-%
-%Thus, the stomatal model is dependent on the photosynthetically active radiation (PAR) $Q_p$ (mol~m$^{-2}$~$s^{-1}$), CO$_2$ concentration $c_a$ (mol~mol$^{-1}$), plant species specific water use efficiency and the humidity in the air (i.e. vapor pressure deficit $\textit{VPD}$ (mol~mol$^{-1}$)). The modified stomatal conductance is given as:
-%\begin{equation}
-%k_{\textit{st}}(\mvec{x},\ \psi_L)= \frac{a_1(\mvec{x})}{a_2(\mvec{x}) + s~c_a(\mvec{x})}\left(-1 + \left(\frac{c_a(\mvec{x})}{a~\lambda(\psi_L)~\textit{VPD}(\mvec{x})} \right)^{\frac{1}{2}}\right) + k_{\textit{st,n}}
-%\end{equation}
-%where $s=0.7$ is the constant representing long-term intercellular to ambient CO$_2$ concentration ratio \citep{Volpe2013}. The constant $a=1.6$ is the ratio of water vapor diffusivity to CO$_2$, and $a_1$ and $a_2$ depends if assimilation rate $A_n$ during photosynthesis is light-limited or Rubsico-limited, and $k_{\textit{st,n}}$ is the nocturnal stomatal conductance enabling plant respiration.
-%
-%
-%
-%
-%
-%\subsubsection*{Assimilation rate}
-%
-%To determine whether the assimilation rate is light-limiting or Rubisco-limiting, the limiting assimilation rate $A_n$ (mol~m$^{-2}$s$^{-1}$)is defined as:
-%\begin{equation}
-%A_n = \min \left(A_E, A_C\right)
-%\end{equation}
-%where $A_E$ is assimilation rate restricted by light-drive electron transport process, and $A_C$ is assimilation rate restricted by Rubisco (Rubilose bisphosphate (RuBP) carboxylase-oxygenase activity). 
-%
-%The assimilation rate based on photosynthesis-cFPGarbon reaction model is defined as:
-%\begin{equation}
-%A_n(\mvec{x}) = \frac{a_1(\mvec{x}) \left(c_p(\mvec{x}) - c_i(\mvec{x})\right)}{a_2(\mvec{x}) + c_i(\mvec{x})}
-%\end{equation}
-%where $c_i$ is the intercellular CO$_2$ concentration. The assimilation rate is closed by relating the photochemical reaction model to the Fickian diffusion at the leaf surface:
-%\begin{equation}
-%A_n(\mvec{x}) = k_c^* \left(c_i(\mvec{x}) - c(\mvec{x})\right)
-%\end{equation} 
-%where $k_c^*$ is the stomatal conductance to CO$_2$ and $c$ is the atmospheric CO$_2$ concentration. Thus, the assimilation rate $A_n$ can be computed once the intercellular CO$_2$ concentration is known:
-%\begin{equation}
-%c_i = - \frac{1}{2} \left(\frac{a_1}{k_c^*} + a_2 - c \right) \pm \frac{1}{2}\sqrt{ \left(\frac{a_1}{k_c^*} + a_2 - c \right)^2 - 4\left(-\frac{a_1 c_{\textit{cp}}}{k_c^*} - c~a_2\right)}
+%\textit{WUE} = \frac{f_c}{f_v}
 %\end{equation}
 %
-%The CO$_2$ conductance $k_{\textit{st,c}}$ (mol~m$^{-2}$\ s$^{-1}$) (molar) is given as:
+%The observations derive a marginal WUE as a function of leaf water potential $\psi_L$:
 %\begin{equation}
-%k_{\textit{st,c}}^* = \frac{k_{\textit{st}}~k_a}{k_{\textit{st}} + k_a}
+%\lambda \left(\psi_L\right) = \lambda_{\textit{max}}^* \frac{c_a}{c_a^*}\exp \left\{-\beta \Big( \langle \psi_L \rangle_{\textit{24h}} - \psi_{\textit{L,max}}\Big)^2\right\}
+%\label{eq:mWUE}
 %\end{equation}
-%where $k_{\textit{st}}$ (mol~m$^{-2}$~s$^{-1}$) is the (molar) stomatal conductance to CO$_2$, $k_a$ (mol~m$^{-2}$s$^{-1}$)  is the boundary layer conductance. The water vapor conductance is given as:
-%\begin{equation}
-%k_{\textit{st,v}}^* = a_c~k_{\textit{st,c}}^*
-%\end{equation}
-%where $a_c$ is the ratio of water vapor to CO$_2$ diffusion. The net water transport through xylem $G_{\textit{v,xylem}}$ (kg~s$^{-1}$) is given as:
-%\begin{equation}
-%G_{\textit{v,xylem}}\left(\psi_L\right) = k_x \left(\psi_R - \psi_L\right) \frac{A_x}{|\mvec{g}|} 
-%\end{equation}
-%where $k_x$ (s$^{-1}$) is the xylem conductance, $\psi_R$ is the root water potential and $\psi_l$ is the leaf water potential. 
+%where $\psi_L$ is assumed to vary slowly such that $\langle \psi_L \rangle_{\textit{24h}}$ is fixed within the secant iteration, $\lambda_{max}^*$ is the marginal WUE under well-watered soil condition at reference CO$_2$ concentration $c_a^*=400$ $\mu$mol~mol$^{-1}$ or parts-per-million (ppm), $\beta$ is the plant-specific sensitivity parameter \citep{Huang2017}.
+%
+%%
+%%Thus, the stomatal model is dependent on the photosynthetically active radiation (PAR) $Q_p$ (mol~m$^{-2}$~$s^{-1}$), CO$_2$ concentration $c_a$ (mol~mol$^{-1}$), plant species specific water use efficiency and the humidity in the air (i.e. vapor pressure deficit $\textit{VPD}$ (mol~mol$^{-1}$)). The modified stomatal conductance is given as:
+%%\begin{equation}
+%%k_{\textit{st}}(\mvec{x},\ \psi_L)= \frac{a_1(\mvec{x})}{a_2(\mvec{x}) + s~c_a(\mvec{x})}\left(-1 + \left(\frac{c_a(\mvec{x})}{a~\lambda(\psi_L)~\textit{VPD}(\mvec{x})} \right)^{\frac{1}{2}}\right) + k_{\textit{st,n}}
+%%\end{equation}
+%%where $s=0.7$ is the constant representing long-term intercellular to ambient CO$_2$ concentration ratio \citep{Volpe2013}. The constant $a=1.6$ is the ratio of water vapor diffusivity to CO$_2$, and $a_1$ and $a_2$ depends if assimilation rate $A_n$ during photosynthesis is light-limited or Rubsico-limited, and $k_{\textit{st,n}}$ is the nocturnal stomatal conductance enabling plant respiration.
+%%
+%%
+%%
+%%
+%%
+%%\subsubsection*{Assimilation rate}
+%%
+%%To determine whether the assimilation rate is light-limiting or Rubisco-limiting, the limiting assimilation rate $A_n$ (mol~m$^{-2}$s$^{-1}$)is defined as:
+%%\begin{equation}
+%%A_n = \min \left(A_E, A_C\right)
+%%\end{equation}
+%%where $A_E$ is assimilation rate restricted by light-drive electron transport process, and $A_C$ is assimilation rate restricted by Rubisco (Rubilose bisphosphate (RuBP) carboxylase-oxygenase activity). 
+%%
+%%The assimilation rate based on photosynthesis-cFPGarbon reaction model is defined as:
+%%\begin{equation}
+%%A_n(\mvec{x}) = \frac{a_1(\mvec{x}) \left(c_p(\mvec{x}) - c_i(\mvec{x})\right)}{a_2(\mvec{x}) + c_i(\mvec{x})}
+%%\end{equation}
+%%where $c_i$ is the intercellular CO$_2$ concentration. The assimilation rate is closed by relating the photochemical reaction model to the Fickian diffusion at the leaf surface:
+%%\begin{equation}
+%%A_n(\mvec{x}) = k_c^* \left(c_i(\mvec{x}) - c(\mvec{x})\right)
+%%\end{equation} 
+%%where $k_c^*$ is the stomatal conductance to CO$_2$ and $c$ is the atmospheric CO$_2$ concentration. Thus, the assimilation rate $A_n$ can be computed once the intercellular CO$_2$ concentration is known:
+%%\begin{equation}
+%%c_i = - \frac{1}{2} \left(\frac{a_1}{k_c^*} + a_2 - c \right) \pm \frac{1}{2}\sqrt{ \left(\frac{a_1}{k_c^*} + a_2 - c \right)^2 - 4\left(-\frac{a_1 c_{\textit{cp}}}{k_c^*} - c~a_2\right)}
+%%\end{equation}
+%%
+%%The CO$_2$ conductance $k_{\textit{st,c}}$ (mol~m$^{-2}$\ s$^{-1}$) (molar) is given as:
+%%\begin{equation}
+%%k_{\textit{st,c}}^* = \frac{k_{\textit{st}}~k_a}{k_{\textit{st}} + k_a}
+%%\end{equation}
+%%where $k_{\textit{st}}$ (mol~m$^{-2}$~s$^{-1}$) is the (molar) stomatal conductance to CO$_2$, $k_a$ (mol~m$^{-2}$s$^{-1}$)  is the boundary layer conductance. The water vapor conductance is given as:
+%%\begin{equation}
+%%k_{\textit{st,v}}^* = a_c~k_{\textit{st,c}}^*
+%%\end{equation}
+%%where $a_c$ is the ratio of water vapor to CO$_2$ diffusion. The net water transport through xylem $G_{\textit{v,xylem}}$ (kg~s$^{-1}$) is given as:
+%%\begin{equation}
+%%G_{\textit{v,xylem}}\left(\psi_L\right) = k_x \left(\psi_R - \psi_L\right) \frac{A_x}{|\mvec{g}|} 
+%%\end{equation}
+%%where $k_x$ (s$^{-1}$) is the xylem conductance, $\psi_R$ is the root water potential and $\psi_l$ is the leaf water potential. 
 
 
-\subsection{Numerical method for determining leaf water potential}
+\section{Numerical method for determining leaf water potential}
 
-The water transport through the plant from soil to root, from root to xylem, through the xylem, and finally, from leaf stomata to air is a closed-problem once the leaf water potential is known. The leaf water potential is determined from the following constraint:
+The water transport through the plant from soil to root, from root to xylem, through the xylem, and finally, from leaf stomata to air is a closed-problem once the leaf water potential is known. The leaf water potential is determined from \cref{eq:massfluxeq}:
 \begin{equation}
 G_{v,leaf}(\psi_L) = G_{v,root} (\psi_L)
 \end{equation}
-or as an optimization problem, it is defined as:
+
+As an optimization problem, it is defined as:
 \begin{equation}
 \mathop {\mathrm{arg\ min} }\limits_{\psi_L}~\mathcal{G}(\psi _L) = \left| {{G_{\textit{v,leaf}}} - {G_{\textit{v,root}}}} \right|
 \end{equation}
@@ -624,7 +753,7 @@ As this is a non-linear closure problem \citep{Manoli2014},  a secant method is 
 \begin{equation}
 \psi_L^{j+1} = \psi_L^{j} - G(\psi_L^j) \frac{\psi_L^j - \psi_L^{j-1}}{G\left(\psi_L^j\right) - G\left(\psi_L^{j-1}\right) }
 \end{equation}
-where the initial estimate of $\psi_L^{j=0} = 0$ MPa and $\psi_L^{j=1} = -10$ MPa and with the additional constraint that $-10 \le \psi_L \le 0$ MPa, enforcing that leaf water potential is negative and not larger than $-10$ MPa (typically known to lower). The detailed solution strategy for determining for coupling all the models is detailed in next section.
+where the initial estimate of $\psi_L^{j=0} = 0$ MPa and $\psi_L^{j=1} = -10$ MPa and with the additional constraint that $-10 \le \psi_L \le 0$ MPa, enforcing that leaf water potential is negative and not larger than $-10$ MPa. The detailed solution strategy for determining for coupling all the models is detailed in next section.
 
 \subsection{Solution strategy for coupling}
 
