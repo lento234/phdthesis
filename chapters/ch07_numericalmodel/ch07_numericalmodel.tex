@@ -4,12 +4,129 @@
 
 \section{Introduction}
 
-\lettrine[lines=3,nindent=0em,loversize=0.1]{T}{he} simplified vegetation model is described in \cref{ch:parametricstudy} introduction the governing equation for moist flow vegetation. The vegetation model provides the necessary source/sink terms for heat, mass and momentum exchanges between vegetation and air as described in \cref{sec:cons_incompressible}. Furthermore, radiation transfer within vegetation is also described in \cref{sec:vegradiation}. For reader, a detailed derivation of the thermodynamic of the moist air is given in \cref{app:thermodynamics} and a detailed derivation of the governing equation of moist flow is given in \cref{app:conservation}. 
+In this chapter, the numerical method for modeling vegetation inside an urban area is described. The numerical model consists of air domain model (\cref{sec:airdomain}), solid domain model (\cref{sec:soliddomain}) and the radiation model \cref{sec:radiationmodel}. \cref{fig:fullmodelcoupling} shows the coupling between these three models and the parameters that are communicated between them. A detailed description of the coupling algorithm is provided in \cref{sec:couplingalgorithm}. 
 
-In this chapter, the numerical method for modeling vegetation inside an urban area is described. The chapter focuses on coupling of the vegetation model with the of heat (incl. radiation) and mass fluxes of the urban surfaces. The governing  equation for the the coupled heat and moisture transport in the porous material is first described.
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\textwidth]{\figdir/fullmodelcoupling-crop.pdf}
+	\caption{Coupling of the vegetation model with air domain solver, solid domain solver and the radiation model. The indicated parameters are used for coupling the methods. }
+	\label{fig:fullmodelcoupling}
+\end{figure}
 
-\section{Governing equations of coupled heat and moisture transport}
+The air domain model describes the transport of moist air through vegetation (i.e., velocity $\mvec{u}$, enthalpy $h$, moisture content $w_a$, and CO$_2$ concentration $x_c$). Furthermore, with the air domain, the \textit{leaf energy balance} (LEB) model is solved to determine the heat and mass fluxes (i.e., $q_{\textit{sen,leaf}}$ and $g_{\textit{v,leaf}}$). A detailed description of the leaf energy balance is provided in \cref{ch:parametricstudy}. The solid domain model described the coupled heat and mass transport (i.e., $T_s$, and $w_s$) in all urban materials (i.e. ground, pavement, and building facades). Furthermore, the soil ground domain which consists of vegetation roots, additionally solves the \textit{soil-plant-atmosphere continuum} (SPAC) model to determine the root water uptake $g_{\textit{v,root}}$ in the soil and the leaf water potential $\psi_L$ (see \cref{sec:spac}). Finally, the radiation model determines the short-wave $q_s$ and long-wave $q_r$ radiative exchanges in the urban street canyon including the impact of vegetation (see \cref{sec:radiationmodel}). 
 
+\section{Air domain: Transport of moist air}
+\label{sec:airdomain}
+The simplified vegetation model is described in \cref{ch:parametricstudy}, introduction the governing equation for moist flow through vegetation. The vegetation model, consisting of the ``\textit{leaf energy balance}'' (LEB) model, provides the necessary source/sink terms for heat, mass and momentum exchanges between vegetation and air as described in \cref{sec:cons_incompressible}. For reader, a detailed derivation of the thermodynamic of the moist air is given in \cref{app:thermodynamics} and a detailed derivation of the governing equation of moist flow is given in \cref{app:conservation}. In this section, we summarize the pseudo-compressible form of governing equation for moist flow through vegetation where the buoyancy force is directly obtained from the density field.  
+
+\subsection*{Conservation of mass}
+
+The governing equation consists of conservation of mass, momentum, energy and species. The conservation equations are given in differential form in a Cartesian coordinate system described by the triplet $\mvec{x} = (x,y,z)$. The conservation of mass for compressible moist flow is given as:
+\begin{equation}
+\frac{\partial \rho}{\partial t} + \nabla \cdot \left( \rho \mvec{u} \right)= 0
+\end{equation}
+where $\rho$ is the fluid density (kg\,m$^{-3}$), and $\mvec{u} = \left(u,v,w\right)$ is the fluid velocity (m\,s$^{-1}$). A detailed derivation is given in appendix \ref{app:thermodynamics} and \ref{app:conservation}.
+
+\subsection*{Conservation of momentum}
+
+The conservation of momentum is given as:
+\begin{equation}
+\frac{\partial \rho \mvec{u}}{\partial t} + \nabla  \cdot \left( \rho \mvec{u} \mvec{u} \right) = -\nabla p + \mu \nabla^2 \mvec{u} + \rho \mvec{g} + \mvec{s}_u
+\end{equation}
+where $p$ is the pressure (Pa), $\mu$ the dynamic viscosity (kg\,m$^{-1}$\,s$^{-1}$), $\mvec{g}$ the gravitational acceleration (m\,s$^{-2}$). The source of momentum $\mvec{s}_u$ is:
+\begin{equation}
+\mvec{s}_u = - \rho a c_d |\mvec{u}|\mvec{u}
+\end{equation}
+where $a$ is the leaf area density (m$^2$\,m$^{-3}$), and $c_d$ is the leaf drag coefficient ($c_d = 0.2$).
+
+\subsection*{Conservation of energy}
+
+The conservation of energy is given as:
+\begin{equation}
+\frac{\partial \rho h}{\partial t} + \nabla  \cdot \left( \rho h \mvec{u} \right) = -\nabla \cdot \mvec{q} + s_h
+\end{equation}
+where 
+\begin{equation}
+\mvec{q} = - \lambda \nabla T
+\end{equation}
+is the Fourier's law of heat conduction, with:
+\begin{equation}
+\mvec{q} = - \frac{c_p \mu}{\mathrm{Pr}} \nabla T
+\end{equation}
+and the source of energy $s_h$ is 
+\begin{equation}
+\mvec{s}_h = \rho c_p a q_{\textit{sen,leaf}}
+\end{equation}
+
+\subsection*{Conservation of species}
+
+In our study, the species of interest is water vapor (subscript $v$) and carbon-dioxide (subscript $c$). The conservation of species $i$ is given as:
+\begin{equation}
+\frac{\partial \rho x_i}{\partial t} + \nabla  \cdot \left( \rho x_i \mvec{u} \right) = \nabla \cdot \mvec{g}_i + s_i
+\end{equation}
+where $x_i$ is the concentration of species $i$, $\mvec{g}_i$ is the flux of species, and $s_i$ is the source term. 
+
+We assume that moist air is composed of dry air and water vapor. The mass fraction of each component is:
+\begin{equation}
+x_a = \frac{\rho_a}{\rho}
+\end{equation}
+and
+\begin{equation}
+x_v = \frac{\rho_v}{\rho}
+\end{equation}
+where $\rho_a$ and $\rho_v$ are partial density of dry air and water vapor (kg\,m$^{-3}$) and $\rho$ is density of gas mixture and results in:
+\begin{equation}
+x_a + x_v = 1
+\end{equation}
+and
+\begin{equation}
+\rho_a + \rho_v = \rho
+\end{equation}
+
+The enthalphy of dry air and water vapor are:
+\begin{equation}
+h_a = c_{p,a} \left(T - T_{\mathit{ref}}\right)
+\end{equation}
+and
+\begin{equation}
+h_v = c_{p,v} \left(T - T_{\mathit{ref}}\right) + L_v \left(x_v - x_{v,ref}\right)
+\end{equation}
+
+The total enthalpy of moist air is:
+\begin{equation}
+h = h_a \, x_a + h_v \, x_v
+\end{equation}
+and so:
+\begin{equation}
+\rho h = \rho_a c_{p,a} \left(T - T_{\mathit{ref}}\right) + \rho_v c_{p,v} \left(T - T_{\mathit{ref}}\right) + \rho_v L_v
+\end{equation}
+
+\subsection*{Turbulence modeling}
+
+The Reynolds decomposition splits the instantaneous velocity into mean and fluctuating component:
+\begin{equation}
+\mvec{u} \left(\mvec{x},t\right) = \overline{\mvec{u}} \left(\mvec{x}\right) + \mvec{u}' \left(\mvec{x},t\right).
+\end{equation}
+
+Applying this averaging operator to the NS equations, resulting Reynolds-Averaged Navier-Stokes (RANS) equation is given as:
+\begin{equation}
+\frac{\partial \overline{\rho}}{\partial t} + \nabla \cdot \left(\overline{\rho}\,\overline{\mvec{u}}\right) = 0,
+\end{equation}
+\begin{equation}
+\frac{\partial \overline{\rho}\,\overline{\mvec{u}}}{\partial t}  + \nabla \cdot \left(\overline{\rho}\,\overline{\mvec{u}}\,\overline{\mvec{u}}\right) = -\nabla \overline{p} + \mu \nabla^2 \overline{\mvec{u}} - \nabla \cdot \left(\overline{\rho \mvec{u}' \mvec{u}'}\right)+ \rho \mvec{g} + s_u
+\end{equation}
+where $\overline{\rho \mvec{u}' \mvec{u}'}$ is the Reynolds stresses. The Reynolds stresses are modelled using Bousinessq eddy-viscosity assumption:
+\begin{equation}
+- \overline{\rho \mvec{u}' \mvec{u}'} = \mu_t \left(\nabla u + \nabla u^T\right) - \frac{2}{3}\rho k \mvec{I}
+\end{equation}
+where:
+\begin{equation}
+\mu_t = \rho C_\mu \frac{k^2}{\varepsilon}
+\end{equation}
+
+
+\section{Solid domain: Coupled heat and moisture transport}
+\label{sec:soliddomain}
 \subsection{Composition of the porous material}
 
 The building materials and the soil is considered as a porous material consisting of three phases: solid phase (denoted with $s$), liquid phase referring to liquid water ($l$) and the air phase which is split into dry air ($a$) and water vapor $v$ \citep{Defraeye2011, Saneinejad2013, Carmeliet2005,Janssen2002}. The open porosity $\phi_o$ (m$^3$\,m$^{-3}$) of the porous material is defined as:
@@ -487,7 +604,9 @@ Additionally, in literature it is known that stomata does not completely close d
 \begin{equation}
 k_{\textit{st}} = \frac{a_1}{a_2 + s\,c_a} \left( -1 + \sqrt{\frac{c_a}{a_c\, \lambda\, \textit{VPD}}} \right) + k_{\textit{st,n}}
 \end{equation}
-where $k_{\textit{st,n}}$ (mol\,m$^{-2}$\,s$^{-1}$) is the nocturnal stomatal conductance ($k_{\textit{st,n}} = 0.018$ mol\,m$^{-2}$\,s$^{-1}$, \citep{Manoli2014}). Thus, we obtain a stomatal model that is a function of the CO$_2$ assimilation (through parameters $a_1$, $a_2$ and $c_a$), atmospheric evaporative demand (AED) (through parameter $\textit{VPD}$), and the Lagrangian multipier $\lambda$ which represents the marginal water cost of plant carbon gain. Therefore, $\lambda$ reflects the sensitivity to water availability is also commonly known as the \textit{marginal water use efficiency}. It is empirically related to the leaf water potential $\lambda = \lambda(\psi_L)$ \citep{Manoli2014,Katul2010} and so, the stomatal response change to water availability is reflected through the change in leaf water potential $\psi_L$. The marginal WUE is determined from experimental measurements of plant photosynthesis, transpiration and stomatal conductance, and solving for the gradient of 
+where $k_{\textit{st,n}}$ (mol\,m$^{-2}$\,s$^{-1}$) is the nocturnal stomatal conductance ($k_{\textit{st,n}} = 0.018$ mol\,m$^{-2}$\,s$^{-1}$, \citep{Manoli2014}). 
+
+Thus, we obtain a stomatal model that is a function of the CO$_2$ assimilation (through parameters $a_1$, $a_2$ and $c_a$), atmospheric evaporative demand (AED) (through parameter $\textit{VPD}$), and the Lagrangian multipier $\lambda$ which represents the marginal water cost of plant carbon gain. Therefore, $\lambda$ reflects the sensitivity to water availability is also commonly known as the \textit{marginal water use efficiency}. It is empirically related to the leaf water potential $\lambda = \lambda(\psi_L)$ \citep{Manoli2014,Katul2010} and so, the stomatal response change to water availability is reflected through the change in leaf water potential $\psi_L$. The marginal WUE is determined from experimental measurements of plant photosynthesis, transpiration and stomatal conductance, and solving for the gradient of 
 \cref{eq:wue}. An empirical model of marginal WUE, $\lambda$, as a function of leaf water potential $\psi_L$ \citep{Manoli2014,Katul2010}, is given as:
 \begin{equation}
 \lambda \left(\psi_L\right) = \lambda_{\textit{max}}^* \frac{c_a}{c_a^*}\exp \left\{-\beta \Big( \langle \psi_L \rangle_{\textit{24h}} - \psi_{\textit{L,max}}\Big)^2\right\}
@@ -514,14 +633,21 @@ f_c = \frac{a_1\,c_a}{a_2 + s\,c_a}\left(1-\sqrt{a_c\, \lambda\, \textit{VPD}\, 
 %f_{c} &= k_{st}^* f_c \\
 %f_{v} &= k_{st,v}^*  f_v
 %\end{align}
-%Furthermore, the fluxes in units kg\,m$^{-2}$\,s$^{-1}$ can be simply determined as:
-%\begin{align}
-%g_{c,leaf} &= M_c f_c \\
-%g_{v,leaf} &= M_v f_v
-%\end{align}
-%where $M_c = \num{4.401e-2}$ kg\,mol$^{-1}$ and $M_v = \num{1.8015e-2}$ kg\,mol$^{-1}$ are the molar mass of CO$_2$ and water vapor, respectively. 
 
-
+Finally, the fluxes from leaves in units kg\,m$^{-2}$\,s$^{-1}$ can be simply determined as:
+\begin{align}
+g_{c,leaf} &= M_c f_c \\
+g_{v,leaf} &= M_v f_v
+\end{align}
+where $M_c = \num{4.401e-2}$ kg\,mol$^{-1}$ and $M_v = \num{1.8015e-2}$ kg\,mol$^{-1}$ are the molar mass of CO$_2$ and water vapor, respectively. So far, the stomatal conductance model is derived by neglecting the contribution of boundary layer conductance $k_{b}$ (i.e. $g_b$ (in plant-science), or inverse of boundary layer resistance $r_b$, assumed to be equivalent to aerodynamic resistance $r_a$). Therefore, the effective stomatal conductance $k_{st}^*$ is defined as:
+\begin{equation}
+k_{st}^* = \frac{k_{st} k_b}{k_{st} + k_b}
+\end{equation}
+where $k_{st}$ is given by \cref{eq:kst} and $k_b$ is discussed in \cref{ch:parametricstudy}. Thus, the leaf fluxes become:
+\begin{align}
+g_{c,leaf} &= M_c\, k_{\textit{st}}^* \left(c_a - c_i \right) \\
+g_{v,leaf} &= M_v\, k_{\textit{st,v}}^* \left(\frac{p_{\textit{v,i}} - p_v}{p}\right)
+\end{align}
 
 \subsection{Assimilation rate}
 \label{subsubsec:ar}
@@ -580,6 +706,7 @@ $\gamma_c = 0.074$, and $\gamma_o = 0.015$. Thus, substituting \cref{eq:fcr_a1,e
 \begin{equation}
 f_c^r = \frac{V_{\textit{cmax}}\,c_i}{K_c \left(1 + \frac{C_{o,a}}{K_o}\right) + s\,c_a}
 \end{equation}
+
 %
 %The Fickian diffusion through stomata is given as:
 %\begin{align}
@@ -755,18 +882,28 @@ As this is a non-linear closure problem \citep{Manoli2014},  a secant method is 
 \end{equation}
 where the initial estimate of $\psi_L^{j=0} = 0$ MPa and $\psi_L^{j=1} = -10$ MPa and with the additional constraint that $-10 \le \psi_L \le 0$ MPa, enforcing that leaf water potential is negative and not larger than $-10$ MPa. The detailed solution strategy for determining for coupling all the models is detailed in next section.
 
-\section{Coupled air-soil-vegetation-radiation model}
+\section{Radiation model}
+\label{sec:radiationmodel}
+The radiative exchanges are summarized in this section.
 
-The numerical model for air domain, solid domains (soil, ground, building), the radiation model and the vegetation model is implemented into OpenFOAM. The solid and air domains are coupled at regular intervals $t^m$ defined as exchange timesteps or air time steps \citep{Saneinejad2014,Kubilay2018}. The fluxes between air and solid domain consisting for thermal, moisture and radiative transfers are coupled at this step, chosen to be 10 min. At each $t^m$, the air domain is assumed to the quasi-steady and solving using steady-state RANS approach converged when residuals of $\rho$, $\mvec{u}$, $h$, $k$, $\varepsilon$ are below threshold. During the steady-state computation, the leaf energy balance is evaluated periodically to correct the heat and mass fluxes, $q_{\textit{sen,leaf}}$ and $g_{\textit{v,leaf}}$, respectively. 
+%The numerical model for air domain, solid domains (soil, ground, building), the radiation model and the vegetation model is implemented into OpenFOAM. The solid and air domains are coupled at regular intervals $t^m$ defined as exchange timesteps or air time steps \citep{Saneinejad2014,Kubilay2018}. The fluxes between air and solid domain consisting for thermal, moisture and radiative transfers are coupled at this step, chosen to be 10 min. At each $t^m$, the air domain is assumed to the quasi-steady and solving using steady-state RANS approach converged when residuals of $\rho$, $\mvec{u}$, $h$, $k$, $\varepsilon$ are below threshold. During the steady-state computation, the leaf energy balance is evaluated periodically to correct the heat and mass fluxes, $q_{\textit{sen,leaf}}$ and $g_{\textit{v,leaf}}$, respectively. 
 
 \section{Coupling algorithm}
+\label{sec:couplingalgorithm}
 
-The numerical model for air domain, solid domains (soil, ground, building), the radiation model and the vegetation model is implemented into OpenFOAM. The solid and air domains are coupled at regular intervals $t^m$ defined as exchange timesteps or air time steps \citep{Saneinejad2014,Kubilay2018}. The fluxes between air and solid domain consisting for thermal, moisture and radiative transfers are coupled at this step, chosen to be 10 min. At each $t^m$, the air domain is assumed to the quasi-steady and solving using steady-state RANS approach converged when residuals of $\rho$, $\mvec{u}$, $h$, $k$, $\varepsilon$ are below threshold. 
+The numerical models for air domain, solid domains (soil, ground, building facade), the radiation model and the vegetation model are implemented into OpenFOAM. \cref{fig:coupling} shows the schematic representation of the solid and air domain coupling strategy. The solid and air domains are coupled at regular intervals $t^m$ defined as exchange timesteps or air time steps \citep{Saneinejad2014,Kubilay2018}. The fluxes between air and solid domain consisting of thermal, moisture and radiative transfers are coupled at exchange timesteps, chosen to be an interval of $\Delta t^m = 10$ min.
+
+\begin{figure}[t]
+	\centering
+	\includegraphics[width=\textwidth]{\figdir/coupling-crop.pdf}
+	\caption{Schematic representation of the coupling strategy.}
+	\label{fig:coupling}
+\end{figure}
 
 
 \subsection{Air domain}
 
-The air domain is solved using $m$ pseudo steady-state timesteps. The diurnal cycle is split into pseudo steady-state timesteps of $\Delta t^m = 10$ min (i.e., $8640$ time steps in a $24$ hrs). At each steady-state timestep $t^m$, the quasi steady-state RANS model is solved for the fluid equations: $\rho$, $\mvec{u}$, $h$, $k$, and $\varepsilon$. During the steady-state computation, the \textit{leaf energy balance} (LEB) model is solved to determine the heat and mass fluxes, $q_{\textit{sen,leaf}}$ and $g_{\textit{v,leaf}}$, respectively. The algorithm for solving the air domain from $t^{m}\rightarrow t^{m+1}$ is as follows:
+The air domain is solved using $m$ pseudo steady-state timestep, discretizing the diurnal cycle of a day into $\num{8640}$ pseudo steady-state timesteps of $\Delta t^m = 10$ min (i.e., $8640$ time steps in a $24$ hrs). At each $m^{\mathrm{th}}$ step, a steady-state RANS model is solved for the fluid equations: $\rho$, $\mvec{u}$, $h$, $k$, and $\varepsilon$. During the steady-state computation, the \textit{leaf energy balance} (LEB) model is solved to determine the heat and mass fluxes, $q_{\textit{sen,leaf}}$ and $g_{\textit{v,leaf}}$, respectively. The algorithm for solving the air domain from $t^{m}\rightarrow t^{m+1}$ (as shown in \cref{fig:coupling}) is as follows:
 \begin{enumerate}
 	\item Update the radiation fields in the air domain using $q_{\textit{rad}}$ from building surfaces and determined $q_{\textit{r,lw}}$ and $q_{\textit{r,sw}}$.
 	\item Solve \textit{leaf energy balance} (LEB) model:
@@ -780,23 +917,22 @@ The air domain is solved using $m$ pseudo steady-state timesteps. The diurnal cy
 		\item Repeat steps (d) to (f) until the leaf temperature has converged ($\epsilon < \num{e-8}$).
 	\end{enumerate}
 	\item Calculate all vegetation source terms $s_\rho$, $\mvec{s}_u$, $s_T$, $s_w$, $s_k$ and $s_{\varepsilon}$ using \cref{eq:source_density,eq:source_mom,eq:source_temp,eq:source_humi,eq:source_k,eq:source_eps}.
-	\item Solve for the steady-state air flow field for $t^{m+1}$, \crefrange{eq:conservationeq_incompressible1}{eq:conservationeq_incompressible6}.
+	\item Solve for the steady-state airflow field for $t^{m+1}$, \crefrange{eq:conservationeq_incompressible1}{eq:conservationeq_incompressible6}.
 	\item Repeat steps (2) to (4) until residuals of \crefrange{eq:conservationeq_incompressible1}{eq:conservationeq_incompressible6} have reached the convergence limit of $\epsilon < \num{e-6}$.
 \end{enumerate}
 
 \subsection{Solid domain}
 
-The solid domain describes the heat and mass transport in urban structures such as building facade, pavement, road and the ground (i.e., soil). Each of these ``sub'' domains consists of $n$ adaptive solid timesteps with $\Delta t^n < \Delta t^m$ \citep{Kubilay2018,Janssen2002}.
-At the beginning of the solid domain iteration, the thermal, moisture and radiative transfers are updated providing the necessary boundary conditions for wall boundaries. For each of $n$ solid timesteps, the linearized heat and mass transport equation are solved using $k$ Picard iterations. In only the soil sub-domain, for each of these $k$ Picard iteration, the root water uptake is determined through $j$ secant iterations. The algorithm of solving such soil sub-domain is given as:
+The solid domain describes the heat and mass transport in urban structures such as building facade, pavement, road and the ground (i.e., soil). Each of these ``\textit{sub}'' domains consists of $n$ adaptive solid timesteps with $\Delta t^n < \Delta t^m$ as shown in \cref{fig:coupling} \citep{Kubilay2018,Janssen2002}. At the beginning of the solid domain iteration, the thermal, moisture and radiative transfers are updated providing the necessary boundary conditions for wall boundaries. For each of $n$ solid timesteps, the linearized heat and mass transport equation are solved using $k$ Picard iterations. In the soil sub-domain only, during each of these $k$ Picard iteration, the soil-plant-atmosphere continuum (SPAC) model is solved using $j$ secant iterations to determine the root water uptake \citep{Manoli2014}. The algorithm for solving such soil sub-domain is given as:
 \begin{enumerate}
 	\item $k$ Picard iterations solving for the linearized heat and mass transport transport equations:
 		\begin{enumerate}[label=(\alph*)]
-			\item Calculate marginal WUE $\lambda\left(\langle\psi_L\rangle_{24h}\right)$. % As $\psi_L$ is assumed to be slowly varying, $\lambda$ is constant in secant iteration.
-			\item Calculate stomatal conductance $k_{\textit{st}}$, constant in the secant iteration.
+			\item Calculate marginal WUE $\lambda$. % As $\psi_L$ is assumed to be slowly varying, $\lambda$ is constant in secant iteration.
+			\item Calculate stomatal conductance $k_{\textit{st}}$.
 			\item Calculate assimilation rate $f_c$ and transpiration rate $f_v$.
 			\item Calculate net transpiration rate $G_{\textit{v,leaf}}$.
 			\item Calculate effective soil-root conductance $k_{sr}^*$.
-			\item $j$Secant iterations solve for leaf water potential $\psi_L$.
+			\item $j$ secant iterations solve for leaf water potential $\psi_L$.
 				\begin{enumerate}[label=(\alph*)]
 					\item Initial guess of leaf water potential, $\psi_L^{j=0} = 0$ MPa, $\psi_L^{j=1} = -10$ MPa.
 					\item Calculate effective xylem conductance $k_x^*$.
@@ -807,8 +943,8 @@ At the beginning of the solid domain iteration, the thermal, moisture and radiat
 					\item Repeat till leaf water potential is converged, $\delta \psi_L \le \epsilon$.
 				\end{enumerate}
 			\item Calculate the sink in soil moisture due to root water uptake $s_{r}$.
-			\item Solve linearized form of heat and mass equation using PCG until $\delta p_c = \delta T = \num{e-2}$, repeating steps before.
+			\item Solve linearized form of heat and mass equation using PCG until $\delta p_c \le \num{e-2} $ and $\delta T \le  \num{e-2}$, repeating steps before.
 		\end{enumerate}
-	\item Use the final surface temperature $T_s^{N}$ to update the radiation model updating $q_{\textit{r,lw}}$ fluxes from all surfaces.
-	\item Final surface temperature $T_s^N$ and moisture fluxes $g_{v}^N$ are boundary condition for the air domain for $t^{m}\rightarrow t^{m+1}$.
+	\item Use the final surface temperature $T_s^{N}$ to update $q_{\textit{r,lw}}$ fluxes at all surfaces.
+	\item Final surface temperature $T_s^N$ and moisture fluxes $g_{v}^N$ are boundary conditions for the air domain at the following timestep $t^{m+1}$.
 \end{enumerate}

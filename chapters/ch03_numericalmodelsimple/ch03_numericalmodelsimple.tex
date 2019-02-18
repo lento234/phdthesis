@@ -21,105 +21,105 @@
 %The flow of moist air through vegetation is modelled with a computational fluid dynamics (CFD) approach where vegetation is modelled as a porous medium, where the heat and mass exchanges are determined from a leaf energy balance model (Section 2.1). The numerical model is validated against numerical and experimental study of impatiens (jewelweed) plants in a greenhouse (Section 2.3). Thereafter, the model is used to study the transpirative cooling effect of trees in Section 3. The thermal comfort for a pedestrian is assessed using the Universal Thermal Climate Index (UTCI) (Fiala et al., 2001). Furthermore, the transpirative cooling is identified by comparing the UTCI at transpiring (when the leaves can transpire) and non-transpiring (when the leaves do not transpire) conditions.
 
 
-\section{Generalized governing equation of moist flow}
-
-The governing equation consists of conservation of mass, momentum, energy and species. The conservation equations are given in differential form in a Cartesian coordinate system described by the triplet $\mvec{x} = (x,y,z)$. The conservation of mass for compressible moist flow is given as:
-
-\begin{equation}
-\frac{\partial \rho}{\partial t} + \nabla \cdot \left( \rho \mvec{u} \right)= 0
-\end{equation}
-where $\rho$ is the fluid density (kg\,m$^{-3}$), and $\mvec{u} = \left(u,v,w\right)$ is the fluid velocity (m\,s$^{-1}$). A detailed derivation is given in appendix \ref{app:thermodynamics} and \ref{app:conservation}.
-
-The conservation of momentum is given as:
-\begin{equation}
-\frac{\partial \rho \mvec{u}}{\partial t} + \nabla  \cdot \left( \rho \mvec{u} \mvec{u} \right) = -\nabla p + \mu \nabla^2 \mvec{u} + \rho \mvec{g} + \mvec{s}_u
-\end{equation}
-where $p$ is the pressure (Pa), $\mu$ the dynamic viscosity (kg\,m$^{-1}$\,s$^{-1}$), $\mvec{g}$ the gravitational acceleration (m\,s$^{-2}$). The source of momentum $\mvec{s}_u$ is:
-\begin{equation}
-\mvec{s}_u = - \rho a c_d |\mvec{u}|\mvec{u}
-\end{equation}
-where $a$ is the leaf area density (m$^2$\,m$^{-3}$), and $c_d$ is the leaf drag coefficient ($c_d = 0.2$).
-
-The conservation of energy is given as:
-\begin{equation}
-\frac{\partial \rho h}{\partial t} + \nabla  \cdot \left( \rho h \mvec{u} \right) = -\nabla \cdot \mvec{q} + s_h
-\end{equation}
-where 
-\begin{equation}
-\mvec{q} = - \lambda \nabla T
-\end{equation}
-is the Fourier's law of heat conduction, with:
-\begin{equation}
-\mvec{q} = - \frac{c_p \mu}{\mathrm{Pr}} \nabla T
-\end{equation}
-
-The conservation of species $i$ is given as:
-\begin{equation}
-\frac{\partial \rho x_i}{\partial t} + \nabla  \cdot \left( \rho x_i \mvec{u} \right) = \nabla \cdot \mvec{g}_i + s_i
-\end{equation}
-where $x_i$ is the concentration of species $i$, $\mvec{g}_i$ is the flux of species, and $s_i$ is the source term.
-
-\begin{assumption}
-	We assume that moist air is composed of dry air and water vapor.
-\end{assumption}
-
-The mass fraction of each component is:
-\begin{equation}
-x_a = \frac{\rho_a}{\rho}
-\end{equation}
-and
-\begin{equation}
-x_v = \frac{\rho_v}{\rho}
-\end{equation}
-where $\rho_a$ and $\rho_v$ are partial density of dry air and water vapour (kg\,m$^{-3}$) and $\rho$ is density of gas mixture and results in:
-\begin{equation}
-x_a + x_v = 1
-\end{equation}
-and
-\begin{equation}
-\rho_a + \rho_v = \rho
-\end{equation}
-
-The enthalphy of dry air and water vapor are:
-\begin{equation}
-h_a = c_{p,a} \left(T - T_{\mathit{ref}}\right)
-\end{equation}
-and
-\begin{equation}
-h_v = c_{p,v} \left(T - T_{\mathit{ref}}\right) + L_v \left(x_v - x_{v,ref}\right)
-\end{equation}
-
-The total enthalpy of moist air is:
-\begin{equation}
-h = h_a \cdot x_a + h_v \cdot x_v
-\end{equation}
-and so:
-\begin{equation}
-\rho h = \rho_a c_{p,a} \left(T - T_{\mathit{ref}}\right) + \rho_v c_{p,v} \left(T - T_{\mathit{ref}}\right) + \rho_v L_v
-\end{equation}
-
-\section{Turbulence modeling}
-
-The Reynolds decomposition splits the instantaneous velocity into mean and fluctuating component:
-\begin{equation}
-\mvec{u} \left(\mvec{x},t\right) = \overline{\mvec{u}} \left(\mvec{x}\right) + \mvec{u}' \left(\mvec{x},t\right).
-\end{equation}
-
-Applying this averaging operator to the NS equations, resulting Reynolds-Averaged Navier-Stokes (RANS) equation is given as:
-\begin{equation}
-\frac{\partial \overline{\rho}}{\partial t} + \nabla \cdot \left(\overline{\rho}\,\overline{\mvec{u}}\right) = 0,
-\end{equation}
-\begin{equation}
-\frac{\partial \overline{\rho}\,\overline{\mvec{u}}}{\partial t}  + \nabla \cdot \left(\overline{\rho}\,\overline{\mvec{u}}\,\overline{\mvec{u}}\right) = -\nabla \overline{p} + \mu \nabla^2 \overline{\mvec{u}} - \nabla \cdot \left(\overline{\rho \mvec{u}' \mvec{u}'}\right)+ \rho \mvec{g} + s_u
-\end{equation}
-where $\overline{\rho \mvec{u}' \mvec{u}'}$ is the Reynolds stresses. The Reynolds stresses are modelled using Bousinessq eddy-viscosity assumption:
-\begin{equation}
-- \overline{\rho \mvec{u}' \mvec{u}'} = \mu_t \left(\nabla u + \nabla u^T\right) - \frac{2}{3}\rho k \mvec{I}
-\end{equation}
-where:
-\begin{equation}
-\mu_t = \rho C_\mu \frac{k^2}{\varepsilon}
-\end{equation}
+%\section{Generalized governing equation of moist flow}
+%
+%The governing equation consists of conservation of mass, momentum, energy and species. The conservation equations are given in differential form in a Cartesian coordinate system described by the triplet $\mvec{x} = (x,y,z)$. The conservation of mass for compressible moist flow is given as:
+%
+%\begin{equation}
+%\frac{\partial \rho}{\partial t} + \nabla \cdot \left( \rho \mvec{u} \right)= 0
+%\end{equation}
+%where $\rho$ is the fluid density (kg\,m$^{-3}$), and $\mvec{u} = \left(u,v,w\right)$ is the fluid velocity (m\,s$^{-1}$). A detailed derivation is given in appendix \ref{app:thermodynamics} and \ref{app:conservation}.
+%
+%The conservation of momentum is given as:
+%\begin{equation}
+%\frac{\partial \rho \mvec{u}}{\partial t} + \nabla  \cdot \left( \rho \mvec{u} \mvec{u} \right) = -\nabla p + \mu \nabla^2 \mvec{u} + \rho \mvec{g} + \mvec{s}_u
+%\end{equation}
+%where $p$ is the pressure (Pa), $\mu$ the dynamic viscosity (kg\,m$^{-1}$\,s$^{-1}$), $\mvec{g}$ the gravitational acceleration (m\,s$^{-2}$). The source of momentum $\mvec{s}_u$ is:
+%\begin{equation}
+%\mvec{s}_u = - \rho a c_d |\mvec{u}|\mvec{u}
+%\end{equation}
+%where $a$ is the leaf area density (m$^2$\,m$^{-3}$), and $c_d$ is the leaf drag coefficient ($c_d = 0.2$).
+%
+%The conservation of energy is given as:
+%\begin{equation}
+%\frac{\partial \rho h}{\partial t} + \nabla  \cdot \left( \rho h \mvec{u} \right) = -\nabla \cdot \mvec{q} + s_h
+%\end{equation}
+%where 
+%\begin{equation}
+%\mvec{q} = - \lambda \nabla T
+%\end{equation}
+%is the Fourier's law of heat conduction, with:
+%\begin{equation}
+%\mvec{q} = - \frac{c_p \mu}{\mathrm{Pr}} \nabla T
+%\end{equation}
+%
+%The conservation of species $i$ is given as:
+%\begin{equation}
+%\frac{\partial \rho x_i}{\partial t} + \nabla  \cdot \left( \rho x_i \mvec{u} \right) = \nabla \cdot \mvec{g}_i + s_i
+%\end{equation}
+%where $x_i$ is the concentration of species $i$, $\mvec{g}_i$ is the flux of species, and $s_i$ is the source term.
+%
+%\begin{assumption}
+%	We assume that moist air is composed of dry air and water vapor.
+%\end{assumption}
+%
+%The mass fraction of each component is:
+%\begin{equation}
+%x_a = \frac{\rho_a}{\rho}
+%\end{equation}
+%and
+%\begin{equation}
+%x_v = \frac{\rho_v}{\rho}
+%\end{equation}
+%where $\rho_a$ and $\rho_v$ are partial density of dry air and water vapour (kg\,m$^{-3}$) and $\rho$ is density of gas mixture and results in:
+%\begin{equation}
+%x_a + x_v = 1
+%\end{equation}
+%and
+%\begin{equation}
+%\rho_a + \rho_v = \rho
+%\end{equation}
+%
+%The enthalphy of dry air and water vapor are:
+%\begin{equation}
+%h_a = c_{p,a} \left(T - T_{\mathit{ref}}\right)
+%\end{equation}
+%and
+%\begin{equation}
+%h_v = c_{p,v} \left(T - T_{\mathit{ref}}\right) + L_v \left(x_v - x_{v,ref}\right)
+%\end{equation}
+%
+%The total enthalpy of moist air is:
+%\begin{equation}
+%h = h_a \cdot x_a + h_v \cdot x_v
+%\end{equation}
+%and so:
+%\begin{equation}
+%\rho h = \rho_a c_{p,a} \left(T - T_{\mathit{ref}}\right) + \rho_v c_{p,v} \left(T - T_{\mathit{ref}}\right) + \rho_v L_v
+%\end{equation}
+%
+%\section{Turbulence modeling}
+%
+%The Reynolds decomposition splits the instantaneous velocity into mean and fluctuating component:
+%\begin{equation}
+%\mvec{u} \left(\mvec{x},t\right) = \overline{\mvec{u}} \left(\mvec{x}\right) + \mvec{u}' \left(\mvec{x},t\right).
+%\end{equation}
+%
+%Applying this averaging operator to the NS equations, resulting Reynolds-Averaged Navier-Stokes (RANS) equation is given as:
+%\begin{equation}
+%\frac{\partial \overline{\rho}}{\partial t} + \nabla \cdot \left(\overline{\rho}\,\overline{\mvec{u}}\right) = 0,
+%\end{equation}
+%\begin{equation}
+%\frac{\partial \overline{\rho}\,\overline{\mvec{u}}}{\partial t}  + \nabla \cdot \left(\overline{\rho}\,\overline{\mvec{u}}\,\overline{\mvec{u}}\right) = -\nabla \overline{p} + \mu \nabla^2 \overline{\mvec{u}} - \nabla \cdot \left(\overline{\rho \mvec{u}' \mvec{u}'}\right)+ \rho \mvec{g} + s_u
+%\end{equation}
+%where $\overline{\rho \mvec{u}' \mvec{u}'}$ is the Reynolds stresses. The Reynolds stresses are modelled using Bousinessq eddy-viscosity assumption:
+%\begin{equation}
+%- \overline{\rho \mvec{u}' \mvec{u}'} = \mu_t \left(\nabla u + \nabla u^T\right) - \frac{2}{3}\rho k \mvec{I}
+%\end{equation}
+%where:
+%\begin{equation}
+%\mu_t = \rho C_\mu \frac{k^2}{\varepsilon}
+%\end{equation}
 
 \section{Incompressible conservation equations of mean flow of moist air}
 \label{sec:cons_incompressible}
