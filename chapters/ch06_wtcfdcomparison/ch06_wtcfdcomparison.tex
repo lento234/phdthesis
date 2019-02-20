@@ -1,4 +1,4 @@
-\chapter{Comparison of wind tunnel measurement and CFD simulation of a small plant}
+\chapter{Comparison of CFD model and wind tunnel measurement}
 \label{ch:wtcfdcomparison}
 \def\figdir{chapters/ch06_wtcfdcomparison/figures}	
 
@@ -8,7 +8,7 @@
 % how the leaf area density distribution is obtained
 % comparison....
 
-\lettrine[lines=3,nindent=0em,loversize=0.1]{I}{n} this chapter, we compare the numerical method described in \cref{ch:parametricstudy,ch:numericalmethod} with the measurements of \cref{ch:microclimatestudy}. The measurements were performed for a small \textit{Buxus} \textit{sempervirens} plant. The measurements consisted of: i) X-ray tomography measuring plant microstructure metrics such as net leaf area and leaf area density, ii) stereoscopic particle image velocimetry (SPIV) measuring the wake flow properties such as mean velocity and turbulence kinetic energy (TKE), iii) infrared thermography measuring the spatiotemporal leaf temperature profile, and iv) hygrothermal in-foliage measurement probes measuring the vertical distribution of relative humidity (RH) and air temperature. Therefore, the goal of the present study is to compare the numerical simulation of the Buxus plant setup using the porous medium approach detailed in this thesis and compare with the high-resolution dataset to quantify the discrepancies. The present study aims at providing insight to the feasibility of employing such numerical techniques and possible limitation.
+\lettrine[lines=3,nindent=0em,loversize=0.1]{I}{n} this chapter, we compare the numerical method described in \cref{ch:parametricstudy} with the measurements of \cref{ch:microclimatestudy}. The measurements were performed for a small \textit{Buxus} \textit{sempervirens} plant. The measurements consisted of: i) X-ray tomography measuring plant microstructure metrics such as net leaf area and leaf area density, ii) stereoscopic particle image velocimetry (SPIV) measuring the wake flow properties such as mean velocity and turbulence kinetic energy (TKE), iii) infrared thermography measuring the spatiotemporal leaf temperature profile, and iv) hygrothermal in-foliage measurement probes measuring the vertical distribution of relative humidity (RH) and air temperature. Therefore, the goal of the present study is to compare the numerical simulation of the Buxus plant setup using the porous medium approach detailed in this thesis and compare with the high-resolution dataset to quantify the discrepancies. The present study aims at providing insight to the feasibility of employing such numerical techniques and possible limitation.
 
 \section{Simulation domain and boundary condition}
 
@@ -43,7 +43,7 @@ The numerical domain is based on the geometry of the wind tunnel test-section wi
 \end{align}
 where $\tavg{u}(z)$ (m\,s$^{-1}$) is the mean horizontal velocity, $u_*= \num{0.05052531}$ m\,s$^{-1}$ is  the friction velocity, $\kappa=0.41$ is von K\'arm\'an constant, $z_0 = \num{0.00133508}$ m is the aerodynamic roughness height and $C_{\mu}=0.09$. The inlet turbulent intensity is $I = \sqrt{2/3\,k}/U_{ref} = 12.1 \%$. The roughness height $z_0$ and the friction velocity $u_*$ is obtained using curve-fit of the measured PIV profile. The outlet boundary condition is defined as pressure outlet with a static pressure $p=0$. A zero-gradient boundary condition is enforced for $\mvec{u}$, $k$, and $\varepsilon$. The remaining boundaries (i.e., top-wall and side-walls) is modeled as no-slip wall-boundary and with standard wall functions.
 
-\subsection{Vvegetation: Leaf area density}
+\subsection{Vegetation: Leaf area density}
 
 The vegetation is modeled as a porous medium parameterized using a leaf area density $a$ (m$^2$\,m$^{-3}$) distribution and a constant leaf drag coefficient $c_d$. The momentum source term $s_u$ (N\,m$^{-3}$) is given as:
 	\begin{align}
