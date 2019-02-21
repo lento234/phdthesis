@@ -1,7 +1,7 @@
 \chapter{Introduction}
 \label{ch:introduction}
 
-\def\figdir{chapters/introduction/figures/}
+\def\figdir{chapters/ch01_introduction/figures}
 
 %\epigraph{\textit{The easiest way to solve a problem is to deny it exists.}}{Isaac Asimov}
 
@@ -17,28 +17,34 @@
 
 \lettrine[lines=3,nindent=0em,loversize=0.1]{T}{he} global population is steady rising and migrating from rural areas to urban areas and results in a growing urbanization as urban for past two centuries. This result of a rapid rise in urban population and therefore in future the ecology of the urban system will become a primary concern. Furthermore, climate change, driven by human activity need to be reduces to mitigate the present detrimental climatology in urban areas. A lack thereof can not only have implication on the global climate but also the comfort and health of urban populace. 
 
-Presently, there is a growing need to accurately predict the impact of the vegetation. Vegetation provides natural cooling through shading and transpiration and is a primary solution to combat the growing urban heat island (UHI) and improve the thermal comfort  \citep{Gillner2015, Bowler2010, Loughner2012}. 
-
-
-\section{Objective and Methodology}
-
-The objective of this thesis is as follows:
-\begin{itemize}
-	\item to quantify the natural cooling provided by vegetation in urban microclimate consisting of transpirative cooling and shading from plant foliage.
-	\item to quantify the impact of vegetation on pedestrian thermal comfort. 
-	\item to understand the influence of water stress on the natural cooling.
-\end{itemize}
-
-Figure \ref{fig:vegetation_fluxes} shows a schematic representation of the various fluxes exchanged between an urban tree and the environment. 
+Therefore, presently, there is an increasingly growing need to accurately predict the impact of the vegetation at scale of pedestrians. Vegetation provides natural cooling through shading and transpiration and is a primary solution to combat the growing urban heat island (UHI) and improve the thermal comfort  \citep{Gillner2015, Bowler2010, Loughner2012}. 
 
 \begin{figure}[h]
 	\centering
-	%\includegraphics[width=0.7\textwidth]{\figdir/vegetation_fluxes.png}
+	\includegraphics[width=\textwidth]{\figdir/streetcanyon_tree_part5.png}
 	\caption{Interaction of urban vegetation with the urban microclimate.}
 	\label{fig:vegetation_fluxes}
-\end{figure}	
+\end{figure}
+
+The complexifiers which make in urban greening solutions is that cooling provided by vegetation is environmentally dependent. Figure \ref{fig:vegetation_fluxes} shows a schematic representation of the various fluxes exchanged between an urban tree and the environment. The figure shows the the various physical processes that vegetation is part of. The solar radiation is absorbed by plant foliage and drives the energy balance that controls the latent (i.e., due to transpiration of moisture), and sensible heat flux from the plant. Furthermore, the interception of solar radiation provides shading in the urban area. Vegetation also has an impact on the water cycle, where the moisture in the soil is transported into air through transpiration. Moreover, the plant transpiration is dependent on the water availability at the plant roots. %So, the transpiration driven cooling (i.e., transpirative cooling potential) of vegetation is environmentally dependent. 
 
 
+Furthermore, high vegetation density can also have a negative impact on the ventilation characteristics in an urban microclimate. So, increasing the thermal comfort in urban area can be at the cost of air quality. Thus, there exists a need for a numerical prediction tool that can take into account of all these factors to provide an accurate assessments on the impact of vegetation in urban microclimate. 
+
+\section{Objective and Methodology}
+
+The goal of the thesis is to improve the assessment on the impact of vegetation on the urban microclimate. As vegetation is increasingly being sought after as a natural UHI mitigation strategy, accurate predictions are need to assess their effectiveness. More specifically, the objective of this thesis is as follows:
+\begin{itemize}
+	\item to assess the impact of vegetation on the microclimate.
+	
+	\item to quantify the natural cooling (i.e., transpirative cooling and shading) provided by vegetation in urban microclimate.
+	
+	\item to understand the influence of water stress on the natural cooling.
+	
+	\item to quantify the impact of vegetation on pedestrian thermal comfort. 
+\end{itemize}
+
+Experimental and numerical approaches are employed to assess the impact of vegetation on the microclimate. Wind tunnel experiments in an atmospheric boundary layer (ABL) are opted to understand the impact of vegetation on the airflow and the local microclimate, where small model trees and small natural trees are employed as scaled models. Measurement techniques such as particle image velocimetry (PIV) and drag force measurement are employed to quantify the modification of airflow due to vegetation. Measurement techniques such as infrared thermography, and hygrothermal sensor analysis are used to quantify the change in hygrothermal variables. A numerical asssessment on the impact of vegetation on urban microclimate is achieved by developing a vegetation model integrated into a computation fluid dynamics  (CFD) model. The numerical model simultaniously takes in account of the turbulence modification, radiation balance, heat and mass fluxes, and the sensitivity to soil moisture simultaneously. With this modeling technique, the cooling potential of vegetation is quantified along with the impact on thermal comfort for a pedestrian. 
 
 \section{Outline of the thesis}
 
