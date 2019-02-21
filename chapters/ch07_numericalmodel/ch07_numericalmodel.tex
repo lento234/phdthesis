@@ -14,7 +14,7 @@
 	\label{fig:fullmodelcoupling}
 \end{figure}
 
-The \textit{air} domain model describes the transport of moist air through vegetation (i.e., velocity $\mvec{u}$, enthalpy $h$, moisture content $w_a$, and CO$_2$ concentration $x_c$). Furthermore, with the air domain, the \textit{leaf energy balance} (LEB) model is solved to determine the heat and mass fluxes (i.e., $q_{\textit{sen,leaf}}$ and $g_{\textit{v,leaf}}$) and provides the necessary source and sink terms for solving the moist airflow. A detailed description of the leaf energy balance and the coupling between the air domain is provided in \cref{ch:parametricstudy} and summarized in \cref{sec:airdomain}. The \textit{solid} domain model described the coupled heat and mass transport (i.e., $T_s$, and $w_s$) in all urban materials (i.e. soil, pavement, and building facades). Furthermore, in the soil region which consists of vegetation roots, the \textit{soil-plant-atmosphere continuum} (SPAC) is solved to determine the leaf water potential $\psi_L$ (see \cref{sec:spac}) and the root water uptake $g_{\textit{v,root}}$ which provides the necessary sink term in soil region. A detailed description of the solid domain, SPAC model, and the coupling between them is provided in \cref{sec:soliddomain,sec:spac,sec:couplingalgorithm}, respectively. The final ingredient is the \textit{radiation} model which calculates the short-wave $q_s$ and long-wave $q_r$ radiative exchanges in the urban street canyon including the impact of vegetation. A detailed description of the radiation model is given in \cref{sec:radiationmodel}.
+The \textit{air} domain model describes the transport of moist air through vegetation (i.e., velocity $\mvec{u}$, enthalpy $h$, moisture content $w_a$, and CO$_2$ concentration $c$). Furthermore, with the air domain, the \textit{leaf energy balance} (LEB) model is solved to determine the heat and mass fluxes (i.e., $q_{\textit{sen,leaf}}$ and $g_{\textit{v,leaf}}$), which provides the necessary source and sink terms for solving the moist airflow. A summary of the leaf energy balance and the coupling between the air domain is provided in \cref{ch:parametricstudy} and detailed in \cref{sec:airdomain}. The \textit{solid} domain model described the coupled heat and mass transport (i.e., solid temperature $T_s$, and solid moisture content $w_s$) in all urban materials (i.e., soil, pavement, and building facades). Furthermore, in the soil region which consists of vegetation roots, the \textit{soil-plant-atmosphere continuum} (SPAC) is solved to determine the leaf water potential $\psi_L$ (see \cref{sec:spac}) and the root water uptake $g_{\textit{v,root}}$, which provides the necessary sink term in soil region. A detailed description of the solid domain, SPAC model, and the coupling between them is provided in \cref{sec:soliddomain,sec:spac,sec:couplingalgorithm}, respectively. The final ingredient is the \textit{radiation} model which calculates the short-wave $q_s$ and long-wave $q_r$ radiative exchanges in the urban street canyon including the impact of vegetation. A detailed description of the radiation model is given in \cref{sec:radiationmodel}.
 
 \section{Air domain: Transport of moist air}
 \label{sec:airdomain}
@@ -22,7 +22,7 @@ The simplified vegetation model is described in \cref{ch:parametricstudy}, intro
 
 
 \subsection*{Conservation of species}
-The governing equation consists of conservation of mass, momentum, energy and species. The conservation equations are given in differential form in a Cartesian coordinate system described by the triplet $\mvec{x} = (x,y,z)$. In our study, the species of interest is water vapor (subscript $v$) and carbon-dioxide (subscript $c$). The conservation of species $i$ is given as:
+The governing equation consists of conservation of mass, momentum, energy, and species. The conservation equations are given in differential form in a Cartesian coordinate system described by the triplet $\mvec{x} = (x,y,z)$. In our study, the species of interest is water vapor (subscript $v$) and carbon-dioxide (CO$_2$) (subscript $c$). The conservation of species $i$ is given as:
 \begin{equation}
 \frac{\partial \rho x_i}{\partial t} + \nabla  \cdot \left( \rho x_i \mvec{u} \right) = - \nabla \cdot \mvec{g}_{\textit{d,i}} + s_i
 \label{eq:xi}
@@ -33,22 +33,23 @@ x_a &= \frac{\rho_a}{\rho} \\
 x_v &= \frac{\rho_v}{\rho} \label{eq:xv}\\
 x_c &= \frac{\rho_c}{\rho}\label{eq:xc}
 \end{align}
-where $\rho_a$, $\rho_v$, $\rho_c$ are partial density of dry air, water vapor and CO$_2$ (kg\,m$^{-3}$). The variable $\rho$ is total density of gas mixture is given as:
+and satisfies:
 \begin{equation}
 x_a + x_v + x_c = 1
+\label{eq:massfrac}
 \end{equation}
-However, as $x_c \ll (x_a+x_v)$:
+where $\rho_a$, $\rho_v$, $\rho_c$ are partial density of dry air, water vapor and CO$_2$ (kg\,m$^{-3}$). However, as $x_c \ll (x_a+x_v)$, we can approximate \cref{eq:massfrac} to:
 \begin{equation}
 x_a + x_v \approx 1
 \end{equation}
-and so:
+Similarly, total density of gas mixture $\rho$ is given as:
 \begin{equation}
 \rho_a + \rho_v = \rho
 \end{equation} 
 
-The Fick's law is used to describe the diffusive mass flux as a function of concentration gradient of the species:
+The Fick's law of diffusion is used to describe the diffusive mass flux as a function of concentration gradient of the species:
 \begin{equation}
-\mvec{g}_{\textit{d,i}} = - \rho D \nabla x_i
+\mvec{g}_{\textit{d,i}} = - \rho D_i \nabla x_i
 \label{eq:dmf}
 \end{equation}
 where $D$ is the diffusion coefficient. Thus, substituting mass fractions \cref{eq:xv,eq:xc}, and diffusion mass flux \cref{eq:dmf} into \cref{eq:xi}, the conservation equation of species become:
