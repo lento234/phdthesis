@@ -23,10 +23,10 @@
      inkscape:window-height="1395"
      inkscape:window-width="2560"
      showgrid="false"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="layer2"
      inkscape:document-units="mm"
-     inkscape:cy="503.32914"
-     inkscape:cx="211.03388"
+     inkscape:cy="847.07914"
+     inkscape:cx="70.40888"
      inkscape:zoom="1.28"
      inkscape:pageshadow="2"
      inkscape:pageopacity="0.0"
@@ -199,14 +199,6 @@
     </rdf:RDF>
   </metadata>
   <g
-     id="layer1"
-     inkscape:groupmode="layer"
-     inkscape:label="Layer 1" />
-  <g
-     inkscape:label="Layer 3"
-     id="layer3"
-     inkscape:groupmode="layer" />
-  <g
      transform="translate(3.042,6.294)"
      id="g195">
     <g
@@ -225,7 +217,8 @@
   <g
      inkscape:groupmode="layer"
      id="layer2"
-     inkscape:label="Layer 2">
+     inkscape:label="Layer 2"
+     style="display:inline">
     <path
        inkscape:connector-curvature="0"
        id="path2910"
@@ -923,7 +916,7 @@
        inkscape:connector-curvature="0"
        id="path3726"
        d="M 136.06404,34.869457 57.668718,114.48399"
-       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.3;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:2.4,2.4;stroke-dashoffset:0" />
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.30000001;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:2.4, 2.4;stroke-dashoffset:0;stroke-opacity:1" />
     <path
        sodipodi:nodetypes="cc"
        inkscape:connector-curvature="0"
@@ -940,7 +933,7 @@
        inkscape:connector-curvature="0"
        id="path3740"
        d="m 232.57369,437.37962 c -14.26441,-0.1031 -28.18983,-0.60126 -38.04843,-1.36112 -2.25519,-0.17381 -8.99342,-0.87248 -9.06904,-0.94033 -0.0671,-0.0602 46.83612,0.0792 53.95004,0.16029 l 8.35175,0.0952 0.1022,0.62148 c 0.0562,0.34181 0.13839,0.82346 0.1826,1.07033 l 0.0804,0.44884 -5.70317,-0.0324 c -3.13674,-0.0178 -7.5676,-0.0459 -9.84636,-0.0623 z"
-       style="opacity:1;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.37795276;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+       style="opacity:1;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.37795275;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
   </g>
   <g
      transform="matrix(0.423624,0,0,0.423624,111.48339,52.445117)"

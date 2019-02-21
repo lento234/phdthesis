@@ -27,16 +27,19 @@
 
 %However, as 30\% of the global population will be residing in cities, cities should strive to be sustainable and mitigate the present and future adverse effects on the climate. Furthermore, it is also in the interest of the city itself, as the city itself suffer from its unintended impacts. 
 
+\begin{figure}[p]
+	\centering
+	\includegraphics[width=0.7\textwidth]{\figdir/lengthtimescales.png}
+	\caption{Time and length scale of phenomena in urban climate \citep{Oke2017a}.}
+	\label{fig:lengthtimescales}
+\end{figure}
+
+
 ``Urban climates are prime example of inadvertent climate modification - the unintended impact of human activity on the atmosphere'' \citep{Oke2017a}. In other words, the urban climate describes the modification of the atmosphere due to various components of the urban ecosystem. More specifically, the urban ecosystem modifies the natural environment through five aspects: atmosphere, biosphere, hydrosphere, pedo- and lithosphere, and the build system \citep{Oke2017a}. The urban atmosphere describes the influence of urban elements on the atmospheric conditions. The urban biosphere describes influence of urban vegetation and other biological elements. The urban hydrosphere describes the water movement in the urban area, where the process such as surface run-off is described. The urban pedo- and lithosphere deals with the soil and ground modification in cities. Finally, the build system describes the influence of man-made structures on its environment. Therefore, the net urban climate is a result of these five aspects and the coupling between all these components needed to be understood to study the urban climate.
 
 %A study on the energy budget in an urban environment can provide a initial understanding of the coupling between varies processes in such an environment.
 
-	\begin{figure}[p]
-		\centering
-		\includegraphics[width=0.7\textwidth]{\figdir/lengthtimescales.png}
-		\caption{Time and length scale of phenomena in urban climate \citep{Oke2017a}.}
-		\label{fig:lengthtimescales}
-	\end{figure}
+
 
 \subsection{Urban scales}
 
@@ -96,25 +99,28 @@ One of the key aspect of the urban microclimate study is its impact on the urban
 
 where $Q_m$ (W\,m$^{-2}$) is the heat produced from metabolism, $Q_w$ (W\,m$^{-2}$) is muscular activity, $Q_s$ (W\,m$^{-2}$) is sensible heat flux, $Q_l$ (W\,m$^{-2}$) is latent heat flux, $Q_t$ (W\,m$^{-2}$) is heat produced from respiration, and $\Delta Q_s$ (W\,m$^{-2}$) is the rate of energy storage. Various comfort models have been developed to solve the energy balance. The Munich Energy-Balance Model for Individuals (MEMI) solves energy balance with a two-node system solving the heat flux from the skin to the body core and heat fluxes through clothing \citep{Hoppe1999}. 
 
-	\begin{figure}[t]
+	\begin{figure}[p]
 		\centering
 		\includegraphics[width=\textwidth]{\figdir/thermalindex.png}
 		\caption{Range, relation and physiological response for different parameters of the comfort indexes \citep{Oke2017,Matzarakis1999,Bazejczyk2013}.}
 		\label{fig:thermalindex}
 	\end{figure}
+	
+	\begin{figure}[p]
+	\centering
+	\includegraphics[width=\textwidth]{\figdir/energymassbudget.png}
+	\caption{Coupling between radiative, energy and water budget \citep{Sawinski2011}.}.
+	\label{fig:energymassbudget}
+	\end{figure}
+
 
 A more realistic model is the UTCI-Fiala model that uses a 12 element (head, face, neck, shoulder, thorax, abdomen, upper and lower arm, hands, upper and lower legs, and feet), 187-node model \citep{Fiala2001,Brode2012,Blazejczyk2012,Jendritzky2012,Bazejczyk2013,Lokys2015}. The physiological response can then quantified using various thermal / human comfort indexes such as predicted mean vote (PMV), perceived temperature (PT), OUT-SET*, physiological equivalent temperature (PET), universal thermal climate index (UTCI). Figure \ref{fig:thermalindex} shows the various physiological responses at different values of various thermal indexes. The human body is defined to be in a comfortable state between $9\ge \mathrm{UTCI} \ge 26$\si{\celsius}. Above this regime, heat stress occurs, where sweating rate and skin temperature starts to increase. The physiological stresses above comfort level are categorized as slight, moderate, strong and extreme heat stresses.
 
 \section{Impact of vegetation on urban microclimate}
 
-Urban greening solutions is seen as an effective tool to combat the growing UHI and improve the climate in urban areas \citep{Gillner2015, Bowler2010, Loughner2012}.  The energy contribution of the latent heat flux from vegetation in urban microclimate cannot be neglected as seen in section \ref{subsec:energybalance}. Furthermore, urban vegetation has a direct influence on the aerodynamic, radiative, thermal and moisture properties of the urban microclimate \citep{Oke1989}. Thus, the interaction of urban vegetation with the environment can be seen as the coupling between the radiative, heat and moisture balance, as depicted in Fig. {fig:energymassbudget}. Therefore, to accurately assess the impact of urban vegetation on the urban microclimate, these coupled processes must be taken into account.
+Urban greening solutions is seen as an effective tool to combat the growing UHI and improve the climate in urban areas \citep{Gillner2015, Bowler2010, Loughner2012}.  The energy contribution of the latent heat flux from vegetation in urban microclimate cannot be neglected as seen in section \ref{subsec:energybalance}. Furthermore, urban vegetation has a direct influence on the aerodynamic, radiative, thermal and moisture properties of the urban microclimate \citep{Oke1989}. Thus, the interaction of urban vegetation with the environment can be seen as the coupling between the radiative, heat and moisture balance, as depicted in \cref{fig:energymassbudget}. Therefore, to accurately assess the impact of urban vegetation on the urban microclimate, these coupled processes must be taken into account.
 	
-	\begin{figure}[t]
-		\centering
-		\includegraphics[width=\textwidth]{\figdir/energymassbudget.png}
-		\caption{Coupling between radiative, energy and water budget \citep{Sawinski2011}.}.
-		\label{fig:energymassbudget}
-	\end{figure}
+
 
 \subsection{Influence of vegetation on the energy balance}
 
@@ -142,21 +148,23 @@ E = \varepsilon \sigma T^4
 \end{equation}  
 where $\varepsilon$ is the emissivity of body, $\sigma = \num{5.67e-8}$ W\,m$^{-2}$\,K$^{-4}$ is the Stefan-Boltzmann constant, and $T$ is the surface temperature (K). 
 
-\begin{figure}[t]
+\begin{figure}[p]
 	\centering
 	\includegraphics[width=0.7\textwidth]{\figdir/leaftransmission.png}
 	\caption{Electromagnetic spectrum absorbed, transmitted, and reflected by a leaf \citep{Lambers2008,nobel2009physicochemical}. }
 	\label{fig:leaftransmission}
 \end{figure}
 
-Unlike buildings, which are regarded as opaque, vegetation is a participating medium which transmits radiation depending on the wavelength. Figure \ref{fig:leaftransmission} shows the radiation absorption, transmission, and reflection fraction of a leaf. The leaves are semi-transparent to wavelength in between 0.5 and 2 $\mu$m. However, below and above these wavelengths, the leaves can be considered as an opaque medium absorbing all the radiation. Therefore, vegetation such as trees plays an essential role in the radiative balance in an urban area. Figure \ref{fig:thermoimage} shows an infrared image indicated the shading effect of a tree on an asphalt street, where a surface temperature drop of upto 15.2 K was observable.
-
-\begin{figure}[t]
+\begin{figure}[p]
 	\centering
 	\includegraphics[width=0.7\textwidth]{\figdir/thermoimage.png}
 	\caption{Infrared image assessing the shading effect of a tree (\textit{Tilia cordata}) on an asphalted streets \citep{Gillner2015}. }
 	\label{fig:thermoimage}
 \end{figure}	
+
+Unlike buildings, which are regarded as opaque, vegetation is a participating medium which transmits radiation depending on the wavelength. Figure \ref{fig:leaftransmission} shows the radiation absorption, transmission, and reflection fraction of a leaf. The leaves are semi-transparent to wavelength in between 0.5 and 2 $\mu$m. However, below and above these wavelengths, the leaves can be considered as an opaque medium absorbing all the radiation. Therefore, vegetation such as trees plays an essential role in the radiative balance in an urban area. Figure \ref{fig:thermoimage} shows an infrared image indicated the shading effect of a tree on an asphalt street, where a surface temperature drop of upto 15.2 K was observable.
+
+
 
 Finally, due to photosynthesis the latent heat flux generated from transpiration also has an impact on the energy balance. The sensible heat flux $Q_s$ (W\,m$^{-2}$) is directly related to the temperature gradient:
 
@@ -166,12 +174,21 @@ Q_s = h_{c,h} \left(T_l - T_a\right)
 
 where $h_{c,h}$ is the convective heat transfer coefficient (CHTC) (W\,m$^{-2}$\,K$^{-1}$), $T_l$ (K) is the leaf temperature, and $T_a$ (K) is the air temperature. Therefore, a larger temperature gradient or a larger CHTC results in larger sensible heat flux. Figure \ref{fig:leaftemperature_range} shows a typical range of leaf and air temperature during day and night. The leaf temperature is dependent on the photosynthetic rate and can either add or extract sensible heat from air depending on the sign of the temperature gradient.
 
-\begin{figure}[t]
+\begin{figure}[p]
 	\centering
 	\includegraphics[width=0.7\textwidth]{\figdir/leaftemperature_range.png}
 	\caption{Typical daily range of air and leaf temperature of glabrous green winter leaves and pubescent white summer leaves of \textit{Encelia farinosa} (brittlebush) \citep{Lambers2008}. }
 	\label{fig:leaftemperature_range}
 \end{figure}
+
+\begin{figure}[p]
+	\centering
+	\includegraphics[width=\textwidth]{\figdir/vegetationfraction.png}
+	\caption{Dependency of Bowen ratio $\beta$ to vegetation density for various cities around the world \citep{Oke2017a}. }
+	\label{fig:vegetationfraction}
+\end{figure}	
+
+
 
 The latent heat flux $Q_l$ (W\,m$^{-2}$) is associated to the latent heat transport towards or away from the leaf surface:
 \begin{equation}
@@ -182,12 +199,6 @@ where $L_v=\num{2.464e6}$      J\,kg$^{-1}$ (at 15\si{\celsius}) is the latent h
 \beta = \frac{Q_s}{Q_l}
 \end{equation}
 
-\begin{figure}[t]
-	\centering
-	\includegraphics[width=\textwidth]{\figdir/vegetationfraction.png}
-	\caption{Dependency of Bowen ratio $\beta$ to vegetation density for various cities around the world \citep{Oke2017a}. }
-	\label{fig:vegetationfraction}
-\end{figure}	
 
 where it is simply the ratio between sensible and latent heat fluxes. Cities with high Bowen ratio (such as $\beta > 1$) is attributed to having either lower vegetation density or litter open water surfaces and higher density of impervious urban structures. Figure \ref{fig:vegetationfraction} shows that there is a linear relationship between Bowen ratio and vegetation density for various cities around the world. A higher vegetation density results in increased energy conversion to latent heat in the domain. However, it must be noted that lower Bowen ratio can indicate higher humidity flux in the atmosphere due to increased evapotranspiration which can have a negative impact on the thermal comfort.
 
@@ -202,7 +213,7 @@ An important variable used to define the state of water in various domain (e.g.,
 \end{equation}
 where $\mvec{g}$ is the water flux, $k$ is the conductance, and $\psi$ is the water potential. Therefore, for water to be supplied at the leaf from roots for transpiration, a sufficient gradient is required between the soil water potential and the leaf water potential. As the water demand at the leaves increases, a larger gradient will be required. Following this logic, the water stress is minimal before dawn and maximum during midday. 
 
-\begin{figure}[t]
+\begin{figure}[h]
 	\centering
 	\includegraphics[width=0.7\textwidth]{\figdir/soilmoisture.png}
 	\caption{Various degrees of soil moisture: $V_w$ is volume of water, $V_a$ is volume of air and $V_s$ is volume of soil.}
@@ -224,26 +235,23 @@ w = \frac{m}{V}.
 
 The water content in the soil is maximum at saturated conditions and as the soil dries, the soil moisture reaches the field capacity. The field capacity is the equilibrium state after an excess amount of water has drained away. As the soil dries further, the soil moisture reaches the permanent wilting point (PWP) or wilting point. Below the wilting point, plants start to wilt (i.e., the plant cells looks turgidity) and can no longer recover from the water stress. Typically, the wilting point is defined to be at a water potential of $\psi=-1.5$ \si{\MPa}. However, the water content associated with this water potential depends on the soil type. Figure \ref{fig:soilwatercontent} shows the regimes of field capacity and wilting point for various soil types. 
 	
-	\begin{figure}[ht]
+	\begin{figure}[p]
 		\centering
 		\includegraphics[width=\textwidth]{\figdir/soilwatercontent_soilpotential.png}
 		\caption{A typical relation of soil water potential $\psi$ as a function of soil water content $\theta$ }
 		\label{fig:soilwatercontent_soilpotential}
-	\end{figure}	
+	\end{figure}
 	
+	\begin{figure}[p]
+		\centering
+		\includegraphics[width=0.7\textwidth]{\figdir/waterpotential_diurnal.png}
+		\caption{Schematic representation  of diurnal change in soil, root, and leaf water potential \citep{nobel2009physicochemical}.}
+		\label{fig:waterpotential_diurnal}
+	\end{figure}	
 	
 A larger different between field capacity and the wilting point indicates a larger availability of water for the plants. We see that sand cannot hold much water and furthermore, it quickly dries towards the wilting point. Whereas, loam and silt loam is seen to have a larger field capacity and buffer of water until it reaches the wilting point. Figure \ref{fig:soilwatercontent_soilpotential} shows the typical dependency of the soil water potential $\psi$ to the soil water content $\theta$. The optimal zone for a plant is between the field capacity and around 10 orders of magnitude above the wilting point. The figure also shows that with high water content, water potential varies weakly. However, approaching the wilting point, the water potential drops exponentially, indicating a non-linearity in the water stress. 
 
-\begin{figure}[t]
-	\centering
-	\includegraphics[width=0.7\textwidth]{\figdir/waterpotential_diurnal.png}
-	\caption{Schematic representation  of diurnal change in soil, root, and leaf water potential \citep{nobel2009physicochemical}.}
-	\label{fig:waterpotential_diurnal}
-\end{figure}
-
 Figure \ref{fig:waterpotential_diurnal} shows the diurnal response of soil, root and leaf water potential. We see that once the water potential too low, the onset of leaf wilting can compromise the transpiration driven water cycle and potential the health of the plant. Therefore, plants are more susceptible to lower soil moisture content and in cities, water availability will become a critical factor, especially during a heat wave, for the survivability of the urban vegetation. 
-
-
 
 %
 %
@@ -290,42 +298,42 @@ However, a study on the mitigation potential of vegetation using such measuremen
 
 Similar to greenhouse studies, wind tunnel measurements provide a level of control that is seldom available from field measurements. Furthermore, measurement techniques such as Particle Image Velocimetry provide a level of detail of the flow structure that is not possible from field measurements. The downside to wind tunnel measurements is the requirement for scale similarity and requirement for measurement facility. Various authors have successfully studied the flow characteristics of natural vegetation. \cite{Cao2012} compares various shrubby trees including a deciduous, coniferous, and broadleaf evergreen tree. The study investigated the dependency of drag and the overturning moment of various tree species to wind speed. Similarly, wind tunnel measurements are performed for hardwood species \citep{Vollsinger2005} and conifers \citep{Vollsinger2005a, Mayhead1973, Bitog2011}. These controlled experiments provide a better understanding of the influence of tree morphology on the drag coefficient. These measurements can be then used to improve existing computational fluid dynamics (CFD) models and accurately assess their impact on the flow \citep{Bitog2011}. The PIV measurements of the tree wake can provide additional means of quantifying the turbulence modification due to trees in the flow \citep{Lee2012, Lee2014565}. Furthermore, these studies show additional understanding of sheltering provided by trees in the wind. The drag measurement is an effective tool to quantify the sheltering factor of the porous tree \citep{Guan2003,Kinnersley1994,Gromke2008a}.
 
-\begin{figure}[t]
-	\centering
-	\includegraphics[width=\textwidth]{\figdir/modeltree.png}
-	\caption{Different types of model trees used in wind tunnel studies \citep{Gromke2008a}. }
-	\label{fig:modeltree}
-\end{figure}
+	\begin{figure}[t]
+		\centering
+		\includegraphics[width=\textwidth]{\figdir/modeltree.png}
+		\caption{Different types of model trees used in wind tunnel studies \citep{Gromke2008a}. }
+		\label{fig:modeltree}
+	\end{figure}
+	
+	\begin{figure}[p]
+		\centering
+		\includegraphics[width=0.7\textwidth]{\figdir/dragcoefficientree.png}
+		\caption{Drag measurement study of small trees in windtunnel \citep{Cao2012}.}
+		\label{fig:dragcoefficientree}
+	\end{figure}
+	
+	\begin{figure}[p]
+		\centering
+		\includegraphics[width=\textwidth]{\figdir/modeltreecanoy.png}
+		\caption{Wind tunnel model of a vegetation canopy from wire mesh  \citep{Conan2015}}
+		\label{fig:modeltreecanoy}
+	\end{figure}
 
 Turbulent momentum exchange of vegetation with the environment was also investigated experimentally, such as in wind tunnels. In these studies, the flow field around the vegetation is typically correlated to its drag coefficient. \cite{Gromke2008a} investigated the flow around small model trees of various porosity and material, as shown in Figure \ref{fig:modeltree}. They used Laser Doppler Velocimetry (LDV) to perform a spectral analysis of the velocity, enabling to correlate the drag coefficient to the TKE dissipation. Investigations for natural, flexible trees were performed by \cite{Vollsinger2005a} and \cite{Vollsinger2005}, where the effects of pruning and streamlining are quantified using drag coefficient measurements. \cite{Cao2012} employed a similar approach and investigated the impact of volumetric density on various deciduous, coniferous, and broadleaf evergreen trees (Figure \ref{fig:dragcoefficientree}). However, a detailed experimental study on the influence of natural vegetation on the flow using detailed flow field measurements nor a study of combining vegetation and a built environment is not available in the literature. The evolution of the turbulent flow field within the vegetation is difficult to measure in a wind tunnel. However, the knowledge on the relation between turbulent production and dissipation within the vegetation is an essential determinant for the exchange processes of vegetation and the airflow. 
 
-\begin{figure}[t]
-	\centering
-	\includegraphics[width=0.7\textwidth]{\figdir/dragcoefficientree.png}
-	\caption{Drag measurement study of small trees in windtunnel \citep{Cao2012}.}
-	\label{fig:dragcoefficientree}
-\end{figure}
-
 The simplest representation of trees is a porous fence. Various authors in the past have studies the flow past a thin porous fence: \citep{Gandemer1979, Dong2010, Perera1981,Hagen1971,Conan2015}. The model construction approach has also been extended to study flow past 3D dense vegetation, studies the flow through vegetation canopy \citep{Conan2015,Poggi2004}. Figure \ref{fig:modeltreecanoy} shows a typical construction of vegetation canopy for wind tunnel studies. Such studies enable to understand passive scalar transport modification such as pollution dispersion due to vegetation \citep{Gromke2011,Gromke2008}.
-
-\begin{figure}[t]
-	\centering
-	\includegraphics[width=\textwidth]{\figdir/modeltreecanoy.png}
-	\caption{Wind tunnel model of a vegetation canopy from wire mesh  \citep{Conan2015}}
-	\label{fig:modeltreecanoy}
-\end{figure}
 
 A more advanced model constructions have also been employed where fractal type porous structures are made to mimic the tree structure \citep{McClure2017}. Authors have also modeled a resolved tree canopy using fractal dimensioning \citep{Bai2012,Bai2014a}. 
 
 \section{Assessing impact of vegetation using numerical methods}
 
-The global influence of vegetation on the local climate has been assessed by using urban microclimate models \citep{Bruse1998, Robitu2006}. There are two distinct classes of modeling the flow past vegetation: resolved approaches \citep{Endalew2009,Endalew2006} and unresolved approaches using porous media approaches \citep{Sanz2003, Kenjeres2013, Gromke2014, Katul2004}. In the resolved type of numerical methods, the elements of vegetation are directly resolved, where the Dirichlet and Neumann boundary conditions are directly prescribed. When employing a porous media approach, vegetation is simplified to representative volume elements, defined through the leaf area density $a$ ( or $\textit{LAD}$) (m$^2$\,m$^{-3}$):
+The global influence of vegetation on the local climate has been assessed by using urban microclimate models \citep{Bruse1998, Robitu2006}. There are two distinct classes of modeling the flow past vegetation: resolved approaches \citep{Endalew2009,Endalew2006} and unresolved approaches using porous media approaches \citep{Sanz2003, Kenjeres2013, Gromke2014, Katul2004} (see \cref{fig:averagingapproaches}). In the resolved type of numerical methods, the elements of vegetation are directly resolved, where the Dirichlet and Neumann boundary conditions are directly prescribed. When employing a porous media approach, vegetation is simplified to representative volume elements, defined through the leaf area density $a$ ( or $\textit{LAD}$) (m$^2$\,m$^{-3}$):
 \begin{equation}
 a = \frac{A_{\textit{leaf}}}{V}
 \end{equation}
 defined as the ratio between one-side leaf surface area $A_{\textit{leaf}}$ in a given volume. 
 
-	\begin{figure}[t]
+	\begin{figure}[h]
 		\centering
 		\includegraphics[width=0.99\textwidth]{\figdir/averagingapproaches.png}
 		\caption{Averaging approaches}
