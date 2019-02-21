@@ -67,8 +67,8 @@
 	$K_{\textit{lp}}$ & liquid water permeability & s \\ 	
 	$K_{\textit{vp}}$ & water vapor permeability & s \\ 		
 	$K_{\textit{vT}}$ & water vapor permeability due to temperature & s \\ 			
-	$K_c$ & Michaelis constant for CO$_2$ & ??? \\ 	
-	$K_o$ & Michaelis constant for O$_2$ & ??? \\ 		
+	$K_c$ & Michaelis constant for CO$_2$ & mol\,mol$^{-1}$ \\ 	
+	$K_o$ & Michaelis constant for O$_2$ & mol\,mol$^{-1}$ \\ 		
 %	$\bm{K}$ & permeability tensor & s \\ 
 %	$K_s$ & saturated permeability & m$^2$ \\ 
 %	$K_v$ & water vapor permeability & s \\ 
@@ -104,7 +104,7 @@
 	$q_{\textit{rad,lat}}$ & radiative heat flux into leaf & W\,m$^{-2}$\\ 		
 	$q_{\textit{sen,lat}}$ & sensible heat flux from leaf & W\,m$^{-2}$\\ 
 	
-	$Q_p$ & flux of incoming PAR & ??? \\ 
+	$Q_p$ & flux of incoming PAR & mol\,m$^{-2}$\,s$^{-1}$ \\ 
 %	$q$ & fluid flux & m/s \\ 
 %	$q_f$ & flux due to moving front & m$^2$ \\ 
 %	$\bm{{{{\textrm{q}}_h}}}$ & heat flux & J/(sm$^2$) \\ 
@@ -157,7 +157,7 @@
 %	$v$ & fluid velocity in wall-normal direction & m/s \\ 
 %	$v'$ & fluctuating part of wall-normal component of velocity vector & m/s \\ 
 
-	$V_{\textit{cmax}}$ & maximum carboxylation capacity & ??? \\ 
+	$V_{\textit{cmax}}$ & maximum carboxylation capacity & mol\,m$^{-2}$\,s$^{-1}$ \\ 
 
 	$w$ & moisture content & kg\,m$^{-3}$ \\ 
 	$w_a$ & dry air content & kg\,m$^{-3}$ \\ 	
@@ -311,14 +311,16 @@
 	$i$ 					& intercellular \\
 %	$i$ & inlet \\
 	$l$ 					& liquid (water) \\
+	$l$ 					& leaf \\	
+	$\textit{leaf}$ 		& leaf \\		
 	$lw$ 					& long-wave \\	
-	$L$ 					& leaf \\	
+	$L$ 					& leaf (net property) \\	
 %	${nw}$ & non-wetting phase \\
 %	$r$ & receding \\
 	$o$						& open \\
 	$\mathit{pore}$			& pore \\
 	$\mathit{ref}$ 			& reference \\
-	$\mathit{root}$ 		& root \\
+	$\mathit{root}$ 		& root (net property) \\
 	$\mathit{sat}$ 			& saturated \\
 	$R$ 					& root \\	
 	$s$ 					& solid \\
@@ -366,7 +368,7 @@
 	\acro{FVM}{finite volume method}
 	\acro{HPC}{high performance computing}
 	\acro{LAI}{leaf area index}
-	\acro{LAI}{leaf area density}
+	\acro{LAD}{leaf area density}
 	\acro{LDPE}{low-density Polyethylene}
 	\acro{LES}{large eddy simulation}
 	\acro{LHS}{left hand side}
