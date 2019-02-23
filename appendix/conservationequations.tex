@@ -308,33 +308,43 @@ Therefore, Eq. \ref{eq:energy2} simplifies to:
 \end{equation}
 and decomposing for different species gives:
 \begin{align}
-	\frac{\partial }{\partial t} \left( \rho_a h_a \right) +   \nabla  \cdot \left( \rho_a h_a \mvec{u}\right) =  - \nabla  \cdot \mvec{q} + s_{h,a}\\
-	\frac{\partial }{\partial t} \left( \rho_v h_v \right) +   \nabla  \cdot \left( \rho_v h_v \mvec{u}\right) =  - \nabla  \cdot \mvec{q} + s_{h,v}
+	\frac{\partial }{\partial t} \left( \rho_a h_a \right) +   \nabla  \cdot \left( \rho_a h_a \mvec{u}\right) =  - \nabla  \cdot \mvec{q} + s_{h,a} \label{eq:hrhoa}\\
+	\frac{\partial }{\partial t} \left( \rho_v h_v \right) +   \nabla  \cdot \left( \rho_v h_v \mvec{u}\right) =  - \nabla  \cdot \mvec{q} + s_{h,v} \label{eq:hrhov}
 \end{align}
 
-The energy source for dry air is:
+The energy source for dry air is simply the sensible heat flux between leaf and air:
 \begin{equation}
 s_{h,a} = a~ q_{sen,leaf,a}
 \end{equation}
 where $a$ is the leaf area density (m$^{2}$~m$^{-3}$) and
 \begin{equation}
-q_{sen,leaf,a} = h_c \left(T_l - T\right)
+q_{\textit{sen,leaf,a}} = h_c \left(T_l - T\right)
+\label{eq:q_{sen,leaf,a}}
 \end{equation}
-is the sensible heat flux (W~m$^{-2}$) with $h_c$ the convective heat transfer coefficient, $T_l$ is the leaf temperature, and $T$ is the air temperature. The energy source of water vapor $s_{h,v}$ is defined as:
+is the sensible heat flux (W~m$^{-2}$) with $h_c$ the convective heat transfer coefficient, $T_l$ is the leaf temperature, and $T$ is the air temperature. The energy source due to introduction of water vapor in the air domain $s_{h,v}$ is defined as:
 \begin{equation}
-s_{h,v} = a ~ \left( q_{sen,leaf,v}  + q_{lat,leaf} \right)
+s_{\textit{h,v}} = a ~ \left( q_{\textit{sen,leaf,v}}  + q_{\textit{lat,leaf}} \right)
 \end{equation}
 where:
 \begin{equation}
-q_{sen,leaf,v} = c_{p,v} \left(T_l - T\right) ~ g_{v,leaf}
+q_{\textit{sen,leaf,v}} = c_{p,v} \left(T_l - T\right) ~ g_{v,leaf}
 \end{equation}
 with $c_{p,v}$ the specific heat capacity of water vapor, $g_{v,leaf}$ is the leaf transpiration rate and
 \begin{equation}
-q_{lat,leaf} = k_s \frac{p_{v,sat}(T_l) - p_v}{p}
+q_{l\textit{at,leaf}} = k_s \frac{p_{v,sat}(T_l) - p_v}{p}
 \end{equation}
-is the latent heat flux, $k_s$ is the stomatal conductance, $p_{v,sat}(T_l)$ is the saturation vapor pressure at leaf surface, and $p_v$ is the partial vapor pressure. Finally, the energy source of CO$_2$ is 
+is the latent heat flux, $k_s$ is the stomatal conductance, $p_{v,sat}(T_l)$ is the saturation vapor pressure at leaf surface, and $p_v$ is the partial vapor pressure. We assume $q_{\textit{sen,leaf,v}}$ is negligible compared to $q_{sen,leaf,a}$ (\cref{eq:q_{sen,leaf,a}}), and so $s_{\textit{h,v}} \approx a\,q_{\textit{lat,leaf}}$. 
+
+Finally, the energy source due to sink/source of CO$_2$ is 
 \begin{equation}
 q_{sen,leaf,c} = c_{p,c} \left(T_l - T\right)~A_n
 \end{equation}
-where $A_n$ is the CO$_2$ assimilation rate.
+where $A_n$ is the CO$_2$ assimilation rate. Equally, we assume $q_{sen,leaf,c} \ll eq:q_{sen,leaf,a}$ and is therefore neglected. The transport of temperature (i.e., sensible heat) is obtained simply from \cref{eq:hrhoa}:
+\begin{equation}
+	\frac{\partial }{\partial t} \left( \rho_a h_a \right) +   \nabla  \cdot \left( \rho_a h_a \mvec{u}\right) =  - \nabla  \cdot \mvec{q} + a\,q_{sen,leaf,a}\\
+\end{equation}
+and simplifies to:
+\begin{equation}
+\frac{\partial }{\partial t} \left( \rho_a T \right) +   \nabla  \cdot \left( \rho_a T \mvec{u}\right) =  - \nabla  \cdot \mvec{q} + a\,q_{sen,leaf,a}\\
+\end{equation}
 

@@ -27,7 +27,7 @@ The governing equation consists of conservation of mass, momentum, energy, and s
 \frac{\partial \rho x_i}{\partial t} + \nabla  \cdot \left( \rho x_i \mvec{u} \right) = - \nabla \cdot \mvec{g}_{\textit{d,i}} + s_i
 \label{eq:xi}
 \end{equation}
-where $x_i$ is the concentration of species $i$, $\mvec{g}_{\textit{d,i}}$ is the diffusive mass flux of the species, and $s_i$ is the source term. We assume that moist air is composed of dry air $a$, water vapor $v$ and carbon-dioxide $c$. The mass fraction of each component is:
+where $x_i$ is the concentration of species $i$, $\mvec{u} = \left(u,v,w\right)$ is the fluid velocity, $\mvec{g}_{\textit{d,i}}$ is the diffusive mass flux of the species, and $s_i$ is the source term. We assume that moist air is composed of dry air $a$, water vapor $v$ and carbon-dioxide $c$. The mass fraction of each component is:
 \begin{align}
 x_a &= \frac{\rho_a}{\rho} \\
 x_v &= \frac{\rho_v}{\rho} \label{eq:xv}\\
@@ -44,18 +44,19 @@ x_a + x_v \approx 1
 \end{equation}
 Similarly, total density of gas mixture $\rho$ is given as:
 \begin{equation}
-\rho_a + \rho_v = \rho
+\rho \approx \rho_a + \rho_v
+\label{eq:rho2}
 \end{equation} 
 
 The Fick's law of diffusion is used to describe the diffusive mass flux as a function of concentration gradient of the species:
 \begin{equation}
-\mvec{g}_{\textit{d,i}} = - \rho D_i \nabla x_i
+\mvec{g}_{\textit{d,i}} = - \rho D_{\textit{ai}} \nabla x_i
 \label{eq:dmf}
 \end{equation}
 where $D$ is the diffusion coefficient. Thus, substituting mass fractions \cref{eq:xv,eq:xc}, and diffusion mass flux \cref{eq:dmf} into \cref{eq:xi}, the conservation equation of species become:
 \begin{align}
-\frac{\partial \rho w}{\partial t} + \nabla  \cdot \left( \rho w \mvec{u} \right) &= D_v \nabla^2 w + s_w \label{eq:xv2}\\
-\frac{\partial \rho c}{\partial t} + \nabla  \cdot \left( \rho c \mvec{u} \right) &= D_c \nabla^2 c + s_c \label{eq:xc2}
+\frac{\partial \rho w}{\partial t} + \nabla  \cdot \left( \rho w \mvec{u} \right) &= D_{\textit{va}} \nabla^2 w + s_w \label{eq:xv2}\\
+\frac{\partial \rho c}{\partial t} + \nabla  \cdot \left( \rho c \mvec{u} \right) &= D_{\textit{ca}} \nabla^2 c + s_c \label{eq:xc2}
 \end{align}
 and the notations $w\equiv x_v$ (kg\,kg$^{-1}$) and $c\equiv x_c\, M_a/M_c $ (mol\,mol$^{-1}$) are used to conform with past studies \citep{Carmeliet2005, Defraeye2011, Saneinejad2013, Kubilay2014b}.
 
@@ -63,9 +64,9 @@ and the notations $w\equiv x_v$ (kg\,kg$^{-1}$) and $c\equiv x_c\, M_a/M_c $ (mo
 
 The conservation of mass for compressible moist flow is given as:
 \begin{equation}
-\frac{\partial \rho}{\partial t} + \nabla \cdot \left( \rho \mvec{u} \right)= 0
+\frac{\partial \rho}{\partial t} + \nabla \cdot \left( \rho \mvec{u} \right) = s_w
 \end{equation}
-where $\rho$ is the fluid density (kg\,m$^{-3}$), and $\mvec{u} = \left(u,v,w\right)$ is the fluid velocity (m\,s$^{-1}$). A detailed derivation is given in appendix \ref{app:thermodynamics} and \ref{app:conservation}.
+where $\rho$ is defined by \cref{eq:rho2} and as $\mathcal{O}(s_w)\approx \num{e-4}$ (\cref{app:conservation}), we assume source of water vapor is negligible in conservation of mass.
 
 \subsection*{Conservation of momentum}
 
@@ -92,21 +93,21 @@ where
 \end{equation}
 is the Fourier's law of heat conduction, with:
 \begin{equation}
-\mvec{q} = - \frac{c_p \mu}{\mathrm{Pr}} \nabla T
+\lambda = - \frac{c_p \mu}{\mathrm{Pr}}
 \end{equation}
-and the source of energy $s_h$ is 
+and the source of energy $s_h$:
 \begin{equation}
-\mvec{s}_h = \rho\,c_p\, a\, q_{\textit{sen,leaf}}
+\mvec{s}_h = \rho\,c_p\, a\, \left(q_{\textit{sen,leaf}} + q_{\textit{lat,leaf}} \right)
 \label{eq:sh}
 \end{equation}
+assuming that the sensible heat flux is only due to leaf and air. The sensible heat flux associated to the source of moisture is assumed to be negligible. 
 
-The enthalphy of dry air and water vapor are:
+The enthalpy of dry air and water vapor are:
 \begin{align}
 h_a &= c_{p,a} \left(T - T_{\mathit{ref}}\right) \\
 h_v &= c_{p,v} \left(T - T_{\mathit{ref}}\right) + L_v \left(x_v - x_{v,ref}\right)
 \end{align}
-
-The total enthalpy of moist air is:
+where water vapor contains the latent heat of vaporization. Thus, the total enthalpy of moist air is:
 \begin{equation}
 h = h_a \, x_a + h_v \, x_v
 \end{equation}
@@ -114,7 +115,6 @@ and so:
 \begin{equation}
 \rho h = \rho_a c_{p,a} \left(T - T_{\mathit{ref}}\right) + \rho_v c_{p,v} \left(T - T_{\mathit{ref}}\right) + \rho_v L_v
 \end{equation}
-
 \subsection*{Turbulence modeling}
 
 The Reynolds decomposition splits the instantaneous velocity into mean and fluctuating component:
@@ -211,7 +211,7 @@ w = w_l + w_v
 
 \subsection{Water potential}
 
-Water potential is a universal parameter to determine the \textit{water status} in any medium \citep{nobel2009physicochemical}. In the thesis, we use it to define the water status of multiple domains such as solid porous materials (soil and building facades), plant xylem, and air. The water potential $\psi$ (Pa) describes the chemical potential of water $\mu$ (J\,mol$^{-1}$) with respect to chemical potential of pure water $\mu^{o,l}$ (J\,mol$^{-1}$) at the same temperature, standard atmosphere and at zero level:
+Water potential is a universal parameter to determine the \textit{water status} in any medium \citep{nobel2009physicochemical}. In this thesis, we use it to define the water status of multiple domains such as solid porous materials (soil and building facades), plant xylem, and air. The water potential $\psi$ (Pa) describes the chemical potential of water $\mu$ (J\,mol$^{-1}$) with respect to chemical potential of pure water $\mu^{o,l}$ (J\,mol$^{-1}$) at the same temperature, standard atmosphere and at zero level:
 \begin{equation}
 \psi = \frac{\mu - \mu^{o,l}}{V^o_l}
 \end{equation}
@@ -232,7 +232,7 @@ The gravitational potential $\psi_g$ (Pa) is defined as:
 \begin{equation}
 \psi_g = - \rho \mvec{g} \cdot \mvec{x} = \rho g z
 \end{equation}
-where $g = |\mvec{g}|$ with $z$ oriented upward. Thus, by taking the capillary and gravitational water potentials into account, the transport of water can be described in building materials and, more importantly, soil where the plant roots are present.
+where $g = |\mvec{g}|$ with $z$ oriented upward. Thus, by taking the capillary and gravitational water potentials into account, the transport of water can be described in building materials and, more importantly, soil region where the plant roots are present.
 
 \subsection{Coupled transport of heat and mass}
 \label{subsec:ctoham}
