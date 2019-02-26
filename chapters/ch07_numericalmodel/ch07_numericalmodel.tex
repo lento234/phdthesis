@@ -62,15 +62,15 @@ and the notations $w\equiv x_v$ (kg\,kg$^{-1}$) and $c\equiv x_c\, M_a/M_c $ (mo
 
 \subsection*{Conservation of mass}
 
-The conservation of mass for compressible moist flow is given as:
+A detailed derivation of conservation of mass is given in \cref{sec:conservationofmass}. The conservation of mass for compressible moist flow is given as:
 \begin{equation}
-\frac{\partial \rho}{\partial t} + \nabla \cdot \left( \rho \mvec{u} \right) = s_w
+\frac{\partial \rho}{\partial t} + \nabla \cdot \left( \rho \mvec{u} \right) = 0
 \end{equation}
-where $\rho$ is defined by \cref{eq:rho2} and as $\mathcal{O}(s_w)\approx \num{e-4}$ (\cref{app:conservation}), we assume source of water vapor is negligible in conservation of mass.
+where $\rho$ is defined by \cref{eq:rho2} and as $\mathcal{O}(s_w)\approx \num{e-4}$ (\cref{app:conservation}). We assume source of water vapor and CO$_2$ is negligible in conservation of mass. 
 
 \subsection*{Conservation of momentum}
 
-The conservation of momentum is given as:
+A detailed derivation of conservation of momentum is given in \cref{sec:conservationofmomentum}. The conservation of momentum is given as:
 \begin{equation}
 \frac{\partial \rho \mvec{u}}{\partial t} + \nabla  \cdot \left( \rho \mvec{u} \mvec{u} \right) = -\nabla p + \mu \nabla^2 \mvec{u} + \rho \mvec{g} + \mvec{s}_u
 \end{equation}
@@ -83,38 +83,28 @@ where $a$ is the leaf area density (m$^2$\,m$^{-3}$), and $c_d$ is the leaf drag
 
 \subsection*{Conservation of energy}
 
-The conservation of energy is given as:
+A detailed derivation of conservation of energy is given in \cref{sec:conservationofenergy}. The conservation of energy is given as:
 \begin{equation}
-\frac{\partial \rho h}{\partial t} + \nabla  \cdot \left( \rho h \mvec{u} \right) = -\nabla \cdot \mvec{q} + s_h
+c_p  \left( \frac{\partial }{\partial t} \left( \rho T \right) + \nabla \cdot \left(\rho T \mvec{u} \right)  \right) = - \nabla  \cdot \left(\lambda \nabla T \right) + \underbrace{a\,q_{\textit{sen,leaf}}}_{s_h}
 \end{equation}
-where 
+where $\rho$ (kg\,m$^{-3}$) is the density of mixture and $c_p$ (J\,kg$^{-1}$\,K$^{-1}$) is the specific heat capacity of the mixture. The source of energy $s_h$ (W\,m$^{-3}$) for the above equation (i.e., quasi- transport of temperature) is:
 \begin{equation}
-\mvec{q} = - \lambda \nabla T
-\end{equation}
-is the Fourier's law of heat conduction, with:
-\begin{equation}
-\lambda = - \frac{c_p \mu}{\mathrm{Pr}}
-\end{equation}
-and the source of energy $s_h$:
-\begin{equation}
-\mvec{s}_h = \rho\,c_p\, a\, \left(q_{\textit{sen,leaf}} + q_{\textit{lat,leaf}} \right)
+\mvec{s}_h = \rho\,c_p\, a\, q_{\textit{sen,leaf}}
 \label{eq:sh}
 \end{equation}
-assuming that the sensible heat flux is only due to leaf and air. The sensible heat flux associated to the source of moisture is assumed to be negligible. 
+assuming that the sensible heat flux is only due to leaf and air thermal conduction. 
 
-The enthalpy of dry air and water vapor are:
+The (specific) enthalpies of dry air $h_a$ (J,kg$^{-1}$) and water vapor $h_v$ (J,kg$^{-1}$) are:
 \begin{align}
-h_a &= c_{p,a} \left(T - T_{\mathit{ref}}\right) \\
-h_v &= c_{p,v} \left(T - T_{\mathit{ref}}\right) + L_v \left(x_v - x_{v,ref}\right)
+h_a &= c_{pa} \left(T - T_{\mathit{ref}}\right) \\
+h_v &= c_{pv} \left(T - T_{\mathit{ref}}\right) + L_v
 \end{align}
-where water vapor contains the latent heat of vaporization. Thus, the total enthalpy of moist air is:
+where $L_v$ is the latent heat of vaporization. Thus, the total enthalpy of moist air is:
 \begin{equation}
-h = h_a \, x_a + h_v \, x_v
+h \equiv \sum_i h_i x_i = c_p \left(T - T_{\mathit{ref}}\right) + L_v x_v
 \end{equation}
-and so:
-\begin{equation}
-\rho h = \rho_a c_{p,a} \left(T - T_{\mathit{ref}}\right) + \rho_v c_{p,v} \left(T - T_{\mathit{ref}}\right) + \rho_v L_v
-\end{equation}
+where $c_p = x_a c_{\textit{pa}} +  x_v c_{\textit{pv}}$ is the specific heat capacity of gas mixture.
+
 \subsection*{Turbulence modeling}
 
 The Reynolds decomposition splits the instantaneous velocity into mean and fluctuating component:

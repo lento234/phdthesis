@@ -65,6 +65,7 @@ where the product of two rank-1 tensor (\textit{vector}) results in a rank-2 ten
 
 \section{Conservation of mass}
 \label{sec:conservationofmass}
+
 The mass of moist air $m$ (kg) is assumed to consist of dry air $m_a$ (kg), water vapor $m_v$ (kg) and carbon-dioxide (i.e., CO$_2$) $m_{c}$ (kg).
 \begin{equation}
 m = m_a + m_v + m_{c}
@@ -129,6 +130,8 @@ We have following system of equation for quaternary mixture of dry air, water va
 \end{align}
 where ${s_{\rho ,a}}$, ${s_{\rho ,v}}$ and ${s_{\rho ,c}}$ are the mass source terms (kg\,m$^{-3}$s$^{-1}$).
 
+\subsection{Source of mass}
+
 \begin{assumption}
 	We assume there is no dry air generated in the fluid, ${s_{\rho ,a}} = 0$. 
 \end{assumption}
@@ -142,15 +145,18 @@ The leaves in control volumes $\Omega$ generate water vapour (from the transpira
 {s_{\rho ,v}} &= a\, g_{v,leaf} \label{eq:gvsource}\\
 {s_{\rho ,c}} &= a\, g_{c,leaf}
 \end{align}
-where $a$ is the leaf area density (m$^2$m$^{-3}$), and $g_{v,\mathit{leaf}}$ and $g_{c,\mathit{leaf}}$ are the water vapour and $CO_2$ mass flux from the surface of the leaf (kg\,m$^{-2}$s$^{-1}$).
+where $a$ is the leaf area density (m$^2$m$^{-3}$), and $g_{v,\mathit{leaf}}$ (kg\,m$^{-2}$s$^{-1}$) and $g_{c,\mathit{leaf}}$ (kg\,m$^{-2}$s$^{-1}$) are the water vapour and $CO_2$ mass flux from the surface of the leaf.
 
 Thus the conservation of mass of gas mixture is written as:
 \begin{equation}
 \frac{{\partial {\rho}}}{{\partial t}} + \nabla  \cdot \left( {{\rho }{\mvec{u}}} \right) = s_{\rho,v} + s_{\rho,c}
 \end{equation}
 
+
+
+
 \begin{assumption}
-The order of magnitude of water vapour mass source $\mathcal{O}\left(s_{\rho,v}\right)\approx10^{-4}$ and $CO_2$ mass source $\mathcal{O}\left(s_{\rho,c}\right)\approx10^{-6}$ \citep{Hiraoka2005}. Therefore the mass source of $CO_2$ is negligible compared to water vapour.
+The order of magnitude of water vapor mass source $\mathcal{O}\left(s_{\rho,v}\right)\approx10^{-4}$ and $CO_2$ mass source $\mathcal{O}\left(s_{\rho,c}\right)\approx10^{-6}$ \citep{Hiraoka2005}. Therefore the mass source of $CO_2$ is negligible compared to water vapour.
 \end{assumption}
 
 \begin{assumption}
@@ -163,6 +169,7 @@ Therefore, when solving the Navier-Stokes equations, the conservation of mass ca
 \end{equation}
 
 \section{Conservation of momentum}
+\label{sec:conservationofmomentum}
 
 \subsection{Netwon's second law of motion}
 Newton's second law of motion is given as:
@@ -345,6 +352,7 @@ where $A_{\textit{leaf}}$ (m) is the total leaf surface area.
 
 \newpage
 \section{Conservation of Energy}
+\label{sec:conservationofenergy}
 
 \subsection{First law of thermodynamics}
 
@@ -356,7 +364,7 @@ where $dE$ (J or kg\,m$^2$\,s$^{-2}$) is the change in total internal energy of 
 \begin{equation}
 E = \int\limits_\Omega \rho \hat{E}\;\mathrm{d}V
 \end{equation}
-where $\hat{E}$ (J\,kg$^{-1}$), the intensive property is related total energy $E$ (J), the extensive property. The total energy per unit mass of the mixture $\hat{E}$ is given as: 
+where $\hat{E}$ (J\,kg$^{-1}$) (an intensive property) is related total energy $E$ (J) (an extensive property). The total energy per unit mass of the mixture $\hat{E}$ is given as: 
 \begin{equation}
 \hat{E} = e + \frac{\left| \mvec{u} \right|^2}{2} + gz
 \end{equation}
@@ -364,7 +372,7 @@ where $e$ (J\,kg$^{-1}$) is the internal energy per unit mass, $|\mvec{u}|^2/2$ 
 \begin{equation}
 e = h - RT = h - \frac{p}{\rho}
 \end{equation}
-where $R$ (J\,kg$^{-1}$\,K$^{-1}$) is the gas constant. The total enthalpy $h$ (J\,kg$^{-1}$) of the gas mixture is defined in \cref{app:thermodynamics}, i.e., \cref{enthalpymoistair} and given as:
+where $R$ (J\,kg$^{-1}$\,K$^{-1}$) is the gas constant. The total enthalpy $h$ (J\,kg$^{-1}$) of the gas mixture is defined in \cref{app:thermodynamics}, i.e., \cref{eq:enthalpymoistair} and given as:
  \begin{equation}
 h = \sum_i x_i h_i =  \left(x_a c_{pa} + x_v c_{pv} \right) \left(T - T_{\textit{ref}}\right)  + x_v\,L_v 
 \label{eq:enthalpymoistair2}
@@ -416,14 +424,23 @@ We assume pressure work is negligible due to incompressible flow approximation, 
 
 The total heat flux $\mvec{q}$ (W\,m$^{-2}$) is the total heat flux due to heat diffusion (i.e., conduction) and mass diffusion is given as:
 \begin{equation}
-\mvec{q} = \mvec{q}_c + \mvec{q}_d = \lambda \nabla T + \sum_i h_i\, \mvec{g}_{\textit{d,i}}
+\mvec{q} = \mvec{q}_c + \mvec{q}_d
 \label{eq:totalheatflux}
 \end{equation}
-where $\mvec{q}_c$ (W\,m$^{-2}$) is the Fourier law of heat conduction, with:
+where $\mvec{q}_c$ (W\,m$^{-2}$) is the heat flux due to heat diffusion (i.e., conduction) and $\mvec{q}_d$ (W\,m$^{-2}$) is the heat flux due to mass diffusion. The conduction term is defined by the Fourier law of heat conduction:
 \begin{equation}
-\lambda = - \frac{c_p \mu}{\mathrm{Pr}}
+\mvec{q}_c = - \lambda \nabla T
 \end{equation}
-and $\mvec{g}_{\textit{d,i}}$ (kg\,m$^{-2}$\,s$^{-1}$) diffusive flux of species $i$ contributing to the heat transport. Simplifying \cref{eq:energy1}, we obtain:
+where $\lambda = c_p\mu/\mathrm{Pr}$ (W\,m$^{-1}$\,K$^{-1}$) is the thermal conductivity, where $c_p$ (J\,kg$^{-1}$\,K$^{-1}$) is the specific heat capacity of gas mixture, $\mu$ (kg\,m$^{-1}$\,s$^{-1}$) is the dynamic viscosity of gas mixture. The heat flux due to mass flux $\mvec{q}_d$ (W\,m$^{-2}$) is given as:
+\begin{equation}
+\mvec{q}_d = \sum_i h_i\, \mvec{g}_{\textit{d,i}}
+\end{equation}
+where $\mvec{g}_{\textit{d,i}}$ (kg\,m$^{-2}$\,s$^{-1}$) diffusive flux of species $i$ contributing to the heat transport. So:
+\begin{equation}
+\mvec{q} = - \lambda \nabla T + \sum_i h_i\, \mvec{g}_{\textit{d,i}}
+\end{equation}
+
+Simplifying \cref{eq:energy1}, we obtain:
 \begin{equation}
 \frac{\partial }{{\partial t}}\left( {{\rho }{\hat{E}}} \right) + \nabla  \cdot \left( {{\rho }{\hat{E}}{\mvec{u}}} \right) =  - \nabla  \cdot {\mvec{q}}  + s_h
 \label{eq:energy1p1}
@@ -480,7 +497,7 @@ Substituting, the total heat flux $\mvec{q}$ (W\,m$^{-2}$) \cref{eq:totalheatflu
 \begin{split}
 &\frac{\partial }{\partial t} \left( \rho_a\,c_{\textit{pa}}\left(T - T_{\textit{ref}}\right) +  \rho_v\,c_{\textit{pv}} \left(T - T_{\textit{ref}}\right) + \rho_v\, L_v \right)\\
 & \hspace{5em} + \nabla  \cdot \left( \left( \rho_a\,c_{\textit{pa}}\left(T - T_{\textit{ref}}\right) +  \rho_v\,c_{\textit{pv}} \left(T - T_{\textit{ref}}\right) + \rho_v\, L_v \right) \mvec{u}\right)\\
-& \hspace{10em} =  - \nabla  \cdot \left(\lambda \nabla T + \sum_i h_i \mvec{g}_{\textit{d,i}}\right) + s_h
+& \hspace{10em} =  - \nabla  \cdot \left(- \lambda \nabla T + \sum_i h_i \mvec{g}_{\textit{d,i}}\right) + s_h
 \end{split}
 \label{eq:energy5}
 \end{equation}
@@ -490,7 +507,7 @@ and as $\rho_i\mvec{u}_i = \rho_i \mvec{u} + \mvec{g}_{\textit{d,i}}$ (see \cref
 \begin{split}
 &\frac{\partial }{\partial t} \left( \rho_a\,c_{\textit{pa}}\left(T - T_{\textit{ref}}\right) +  \rho_v\,c_{\textit{pv}} \left(T - T_{\textit{ref}}\right) + \rho_v\, L_v \right)\\
 & \hspace{5em} + \nabla  \cdot \left( \rho_a\,c_{\textit{pa}}\left(T - T_{\textit{ref}}\right)\mvec{u}_a +  \rho_v\,c_{\textit{pv}} \left(T - T_{\textit{ref}}\right)\mvec{u}_v + \rho_v\, L_v\mvec{u}_v \right)\\
-& \hspace{10em} =  - \nabla  \cdot \left(\lambda \nabla T \right) + s_h
+& \hspace{10em} =  \nabla  \cdot \left(\lambda \nabla T \right) + s_h
 \end{split}
 \label{eq:energy6}
 \end{equation}
@@ -499,7 +516,7 @@ Therefore, the conservation of energy \cref{eq:energy6} can be rewritten for sep
 \begin{split}
 c_{\textit{pa}}  &\left( \frac{\partial }{\partial t} \left( \rho_a T \right) + \nabla\cdot \left(\rho_a T \mvec{u}_a \right)  \right) + c_{\textit{pv}} \left( \frac{\partial }{\partial t} \left( \rho_v T \right) + \nabla \cdot\left(\rho_v T \mvec{u}_v \right)  \right) \\ 
 - c_{\textit{pa}} T_{\textit{ref}} &\left( \frac{\partial }{\partial t} \left( \rho_a \right) + \nabla\cdot \left(\rho_a \mvec{u}_a \right)  \right) - c_{\textit{pv}} T_{\textit{ref}} \left( \frac{\partial }{\partial t} \left( \rho_v \right) + \nabla\cdot \left(\rho_v \mvec{u}_v \right)  \right) \\
- + L_v &\left( \frac{\partial }{\partial t} \left( \rho_v \right) + \nabla\cdot \left(\rho_v \mvec{u}_v \right)  \right) =  - \nabla  \cdot \left(\lambda \nabla T \right) + s_h
+ + L_v &\left( \frac{\partial }{\partial t} \left( \rho_v \right) + \nabla\cdot \left(\rho_v \mvec{u}_v \right)  \right) =  \nabla  \cdot \left(\lambda \nabla T \right) + s_h
 \end{split}
 \label{eq:energy7}
 \end{equation}
@@ -508,23 +525,29 @@ c_{\textit{pa}}  &\left( \frac{\partial }{\partial t} \left( \rho_a T \right) + 
 
 The source of energy $s_h$ (W\,m$^{-3}$) is given defined as:
 \begin{equation}
-s_h = a\,\left(q_{\textit{sen,leaf}} + \sum_i h_i g_{\textit{i,leaf}} \right)
+s_h = a\,\left(q_{\textit{c,leaf}} + q_{\textit{d,leaf}}\right)
+\label{eq:shterm01}
+\end{equation}
+where $a$ (m$^{2}$\,m$^{-3}$) is leaf area density, $q_{\textit{c,leaf}}$ (W\,m$^{-2}$) is heat flux from leaf surface due to conduction (i.e., heat diffusion), and $q_{\textit{d,leaf}}$ (W\,m$^{-2}$) is the heat flux due to mass diffusion from the leaf surface. Expanding, the mass diffusion term in \cref{eq:shterm01} gives:
+\begin{equation}
+s_h = a\,\left(q_{\textit{c,leaf}} + \sum_i h_i g_{\textit{i,leaf}} \right)
 \label{eq:shterm1}
 \end{equation}
-where $a$ (m$^{2}$\,m$^{-3}$) is leaf area density, $q_{\textit{sen,leaf}}$ (W,m$^{-2}$) heat flux due to heat conduction from the vegetation, $ g_{\textit{i,leaf}} $ is the mass flux from vegetation. And so, 
+where $ g_{\textit{i,leaf}} $ is the mass flux of species $i$ from the leaf surface. And so \cref{eq:shterm1} becomes: 
 \begin{equation}
-s_h = a\, \left(q_{\textit{\textit{cond},leaf}} + h_v g_{\textit{v,leaf}} + h_c g_{\textit{c,leaf}} \right)
+s_h = a\, \left(q_{\textit{c,leaf}} + h_v g_{\textit{v,leaf}} + h_c g_{\textit{c,leaf}} \right)
 \label{eq:shterm2}
 \end{equation}
-where $g_{\textit{v,leaf}}$ (kg\,m$^{-2}$\,s${-1}$) and $g_{\textit{c,leaf}}$ (kg\,m$^{-2}$\,s${-1}$) are fluxes of water vapor and CO$_2$. 
+where $g_{\textit{v,leaf}}$ (kg\,m$^{-2}$\,s${-1}$) and $g_{\textit{c,leaf}}$ (kg\,m$^{-2}$\,s${-1}$) are mass fluxes of water vapor and CO$_2$, respectively.
 
 \begin{assumption}
-We assume there is no flux of oxygen O$_2$. Thus, substituting the enthalpies of water vapor and CO$_2$, we get:
+Note that, we assumed there is no flux of oxygen O$_2$.
 \end{assumption}
 
-The sensible heat flux $q_{\textit{sen,leaf}}$ (W\,m$^{-2}$), i.e., the heat flux due to conduction from the leaf is given as:
+The conductive heat flux $q_{\textit{c,leaf}}$ (W\,m$^{-2}$) is given as:
 \begin{equation}
-q_{\textit{cond},leaf} = h_{\textit{c,h}} \left(T_l - T\right)
+q_{\textit{c,leaf}} = h_{\textit{c,h}} \left(T_l - T\right)
+\label{eq:qcleaf}
 \end{equation}
 where $h_{\textit{c,h}}$ (W\,m$^{-2}$\,K$^{-1}$) is the convective heat transfer coefficient of the leaf and $T_l$ (K) is the leaf temperature. The source of energy due to water vapor flux $g_{\textit{v,leaf}}$ is given as:
 \begin{equation}
@@ -533,8 +556,11 @@ h_v g_{\textit{v,leaf}} = c_{\textit{pv}} \left(T_l - T\right) g_{\textit{v,leaf
 where $g_{\textit{v,leaf}}$ (kg\,m$^{-2}$\,s$^{-1}$) is the leaf transpiration rate. Similarly, the source of energy due to CO$_2$ flux $g_{\textit{c,leaf}}$ is given as:
 \begin{equation}
 h_c g_{\textit{c,leaf}} = c_{\textit{pc}} \left(T_l - T\right) g_{\textit{c,leaf}}
+\label{eq:qdvleaf}
 \end{equation}
-where $g_{\textit{v,leaf}}$ (kg\,m$^{-2}$\,s$^{-1}$) is the leaf CO$_2$ assimilation rate. Therefore, we can divide the source of energy \cref{eq:shterm2} into sensible and latent heat flux components as:
+where $g_{\textit{v,leaf}}$ (kg\,m$^{-2}$\,s$^{-1}$) is the leaf CO$_2$ assimilation rate (i.e., mass flux of CO$_2$ due to the photosynthetic process). 
+
+Thus, substituting \cref{eq:qcleaf,eq:qdvleaf} into \cref{eq:shterm2}, and decompose to sensible (i.e., temperature dependent) and latent component, we arrive at:
 \begin{equation}
 {s_h} = a{\mkern 1mu} \left( {\underbrace {\left[ {{h_{\textit{c,h}}} + {c_{pv}}{g_{\textit{v,leaf}}} + {c_{pc}}{g_{\textit{c,leaf}}}} \right]\left( {{T_l} - T} \right)}_{\mathrm{sensible}} + \underbrace {{L_v}{g_{\textit{v,leaf}}}}_{\mathrm{latent}}} \right)
 \label{eq:shterm3}
@@ -544,18 +570,25 @@ where $g_{\textit{v,leaf}}$ (kg\,m$^{-2}$\,s$^{-1}$) is the leaf CO$_2$ assimila
 We assume the  sensible heat flux contribution of water vapor and CO$_2$ is negligible compared to the conductive heat flux \citep{Hiraoka2005}, i.e., $\left(c_{pv}g_{v,leaf} + c_{pc}g_{c,leaf} \right)\ll h_{\textit{c,h}}$.
 \end{assumption}
 
-Thus, the source of energy $s_h$ (W\,m$^{-3}$) becomes:
+Thus, the source of energy $s_h$ (W\,m$^{-3}$), \cref{eq:shterm3}, simplifies to:
 \begin{equation}
 {s_h} = a \left( h_{\textit{c,h}} \left(T_l - T\right) + L_v g_{\textit{v,leaf}} \right)
 \label{eq:shterm4}
 \end{equation}
+where:
+\begin{align}
+	q_{\textit{sen,leaf}} &= h_{\textit{c,h}} \left(T_l - T\right) \label{eq:qsenleaf2} \\
+	q_{\textit{lat,leaf}} &= L_v g_{\textit{v,leaf}} \label{eq:qlatleaf2} \\
+\end{align}
+$q_{\textit{sen,leaf}}$ (W\,m$^{-2}$) and $q_{\textit{lat,leaf}}$ (W\,m$^{-2}$) is typically known as the sensible and latent heat flux from leaf in literature \citep{Manickathan2018a,Hiraoka2005,Bruse1998}. 
+
 
 Substituting \cref{eq:shterm4} into conservation of energy becomes:
 \begin{equation}
 \begin{split}
 c_{\textit{pa}}  &\left( \frac{\partial }{\partial t} \left( \rho_a T \right) + \nabla\cdot \left(\rho_a T \mvec{u}_a \right)  \right) + c_{\textit{pv}} \left( \frac{\partial }{\partial t} \left( \rho_v T \right) + \nabla \cdot\left(\rho_v T \mvec{u}_v \right)  \right) \\ 
 - c_{\textit{pa}} T_{\textit{ref}} &\left( \frac{\partial }{\partial t} \left( \rho_a \right) + \nabla \cdot\left(\rho_a \mvec{u}_a \right)  \right) - c_{\textit{pv}} T_{\textit{ref}} \left( \frac{\partial }{\partial t} \left( \rho_v \right) + \nabla \cdot\left(\rho_v \mvec{u}_v \right)  \right) \\
-+ L_v &\left( \frac{\partial }{\partial t} \left( \rho_v \right) + \nabla\cdot \left(\rho_v \mvec{u}_v \right)  \right) =  - \nabla  \cdot \left(\lambda \nabla T \right) + a \left( h_{\textit{c,h}} \left(T_l - T\right) + L_v g_{\textit{v,leaf}} \right)
++ L_v &\left( \frac{\partial }{\partial t} \left( \rho_v \right) + \nabla\cdot \left(\rho_v \mvec{u}_v \right)  \right) =  \nabla  \cdot \left(\lambda \nabla T \right) + a \left( h_{\textit{c,h}} \left(T_l - T\right) + L_v g_{\textit{v,leaf}} \right)
 \end{split}
 \label{eq:energy8}
 \end{equation}
@@ -565,7 +598,7 @@ Substituting conservation of mass of air \cref{eq:comaa} and conservation of mas
 \begin{split}
 &c_{\textit{pa}}   \left( \frac{\partial }{\partial t} \left( \rho_a T \right) + \nabla\cdot \left(\rho_a T \mvec{u}_a \right)  \right) + c_{\textit{pv}} \left( \frac{\partial }{\partial t} \left( \rho_v T \right) + \nabla \cdot\left(\rho_v T \mvec{u}_v \right)  \right) \\ 
 & \hspace{5em}- c_{\textit{pv}} T_{\textit{ref}} \left(a\,g_{\textit{v,leaf}}  \right) + L_v \left(a\,g_{\textit{v,leaf}}  \right) \\
-& \hspace{10em} =  - \nabla  \cdot \left(\lambda \nabla T \right) + a \left( h_{\textit{c,h}} \left(T_l - T\right) + L_v g_{\textit{v,leaf}} \right)
+& \hspace{10em} =  \nabla  \cdot \left(\lambda \nabla T \right) + a \left( h_{\textit{c,h}} \left(T_l - T\right) + L_v g_{\textit{v,leaf}} \right)
 \end{split}
 \label{eq:energy9}
 \end{equation}
@@ -577,45 +610,29 @@ We assume the term $c_{\textit{pv}} T_{\textit{ref}}$ is negligible, as  $c_{\te
 \begin{equation}
 \begin{split}
 &c_{\textit{pa}}   \left( \frac{\partial }{\partial t} \left( \rho_a T \right) + \nabla \cdot \left(\rho_a T \mvec{u}_a \right)  \right) + c_{\textit{pv}} \left( \frac{\partial }{\partial t} \left( \rho_v T \right) + \nabla \cdot \left(\rho_v T \mvec{u}_v \right)  \right) \\ 
-&+ L_v \left(a\,g_{\textit{v,leaf}}  \right) = - \nabla  \cdot \left(\lambda \nabla T \right) + a \left( h_{\textit{c,h}} \left(T_l - T\right) + L_v g_{\textit{v,leaf}} \right)
+&\hspace{5em}+ L_v \left(a\,g_{\textit{v,leaf}}  \right) = \nabla  \cdot \left(\lambda \nabla T \right) + a \left( h_{\textit{c,h}} \left(T_l - T\right) + L_v g_{\textit{v,leaf}} \right)
 \end{split}
 \label{eq:energy10}
 \end{equation}
-and we can cancel the latent component on both sides, giving:
+
+Thus, we can cancel the latent component terms on both sides, giving:
 \begin{equation}
 \begin{split}
 &c_{\textit{pa}}   \left( \frac{\partial }{\partial t} \left( \rho_a T \right) + \nabla \cdot \left(\rho_a T \mvec{u}_a \right)  \right) + c_{\textit{pv}} \left( \frac{\partial }{\partial t} \left( \rho_v T \right) + \nabla \cdot \left(\rho_v T \mvec{u}_v \right)  \right) \\ 
-& = - \nabla  \cdot \left(\lambda \nabla T \right) + a \left( h_{\textit{c,h}} \left(T_l - T\right) \right)
+&\hspace{5em} = \nabla  \cdot \left(\lambda \nabla T \right) + a \left( h_{\textit{c,h}} \left(T_l - T\right) \right)
 \end{split}
 \label{eq:energy11}
 \end{equation}
 
-So, we see that following the assumption, the source of energy is simply due to conductive sensible heat flux from the temperature difference between air and leaf, i.e., $s_h$ (W\,m$^{-3}$):
+So, we see that following the assumption, the source of (sensible) energy (i.e., energy equation based on only the temperature) is simply due to sensible heat flux from the leaf surface. Thus, for such equations, the source of energy $s_h$ (W\,m$^{-3}$) is:
 \begin{equation}
-{s_h} = a h_{\textit{c,h}} \left(T_l - T\right) = a\,q_{\textit{sen,leaf}}
+{s_h} =  a\,q_{\textit{sen,leaf}} = a\, h_{\textit{c,h}} \left(T_l - T\right)
 \label{eq:shterm5}
 \end{equation}
 
-%\begin{equation}
-%s_h = a\,\left(2\,h + g_{\textit{v,leaf}} \left(c_{pv}(T-T_\textit{ref})\right) + h_c g_{\textit{c,leaf}}\right)
-%\label{eq:shterm3}
-%\end{equation}
-
-%and decomposing for different species gives:
-%\begin{align}
-%	\frac{\partial }{\partial t} \left( \rho_a h_a \right) +   \nabla  \cdot \left( \rho_a h_a \mvec{u}\right) =  - \nabla  \cdot \mvec{q} + s_{h,a} \label{eq:hrhoa}\\
-%	\frac{\partial }{\partial t} \left( \rho_v h_v \right) +   \nabla  \cdot \left( \rho_v h_v \mvec{u}\right) =  - \nabla  \cdot \mvec{q} + s_{h,v} \label{eq:hrhov}
-%\end{align}
-
-The energy source for dry air is simply the sensible heat flux between leaf and air:
+The energy equation (i.e., now the transport equation of temperature), \cref{eq:energy11} can be further simplified, as density of moist air $\rho = \rho_a + \rho_v$ (kg\,m$^{-3}$) and heat capacity $c_p = c_{\textit{pa}} + c_{\textit{pv}}$ (J\,kg$^{-1}$\,K$^{-1}$):
 \begin{equation}
-s_{h,a} = a\, q_{sen,leaf,a}
-\end{equation}
-
-
-Combining, the density of air and water vapor, $\rho = \rho_a + \rho_v$ and $c_p = c_{\textit{pa}} + c_{\textit{pv}}$, \cref{eq:energy11} can be written in the form:
-\begin{equation}
-c_p  \left( \frac{\partial }{\partial t} \left( \rho T \right) + \nabla \cdot \left(\rho T \mvec{u} \right)  \right) = - \nabla  \cdot \left(\lambda \nabla T \right) + a\,q_{\textit{sen,leaf}}
+c_p  \left( \frac{\partial }{\partial t} \left( \rho T \right) + \nabla \cdot \left(\rho T \mvec{u} \right)  \right) = \nabla  \cdot \left(\lambda \nabla T \right) + \underbrace{a\,q_{\textit{sen,leaf}}}_{s_h}
 \label{eq:energy12}
 \end{equation}
 

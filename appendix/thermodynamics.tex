@@ -19,6 +19,11 @@ and substituting \ref{eq:R_to_univR} into \ref{eq:univGasLaw}
 p = \rho R T
 \label{eq:idealGasLaw}
 \end{equation}
+and similarly
+\begin{equation}
+p_i = \rho_i R_i T_i
+\label{eq:idealGasLaw2}
+\end{equation}
 
 \section*{Partial pressures}
 
@@ -51,9 +56,11 @@ m = m_v + m_a
 \end{equation}
 where the species of moist gas mixture is water vapor $m_v$ (kg) and dry air $m_a$ (kg).
 
+\section*{Mass concentration}
+
 The mass concentration $x_i$ (kg$_i$\,kg$^{-1}$) of a given species $i$ is defined as:
 \begin{equation}
-x_i \equiv \frac{m_i}{m}
+x_i \equiv \frac{m_i}{m} = \frac{\rho_i}{\rho}
 \end{equation}
 where $m_i$ (kg$_i$) is the mass of species $i$, and $m$ (kg) is the mass of the gas mixture. The mass fractions are related as:
 \begin{equation}
@@ -61,7 +68,28 @@ where $m_i$ (kg$_i$) is the mass of species $i$, and $m$ (kg) is the mass of the
 \label{eq:totalconc}
 \end{equation}
 
-The absolute humidity or mixing ratio or humidity ratio $w$ (kg\,kg$^{-1}$) is defined as:
+\section*{Specific humidity}
+
+The specific humidity or mixing ratio $q$ (kg\,kg$^{-1}$) is defined as:
+\begin{equation}
+q \equiv \frac{m_v}{m}
+\label{eq:def_q}
+\end{equation}
+where it the mass ratio of water vapor to the total mass. It also satisfies:
+\begin{equation}
+q = \frac{\rho_v}{\rho} = \frac{\rho - \rho_a}{\rho}
+\label{eq:q_rho}
+\end{equation}
+and so solving for total density, we obtain:
+\begin{equation}
+\rho = \frac{\rho_a}{1-q}
+\label{eq:q_rho2}
+\end{equation}
+
+\section*{Humidity ratio}
+
+
+The specific humidity or mixing ratio or humidity ratio $w$ (kg\,kg$^{-1}$) is defined as:
 \begin{equation}
 w \equiv \frac{m_v}{m_a} = \frac{x_v}{x_a}
 \label{eq:def_w}
@@ -142,8 +170,14 @@ where $L_v$ (J\,kg$^{-1}$) is the latent heat of vaporization (or more accuratel
 h = \left(x_a c_{pa} + x_v c_{pv} \right) \left(T - T_{\textit{ref}}\right)  + x_v L_v
 \label{eq:enthalpymoistair}
 \end{equation}
+where the total specific heat capacity of gas $c_p$ (J\,kg\,$^{-1}$) is defined as:
+\begin{equation}
+c_p = x_a c_{pa} + x_v c_{pv}
+\end{equation}
 
-Typically, for atmospheric flows with relatively low water vapor concentration, we have $x_v c_{pv} \ll x_a c_{pa}$ and so: 
+\begin{assumption}
+Typically, for atmospheric flows with relatively low water vapor concentration, we can assume $x_v c_{pv} \ll x_a c_{pa}$ and so: 
+\end{assumption}
 
 \begin{equation}
 h \approx x_a c_{pa} \left(T - T_{\textit{ref}}\right)  + x_v L_v

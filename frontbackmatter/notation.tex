@@ -20,7 +20,10 @@
 	$b$ & Vogel exponent & - \\ 	
 	$c_d$ & leaf drag coefficient & - \\ 	
 	$C_d$ & drag coefficient & - \\ 		
-	$c_p$ & specific heat (at constant pressure) & J\,kg$^{-1}$\,K$^{-1}$ \\ 
+	$c_p$ & specific heat capacity (at constant pressure) & J\,kg$^{-1}$\,K$^{-1}$ \\ 
+	$c_{pa}$ & specific heat capacity of dry air ($=\num{1006.43}$) & J\,kg$^{-1}$\,K$^{-1}$ \\ 	
+	$c_{pl}$ & specific heat capacity of liquid ($=\num{4182}$) & J\,kg$^{-1}$\,K$^{-1}$ \\ 		
+	$c_{pv}$ & specific heat capacity of water vapor ($=\num{1880}$) & J\,kg$^{-1}$\,K$^{-1}$ \\ 			
 	$c_a^*$ & reference CO$_2$ concentration & mol\,mol$^{-1}$ \\ 
 	$C$ & aerodynamic resistance coefficient & s$^{0.5}$\,m$^{-1}$\\ 
 	$C_{\textit{o,a}}$ & oxygen concentration & mol\,mol$^{-1}$ \\ 
@@ -29,9 +32,13 @@
 	$D$ & diameter & m \\ 
 	$D$ & vapor pressure deficit & kPa\\ 	
 	$D$ & vapor pressure deficit & Pa\,Pa$^{-1}$, mol~mol$^{-1}$\\ 	
+	$D_{\textit{va}}$ & diffusion coefficient of vapor to dry air & m$^2$\,s$^{-1}$\\ 		
+	$D_{\textit{ca}}$ & diffusion coefficient of CO$_2$ to dry air & m$^2$\,s$^{-1}$\\ 			
 %	$D_M$ & molecular diffusion coefficient & m$^2$/s \\ 
 %	$e$ & evaporation flux density & kg/(m$^2$/s) \\ 
 	$e_m$ & maximum quantum efficiency of the leaf & - \\ 
+	$E$ & energy & J\\
+	$E$ & energy & J\\	
 	$E$ & leaf transpiration flux & kg\,s$^{-1}$ \\
 
 	$f_c$ & CO$_2$ assimilation (photosynthesis) rate & mol\,m$^{-2}$\,s$^{-1}$ \\
@@ -40,6 +47,9 @@
 	$F$ & force & N \\	
 	$F_d$ & drag force & N \\		
 	$g$ & gravitational acceleration & m$^2$\,s$^{-1}$ \\ 
+	$\mvec{g}$ & mass flux & kg\,m$^{-2}$\,s$^{-1}$ \\ 		
+	$\mvec{g}_{\textit{c,i}}$ & convective mass flux of species $i$ & kg\,m$^{-2}$\,s$^{-1}$ \\ 			
+	$\mvec{g}_{\textit{d,i}}$ & diffusive mass flux of species $i$ & kg\,m$^{-2}$\,s$^{-1}$ \\ 				
 	$\mvec{g}_{\textit{l}}$ & liquid water flux & kg\,m$^{-2}$\,s$^{-1}$ \\ 		
 	$\mvec{g}_{\textit{v}}$ & water vapor flux & kg\,m$^{-2}$\,s$^{-1}$ \\ 		
 	$g_{\textit{v,leaf}}$ & water vapor mass flux & kg\,m$^{-2}$\,s$^{-1}$ \\ 	
@@ -90,7 +100,7 @@
 	$p_l$ & gas phase pressure & Pa \\ 		
 	$p_v$ & partial vapor pressure & Pa \\ 	
 	$p_{\textit{v,i}}$ & intercellular vapor pressure & Pa \\ 			
-	$p_{\textit{v,sat}}$ & saturation vapor pressure & Pa \\ 		
+	$p_{\textit{vsat}}$ & saturation vapor pressure & Pa \\ 		
 	$P$ & pressure & Pa \\ 
 	$\mathrm{Pr}$ & Prandtl number & - \\ 	
 	$\mathrm{Pr}_t$ & turbulent Prandtl number & - \\ 		
@@ -114,7 +124,7 @@
 	$r$ & root area density & m$^{2}$\,m$^{-3}$ \\ 	
 	$r_a$ & aerodynamic resistance & s\,m$^{-1}$\\ 
 	$r_s$ & stomatal resistance & s\,m$^{-1}$\\ 	
-	$R$ & universal gas constant ($=\num{8.3144598}$) & J\,mol$^{-1}$\,K$^{-1}$ \\ 
+	$\mathcal{R}$ & universal gas constant ($=\num{8.3144598}$) & J\,mol$^{-1}$\,K$^{-1}$ \\ 
 	$\textit{RAI}$ & root area index & m$^{2}$\,m$^{-2}$ \\ 	
 	${\textrm{Re}}$ & Reynolds number & - \\ 
 %	${\textrm{Re}_\theta}$ & Reynolds number based on momentum thickness  & - \\ 
@@ -167,6 +177,7 @@
 	$w_l$ & liquid water content & kg\,m$^{-3}$ \\ 		
 	$w_s$ & solid matrix water content & kg\,m$^{-3}$ \\ 
 	$w_v$ & water vapor content & kg\,m$^{-3}$ \\ 		
+	$x_i$ & mass concentration of species $i$ & kg$_i$\,kg$^{-1}$ \\ 	
 	$z$ & vertical height & m \\ 	
 	$z_0$ & aerodynamic roughness height & m \\ 		
 %	$y^+$ & dimensionless wall-normal distance & - \\
