@@ -1,17 +1,17 @@
 \chapter{Conservation equations of moist fluid flow}
 \label{app:conservation}
 
-This appendix consists of detailed derivation of conservation of mass, momentum, energy and species of moist fluid flow. Additional details are also provided in the thesis of \cite{Defraeye2011}. The following chapter derives the conservation equation as is in the conservative form. 
+This appendix consists of detailed derivation of conservation of mass, momentum, and energy of moist fluid flow. Additional details are also provided in the thesis of \cite{Defraeye2011}. The following chapter derives the conservation equation as is in the conservative form. 
 
 \section{Conservation principle}
 \label{sec:Conservationprinciple}
-Let us consider a fluid flow in Euclidean vector space ($\mathbb{R}^3$, $||\cdot||$). The volume of fluid of interest (or control volume CV) is $\Omega \in \mathbb{R}^3$, bounded a surface $\partial\Omega$, with coordinate vector $\mvec{x} = (x,y,z) \in \mathbb{R}^3$. An extensive property in $\Omega$ is defined as an integral of the intensive property:
+Let us consider a fluid flow in Euclidean vector space ($\mathbb{R}^3$, $||\cdot||$). The volume of fluid of interest (or control volume CV) is $\Omega \in \mathbb{R}^3$, bounded by a surface $\partial\Omega$, with coordinate vector $\mvec{x} = (x,y,z) \in \mathbb{R}^3$. Any extensive property in $\Omega$ is defined as an integral of the intensive property:
 \begin{equation}
 \Phi \left( \mvec{x},t \right) \equiv \int_\Omega  \phi  \left( \mvec{x},t \right)\;dV
 \end{equation}
-where $\Phi$ is the extensive property of interest, and $\phi$ is the intensive property. For example, the extensive property mass $m$ (kg), is the integral of density $\rho$ (kg~m$^{-3}$), an intensive property of the fluid. 
+where $\Phi$ is the extensive property of interest, and $\phi$ is the intensive property. For example, the extensive property mass $m$ (kg), is the integral of intensity property density $\rho$ (kg~m$^{-3}$) of the fluid. 
 
-The Reynolds transport theorem is:
+The Reynolds transport theorem is defined as:
 \begin{quote}
 	\centering
 	Rate of increase of $\Phi$ in domain $\Omega$\\
@@ -20,10 +20,10 @@ The Reynolds transport theorem is:
 	$+$\\
 	Net rate of transfer of $\phi$ due to \textit{diffusion} at boundary $\partial \Omega$\\
 $+$\\	
-	Net rate of transfer of $\phi$ within domain $\Omega$ (source/sink)
+	Net rate of transfer of $\phi$ within domain $\Omega$ (i.e., source/sink)
 \end{quote}
 
-In simpler terms, the rate of increase of an extensive property $\Phi$ in the domain $\Omega$ over time is simply due to rate of transfer of the intensive property $\phi$ at the boundary of the domain $\Omega$, i.e., $\partial \Omega$ due to convection and the net rate of transfer of intensive property $\phi$ within the domain $\Omega$. The rate of transfer of $\phi$ at the boundary is also commonly referred to as a \textit{flux} of $\phi$ at the boundary. Also note that a \textit{convection} is sum of \textit{advection} (transport due to velocity) and \textit{diffusion} (transport due to molecular transfer). The rate of transfer of intensive property $\phi$ within the domain $\Omega$ is the source or sinks of $\phi$ in the domain. The mathematical formulation of the Reynolds transport theorem is given as:
+In simpler terms, the rate of increase of any extensive property $\Phi$ over time in the domain $\Omega$ is simply due to rate of transfer of the intensive property $\phi$ at the boundary of the domain $\Omega$ (i.e., $\partial \Omega$) due to convection and the net rate of transfer of intensive property $\phi$ within the domain $\Omega$ (i.e., introduced into the domain as source of sinks). The rate of transfer of $\phi$ at the boundary is also commonly referred to as a \textit{flux} of $\phi$ at the boundary. It must be note that a \textit{convection} is the sum of \textit{advection} (transport due to velocity) and \textit{diffusion} (transport due to molecular transfer). A mathematical formulation of the Reynolds transport theorem is given as:
 \begin{equation}
 \frac{\mathrm{d}~}{\mathrm{d}t} \Phi (\mvec{x},t) = \frac{\mathrm{d}~}{\mathrm{d}t}\int_{\Omega} \phi\;\mathrm{d}V = -\int_{\partial\Omega} \phi~\mvec{u}\cdot\hat{\mvec{n}}\;\mathrm{d}A + \int_{\Omega} s\;\mathrm{d}V
 \label{eq:reynoldstransportheromem}
@@ -34,18 +34,27 @@ where $\mvec{u}$ is velocity, $\hat{\mvec{n}}$ is the normal vector (\textit{poi
 \end{equation}
 and so \ref{eq:reynoldstransportheromem} becomes:
 \begin{equation}
-\frac{d}{dt}\int_{\Omega} \phi\;\mathrm{d}V = -\int_{\Omega} \nabla \cdot (\phi\mvec{u})\;\mathrm{d}V + \int_{\Omega} s\;\mathrm{d}V
+\frac{\mathrm{d}~}{\mathrm{d}t}\int_{\Omega} \phi\;\mathrm{d}V = -\int_{\Omega} \nabla \cdot (\phi\mvec{u})\;\mathrm{d}V + \int_{\Omega} s\;\mathrm{d}V
 \end{equation}
 
-Using the Leinbiz's rules, the integral and derivative is switched assuming the $\phi$ is continuous in time and space:
+\begin{assumption}
+We assume $\phi$ is continuous in time and space. So using Leinbiz's rules, the integral and derivative can rearranged.
+\end{assumption}
+
+Using the Leinbiz's rules, we have:
 \begin{equation}
 \int_{\Omega}  \frac{\partial}{\partial t}\phi\;\mathrm{d}V = -\int_{\Omega} \nabla \cdot (\phi\mvec{u})\;\mathrm{d}V + \int_{\Omega} s\;\mathrm{d}V
 \end{equation}
 and by combining the terms under the same integral simplifies to:
 \begin{equation}
+\int_{\Omega}  \left(\frac{\partial}{\partial t}\phi + \nabla \cdot (\phi\mvec{u}) - s\right)\;\mathrm{d}V = 0
+\end{equation}
+or simply:
+\begin{equation}
 \frac{\partial \phi}{\partial t} + \nabla \cdot (\phi\mvec{u}) = s
 \end{equation}
-resulting in the well-known conservation form (or divergence form). Note that the second term in the LHS is a dyad or outer product, i.e.:
+
+The resulting form in the well-known conservation form (or divergence form). Note that the second term in the LHS is a dyad or outer product, i.e.:
 \begin{equation}
 \phi {\mvec{u}} \equiv {\phi _i}{\mvec{u}_j} = \left( {\begin{array}{*{20}{c}}
 {{\phi _1}}\\
@@ -98,7 +107,7 @@ where $\rho$ (kg\,m$^{-3}$) is density of the gas mixture. The conservation prin
 {m_i} = \int_\Omega  {{\rho _i}\:\mathrm{d}V}
 \end{equation}
 
-The conservation of mass of individual species is given as:
+The conservation of mass of individual species $i$ is given as:
 \begin{equation}
 \frac{\mathrm{d}~}{\mathrm{d}t} {m_i} = \frac{\mathrm{d}~}{\mathrm{d}t} \int \limits_{\Omega} \rho_i\;\mathrm{d}V= - \int \limits_{\partial \Omega } \mvec{g}_i\cdot\hat{\mvec{n}}\;\mathrm{d}A + \int \limits_{\Omega} s_{\rho,i}\;\mathrm{d}V
 \end{equation}

@@ -119,7 +119,7 @@ Applying this averaging operator to the NS equations, resulting Reynolds-Average
 \begin{equation}
 \frac{\partial \overline{\rho}\,\overline{\mvec{u}}}{\partial t}  + \nabla \cdot \left(\overline{\rho}\,\overline{\mvec{u}}\,\overline{\mvec{u}}\right) = -\nabla \overline{p} + \mu \nabla^2 \overline{\mvec{u}} - \nabla \cdot \left(\overline{\rho \mvec{u}' \mvec{u}'}\right)+ \rho \mvec{g} + s_u
 \end{equation}
-where $\overline{\rho \mvec{u}' \mvec{u}'}$ is the Reynolds stresses. The Reynolds stresses are modelled using Bousinessq eddy-viscosity assumption:
+where $\overline{\rho \mvec{u}' \mvec{u}'}$ is the Reynolds stresses. The Reynolds stresses are modeled using Bousinessq eddy-viscosity assumption:
 \begin{equation}
 - \overline{\rho \mvec{u}' \mvec{u}'} = \mu_t \left(\nabla u + \nabla u^T\right) - \frac{2}{3}\rho k \mvec{I}
 \end{equation}
@@ -140,16 +140,14 @@ where ${q_{\mathit{rad},\mathit{leaf}}}$ (W\,m$^{-2}$) is the radiative heat flu
 {q_{\mathit{sen,leaf}}} = {h_{c,h}} \left( {{T_{\mathit{l}}} - T_a} \right)
 \label{eq:sensibleheatflux2}
 \end{equation}
-where $T_l$ (K) is the leaf temperature, $T_a$ (K) is the ambient temperature, and ${h_{c,h}}$ (W\,m$^{-2}$\,K$^{-1}$) is the convective heat transfer coefficient. Subtituting \cref{eq:sensibleheatflux2} into \cref{eq:sh} gives the source of heat from vegetation in conservation of energy
+where $T_l$ (K) is the leaf temperature, $T_a$ (K) is the ambient temperature, and ${h_{c,h}}$ (W\,m$^{-2}$\,K$^{-1}$) is the convective heat transfer coefficient. Subtituting \cref{eq:sensibleheatflux2} into \cref{eq:sh} gives the source of heat from vegetation in conservation of energy.
 
 The latent heat flux is defined as:
 \begin{equation}
 {q_{lat,leaf}} = {L_v} \, {g_{v,leaf}}
 \label{eq:latentheatflux2}
 \end{equation}
-where $L_v=\num{2.5e6}$ J\,kg${-1}$ is the latent heat of vaporization. 
-
-The water vapor flux $g_{v,leaf}$ (kg\,m$^{-2}$\,s$^{-1}$) is defined as:
+where $L_v=\num{2.5e6}$ J\,kg${-1}$ is the latent heat of vaporization. The water vapor flux $g_{v,leaf}$ (kg\,m$^{-2}$\,s$^{-1}$) is defined as:
 \begin{equation}
 {g_{\mathit{v,leaf}}} = M_w\, k_{\textit{st,v}}^* \left( \frac{p_{\textit{v,i}} - {p_v}}{p} \right)
 \label{eq:vapourflux2}
