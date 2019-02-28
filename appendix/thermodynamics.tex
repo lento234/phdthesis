@@ -14,7 +14,7 @@ where $p$ is the pressure (Pa), $\rho$ is density (kg\,m$^{-3}$), $\mathcal{R}=\
 R = \frac{\mathcal{R}}{M}
 \label{eq:R_to_univR}
 \end{equation}
-and substituting \ref{eq:R_to_univR} into \ref{eq:univGasLaw}, we get:
+and substituting \cref{eq:R_to_univR} into \cref{eq:univGasLaw}, we get:
 \begin{equation}
 p = \rho R T
 \label{eq:idealGasLaw}
@@ -44,7 +44,7 @@ The vapor pressure $p_v$ is related to relative humidity $\phi$ as follows:
 \begin{equation}
 \frac{p_v}{p_{\textit{vsat}}} = \phi
 \end{equation}
-where $p_{\textit{vsat}}$ is the saturation vapor pressure. The relative humidity (RH) is also defined as $\textrm{RH}=\phi\times 100$. The saturation vapor pressure, $p_{\textit{vsat}}$ (Pa), is determined directly from temperature as follows\citep{Singh2002}:
+where $p_{\textit{vsat}}$ is the saturation vapor pressure. The relative humidity (RH) is also defined as $\textrm{RH}=\phi\times 100$. The saturation vapor pressure, $p_{\textit{vsat}}$ (Pa), is determined directly from temperature as follows \citep{Singh2002}:
 %\begin{equation}
 %p_{vsat} = 610.78 \exp \left\{\frac{17.269\ (T - 273.15)}{T - 35.85}\right\}
 %\end{equation}
@@ -69,7 +69,7 @@ where it is composed of water vapor $m_v$ (kg) and dry air $m_a$ (kg).
 
 \section*{Mass concentration}
 
-The mass concentration of a given species $i$, $x_i$ (kg$_i$\,kg$^{-1}$), is defined as:
+The mass concentration of species $i$, $x_i$ (kg$_i$\,kg$^{-1}$), is defined as:
 \begin{equation}
 x_i \equiv \frac{m_i}{m} = \frac{\rho_i}{\rho}
 \end{equation}
@@ -83,12 +83,12 @@ where $m_i$ (kg$_i$) is the mass of species $i$, and $m$ (kg) is the total mass 
 
 The specific humidity or mixing ratio $q$ (kg\,kg$^{-1}$) is defined as:
 \begin{equation}
-q \equiv \frac{m_v}{m}
+q \equiv \frac{m_v}{m} = \frac{\rho_v}{\rho}
 \label{eq:def_q}
 \end{equation}
 where it the mass ratio of water vapor to the total mass. It also satisfies:
 \begin{equation}
-q = \frac{\rho_v}{\rho} = \frac{\rho - \rho_a}{\rho}
+q = \frac{\rho - \rho_a}{\rho}
 \label{eq:q_rho}
 \end{equation}
 and so solving for total density $\rho$, we obtain:
@@ -107,16 +107,16 @@ q = \frac{w}{1 + w}
 
 The humidity ratio $w$ (kg\,kg$^{-1}$) (i.e., or moisture content or mixing ratio) is the ratio of mass of water vapor to dry air \citep{ASHRAE2013}:
 \begin{equation}
-w \equiv \frac{m_v}{m_a} = \frac{x_v}{x_a}
+w \equiv \frac{m_v}{m_a} = \frac{x_v}{x_a} = \frac{\rho_v}{\rho_a}
 \label{eq:def_w}
 \end{equation}
-Substituting, \ref{eq:totalconc} into \ref{eq:def_w} we get
+Substituting, \cref{eq:totalconc} into \cref{eq:def_w} we get
 \begin{equation}
 w = \frac{x_v}{1 - x_v}
 \label{eq:w_xv}
 \end{equation}
 
-We can rewrite \ref{eq:w_xv} to determine $x_v$ from $w$:
+We can rewrite \cref{eq:w_xv} to determine $x_v$ from $w$:
 \begin{equation}
 x_v = \frac{w}{1 + w}
 \label{eq:xv_w}
@@ -127,7 +127,7 @@ We can determine $w$ from $p_v$:
 w = \frac{p_v/R_v T}{p_a/ R_aT} = \frac{p_v}{p_a}\frac{R_a}{R_v}
 \label{eq:w_to_P}
 \end{equation}
-and substituting \ref{eq:dalton} into \ref{eq:w_to_P}, we get:
+and substituting \cref{eq:dalton} into \cref{eq:w_to_P}, we get:
 \begin{equation}
 w = \frac{p_v}{p-p_v}\frac{R_a}{R_v}
 \label{eq:pv_to_w}
@@ -140,7 +140,7 @@ p_v = \frac{p w}{R_a/R_v+w}
 
 \section*{Enthalpy}
 
-The specific enthalpy $h$ (J\,kg$^{-1}$) of unit mass is defined as:
+The specific enthalpy $h$ (J\,kg$^{-1}$) of a unit mass is defined as:
 
 \begin{equation}
 h = e + \frac{p}{\rho}
@@ -180,28 +180,25 @@ Therefore, the specific enthalpy of moist air is
 h = \sum_i x_i h_i = x_a h_a + x_v h_v
 \end{equation}
 where $x_a$ and $x_v$ (kg\,kg$^{-1}$) are dry air and vapor mass concentration, and $h_a$ and $h_v$ (J\,kg$^{-1}$) are:
-\begin{equation}
-h_a = c_{pa} \left(T - T_{\textit{ref}}\right)
-\end{equation}
-and 
-\begin{equation}
-h_v = c_{pv} \left(  T - T_{\textit{ref}}\right) + L_v
-\end{equation}
-where $L_v$ (J\,kg$^{-1}$) is the latent heat of vaporization (more accurately, it is referenced at the same reference temperature as $T_{\textit{ref}}$). The reference temperature $T_{\textit{ref}}$ (K) is usually taken to be $t=0^{\circ}$C, i.e., $T_{\textit{ref}} = 273.15$ K and the latent heat of vaporization taken at the same temperature $L_v = \num{2.5e6}$ J\,kg$^{-1}$ at $t=0^{\circ}$C. Thus the specific heat of moist air $h$ (J\,kg${-1}$) becomes:
+\begin{align}
+h_a &= c_{pa} \left(T - T_{\textit{ref}}\right) \\
+h_v &= c_{pv} \left(  T - T_{\textit{ref}}\right) + L_v
+\end{align}
+where $L_v$ (J\,kg$^{-1}$) is the latent heat of vaporization (more accurately, it is referenced at the same reference temperature as $T_{\textit{ref}}$). The reference temperature $T_{\textit{ref}}$ (K) is usually taken to be $t=0^{\circ}$C, i.e., $T_{\textit{ref}} = 273.15$ K and the latent heat of vaporization taken at the same temperature $L_v = \num{2.5e6}$ J\,kg$^{-1}$ at $t=0^{\circ}$C. Thus the specific heat of moist air $h$ (J\,kg$^{-1}$) becomes:
 \begin{equation}
 h = \left(x_a c_{pa} + x_v c_{pv} \right) \left(T - T_{\textit{ref}}\right)  + x_v L_v
 \label{eq:enthalpymoistair}
 \end{equation}
-where the total specific heat capacity of gas $c_p$ (J\,kg\,$^{-1}$) is defined as:
+where the total specific heat capacity of gas $c_p$ (J\,kg\,$^{-1}$\,K$^{-1}$) is defined as:
 \begin{equation}
 c_p = x_a c_{pa} + x_v c_{pv}
 \end{equation}
 
-\begin{assumption}
-Typically, for atmospheric flows with relatively low water vapor concentration, we may assume $x_v c_{pv} \ll x_a c_{pa}$ and so: 
-\end{assumption}
-
-\begin{equation}
-h \approx x_a c_{pa} \left(T - T_{\textit{ref}}\right)  + x_v L_v
-\end{equation}
+%\begin{assumption}
+%Typically, for atmospheric flows with relatively low water vapor concentration, we may assume $x_v c_{pv} \ll x_a c_{pa}$ and so: 
+%\end{assumption}
+%
+%\begin{equation}
+%h \approx x_a c_{pa} \left(T - T_{\textit{ref}}\right)  + x_v L_v
+%\end{equation}
 

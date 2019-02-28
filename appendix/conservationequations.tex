@@ -1,11 +1,11 @@
 \chapter{Conservation equations of moist fluid flow}
 \label{app:conservation}
 
-This appendix consists of detailed derivation of conservation of mass, momentum, and energy of moist fluid flow. Additional details are also provided in the thesis of \cite{Defraeye2011}. The following chapter derives the conservation equation as is in the conservative form. 
+This appendix consists of detailed derivation of conservation of \textit{mass}, \textit{momentum}, and \textit{energy} of moist fluid flow. Additional details are also provided in the thesis of \cite{Defraeye2011}. The following chapter derives the conservation equation in the conservative form. 
 
 \section{Conservation principle}
 \label{sec:Conservationprinciple}
-Let us consider a fluid flow in Euclidean vector space ($\mathbb{R}^3$, $||\cdot||$). The volume of fluid of interest (or control volume CV) is $\Omega \in \mathbb{R}^3$, bounded by a surface $\partial\Omega$, with coordinate vector $\mvec{x} = (x,y,z) \in \mathbb{R}^3$. Any extensive property in $\Omega$ is defined as an integral of the intensive property:
+Let us consider a fluid flow in Euclidean vector space ($\mathbb{R}^3$, $||\cdot||$) with coordinate vector $\mvec{x} = (x,y,z) \in \mathbb{R}^3$. The volume of fluid of interest (or control volume CV) is $\Omega \in \mathbb{R}^3$, bounded by a surface $\partial\Omega$. In the domain, any extensive property in $\Omega$ is defined as an integral of its intensive property:
 \begin{equation}
 \Phi \left( \mvec{x},t \right) \equiv \int_\Omega  \phi  \left( \mvec{x},t \right)\;dV
 \end{equation}
@@ -23,12 +23,14 @@ $+$\\
 	Net rate of transfer of $\phi$ within domain $\Omega$ (i.e., source/sink)
 \end{quote}
 
-In simpler terms, the rate of increase of any extensive property $\Phi$ over time in the domain $\Omega$ is simply due to rate of transfer of the intensive property $\phi$ at the boundary of the domain $\Omega$ (i.e., $\partial \Omega$) due to convection and the net rate of transfer of intensive property $\phi$ within the domain $\Omega$ (i.e., introduced into the domain as source of sinks). The rate of transfer of $\phi$ at the boundary is also commonly referred to as a \textit{flux} of $\phi$ at the boundary. It must be note that a \textit{convection} is the sum of \textit{advection} (transport due to velocity) and \textit{diffusion} (transport due to molecular transfer). A mathematical formulation of the Reynolds transport theorem is given as:
+In simpler terms, the rate of increase of any extensive property $\Phi$ over time in the domain $\Omega$ is simply due to rate of transfer of the intensive property $\phi$ at the boundary of the domain $\Omega$ (i.e., $\partial \Omega$) due to \textit{convection} and the net rate of transfer of intensive property $\phi$ within the domain $\Omega$ (i.e., introduced into the domain as source of sinks). It must be note that a \textit{convection} is the sum of \textit{advection} (transport due to velocity) and \textit{diffusion} (transport due to molecular transfer). The rate of transfer of $\phi$ at the boundary is also commonly referred to as a \textit{flux} of $\phi$ at the boundary. A mathematical formulation of the Reynolds transport theorem is given as:
 \begin{equation}
 \frac{\mathrm{d}~}{\mathrm{d}t} \Phi (\mvec{x},t) = \frac{\mathrm{d}~}{\mathrm{d}t}\int_{\Omega} \phi\;\mathrm{d}V = -\int_{\partial\Omega} \phi~\mvec{u}\cdot\hat{\mvec{n}}\;\mathrm{d}A + \int_{\Omega} s\;\mathrm{d}V
 \label{eq:reynoldstransportheromem}
 \end{equation}
-where $\mvec{u}$ is velocity, $\hat{\mvec{n}}$ is the normal vector (\textit{pointing outward}), and $s$ is the positive source term in $\Omega$. Using the divergence theorem,  surface integral can be converted into volume integral
+where $\mvec{u}$ is velocity, $\hat{\mvec{n}}$ is the normal vector (\textit{pointing outward}, hence the negative sign), and $s$ is the \textit{positive} source term in $\Omega$.
+
+Using the divergence theorem,  surface integral can be converted into volume integral, i.e.:
 \begin{equation}
 \int_{\partial\Omega} \phi~\mvec{u}\cdot\hat{\mvec{n}}\;\mathrm{d}A = \int_{\Omega} \nabla \cdot (\phi\mvec{u})\;\mathrm{d}V
 \end{equation}
@@ -38,7 +40,7 @@ and so \ref{eq:reynoldstransportheromem} becomes:
 \end{equation}
 
 \begin{assumption}
-We assume $\phi$ is continuous in time and space. So using Leinbiz's rules, the integral and derivative can rearranged.
+We assume $\phi$ is a continuous function both in space and time. So using Leinbiz's rules, the integral and derivative can rearranged.
 \end{assumption}
 
 Using the Leinbiz's rules, we have:
@@ -49,7 +51,7 @@ and by combining the terms under the same integral simplifies to:
 \begin{equation}
 \int_{\Omega}  \left(\frac{\partial}{\partial t}\phi + \nabla \cdot (\phi\mvec{u}) - s\right)\;\mathrm{d}V = 0
 \end{equation}
-or simply:
+Therefore, the follow equation must also satisfy:
 \begin{equation}
 \frac{\partial \phi}{\partial t} + \nabla \cdot (\phi\mvec{u}) = s
 \end{equation}
@@ -77,11 +79,11 @@ where the product of two rank-1 tensor (\textit{vector}) results in a rank-2 ten
 
 The mass of moist air $m$ (kg) is assumed to consist of dry air $m_a$ (kg), water vapor $m_v$ (kg) and carbon-dioxide (i.e., CO$_2$) $m_{c}$ (kg).
 \begin{equation}
-m = m_a + m_v + m_{c}
+m \equiv \sum_i m_i = m_a + m_v + m_{c}
 \end{equation}
 
 \begin{assumption}
-	We do not model variation in oxygen concentration from photosynthesis, $m_o = \textit{constant}$.
+	We do not model oxygen concentration change due to photosynthesis, i.e., $m_o = \textit{constant}$.
 \end{assumption}
 
 \subsection{Deriving conservation of mass}
