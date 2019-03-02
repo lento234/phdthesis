@@ -18,7 +18,7 @@ The \textit{air} domain model describes the transport of moist air through veget
 
 \section{Air domain: Transport of moist air}
 \label{sec:airdomain}
-The simplified vegetation model is described in \cref{ch:parametricstudy}, introduction the governing equation for moist flow through vegetation. The vegetation model, consisting of the ``\textit{leaf energy balance}'' (LEB) model, provides the necessary source/sink terms for heat, mass and momentum exchanges between vegetation and air as described in \cref{sec:cons_incompressible}. For reader, a detailed derivation of the thermodynamic of the moist air is given in \cref{app:thermodynamics} and a detailed derivation of the governing equation of moist flow is given in \cref{app:conservation}. In this section, we summarize the pseudo-compressible form of governing equation for moist flow through vegetation where the buoyancy force is directly obtained from the density field.  
+The simplified vegetation model is described in \cref{ch:parametricstudy}, introduction the governing equation for moist flow through vegetation. The vegetation model, consisting of the ``\textit{leaf energy balance}'' (LEB) model, provides the necessary source/sink terms for heat, mass and momentum exchanges between vegetation and air as described in \cref{sec:cons_incompressible}. For the reader, a detailed derivation of the thermodynamics of the moist air is given in \cref{app:thermodynamics} and a detailed derivation of the governing equation of moist flow is given in \cref{app:conservation}. In this section, we summarize the pseudo-compressible form of governing equation for moist flow through vegetation where the buoyancy force is directly obtained from the density field.  
 
 
 \subsection*{Conservation of species}
@@ -203,7 +203,7 @@ Water potential is a universal parameter to determine the \textit{water status} 
 \begin{equation}
 \psi = \frac{\mu - \mu^{o,l}}{V^o_l}
 \end{equation}
-where $V^o_l = 18.05 \num{e-3}$ m$^3$\,mol$^{-1}$ is the molar volume of pure water in liquid phase. The water potential for pure water at standard atmosphere is $\psi = 0$ Pa. The water tends to move towards a region where $\mu-\mu^{o_w}$ is lower, i.e. in the direction of $-\nabla\psi$. The water potential is related to pressure potential, osmotic potential, matrix potential, and gravitational potential. In our study, we assume that the pressure potential gradient is negligible in the solid and we ignore the influence of osmotic potential $\psi_o$ (Pa) as we assume we have a non-saline porous material. Therefore, only the matrix potential and gravitation potential influences the water transport:
+where $V^o_l = 18.05 \num{e-3}$ m$^3$\,mol$^{-1}$ is the molar volume of pure water in liquid phase. The water potential for pure water at standard atmosphere is $\psi = 0$ Pa. The water tends to move towards a region where $\mu-\mu^{o_w}$ is lower, i.e. in the direction of $-\nabla\psi$. The water potential is related to pressure potential, osmotic potential, matrix potential, and gravitational potential. In our study, we assume that the pressure potential gradient is negligible in the solid and we ignore the influence of osmotic potential $\psi_o$ (Pa) as we assume we have a non-saline porous material. Therefore, only the matrix potential and gravitation potential influence the water transport:
 \begin{equation}
 \psi = \underbrace{p_c}_{\psi_c} + \underbrace{\rho_l g z}_{\psi_g}
 \end{equation}
@@ -569,12 +569,12 @@ The Fickian diffusion through stomata is given as:
 f_c = k_{\textit{st}} \left(c_a - c_i\right)
 \label{eq:fickassim}
 \end{equation}
-where $k_{st}$ (mol\,m$^{-2}$\,s$^{-1}$) is the (molar) stomatal condutance to CO$_2$ (note that for now we neglect the boundary layer conductance), $c_i$ (mol\,mol$^{-1}$) is the intercellular CO$_2$ concentration, and $c_a$ (mol\,mol$^{-1}$) is the ambient CO$_2$ concentration. However, during the opening of the stomata, additional moisture is lost by evaporation due to exposure of stomatal cavity to the atmosphere. Therefore, the transpiration rate $f_v$ (mol\,m$^{-2}$\,s$^{-1}$) (i.e. denoted also as $f_e$ (in plant-science) or $G_{\textit{v,leaf}}$ (in building physics), and also known as water use) is dependent on the atmospheric humidity and the availability of water for transpiration \citep{Ball1987,Leuning1995}. It is similarly described, based on Fickian diffusion process:
+where $k_{st}$ (mol\,m$^{-2}$\,s$^{-1}$) is the (molar) stomatal conductance to CO$_2$ (note that for now we neglect the boundary layer conductance), $c_i$ (mol\,mol$^{-1}$) is the intercellular CO$_2$ concentration, and $c_a$ (mol\,mol$^{-1}$) is the ambient CO$_2$ concentration. However, during the opening of the stomata, additional moisture is lost by evaporation due to exposure of stomatal cavity to the atmosphere. Therefore, the transpiration rate $f_v$ (mol\,m$^{-2}$\,s$^{-1}$) (i.e. denoted also as $f_e$ (in plant-science) or $G_{\textit{v,leaf}}$ (in building physics), and also known as water use) is dependent on the atmospheric humidity and the availability of water for transpiration \citep{Ball1987,Leuning1995}. It is similarly described, based on Fickian diffusion process:
 \begin{equation}
 f_v = k_{\textit{st,v}} \left(\frac{p_{v,i} - p_v}{p}\right)
 \label{eq:fv}
 \end{equation}
-where $k_{\textit{st,v}}$ (mol\,m$^{-2}$\,s$^{-1}$) is the (molar) stomatal condutance to water vapor, $p_{v,i}$ (Pa) is the intercellular vapor pressure, and $p_v$ (Pa) is the ambient vapor pressure.Furthermore, $p_{v,i} = p_{v,sat}\left(T_l\right)$ (Pa) where the intercellular vapor pressure inside the stomatal cavity is assumed to be at saturation at the leaf temperature $T_l$. 
+where $k_{\textit{st,v}}$ (mol\,m$^{-2}$\,s$^{-1}$) is the (molar) stomatal conductance to water vapor, $p_{v,i}$ (Pa) is the intercellular vapor pressure, and $p_v$ (Pa) is the ambient vapor pressure. Furthermore, $p_{v,i} = p_{v,sat}\left(T_l\right)$ (Pa) where the intercellular vapor pressure inside the stomatal cavity is assumed to be at saturation at the leaf temperature $T_l$. 
 
 %The water vapor stomatal conductance is related to the CO$_2$ stomatal condutance as:
 %\begin{equation}
@@ -582,7 +582,7 @@ where $k_{\textit{st,v}}$ (mol\,m$^{-2}$\,s$^{-1}$) is the (molar) stomatal cond
 %\end{equation}
 %where $a_c = 1.6$ is the relative diffusion of water vapor to CO$_2$. 
 
-So, the stomatal regulatory function is can be modeled through appropriate stomatal conductance. A generally accepted theory of plant response is that the plant regulates the stomatal aperature to optimize the photosynthetic rate for a given transpiration rate. Thus, the function of vegetation can be simplified as just maximizing the photosynthesis (or CO$_2$ assimilation) for a given transpiration rate (water use) \citep{Medlyn2011} and the water use efficiency (WUE) quantifies the efficiency of the plant of reaching this target:
+So, the stomatal regulatory function is can be modeled through appropriate stomatal conductance. A generally accepted theory of plant response is that the plant regulates the stomatal aperture to optimize the photosynthetic rate for a given transpiration rate. Thus, the function of vegetation can be simplified as just maximizing the photosynthesis (or CO$_2$ assimilation) for a given transpiration rate (water use) \citep{Medlyn2011} and the water use efficiency (WUE) quantifies the efficiency of the plant of reaching this target:
 \begin{equation}
 \textit{WUE} = \frac{f_c}{f_v}
 \label{eq:wue}
@@ -664,8 +664,7 @@ k_{\textit{st}} = \frac{a_1}{a_2 + s\,c_a} \left( -1 + \sqrt{\frac{c_a}{a_c\, \l
 \end{equation}
 where $k_{\textit{st,n}}$ (mol\,m$^{-2}$\,s$^{-1}$) is the nocturnal stomatal conductance ($k_{\textit{st,n}} = 0.018$ mol\,m$^{-2}$\,s$^{-1}$, \citep{Manoli2014}). 
 
-Thus, we obtain a stomatal model that is a function of the CO$_2$ assimilation (through parameters $a_1$, $a_2$ and $c_a$), atmospheric evaporative demand (AED) (through parameter $\textit{VPD}$), and the Lagrangian multipier $\lambda$ which represents the marginal water cost of plant carbon gain. Therefore, $\lambda$ reflects the sensitivity to water availability is also commonly known as the \textit{marginal water use efficiency}. It is empirically related to the leaf water potential $\lambda = \lambda(\psi_L)$ \citep{Manoli2014,Katul2010} and so, the stomatal response change to water availability is reflected through the change in leaf water potential $\psi_L$. The marginal WUE is determined from experimental measurements of plant photosynthesis, transpiration and stomatal conductance, and solving for the gradient of 
-\cref{eq:wue}. An empirical model of marginal WUE, $\lambda$, as a function of leaf water potential $\psi_L$ \citep{Manoli2014,Katul2010}, is given as:
+Thus, we obtain a stomatal model that is a function of the CO$_2$ assimilation (through parameters $a_1$, $a_2$ and $c_a$), atmospheric evaporative demand (AED) (through parameter $\textit{VPD}$), and the Lagrangian multiplier $\lambda$ which represents the marginal water cost of plant carbon gain. Therefore, $\lambda$ reflects the sensitivity to water availability is also commonly known as the \textit{marginal water use efficiency}. It is empirically related to the leaf water potential $\lambda = \lambda(\psi_L)$ \citep{Manoli2014,Katul2010} and so, the stomatal response change to water availability is reflected through the change in leaf water potential $\psi_L$. The marginal WUE is determined from experimental measurements of plant photosynthesis, transpiration and stomatal conductance, and solving for the gradient of 
 \begin{equation}
 \lambda \left(\psi_L\right) = \lambda_{\textit{max}}^* \frac{c_a}{c_a^*}\exp \left\{-\beta \Big( \langle \psi_L \rangle_{\textit{24h}} - \psi_{\textit{L,max}}\Big)^2\right\}
 \label{eq:mwue}
@@ -1049,7 +1048,7 @@ The air domain is solved using $m$ pseudo steady-state timestep, discretizing th
 
 The solid domain describes the heat and mass transport in urban structures such as building facade, pavement, road and the ground (i.e., soil). Each of these ``\textit{sub}'' domains consists of $n$ adaptive solid timesteps with $\Delta t^n < \Delta t^m$ as shown in \cref{fig:coupling} \citep{Kubilay2018,Janssen2002}. At the beginning of the solid domain iteration, the thermal, moisture and radiative transfers are updated providing the necessary boundary conditions for wall boundaries. For each of $n$ solid timesteps, the linearized heat and mass transport equation are solved using $k$ Picard iterations. In the soil sub-domain only, during each of these $k$ Picard iteration, the soil-plant-atmosphere continuum (SPAC) model is solved using $j$ secant iterations to determine the root water uptake \citep{Manoli2014}. The algorithm for solving such soil sub-domain is given as:
 \begin{enumerate}
-	\item $k$ Picard iterations solving for the linearized heat and mass transport transport equations:
+	\item $k$ Picard iterations solving for the linearized heat and mass transport equations:
 		\begin{enumerate}[label=(\alph*)]
 			\item Calculate marginal WUE $\lambda$. % As $\psi_L$ is assumed to be slowly varying, $\lambda$ is constant in secant iteration.
 			\item Calculate stomatal conductance $k_{\textit{st}}$.
