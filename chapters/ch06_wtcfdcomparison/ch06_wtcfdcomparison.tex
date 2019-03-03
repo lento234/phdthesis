@@ -12,7 +12,7 @@
 
 \section{Simulation domain and boundary condition}
 
-The simulation setup consisting of the numerical domain and its boundary conditions were that of the wind tunnel experiment with wind tunnel set wind speed $U_{\textit{ref}} = 1$ m\,s$^{-1}$. The reference velocity used for the study is the plant-canopy height velocity $U_H = 0.77$ m\,s$^{-1}$ at $H = 0.21$ m.
+The simulation setup consisting of the numerical domain and its boundary conditions were that of the wind tunnel experiment with wind tunnel set wind speed $U_{\textit{ref}} = 1$ m\,s$^{-1}$. The reference velocity used for the study is the plant-canopy height velocity $U_h = 0.77$ m\,s$^{-1}$ at $H = 0.21$ m.
 
 \subsection{Numerical domain}
 	
@@ -34,7 +34,7 @@ The numerical domain is based on the geometry of the wind tunnel test-section wi
 	\label{fig:boundaryprofile}
 \end{figure}
 
-\cref{fig:boundaryprofile} shows the upstream boundary condition of mean velocity $\overline{u}$ (m\,s$^{-1}$) and the turbulent kinetic energy $k$ obtained from the wind tunnel experiment. The turbulent dissipation rate $\varepsilon$ is obtained through the atmospheric boundary layer (ABL) profile equations \citep{Richards1993}:
+\cref{fig:boundaryprofile} shows the upstream boundary condition of mean velocity $\overline{u}$ (m\,s$^{-1}$) and the turbulent kinetic energy $k$ obtained from the wind tunnel experiment, normalized with $U_h = 0.77$ m\,s$^{-1}$. The turbulent dissipation rate $\varepsilon$ is obtained through the atmospheric boundary layer (ABL) profile equations \citep{Richards1993}:
 \begin{align}
 	\tavg{u}(z) &= \frac{{{u_*}}}{\kappa }{\text{ln}}\left( {\frac{{z + {z_0}}}{{{z_0}}}} \right) \\
 	k &= \frac{{{u_*}^2}}{{\sqrt {{C_\mu }} }} \\
@@ -45,7 +45,7 @@ where $\tavg{u}(z)$ (m\,s$^{-1}$) is the mean horizontal velocity, $u_*= \num{0.
 
 \subsection{Vegetation: Leaf area density}
 
-The vegetation is modeled as a porous medium parameterized using a leaf area density $a$ (m$^2$\,m$^{-3}$) distribution and a constant leaf drag coefficient $c_d$. The momentum source term $s_u$ (N\,m$^{-3}$) is given as:
+The vegetation is modeled as a porous medium parameterized using a leaf area density $a$ (m$^2$\,m$^{-3}$) distribution and a constant leaf drag coefficient $c_d$. For a detailed description, see \cref{sec:sourceterms}. The source terms for momentum $\mvec{s}_u$ (N\,m$^{-3}$) , turbulence kinetic energy $s_k$ (W\,m$^{-3}$), and the turbulence dissipation rate $s_{\varepsilon}$ (W\,m$^{-3}$\,s$^{-1}$) are given as:
 	\begin{align}
 		\mvec{s}_u &=  - \rho {c_d}a\left| \tavg{\mvec{u}} \right|\tavg{\mvec{u}} 	\label{eq:source_veg1}	 \\
 		s_k &= \rho {c_d}a\left( \beta _p \left| \tavg{\mvec{u}} \right|^3 - \beta _d\left| \tavg{\mvec{u}} \right|k \right) \label{eq:source_veg2} \\

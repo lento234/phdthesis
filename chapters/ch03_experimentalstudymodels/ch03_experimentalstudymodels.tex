@@ -60,7 +60,7 @@ A range of model and natural trees with different heights and porosities is used
 \end{equation}
 obtained from a wind tunnel drag study of realistic tree-like windbreak models \citep{Guan2003}. The study shows that this formulation provides a good estimate for 3D tree models and has been applied by others to estimate the aerodynamic porosity for individual trees \citep{Bitog2011b,Lee2014565,Rosenfeld2010}.
 
-	\begin{figure}[t]
+	\begin{figure}[p]
 	\centering
 	\includegraphics[width=\textwidth]{\figdir/threshold_indexed-crop.pdf}
 	\caption{Frontal thresholded images of model and natural trees at rest: \subfig{a} model tree 1, \subfig{b} model tree 2, \subfig{c} model tree 3, \subfig{d} cypress, \subfig{e} holly and \subfig{f} holly (defoliated). The red region indicates the frontal area of the tree. The frontal area of holly is used as a reference for both foliated and defoliated holly.}
@@ -89,21 +89,26 @@ mincapwidth = \textwidth,
 
 The natural trees used in the present study are divided into two categories: hardwood and coniferous species. Generically, hardwood species have broad-like leaves whereas coniferous trees have needle-like leaves. In the present study, smaller young (juvenile) trees are used with a maximum height of $32$ cm, although a typical mature holly is known to grow up to \numrange{3}{5} m and a mature cypress to \numrange{35}{50} tall. The impact of seasonal foliar density variation is studied by defoliating the holly and subsequently performing drag and flow measurements.
 
-	\begin{figure}[t]
+	\begin{figure}[p]
 	\centering
 	\includegraphics[width=\textwidth]{\figdir/setup_image.png}
 	\caption{Wind tunnel setup for combined drag force and PIV measurements. The model trees or natural trees are positioned on a rigid stainless steel pole connected to the load cell. The trees are traversed 3 times in the upstream direction by $300$ mm, indicated by the red arrow.}
 	\label{fig:setupimage}
 	\end{figure}
-
-The wind tunnel experiments are performed in the ETHZ / Empa Atmospheric Boundary Layer (ABL) wind tunnel. It is a closed circuit G\"ottingen type wind tunnel with a test section cross-section of $1.9$ m (width) by $1.3$ m (height). The wind tunnel can provide wind speeds ranging from \numrange{0.5}{25} m\,s$^{-1}$. \cref{fig:setupimage} shows the setup used for combined measurement of drag force and the flow field behind the trees. The origin of the $x$, $y$, $z$  coordinate system is located at the bottom-center of the tree foliage. The corresponding instantaneous velocity components of the velocity vector $\mvec{u}$ are $u$, $v$, and $w$, oriented along the streamwise, spanwise and vertical directions, respectively. The mean and fluctuating velocities of the velocity vector $\mvec{u}$ are defined $\tavg{\mvec{u}}$ and $\mvec{u}'$, with the overbar denoting an ensemble average. The tree is mounted on the pole-load cell configuration, away from the wind tunnel floor. The trees are mounted in this fashion to reduce the influence of the wind tunnel boundary layer, the load cell and the traverse system at the measurement region. \cref{fig:profiles} shows the normalized mean velocity and the turbulence intensity for two wind speeds of $U_{\textit{ref}}=1$ and $10$ m\,s$^{-1}$. \cref{fig:profiles}a displays a nearly-uniform approach flow wind profile, with a maximum deflection from the mean value less than \num{5e-3} m\,s$^{-1}$. Furthermore, the measurement was performed for a low upstream turbulence with an average turbulence intensity of $I=0.4$\% (\cref{fig:profiles}b). A nearly-uniform wind profile with a low turbulence level is used instead of an atmospheric boundary layer (ABL) to ensure that all trees, which have varying heights, are subjected to the similar velocity profile.
-
-	\begin{figure}[t]
+	
+	\begin{figure}[p]
 		\centering
 		\includegraphics[width=\textwidth]{\figdir/profiles-crop.pdf}
 		\caption{Profile at the location $x=0$ m without trees: \subfig{a} normalized mean velocity magnitude $|\tavg{\mvec{u}}|/U_{\textit{ref}}$ and \subfig{b} turbulence intensity $I$ (\%).}
 		\label{fig:profiles}
 	\end{figure}
+
+
+
+The wind tunnel experiments are performed in the ETHZ / Empa Atmospheric Boundary Layer (ABL) wind tunnel. It is a closed circuit G\"ottingen type wind tunnel with a test section cross-section of $1.9$ m (width) by $1.3$ m (height). The wind tunnel can provide wind speeds ranging from \numrange{0.5}{25} m\,s$^{-1}$. \cref{fig:setupimage} shows the setup used for combined measurement of drag force and the flow field behind the trees. The origin of the $x$, $y$, $z$  coordinate system is located at the bottom-center of the tree foliage. The corresponding instantaneous velocity components of the velocity vector $\mvec{u}$ are $u$, $v$, and $w$, oriented along the streamwise, spanwise and vertical directions, respectively. The mean and fluctuating velocities of the velocity vector $\mvec{u}$ are defined $\tavg{\mvec{u}}$ and $\mvec{u}'$, with the overbar denoting an ensemble average. The tree is mounted on the pole-load cell configuration, away from the wind tunnel floor. The trees are mounted in this fashion to reduce the influence of the wind tunnel boundary layer, the load cell and the traverse system at the measurement region. \cref{fig:profiles} shows the normalized mean velocity and the turbulence intensity for two wind speeds of $U_{\textit{ref}}=1$ and $10$ m\,s$^{-1}$. \cref{fig:profiles}a displays a nearly-uniform approach flow wind profile, with a maximum deflection from the mean value less than \num{5e-3} m\,s$^{-1}$. Furthermore, the measurement was performed for a low upstream turbulence with an average turbulence intensity of $I=0.4$\% (\cref{fig:profiles}b). A nearly-uniform wind profile with a low turbulence level is used instead of an atmospheric boundary layer (ABL) to ensure that all trees, which have varying heights, are subjected to the similar velocity profile.
+
+
+
 
 \section{Measurement setup}
 
