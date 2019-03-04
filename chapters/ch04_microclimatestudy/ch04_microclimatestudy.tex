@@ -148,14 +148,14 @@ Infrared (IR) thermography is performed to obtain a high-resolution spatial and 
 
 \cref{fig:porositydistribution}a shows the average porosity for representative elementary volumes (REV) of voxel sizes ranging from $5$ to $100$ px$^3$. To calculate the spatial distribution of plant porosity, a sufficiently large REV has to be chosen to ensure that variability in the plant microstructure is taken into account. However, if the REV is too large, it sacrifices the resolution of the porosity distribution. If the REV size is $100$ px$^3$, the resulting porosity is $\langle \phi \rangle_{\textit{xyz}}  = 90$\%. However, the downside of such a large REV size is that it has scarified the spatial resolution of porosity distribution. Therefore, in our case, an REV size of $30$ px$^3$ was seen to be optimal, providing sufficient accuracy and resolution, with a calculated average plant porosity of $\langle \phi \rangle_{\textit{xyz}} = 88$\% and error of only $2\%$. \cref{fig:porositydistribution}a also shows the average porosity obtained from both \textit{weka} and the \textit{hist.} methodology as described in \cref{subsec:xray}. We see that both approaches follow the same profile with minor differences. This result indicates that both approaches accurately differentiates air space and biological material. However, in \cref{subsec:xray}, it was seen that the \textit{weka} method provides a better classification of leaf and branches, as visible in \cref{fig:xrayctslice}. So, to obtain key parameters such as leaf surface area, the \textit{weka} method is opted.
 
-%	\begin{figure}[p]
-\begin{sidewaysfigure}[p]
+\begin{figure}[p]
+%\begin{sidewaysfigure}[p]
 		\centering
-		\includegraphics[width=\textwidth]{\figdir/porosity_verticaldistribution_update_v2-crop.pdf}
+		\includegraphics[width=\textwidth]{\figdir/porosity_verticaldistribution_update_v3-crop.pdf}
 		\caption{\subfig{a} Average plant porosity$\langle \phi \rangle_{xyz}$ with respect to voxel size (px$^3$) as a base for determining the REV for calculating porosity distribution, \subfig{b} Three vertical porosity distributions: optical $\beta$, aerodynamic $\alpha$ and true porosity $\langle \phi \rangle_{xy}$, and \subfig{c} leaf area density $\langle a \rangle_{xy}$ (m$^2$ m$^{-3}$) (blue) and normalized short-wave radiative flux $q_{\textit{r,sw}}$ profile (red) inside vegetation determined using Beer-Lambert law extinction coefficient of short-wave radiation $\mu_{\textit{sw}}=0.78$ \citep{Manickathan2018a}.}
 		\label{fig:porositydistribution}
-\end{sidewaysfigure}
-%	\end{figure}
+%\end{sidewaysfigure}
+\end{figure}
 
 \cref{fig:porositydistribution}b shows three vertical distributions of plant porosity. In conjunction with the plant porosity based on the X-ray CT (black line), the optical and aerodynamic porosity of the plant (with respect to the incident airflow direction in the wind tunnel) is investigated. The optical and aerodynamic porosity are typical measures used in the wind tunnel studies to estimate the aerodynamic contribution of the plant porosity \citep{Grant1998,Guan2003,Manickathan2018b}. The optical porosity $\beta$ and the aerodynamic porosity $\alpha$ can be related as follows:
 \begin{equation}
@@ -169,6 +169,7 @@ empirically derived from wind tunnel measurements \citep{Guan2003}. The optical 
 	\caption{Porosity distributions of the plant: \subfig{a} The optical porosity $\beta$ with plant element and airspace indexed as $0$ and $1$, respectively and \subfig{b} streamwise-averaged plant porosity $\langle \phi \rangle_x$. }
 	\label{fig:porosities}
 \end{figure}
+
 
 
 
@@ -187,7 +188,7 @@ In addition to the porosity distribution of the plant, the total leaf area, leaf
 
 The total leaf surface area is determined by integrating the mesh surface and is calculated to be $A_l=0.75$ m$^2$. A metric of plant trait commonly used to quantify the amount of leaves is the leaf area index (LAI). The leaf area is defined as the ratio of one-sided leaf area to the plant ground cover area $A_g$. The one-sided leaf area is simply assumed to be half the total measured leaf area, and the plant ground cover area is derived from the X-ray CT dataset. The plant ground cover was determined to be $A_g=0.031$ m$^2$, and a resulting leaf area index of $\textit{LAI}=12.14$ m$^2$\,m$^{-2}$ is measured. Therefore, the plant is seen to have a high LAI because it is a shrub species that is commonly used as hedgerows or shelterbelts.
 
-The (one-sided) leaf area density $a$ (m$^2$\.m$^{-3}$) (or also known by LAD) is a key parameter that is used to represent vegetation as a porous medium in a numerical models \citep{DeLangre2008,Gross1987,Manickathan2018a}. It is related to the net leaf surface area (two-sided) $A_l$ and the plant porosity $\phi$, given as:
+The (one-sided) leaf area density $a$ (m$^2$\,m$^{-3}$) (or also known by LAD) is a key parameter that is used to represent vegetation as a porous medium in a numerical models \citep{DeLangre2008,Gross1987,Manickathan2018a}. It is related to the net leaf surface area (two-sided) $A_l$ and the plant porosity $\phi$, given as:
 \begin{equation}
 a = \frac{1}{2}{A_l}\frac{{1 - \phi }}{{\int {1 - \phi \;{\mathrm{d}}V} }}
 \end{equation}
