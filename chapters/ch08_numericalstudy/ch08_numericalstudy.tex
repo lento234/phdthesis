@@ -1,6 +1,6 @@
 \chapter{Numerical study of impact of vegetation on urban microclimate}
 \label{ch:impactofvegetation}
-
+\def\figdir{chapters/ch08_numericalstudy/figures}	
 %\begin{quote} 
 %	\begin{flushright}
 %		\textit{The true logic of this world is in the\\ 
@@ -12,6 +12,8 @@
 
 \section{Introduction}
 
+In this chapter, the fully coupled (integrated) numerical model, described in \cref{ch:numericalmethod}, is used to assess the impact of vegetation on urban microclimate. To accurately assess the impact of vegetation on urban microclimate, we must determine: i) the influence of vegetation on the turbulent air flow, ii) the influence of plant transpiration on hygrothermal conditions, iii) the influence of plant shading on the urban environment, and iv), the net influence of all the parameters on the pedestrian thermal comfort. In this chapter, the influence of vegetation is assess using two different experimental setups: a) the study on the influence of vegetation on microclimate of a urban street canyon, and b) a case study on the influence of vegetation is a realistic city topology in Z\"urich, Switzerland at a location known as Muensterhof (in german: M\"unsterhof). The Muensterhof is a town square within the city of Z\"urich with that currently lacks vegetation. The objective of the study in the urban street canyon is to perform a parameteric study and determine the parameters that play a key role in improving the thermal comfort. Furthermore, the plant transpiration and the influence on the soil moisture is investigated. The objective of the case study in M\"uensterhof is determine the microclimate modification of vegetation in a realistic setting.
+
 \section{Urban street canyon}
 
 A numerical assessment of the impact of vegetation is first performed in urban street-canyon. The study investigates the influence of transpirative and shaded cooling due to vegetation on the pedestrian comfort inside a street canyon. In this study, we investigate the cooling potential of vegetation, such as a row of trees, on the microclimate of a street canyon using a CFD model in OpenFOAM. Prior to this study, the cooling effect of vegetation (Manickathan et al., 2018) and the microclimate of a street canyon (Kubilay et al., 2017) were studied separately. The present study is a continuation of these works towards modeling their interactions. A radiation model is developed to model the short-wave and long-wave radiative heat fluxes between the leaf surface and the surroundings. Using the developed model, it is possible to study the influence of transpirative cooling and shading due to vegetation on pedestrian thermal comfort inside a street canyon. The thermal comfort for pedestrians is evaluated using Universal Thermal Climate Index (UTCI). 
@@ -22,9 +24,26 @@ The study shows that both shading and transpiration have a direct positive influ
 
 The simulations are performed for a street canyon with a vegetation zone of $2 \times 10 \times 4$ m$^3$, representing a row of trees which are surrounded by two buildings of $10 \times 50 \times 10$ m$^3$ ($x\times y \times z$), as shown in Figure 1. This vegetation zone has a foliage height of $4$ m (with $z_{\textit{min}}= 4$ m), leaf area density $a= 10$ m$^2$\,m$^{-3}$, leaf drag coefficient $c_d=0.2$ and leaf size $l=0.1$ m. The meteorological data are based on a typical meteorological year and the total solar radiation intensity is for a clear sky on the 21$^{\mathrm{st}}$ of June in the city of Zurich, Switzerland (Kubilay et al. 2017). The wind speed at the building height is $U_{\textit{ref}}=5$ m\,s$^{-1}$, the ambient temperature varies between 11$^{\circ}C$ and 19 $^{\circ}C$ with solar noon at $13:28$ and the relative humidity varies between 62\% and 86\% $RH$. The diurnal variation of the microclimate is modeled using a pseudo steady-state approach, where the governing equation of the air domain, integrated with vegetation, is solved using a steady-state approach at 10-minute intervals. The heat and mass transport in the building materials is solved using an unsteady approach. A detailed summary of the solution algorithm for coupling the vegetation model with airflow model is presented in Manickathan et al. (2018) and the solution algorithm for coupling the air domain with the solid domain is presented in Kubilay et al. (2017).
 
+	\begin{figure}[t]
+	\centering
+	\includegraphics[width=0.8\textwidth]{\figdir/domain_new5.png}
+	%\includegraphics[width=\textwidth]{\figdir/Tinfrared_vs_air_updated-crop.pdf}
+	\caption{The simulation setup of a street canyon composed of two buildings measuring $10 \times 50 \times 10$ m$^3$ ($x\times y \times z$) with vegetation band of size $2 \times 10 \times 4$ m$^3$ in the center. The setup is based on the study of Kubilay et al. (2017) with wind.}
+	\label{fig:domain_new5}
+	\end{figure}
+
 \subsection{Results and Discussion}
 
 The influence of vegetation on the microclimate of the street canyon (depicted in Fig.1) is studied using the developed numerical model. The natural cooling provided by the row of trees is determined by comparing the setup with and without vegetation, “V” and “NV”, respectively. Fig. 2 shows the change in air temperature, $T_v-T_nv$ at noon (12 pm), when the sun is directly above the street canyon. The vegetated region is indicated by the dashed outline. From the figure, two distinct regions of cool zones can be identified. The first region is at the vicinity of the vegetation with a temperature change of around -2 . This cool zone results from the transpirative cooling effect of vegetation. 
+
+	\begin{figure}[t]
+	\centering
+	\includegraphics[width=0.6\textwidth]{\figdir/DT_field_v2.png}
+	%\includegraphics[width=\textwidth]{\figdir/Tinfrared_vs_air_updated-crop.pdf}
+	\caption{Temperature drop, $Tv - Tnv$ (℃) due to vegetation at noon (12 pm) in the center of the street canyon (at $y= 125$ m). The vegetated zone (i.e., row of trees) is indicated by the black dashed line.}
+	\label{fig:DT_field_v2}
+\end{figure}
+
 
 The second zone is the region close to the building wall, where the shadow of the tree was present earlier during the day. This cooling region, resulting from tree shading, is seen to be more effective than the transpirative cooling region, showing a temperature drop of more than -3. Furthermore, at the current location of the shadow, the cooling air is seen to be convected away from the wall, and interacts with the cool zone. This indicates that, in addition to transpirative cooling, the tree-shade cooling plays a vital role in improving the microclimate. It is also evident that, as a result of the combined influence of transpirative and tree-shade cooling, the overall surface temperature of the street canyon is lower.
 
@@ -41,11 +60,11 @@ The universal thermal climate index (UTCI) is employed to study the influence of
 The present study investigates the influence of transpirative and tree-shade cooling on the microclimate of a street canyon. The study shows that both shading and transpiration have a direct influence on the temperatures measured in the street canyon. Furthermore, it is evident that tree-shade cooling is substantially larger than the transpirative cooling and, for the position of a pedestrian under the tree, the thermal comfort, measured through Universal Thermal Climate Index (UTCI), is only affected by the tree-shade cooling. In contrast, the transpirative cooling is seen to have negligible influence on the thermal comfort. Future studies will investigate the influence of environmental and vegetation properties on the impact of transpirative and tree-shade cooling. Additionally, the transpiration rate will be coupled with the soil moisture to determine the influence of root water availability on the impact of transpirative cooling.
 
 The integrated model is used to study the influence of transpirative cooling and cooling due to shading of trees inside a street canyon. From this case study, both transpirative cooling and cooling through shading are seen to reduce the temperatures. Furthermore, the transpiration from the vegetation is seen to increase the humidity inside the street canyon. Although, this additional humidity is seen not to have a significant impact on pedestrian comfort, measured through universal thermal climate index (UTCI), as the comfort provided by the tree shading is substantially higher and counters the negative impacts of increased humidity. However, factors such as leaf area density (LAD), vegetation position, vegetation size, ambient conditions, etc. can have an influence on the outcome. Therefore, the influence of these parameters should be investigated to accurately estimate the impact of the vegetation in urban area.  
-%
-%\section{Case study: Muensterhof}
-%
-%\subsection{Simulation setup}
-%
-%\subsection{Results and Discussion}
-%
-%\subsection{Conclusion}
+
+\section{Case study: Muensterhof}
+
+\subsection{Simulation setup}
+
+\subsection{Results and Discussion}
+
+\subsection{Conclusion}
