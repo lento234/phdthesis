@@ -14,7 +14,7 @@
 	\label{fig:fullmodelcoupling}
 \end{figure}
 
-The \textit{air} domain model describes the transport of moist air through vegetation (i.e., velocity $\mvec{u}$, enthalpy $h$, moisture content $w_a$, and CO$_2$ concentration $c$). Furthermore, with the air domain, the \textit{leaf energy balance} (LEB) model is solved to determine the heat and mass fluxes (i.e., $q_{\textit{sen,leaf}}$ and $g_{\textit{v,leaf}}$), which provides the necessary source and sink terms for solving the moist airflow. A summary of the leaf energy balance and the coupling between the air domain is provided in \cref{ch:parametricstudy} and detailed in \cref{sec:airdomain}. The \textit{solid} domain model described the coupled heat and mass transport (i.e., solid temperature $T_s$, and solid moisture content $w_s$) in all urban materials (i.e., soil, pavement, and building facades). Furthermore, in the soil region which consists of vegetation roots, the \textit{soil-plant-atmosphere continuum} (SPAC) is solved to determine the leaf water potential $\psi_L$ (see \cref{sec:spac}) and the root water uptake $g_{\textit{v,root}}$, which provides the necessary sink term in soil region. A detailed description of the solid domain, SPAC model, and the coupling between them is provided in \cref{sec:soliddomain,sec:spac,sec:couplingalgorithm}, respectively. The final ingredient is the \textit{radiation} model which calculates the short-wave $q_s$ and long-wave $q_r$ radiative exchanges in the urban street canyon including the impact of vegetation. A detailed description of the radiation model is given in \cref{sec:radiationmodel}.
+The \textit{air} domain model describes the transport of moist air through vegetation (i.e., velocity, enthalpy, moisture content, and CO$_2$ concentration). Furthermore, with the air domain, the \textit{leaf energy balance} (LEB) model is solved to determine the heat and mass fluxes, which provides the necessary source and sink terms for solving the moist airflow. A summary of the leaf energy balance and the coupling between the air domain is provided in \cref{sec:airdomain}. The \textit{solid} domain model described the coupled heat and mass transport (i.e., solid temperature, and solid moisture content) in all urban materials (i.e., soil, pavement, and building facades). Furthermore, in the soil region which consists of vegetation roots, the \textit{soil-plant-atmosphere continuum} (SPAC) is solved to determine the leaf water potential (see \cref{sec:spac}) and the root water uptake, which provides the necessary sink term in soil region. A detailed description of the solid domain, SPAC model, and the coupling between them is provided in \cref{sec:soliddomain,sec:spac,sec:couplingalgorithm}, respectively. The final ingredient is the \textit{radiation} model which calculates the short-wave and long-wave radiative exchanges in the urban street canyon including the impact of vegetation. A detailed description of the radiation model is given in \cref{sec:radiationmodel}.
 
 \section{Air domain: Transport of moist air}
 \label{sec:airdomain}
@@ -50,15 +50,15 @@ Similarly, total density of gas mixture $\rho$ is given as:
 
 The Fick's law of diffusion is used to describe the diffusive mass flux as a function of concentration gradient of the species:
 \begin{equation}
-\mvec{g}_{\textit{d,i}} = - \rho D_{\textit{ai}} \nabla x_i
+\mvec{g}_{\textit{d,i}} = - \rho D_{\textit{ia}} \nabla x_i
 \label{eq:dmf}
 \end{equation}
-where $D$ is the diffusion coefficient. Thus, substituting mass fractions \cref{eq:xv,eq:xc}, and diffusion mass flux \cref{eq:dmf} into \cref{eq:xi}, the conservation equation of species become:
+where $D_{ai}$ is the binary diffusion coefficient of species $i$ in air. Thus, substituting mass fractions \cref{eq:xv,eq:xc}, and diffusion mass flux \cref{eq:dmf} into \cref{eq:xi}, the conservation equation of species become:
 \begin{align}
 \frac{\partial \rho w}{\partial t} + \nabla  \cdot \left( \rho w \mvec{u} \right) &= D_{\textit{va}} \nabla^2 w + s_w \label{eq:xv2}\\
 \frac{\partial \rho c}{\partial t} + \nabla  \cdot \left( \rho c \mvec{u} \right) &= D_{\textit{ca}} \nabla^2 c + s_c \label{eq:xc2}
 \end{align}
-and the notations $w\equiv x_v$ (kg\,kg$^{-1}$) and $c\equiv x_c\, M_a/M_c $ (mol\,mol$^{-1}$) are used to conform with past studies \citep{Carmeliet2005, Defraeye2011, Saneinejad2013, Kubilay2014b}.
+where $s_w$ and $s_c$ are source of water and CO$_2$, respectively (see \cref{sec:leafenergy}). The notations $w\equiv x_v$ (kg\,kg$^{-1}$) and $c\equiv x_c\, M_a/M_c $ (mol\,mol$^{-1}$) are used to conform with past studies \citep{Carmeliet2005, Defraeye2011, Saneinejad2013, Kubilay2014b}.
 
 \subsection*{Conservation of mass}
 
@@ -77,9 +77,9 @@ A detailed derivation of conservation of momentum is given in \cref{sec:conserva
 where $p$ is the pressure (Pa), $\mu$ the dynamic viscosity (kg\,m$^{-1}$\,s$^{-1}$), $\mvec{g}$ the gravitational acceleration (m\,s$^{-2}$). The source of momentum $\mvec{s}_u$ is:
 \begin{equation}
 \mvec{s}_u = - \rho\, a \,c_d \,|\mvec{u}|\mvec{u}
+\label{eq:suu}
 \end{equation}
-where $a$ is the leaf area density (m$^2$\,m$^{-3}$), and $c_d$ is the leaf drag coefficient ($c_d = 0.2$).
-
+where $a$ is the leaf area density (m$^2$\,m$^{-3}$), and $c_d$ is the leaf drag coefficient ($c_d = 0.2$) \citep{Wilson1977} and is typically assumed to be a constant. It is done so in the present study for simplicity, but future studies can investigate the influence of varying drag coefficient. For turbulent flows, the viscous drag can be assumed to be negligible compared to the form drag \citep{Judd1996, Li1990, Liu1996}. 
 
 \subsection*{Conservation of energy}
 
@@ -89,10 +89,10 @@ c_p  \left( \frac{\partial }{\partial t} \left( \rho T \right) + \nabla \cdot \l
 \end{equation}
 where $\rho$ (kg\,m$^{-3}$) is the density of mixture and $c_p$ (J\,kg$^{-1}$\,K$^{-1}$) is the specific heat capacity of the mixture. The source of energy $s_h$ (W\,m$^{-3}$) for the above equation (i.e., quasi- transport of temperature) is:
 \begin{equation}
-\mvec{s}_h = \rho\,c_p\, a\, q_{\textit{sen,leaf}}
+\mvec{s}_h = a\, q_{\textit{sen,leaf}}
 \label{eq:sh}
 \end{equation}
-assuming that the sensible heat flux is only due to leaf and air thermal conduction. 
+assuming that the sensible heat flux is only due to leaf and air thermal conduction (see \cref{sec:conservationofenergy} for detailed derivation). 
 
 The (specific) enthalpies of dry air $h_a$ (J,kg$^{-1}$) and water vapor $h_v$ (J,kg$^{-1}$) are:
 \begin{align}
@@ -128,36 +128,134 @@ where:
 \mu_t = \rho C_\mu \frac{k^2}{\varepsilon}
 \end{equation}
 
-\subsection*{Leaf energy balance}
+\highlightpara{
+\begin{align}
+\frac{{\partial \rho k}}{{\partial t}} + \nabla \cdot \left(\rho k \tavg{\mvec{u}} \right)   &= \nabla  \cdot \left[ {\left( {\mu  + \frac{{{\mu _t}}}{{{\sigma _k}}}} \right)\nabla k} \right] + {P_k} - \rho \varepsilon  + s_k,\\
+\frac{{\partial \rho \varepsilon }}{{\partial t}} +  \nabla \cdot \left(\rho \varepsilon \tavg{\mvec{u}} \right) &= \nabla  \cdot \left[ {\left( {\mu  + \frac{{{\mu _t}}}{{{\sigma _\varepsilon }}}} \right)\nabla \varepsilon } \right] + \rho{C_{1\varepsilon }}{P_k}\frac{\varepsilon }{k} - \rho{C_{2\varepsilon }}\frac{{{\varepsilon ^2}}}{{k + \sqrt {\nu \varepsilon } }} + s_\varepsilon
+\label{eq:realizablekepsilon2}
+\end{align}
+where 
+\begin{equation}
+P_k = - \rho \overline{\mvec{u}'\mvec{u}'}:\nabla \tavg{\mvec{u}} = 2 \mu_t |\mathbf{S}|^2
+\end{equation}
+The mean strain-rate $\mathbf{S}$ is defined as
+\begin{equation}
+\mathbf{S} = \frac{1}{2} \left( \nabla \tavg{\mvec{u}} +  \nabla \tavg{\mvec{u}}^T \right)
+\end{equation}
 
-The \textit{leaf energy balance} (LEB), as detailed in \cref{ch:parametricstudy}, is summarized as:
+The TKE source $s_k$ (W\,m$^{-3}$) is given as: 
+\begin{equation}
+s_k = \rho {c_d}a\left( \beta _p \left| \tavg{\mvec{u}} \right|^3 - \beta _d\left| \tavg{\mvec{u}} \right|k \right)
+\label{eq:source_k}		 	
+\end{equation}
+and the TDR source term $s_{\varepsilon}$ (W\,m$^{-3}$\,s$^{-1}$) is given as:
+\begin{equation}
+s_\varepsilon = \rho {c_d}a\left( {{\beta _p}{C_{4\varepsilon }}{{\left| \tavg{\mvec{u}} \right|}^3}\frac{\varepsilon }{k} - {\beta _d}{C_{5\varepsilon }}\left| \tavg{\mvec{u}} \right|\varepsilon } \right)
+\label{eq:source_eps}		 	
+\end{equation}
+with model constants $C_{4\varepsilon}=0.9$ and $C_{5\varepsilon}=0.9$ \citep{Katul2004, Kenjeres2013, Sanz2003}. The constants $\beta_p=1.0$ is the fraction of mean kinetic energy converted into turbulent kinetic energy and $\beta_d=5.1$ describes the reduction in TKE and TDR due to vegetation \citep{Sanz2003}. \cite{Kenjeres2013} compared various RANS model coefficients for vegetation in an urban area and found the coefficients provided by \cite{Katul2004} to be reasonably accurate and the coefficients show good numerical stability. Therefore, these parameters are used in this thesis.}
+
+\section{Leaf energy balance}
+\label{sec:leafenergy}
+
+\highlightpara{The heat and mass exchanges between the tree canopy and the air are simulated using a leaf energy model. The heat and mass exchanges between the tree canopy and the air are simulated using a leaf energy balance as shown in \cref{fig:leaf_energybalance}. We assume a stationary leaf energy balance and that the dynamic thermal storage of heat in leaves can be neglected. }
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.8\textwidth]{\figdir/leafsurface-crop.pdf}
+	\caption{Schematic representation of leaf surface with energy balance as given by \cref{eq:energybalance}. The radiative flux $q_{\mathit{rad,leaf}}$  absorbed by the leaf is balanced by the sensible $q_{\mathit{sen,leaf}}$ and the latent heat flux $q_{\mathit{lat,leaf}}$ leaving the leaf surface. The stomatal resistance 
+		$r_s$ influences the latent heat flux and the aerodynamic resistance $r_a$ influences both the sensible and the latent heat fluxes. }
+	\label{fig:leaf_energybalance}
+\end{figure}
+
+\highlightpara{
+The stationary energy balance is given as:
 \begin{equation}
 {q_{\mathit{rad},\mathit{leaf}}} - {q_{\mathit{lat},\mathit{leaf}}} - {q_{\mathit{sen},\mathit{leaf}}} = 0
-\label{eq:energybalance2}
+\label{eq:energybalance}
 \end{equation}
-where ${q_{\mathit{rad},\mathit{leaf}}}$ (W\,m$^{-2}$) is the radiative heat flux, ${q_{\mathit{lat},\mathit{leaf}}}$ (W\,m$^{-3}$) is the latent heat flux, and ${q_{\mathit{sen},\mathit{leaf}}}$ (W\,m$^{-3}$) is the sensible heat flux. The sensible heat flux is defined as:
+where ${q_{\mathit{rad},\mathit{leaf}}}$ (W\,m$^{-2}$) is the radiative flux, ${q_{\mathit{sen},\mathit{leaf}}}$ (W\,m$^{-2}$) is the sensible heat flux and ${q_{\mathit{lat},\mathit{leaf}}}$ (W\,m$^{-2}$) is the latent heat flux \citep{Majdoubi2009, Bruse1998, Dauzat2001,Hiraoka2005}. Positive sensible and latent heat fluxes are defined as heat transfer from the leaf into the air. The sensible heat flux due to convective heat transfer from leaf surface to the air is given as:
 \begin{equation}
-{q_{\mathit{sen,leaf}}} = {h_{c,h}} \left( {{T_{\mathit{l}}} - T_a} \right)
-\label{eq:sensibleheatflux2}
-\end{equation}
-where $T_l$ (K) is the leaf temperature, $T_a$ (K) is the ambient temperature, and ${h_{c,h}}$ (W\,m$^{-2}$\,K$^{-1}$) is the convective heat transfer coefficient. Subtituting \cref{eq:sensibleheatflux2} into \cref{eq:sh} gives the source of heat from vegetation in conservation of energy.
+{q_{\mathit{sen,leaf}}} = {h_{c,h}} \left( {{T_{\mathit{leaf}}} - T} \right) = \frac{{2\rho {c_p}}}{{{r_a}}} \left( {{T_{\mathit{leaf}}} - T} \right)
+\label{eq:sensibleheatflux}
+\end{equation}}
+\highlightpara{where $h_{c,h}$ (W\,m$^{-2}$\,K$^{-1}$] is the convective heat transfer coefficient (CHTC), $T_{\mathit{leaf}}$ (K) is the leaf surface temperature, $T$ (K) is the air temperature and $r_a$ (s\,m$^{-1}$) is the aerodynamic resistance of the boundary layer around the leaf. A factor 2 is present in the equation as the sensible heat flux occurs on both sides of the leaf. Substituting \cref{eq:sensibleheatflux} into \cref{eq:sh} gives the source of heat from vegetation in conservation of energy.}
 
-The latent heat flux is defined as:
+\highlightpara{The aerodynamic resistance $r_a$ (s\,m$^{-1}$) is given as \citep{Dauzat2001, Robitu2006}:
+\begin{equation}
+{r_a} = C\;{\left( {\frac{l}{{\left| {\bar{\mvec{u}}} \right|}}} \right)^{1/2}}
+\label{eq:ra}
+\end{equation}
+where $C=130$ s$^{0.5}$\,m$^{-1}$ is the proportionality factor and $l$ (m) is the characteristic leaf size ranging from 0.02 m for conifers and up to 0.5 m for tropical plants \citep{Bruse1998}. The latent heat flux from leaf to air due to transpiration is defined as:
 \begin{equation}
 {q_{lat,leaf}} = {L_v} \, {g_{v,leaf}}
-\label{eq:latentheatflux2}
+\label{eq:latentheatflux}
 \end{equation}
-where $L_v=\num{2.5e6}$ J\,kg${-1}$ is the latent heat of vaporization. The water vapor flux $g_{v,leaf}$ (kg\,m$^{-2}$\,s$^{-1}$) is defined as:
+where $L_v=\num{2.5e6}$ J kg$^{-1}$ is latent heat of vaporization. The water vapor flux $g_{v,leaf}$ (kg\,m$^{-2}$\,s$^{-1}$) is defined as:
 \begin{equation}
-{g_{\mathit{v,leaf}}} = M_w\, k_{\textit{st,v}}^* \left( \frac{p_{\textit{v,i}} - {p_v}}{p} \right)
+{g_{\mathit{v,leaf}}} = {h_{c,m}}\left( {{p_{\mathit{v,leaf}}} - {p_v}} \right) = M_w\, k_{\textit{st,v}}^* \left( \frac{p_{\textit{v,i}} - {p_v}}{p} \right)
 \label{eq:vapourflux2}
 \end{equation}
-where $M_w = \num{1.8015e-2}$ (kg\,mol$^{-1}$) is molar mass of water vapor, $p_{\textit{v,i}}$ (Pa) is the intercellular vapor pressure, $p_v$ (Pa) is the ambient vapor pressure, and $k_{\textit{st,v}}^*$ (mol\,m$^{-2}$\,s$^{-1}$) is the effective stomatal conductance of water vapor. A detailed description of the stomatal conductance is given in \cref{subsec:sm}. So, the source of moisture in the air domain, i.e., \cref{eq:xv2}, is obtained from \cref{eq:vapourflux2} as:
+where $h_{c,m}$ (s\,m$^{-1}$) is the convective mass transfer coefficient (CMTC), $M_w = \num{1.8015e-2}$ (kg\,mol$^{-1}$) is molar mass of water vapor, $p_{\textit{v,i}}$ (Pa) is the intercellular vapor pressure, $p_v$ (Pa) is the ambient vapor pressure, $p$ (Pa) is the ambient pressure, and $k_{\textit{st,v}}^*$ (mol\,m$^{-2}$\,s$^{-1}$) is the effective stomatal conductance of water vapor. A detailed description of the stomatal conductance is given in \cref{subsec:sm}. The energy balance (\cref{eq:energybalance}) is solved once the leaf surface temperature $T_{\mathit{leaf}}$ is known. Combining \cref{eq:energybalance,eq:sensibleheatflux,eq:latentheatflux}, the leaf temperature is given as:
+\begin{equation}
+{T_{\mathit{leaf}}} = T + \frac{{{q_{\mathit{rad,leaf}}} - {q_{\mathit{lat,leaf}}}}}{{{h_{c,h}}}}
+\label{eq:solveleaft}
+\end{equation}
+where the equation is solved iteratively as $q_{\mathit{lat,leaf}}$ is dependent on the leaf temperature.}
+
+So, the source of moisture in the air domain, i.e., \cref{eq:xv2}, is obtained from \cref{eq:vapourflux2} as:
 \begin{equation}
 s_w = a\,{g_{\mathit{v,leaf}}}
 \label{eq:sw}
 \end{equation}
-where $s_w$ (kg\,m$^{-3}$\,s${-1}$) is the moisture source term. 
+where $s_w$ (kg\,m$^{-3}$\,s${-1}$) is the moisture source term. In the present study, we assume that there is no condensation or rain on the leaf surface and so evapotranspiration is only due to transpiration through the leaf stomata. Therefore, the vapor pressure at the leaf is the vapour pressure within the leaf stomata which is close to the saturation vapor pressure at the leaf temperature, thereby we can assume
+\begin{equation}
+p_{\mathit{v,leaf}}\cong p_{\mathit{vsat,stom}} \left(T_{\mathit{leaf}}\right)
+\end{equation}
+
+%The water vapor mass flux $g_{\mathit{v,leaf}}$ (kg\,m$^{-2}$\,s$^{-1}$) from leaf into the air is given as:
+%\begin{equation}
+%{g_{\mathit{v,leaf}}} = {h_{c,m}}\left( {{p_{\mathit{v,leaf}}} - {p_v}} \right) = \frac{{\rho {R_a}}}{{p{R_v}}} \, \frac{1}{{{r_a} + {r_s}}}\left( {{p_{\mathit{v,leaf}}} - {p_v}} \right)
+%\label{eq:vapourflux}
+%\end{equation}
+%where $h_{c,m}$ (s\,m$^{-1}$) is the convective mass transfer coefficient (CMTC), $p_{\mathit{v,leaf}}$ (Pa) is the vapor pressure at the leaf, $p_v$ (Pa) is the vapor pressure of the air above the leaf boundary layer, $r_s$ (s\,m$^{-1}$) is the stomatal resistance and $R_a=287.042$ J\,kg$^{-1}$\,K$^{-1}$ and $R_v=\num{461.524}$ J kg$^{-1}$~K$^{-1}$ are the gas constants of dry air and water vapor, respectively.
+
+%The additional resistance $r_s$ is due to the stomatal regulatory control of the leaf. In the present study, the stomatal resistance is modeled as a function of climatic conditions: $q_{\mathit{r,sw}}$ the short-wave radiative flux in the air and $D$ (kPa) the vapor pressure deficit in the air, the difference between the saturation vapor pressure and the vapor pressure of the air
+%\begin{equation}
+%D \equiv p_{\mathit{v,sat}} - p_v
+%\end{equation}
+
+
+%\subsection*{Leaf energy balance}
+
+%The \textit{leaf energy balance} (LEB) is summarized as:
+%\begin{equation}
+%{q_{\mathit{rad},\mathit{leaf}}} - {q_{\mathit{lat},\mathit{leaf}}} - {q_{\mathit{sen},\mathit{leaf}}} = 0
+%\label{eq:energybalance2}
+%\end{equation}
+%where ${q_{\mathit{rad},\mathit{leaf}}}$ (W\,m$^{-2}$) is the radiative heat flux, ${q_{\mathit{lat},\mathit{leaf}}}$ (W\,m$^{-3}$) is the latent heat flux, and ${q_{\mathit{sen},\mathit{leaf}}}$ (W\,m$^{-3}$) is the sensible heat flux. The sensible heat flux is defined as:
+%\begin{equation}
+%{q_{\mathit{sen,leaf}}} = {h_{c,h}} \left( {{T_{\mathit{l}}} - T_a} \right)
+%\label{eq:sensibleheatflux2}
+%\end{equation}
+%where $T_l$ (K) is the leaf temperature, $T_a$ (K) is the ambient temperature, and ${h_{c,h}}$ (W\,m$^{-2}$\,K$^{-1}$) is the convective heat transfer coefficient. Substituting \cref{eq:sensibleheatflux2} into \cref{eq:sh} gives the source of heat from vegetation in conservation of energy.
+
+%The latent heat flux is defined as:
+%\begin{equation}
+%{q_{lat,leaf}} = {L_v} \, {g_{v,leaf}}
+%\label{eq:latentheatflux2}
+%\end{equation}
+%where $L_v=\num{2.5e6}$ J\,kg${-1}$ is the latent heat of vaporization. The water vapor flux $g_{v,leaf}$ (kg\,m$^{-2}$\,s$^{-1}$) is defined as:
+%\begin{equation}
+%{g_{\mathit{v,leaf}}} = M_w\, k_{\textit{st,v}}^* \left( \frac{p_{\textit{v,i}} - {p_v}}{p} \right)
+%\label{eq:vapourflux2}
+%\end{equation}
+%where $M_w = \num{1.8015e-2}$ (kg\,mol$^{-1}$) is molar mass of water vapor, $p_{\textit{v,i}}$ (Pa) is the intercellular vapor pressure, $p_v$ (Pa) is the ambient vapor pressure, and $k_{\textit{st,v}}^*$ (mol\,m$^{-2}$\,s$^{-1}$) is the effective stomatal conductance of water vapor. A detailed description of the stomatal conductance is given in \cref{subsec:sm}. So, the source of moisture in the air domain, i.e., \cref{eq:xv2}, is obtained from \cref{eq:vapourflux2} as:
+%\begin{equation}
+%s_w = a\,{g_{\mathit{v,leaf}}}
+%\label{eq:sw}
+%\end{equation}
+%where $s_w$ (kg\,m$^{-3}$\,s${-1}$) is the moisture source term. 
 
 Similarly, the CO$_2$ source in \cref{eq:xc2} is given as:
 \begin{equation}
@@ -174,7 +272,7 @@ where $k_{st}^*$ (mol\,m$^{-2}$\,s$^{-1}$) is the effective stomatal conductance
 \label{sec:soliddomain}
 \subsection{Composition of the porous material}
 
-The building materials and the soil is considered as a porous material consisting of three phases: solid phase (denoted with $s$), liquid phase referring to liquid water ($l$) and the air phase which is split into dry air ($a$) and water vapor $v$ \citep{Defraeye2011, Saneinejad2013, Carmeliet2005,Janssen2002}. The open porosity $\phi_o$ (m$^3$\,m$^{-3}$) of the porous material is defined as:
+The building materials and the soil are considered as porous materials consisting of three phases: solid phase (denoted with $s$), liquid phase referring to liquid water ($l$) and the air phase which is split into dry air ($a$) and water vapor $v$ \citep{Defraeye2011, Saneinejad2013, Carmeliet2005,Janssen2002}. The open porosity $\phi_o$ (m$^3$\,m$^{-3}$) of the porous material is defined as:
 \begin{equation}
 \phi_o = \frac{V_{\mathit{pore}}}{V}
 \end{equation}
@@ -199,11 +297,11 @@ w = w_l + w_v
 
 \subsection{Water potential}
 
-Water potential is a universal parameter to determine the \textit{water status} in any medium \citep{nobel2009physicochemical}. In this thesis, we use it to define the water status of multiple domains such as solid porous materials (soil and building facades), plant xylem, and air. The water potential $\psi$ (Pa) describes the chemical potential of water $\mu$ (J\,mol$^{-1}$) with respect to chemical potential of pure water $\mu^{o,l}$ (J\,mol$^{-1}$) at the same temperature, standard atmosphere and at zero level:
+Water potential is a universal variable to determine the \textit{water status} in any medium \citep{nobel2009physicochemical}. In this thesis, we use it to define the water status of multiple domains such as solid porous materials (soil and building facades), plant xylem, and air. The water potential $\psi$ (Pa) describes the chemical potential of water $\mu$ (J\,mol$^{-1}$) with respect to chemical potential of pure water $\mu^{o,l}$ (J\,mol$^{-1}$) at the same temperature, standard atmosphere and at zero level:
 \begin{equation}
 \psi = \frac{\mu - \mu^{o,l}}{V^o_l}
 \end{equation}
-where $V^o_l = 18.05 \num{e-3}$ m$^3$\,mol$^{-1}$ is the molar volume of pure water in liquid phase. The water potential for pure water at standard atmosphere is $\psi = 0$ Pa. The water tends to move towards a region where $\mu-\mu^{o_w}$ is lower, i.e. in the direction of $-\nabla\psi$. The water potential is related to pressure potential, osmotic potential, matrix potential, and gravitational potential. In our study, we assume that the pressure potential gradient is negligible in the solid and we ignore the influence of osmotic potential $\psi_o$ (Pa) as we assume we have a non-saline porous material. Therefore, only the matrix potential and gravitation potential influence the water transport:
+where $V^o_l = 18.05 \num{e-3}$ m$^3$\,mol$^{-1}$ is the molar volume of pure water in liquid phase. The water potential for pure water at standard atmosphere is $\psi = 0$ Pa. The water tends to move towards a region where $\mu-\mu^{o,l}$ is lower, i.e. in the direction of $-\nabla\psi$. The water potential is related to pressure potential, osmotic potential, matrix potential, and gravitational potential. In our study, we assume that the pressure potential gradient is negligible in the solid and we ignore the influence of osmotic potential $\psi_o$ (Pa) as we assume we have a non-saline porous material. Therefore, only the matrix potential and gravitation potential influence the water transport:
 \begin{equation}
 \psi = \underbrace{p_c}_{\psi_c} + \underbrace{\rho_l g z}_{\psi_g}
 \end{equation}
@@ -231,11 +329,11 @@ The conservation of mass in the solid domain is defined as:
 \pde{w_a}{t} + \nabla \cdot \left(w_a\mvec{u}_a \right) &= 0 \label{eq:aircom} \\ 
 \pde{w_l + w_v}{t} + \nabla \cdot \left(w_l\mvec{u}_l + w_v\mvec{u}_v \right) &= 0 \label{eq:liqcom}
 \end{align}
-assuming that solid matrix does not move, mass of different phases only change due to evaporation or condensation. Other phenomena such as melting, freezing, sublimation and deposition are neglected. Assuming dry air does not contribute to moisture storage, i.e., $\partial w_a / \partial t = 0$, the conservation of mass simplifies to rate of change of moisture content $w = w_l + w_v$, from \cref{eq:liqcom}:
+assuming that solid matrix does not change, mass of different phases only changes due to evaporation or condensation. Other phenomena such as melting, freezing, sublimation and deposition are neglected. Assuming dry air does not contribute to moisture storage, i.e., $\partial w_a / \partial t = 0$, the conservation of mass simplifies to rate of change of moisture content $w = w_l + w_v$, from \cref{eq:liqcom}:
 \begin{equation}
  \pde{w}{t} = - \nabla \cdot \left(\mvec{g}_l + \mvec{g}_v \right)
 \end{equation}
-where $\mvec{g}_l \equiv w_l\mvec{u}_l$ (kg\,m$^{-2}$\,s$^{-1}$) and $\mvec{g}_v \equiv w_v\mvec{u}_v$ (kg\,m$^{-2}$\,s$^{-1}$) are defined as the liquid water and water vapor fluxes, respectively. Additionally, the contribution of root water uptake due to plant transpiration is introduced through the source term $s_r$ (kg\,m$^{-3}$\,s$^{-1}$):
+where $\mvec{g}_l \equiv w_l\mvec{u}_l$ (kg\,m$^{-2}$\,s$^{-1}$) and $\mvec{g}_v \equiv w_v\mvec{u}_v$ (kg\,m$^{-2}$\,s$^{-1}$) are defined as the liquid water and water vapor fluxes, respectively. Additionally, the plant transpiration leafs to root uptake leading to a water loss in the soil domain. The contribution of root water uptake due to plant transpiration is introduced through the source term $s_r$ (kg\,m$^{-3}$\,s$^{-1}$):
 \begin{equation}
 \pde{w}{t} = - \nabla \cdot \left(\mvec{g}_l + \mvec{g}_v \right) + s_r
 \label{eq:com4}
@@ -246,12 +344,12 @@ The sink term due to root water uptake is explained in detail later in \cref{sec
 \frac{\partial w}{\partial p_c} \frac{\partial p_c}{\partial t} = -  \nabla \cdot \left(\mvec{g}_l + \mvec{g}_v\right) + s_{r}
 \label{eq:com5}
 \end{equation}
-with $C_{mm} \equiv \partial w/ \partial p_c$ (kg\,m$^{-3}$\,Pa$^{-1}$) is defined as the moisture capacity. Thus, the change in water content in the porous material is simply due to the liquid and vapor fluxes, and root water uptake. The liquid water flux $\mvec{g}_l$ in porous media is given by:
+with $C_{mm} \equiv \partial w/ \partial p_c$ (kg\,m$^{-3}$\,Pa$^{-1}$) is defined as the moisture capacity. Thus, the change in water content in the porous material is simply due to the liquid and vapor fluxes, and root water uptake (only in soil where root is present). The liquid water flux $\mvec{g}_l$ in porous media is given by:
 \begin{equation}
 \mvec{g}_l = - K_{\textit{lp}} \nabla \left(p_c + \rho_l g z\right)
 \label{eq:liquidflux}
 \end{equation}
-and assumes the air pressure effects be negligible with respect to capillary and gravitational effects, where $K_{\textit{lp}}$ (s) the liquid water permeability. We assume that the liquid water permeability is only due to pressure gradient, and the influence of thermal gradient is neglected \citep{Carmeliet2005}. The water vapor flux in the porous media is given by:
+and assumes the air pressure effects be negligible with respect to capillary and gravitational effects, where $K_{\textit{lp}}$ (s) is the liquid water permeability. We assume that the liquid water permeability is only due to pressure gradient, and the influence of thermal gradient is neglected \citep{Carmeliet2005}. The water vapor flux in the porous media is given by:
 \begin{equation}
 \mvec{g}_v = K_{\textit{vp}}\nabla p_c + K_{\textit{vT}}\nabla T
 \label{eq:vaporflux}
@@ -264,7 +362,7 @@ is the water vapor permeability (s) due to pressure,
 \begin{equation}
 K_{\textit{vT}} = - \delta_v \frac{p_v}{\rho_l R_v T^2}\left(\rho_l L_v - p_c\right)
 \end{equation}
-is the water vapor permeability (s) due to temperature, and
+is the water vapor permeability (s) due to temperature gradient, and
 \begin{equation}
 \delta_v = \frac{D_{\textit{va,mat}}}{R_v T}
 \end{equation}
@@ -317,24 +415,26 @@ and $L_v$ is the latent heat of vaporization of water. Substituting \cref{eq:ent
 \end{split}
 \label{eq:coe3}
 \end{equation}
-where:
+
+We defined the thermal capacity terms as:
 \begin{align}
 C_{\textit{TT}} &=  c_{\textit{ps}}w_s + c_{\textit{pl}}w \label{eq:cap1} \\
 C_{\textit{Tp}} &=  c_{\textit{pl}} \left( T - T_{\mathit{ref}}\right) \pde{w}{p_c} \label{eq:cap2} 
 \end{align}
-are the thermal capacity terms. Substituting liquid and vapour fluxes, \cref{eq:liquidflux,eq:vaporflux}, respectively, thermal capacities \cref{eq:cap1,eq:cap2} and heat conduction \cref{eq:fourierlaw} into conservation of energy expands \cref{eq:coe3} to:
+are the thermal capacity terms. Substituting liquid and vapour fluxes, \cref{eq:liquidflux,eq:vaporflux}, respectively, thermal capacities \cref{eq:cap1,eq:cap2} and heat conduction \cref{eq:fourierlaw} into conservation of energy equation \cref{eq:coe3} we get:
 \begin{align}
 \begin{aligned}
-		\mathllap{C_{\textit{TT}}\frac{\partial T}{\partial t} + C_{\textit{Tp}}\frac{\partial p_c}{\partial t}} = \nabla \cdot \bigg(\lambda \nabla T &+  K_{\textit{lp}} c_{\textit{pl}} \left(T - T_{\textit{ref}}\right)  \nabla p_c \\
-					&+ K_{\textit{lp}} c_{\textit{pl}} \left(T - T_{\textit{ref}}\right) \rho_l g z\\
+		\mathllap{C_{\textit{TT}}\frac{\partial T}{\partial t} + C_{\textit{Tp}}\frac{\partial p_c}{\partial t}} = \nabla \cdot \bigg(\lambda \nabla T &+  K_{\textit{lp}} c_{\textit{pl}} \left(T - T_{\textit{ref}}\right) \left(\nabla p_c + \rho_l g z\right) \\
+%					&+ K_{\textit{lp}} c_{\textit{pl}} \left(T - T_{\textit{ref}}\right) \\
 					&- K_{\textit{vp}} \Big[c_{\textit{pv}} \left(T - T_{\textit{ref}}\right) + L_v\Big] \nabla p_c \\ 
 					&- K_{\textit{vT}} \Big[c_{\textit{pv}} \left(T - T_{\textit{ref}}\right) + L_v\Big] \nabla T \bigg)
 \end{aligned}
 \end{align}
+where the terms on RHS are heat transport due to conduction, liquid transport, and vapor transport.
 
 \subsection{Linearized heat and mass transport equation}
 
-In the present study, the conservation of mass and energy is coupled together as a heat and mass model (HAM) according to \citep{Janssen2002,Defraeye2011,Carmeliet2005,Saneinejad2013,Kubilay2018}. Due to the shape of the water retention curve and the hydraulic conductivity curve, as shown in \cref{fig:wrc}, the Richards equation is highly non-linear. Therefore, the numerical solution of the equation is very sensitive to convergence tolerance and requires linearization techniques to maintain accuracy and computational efficiency. So, methods such as fixed-point Picard iterations is used to solve the non-linear equations. More details on the discretization is provided in \cite{Liu2012,Janssen2002,Kubilay2018}. 
+In the present study, the conservation of mass and energy is coupled together as a heat and mass model (HAM) according to \citep{Janssen2002,Defraeye2011,Carmeliet2005,Saneinejad2013,Kubilay2018}. Due to the shape of the water retention curve and the hydraulic conductivity curve, as shown in \cref{fig:wrc}, the Richards equation is highly non-linear. Therefore, the numerical solution of the equation is very sensitive to convergence tolerance and requires linearization techniques to maintain accuracy and computational efficiency. Methods such as fixed-point Picard iterations are used to solve the non-linear equations. More details on the discretization is provided in \cite{Liu2012,Janssen2002,Kubilay2018}. 
 
 The conservation of mass (i.e., the moisture transport equation), \cref{eq:com6}, in the linearized form is given as:
 \begin{equation}
@@ -393,12 +493,12 @@ The system of linear equations is solved by Krylov subspace iteration solver, i.
 \begin{equation}
 \left| T^{n+1,k+1} - T^{n+1,k}\right| \le \delta T
 \end{equation}
-where $\delta p_c = \delta T = 10^{-2}$.
+where $\delta p_c = \delta T = 10^{-2}$ \citep{Kubilay2018}.
 
 \section{Soil-Plant-Atmosphere Continuum model}
 \label{sec:spac}
 
-In the present study, the components of the water potential inside the plants are not directly determined. The soil-plant-atmosphere continuum (SPAC) model that is integrated into the vegetation model is described in this section, implemented according the state-of-art techniques: \citep{Volpe2013,Manoli2014,Launiainen2015,Idso1977,Manzoni2011,Farquhar1980}. The root-system of the plants are represented as a network-like structure assuming cooperative strategy among the individual roots and a bulk plant transpiration through a single xylem. We assume no water storage inside the plant and therefore, the water flux from soil to root $G_{\textit{v,root}}$, from root to leaf through xylem $G_{\textit{v,xylem}}$, and from leaf to air $G_{\textit{v,leaf}}$ is in equilibrium, as depicted in \cref{fig:SPAC_waterbalance}:
+The soil-plant-atmosphere continuum (SPAC) model that is integrated into the vegetation model is described in this section, implemented according to the state-of-art techniques: \citep{Volpe2013,Manoli2014,Launiainen2015,Idso1977,Manzoni2011,Farquhar1980}. The root-system of the plants are represented as a network-like structure assuming cooperative strategy among the individual roots and a bulk plant transpiration through the xylem system. We assume no water storage inside the plant and therefore, the water flux from soil to root $G_{\textit{v,root}}$, from root to leaf through xylem $G_{\textit{v,xylem}}$, and from leaf to air $G_{\textit{v,leaf}}$ is equal, as depicted in \cref{fig:SPAC_waterbalance}:
 \begin{equation}
 G_{\textit{v,root}} = G_{\textit{v,xylem}} = G_{\textit{v,leaf}}
 \label{eq:massfluxeq}
@@ -407,7 +507,7 @@ and so, the atmospheric evaporative demand (AED) is dependent on the water avail
 
 \begin{figure}[t]
 	\centering
-	\includegraphics[width=0.5\textwidth]{\figdir/SPAC_waterbalance-crop.pdf}
+	\includegraphics[width=0.5\textwidth]{\figdir/SPAC_waterbalance_v2-crop.pdf}
 	\caption{Soil-Plant-Atmosphere Continuum: The water balance between plant transpiration and root water uptake, $G_{\textit{v,root}} = G_{\textit{v,xylem}} = G_{\textit{v,leaf}}$.}
 	\label{fig:SPAC_waterbalance}
 \end{figure}
@@ -446,8 +546,7 @@ where $\Delta z$ is the vertical height of the root layer mesh and $\beta = \num
 
 \begin{figure}[t]
 	\centering
-e
-	\includegraphics[width=0.65\textwidth]{\figdir/SPAC_root_v2-crop.pdf}
+	\includegraphics[width=0.65\textwidth]{\figdir/SPAC_root_v3-crop.pdf}
 	\caption{Soil-Plant-Atmosphere Continuum: The water transport in soil-root system.}
 	\label{fig:SPAC_root}
 \end{figure}
@@ -456,7 +555,7 @@ Thus, the net root water uptake from the soil domain $G_{\textit{v,root}}$ (kg\,
 \begin{equation}
 G_{\textit{v,root}} = \int_{\Omega_s} s_r\,\mathrm{d}V = \int_{\Omega_s} r\,g_{\textit{v,root}}\,\mathrm{d}V
 \end{equation}
-where $\Omega_s$ denotes the soil domain. 
+where $\Omega_s$ denotes the soil domain (note that as $r=0$ outside root-zone, the integration is essentially only in the root volume). 
 
 %The water uptake from the root is equal to the water transport in the xylem as so:
 %\begin{equation}
@@ -465,7 +564,7 @@ where $\Omega_s$ denotes the soil domain.
 
 \subsection{Water transport in xylem}
 
-The water flux through the plant in xylem $g_{\textit{v,xylem}}$ (kg\,m$^{-2}$\,s$^{-1}$) is defined as:
+The water flux through the plant in xylem  layer $g_{\textit{v,xylem}}$ (kg\,m$^{-2}$\,s$^{-1}$) is defined as:
 \begin{equation}
 g_{\textit{v,xylem}}(\psi_L) = k_x^* \left(\psi_R - \psi_L\right)
 \end{equation}
@@ -478,7 +577,7 @@ where $A_x$ (m$^2$) is the xylem cross-sectional area. The effective xylem condu
 \begin{equation}
 k_x^* = k_x \, \rho_l
 \end{equation}
-where plant xylem conductance $k_x$ (m\,Pa$^{-1}$\,s$^{-1}$) is modeled using a ``\textit{vulnerability curve}'' approach. The xylem conductance becomes exponentially smaller with increasing leaf water potential \citep{Volpe2013}. This empirical model is based on plant response to the vulnerability to xylem cavitation and embolism that could occur at high water potential gradients. The xylem conductance $k_x$ (m\,Pa$^{-1}$\,s$^{-1}$) is defined by:
+where plant xylem conductance $k_x$ (m\,Pa$^{-1}$\,s$^{-1}$) is modeled using a ``\textit{vulnerability curve}'' approach. The xylem conductance becomes exponentially smaller with increasing leaf water potential \citep{Volpe2013}. This empirical model is based on plant response of the vulnerability to xylem cavitation and embolism that could occur at very low water potential. The xylem conductance $k_x$ (m\,Pa$^{-1}$\,s$^{-1}$) is defined by:
 \begin{equation}
 k_x = k_{\textit{x,max}} \exp \left\{ - \left( - \frac{\psi_L}{d}\right)^c \right\}
 \end{equation}
@@ -505,12 +604,12 @@ where $k_{\textit{x,max}}$ (m\,Pa$^{-1}$\,s$^{-1}$) is the maximum xylem conduct
 
 The leaf transpiration rate $g_{\textit{v,leaf}}$ (kg\,m$^{-2}$s$^{-1}$) as defined in \cref{sec:airdomain}, \cref{eq:vapourflux2}, and is simply defined as:
 \begin{equation}
-g_{\textit{v,leaf}} = M_v\, k_{st,v}^* \left(\frac{p_{\textit{v,leaf}} - p_v}{p}\right)
+g_{\textit{v,leaf}} = M_w\, k_{st,v}^* \left(\frac{p_{\textit{v,leaf}} - p_v}{p}\right)
 \label{eq:gvleaf}
 \end{equation}
-where $p_{\textit{v,leaf}}$ (Pa) is the vapor pressure at the leaf, $p_v$ (Pa) is the ambient vapor pressure and $p$ (Pa) is ambient pressure. In plant-science community, the leaf transpiration is typically given in molar units ($f_c$ (mol\,m$^{-2}$\,s$^{-1}$)) is obtained from \cref{eq:gvleaf}:
+where $p_{\textit{v,leaf}}$ (Pa) is the vapor pressure at the leaf, $p_v$ (Pa) is the ambient vapor pressure and $p$ (Pa) is ambient pressure. In plant-science community, the leaf transpiration is typically given in molar units ($f_c$ (mol\,m$^{-2}$\,s$^{-1}$)) and is obtained from \cref{eq:gvleaf}:
 \begin{equation}
-f_v = g_{\textit{v,leaf}} / M_v = k_{st,v}^* \left(\frac{p_{\textit{v,leaf}} - p_v}{p}\right)
+f_v = g_{\textit{v,leaf}} / M_w = k_{st,v}^* \left(\frac{p_{\textit{v,leaf}} - p_v}{p}\right)
 \label{eq:fvorig}
 \end{equation}
 
@@ -521,8 +620,21 @@ k_{\textit{st,v}}^* = a_c \,k_{\textit{st}}^*
 where $k_{\textit{st}}^*$ (mol\,m$^{-2}$\,s$^{-1}$) is the effective stomatal conductance of CO$_2$, and $a_c = 1.6$ is the relative diffusion of water vapor to CO$_2$. The effective stomatal conductance is the sum of stomatal and boundary layer conductance (assumed to be in series):
 \begin{equation}
 k_{\textit{st}}^* = \frac{k_{\textit{st}}\,k_b}{k_{\textit{st}} + k_b}
+\label{eq:ksteff}
 \end{equation}
-where $k_b$ (mol\,m$^{-2}$\,s$^{-1}$) is the boundary layer conductance (i.e. $g_b$ (in plant-science), or inverse of boundary layer resistance $r_b$, assumed to be equivalent to aerodynamic resistance $r_a$) and is discussed in detail in \cref{ch:parametricstudy}.
+where $k_b$ (mol\,m$^{-2}$\,s$^{-1}$) is the boundary layer conductance (i.e. $g_b$ (in plant-science), or inverse of boundary layer resistance $r_b$, assumed to be equivalent to aerodynamic resistance $r_a$). \cref{eq:ksteff} given in terms of resistances is given as:
+\begin{equation}
+k_{\textit{st}}^* = \frac{1}{r_s + r_a}
+\label{eq:hcm2}
+\end{equation}
+where $r_s$ (s\,m$^{-1}$)is the stomatal resistance.
+
+%A factor 2 is present in the equation as the sensible heat flux occurs on both sides of the leaf. The aerodynamic resistance $r_a$ (s\,m$^{-1}$) is given as \citep{Dauzat2001, Robitu2006}:
+%\begin{equation}
+%{r_a} = C\;{\left( {\frac{l}{{\left| {\bar{\mvec{u}}} \right|}}} \right)^{1/2}}
+%\label{eq:ra2}
+%\end{equation}
+%where $C=130$ s$^{0.5}$\,m$^{-1}$ is the proportionality factor and $l$ (m) is the characteristic leaf size ranging from 0.02 m for conifers and up to 0.5 m for tropical plants \citep{Bruse1998}.
 
 
 \begin{figure}[t]
@@ -542,7 +654,7 @@ The net plant transpiration rate $G_{\textit{v,leaf}}$ (kg\,s$^{-1}$) is simply 
 G_{\textit{v,leaf}} = \int_{\Omega_a} s_w~\mathrm{d}V = \int_{\Omega_a} a\,g_{\textit{v,leaf}}~\mathrm{d}V
 \label{eq:netwaterflux_leaf}
 \end{equation}
-where $a$ (m$^2$\,m$^{-3}$) is the leaf area density and $\Omega_a$ denotes the air domain. As the water mass flux to the atmosphere is in equilibrium with the water vapor flux through xylem, i.e., as shown in \cref{eq:massfluxeq}, we can equate \cref{eq:netwaterflux_leaf} to \cref{eq:netwaterflux_xylem}:
+where $a$ (m$^2$\,m$^{-3}$) is the leaf area density and $\Omega_a$ denotes the air domain (note that $a=0$ outside vegetation, the integration is essentially only performed inside the foliage). As the water mass flux to the atmosphere is in equilibrium with the water vapor flux through xylem, i.e., as shown in \cref{eq:massfluxeq}, we can equate \cref{eq:netwaterflux_leaf} to \cref{eq:netwaterflux_xylem}:
 \begin{equation}
 G_{\textit{v,leaf}} = G_{\textit{v,xylem}}
 \end{equation}
@@ -569,12 +681,12 @@ The Fickian diffusion through stomata is given as:
 f_c = k_{\textit{st}} \left(c_a - c_i\right)
 \label{eq:fickassim}
 \end{equation}
-where $k_{st}$ (mol\,m$^{-2}$\,s$^{-1}$) is the (molar) stomatal conductance to CO$_2$ (note that for now we neglect the boundary layer conductance), $c_i$ (mol\,mol$^{-1}$) is the intercellular CO$_2$ concentration, and $c_a$ (mol\,mol$^{-1}$) is the ambient CO$_2$ concentration. However, during the opening of the stomata, additional moisture is lost by evaporation due to exposure of stomatal cavity to the atmosphere. Therefore, the transpiration rate $f_v$ (mol\,m$^{-2}$\,s$^{-1}$) (i.e. denoted also as $f_e$ (in plant-science) or $G_{\textit{v,leaf}}$ (in building physics), and also known as water use) is dependent on the atmospheric humidity and the availability of water for transpiration \citep{Ball1987,Leuning1995}. It is similarly described, based on Fickian diffusion process:
+where $k_{st}$ (mol\,m$^{-2}$\,s$^{-1}$) is the (molar) stomatal conductance to CO$_2$ (note that for now we neglect the boundary layer conductance), $c_i$ (mol\,mol$^{-1}$) is the intercellular CO$_2$ concentration, and $c_a$ (mol\,mol$^{-1}$) is the ambient CO$_2$ concentration. During the opening of the stomata, additional moisture is lost by evaporation due to exposure of stomatal cavity to the atmosphere. The transpiration rate $f_v$ (mol\,m$^{-2}$\,s$^{-1}$) (i.e. denoted also as $f_e$ (in plant-science) or $G_{\textit{v,leaf}}$ (in building physics), and also known as water use) is dependent on the atmospheric humidity and the availability of water for transpiration \citep{Ball1987,Leuning1995}. It is similarly described, based on Fickian diffusion process:
 \begin{equation}
 f_v = k_{\textit{st,v}} \left(\frac{p_{v,i} - p_v}{p}\right)
 \label{eq:fv}
 \end{equation}
-where $k_{\textit{st,v}}$ (mol\,m$^{-2}$\,s$^{-1}$) is the (molar) stomatal conductance to water vapor, $p_{v,i}$ (Pa) is the intercellular vapor pressure, and $p_v$ (Pa) is the ambient vapor pressure. Furthermore, $p_{v,i} = p_{v,sat}\left(T_l\right)$ (Pa) where the intercellular vapor pressure inside the stomatal cavity is assumed to be at saturation at the leaf temperature $T_l$. 
+where $k_{\textit{st,v}}$ (mol\,m$^{-2}$\,s$^{-1}$) is the (molar) stomatal conductance to water vapor, $p_{v,i}$ (Pa) is the intercellular vapor pressure, $p_v$ (Pa) is the ambient vapor pressure and $p$ (Pa) is the ambient pressure. Furthermore, $p_{v,i} = p_{v,sat}\left(T_l\right)$ (Pa) where the intercellular vapor pressure inside the stomatal cavity is assumed to be at saturation at the leaf temperature $T_l$. 
 
 %The water vapor stomatal conductance is related to the CO$_2$ stomatal condutance as:
 %\begin{equation}
@@ -606,12 +718,12 @@ or simply:
 \lambda = \pde{f_v}{f_c} 
 \end{equation}
 
-Following these constraints, the stomatal conductance $k_{\textit{st}}$ can be determined, given that unknowns in the assimilation rate $f_c$ are closed. To provide a closure for the assimilation rate, the assimilation rate $f_c$ described from the perspective of photochemical reaction model is also used. The Farquhar model of photosynthesis describing the biochemical demand function is given as:
+Following these constraints, the stomatal conductance $k_{\textit{st}}$ can be determined, given that problem in the assimilation rate $f_c$ is closed to determine the unknown. To provide a closure for the assimilation rate, the assimilation rate $f_c$ described from the perspective of photochemical reaction model is used. The Farquhar model of photosynthesis describing the biochemical demand function is given as:
 \begin{equation}
 f_c = \frac{a_1 c_i}{a_2 + s\,c_a}
 \label{eq:bioassim}
 \end{equation}
-where $c_i$ (mol\,mol$^{-1}$)  is the intercellular CO$_2$ concentration, $c_a$ (mol\,mol$^{-1}$) is the ambient CO$_2$ concentration, and $a_1$ and $a_2$ are parameters dependent on whether photosynthetic reaction rate is limited by light or RuBisCO (Rubilose bisphosphate (RuBP) carboxylase-oxygenase) \citep{Katul2010, Farquhar1980}, and $s=0.7$ is the constant representing long-term intercellular to ambient CO$_2$ concentration ratio \citep{Volpe2013}. A detailed description of calculating $a_1$ and $a_2$ are given in \cref{subsubsec:ar}.
+where $c_i$ (mol\,mol$^{-1}$)  is the intercellular CO$_2$ concentration, $c_a$ (mol\,mol$^{-1}$) is the ambient CO$_2$ concentration, and $a_1$ and $a_2$ are parameters dependent on whether photosynthetic reaction rate is limited by light or RuBisCO (Rubilose bisphosphate (RuBP) carboxylase-oxygenase) \citep{Katul2010, Farquhar1980}, and $s=0.7$ is the constant representing the long-term intercellular to ambient CO$_2$ concentration ratio \citep{Volpe2013}. A detailed description of calculating $a_1$ and $a_2$ are given in \cref{subsubsec:ar}.
 
 %Therefore,
 %The Fickian diffusion through stomata is given as:
@@ -639,7 +751,7 @@ So, substituting \cref{eq:ci} back into the biochemical demand function (\cref{e
 f_c = \frac{k_{st}\,a_1\,c_a}{a_1 + k_{st} \left(a_2 + s\,c_a\right)}
 \label{eq:fc2}
 \end{equation}
-where only the $k_{st}$ is the remaining unknown. Finally, the stomatal conductance $k_{\textit{st}}$ can be determined by solving \cref{eq:lagrangian1}:
+where only $k_{st}$ is the remaining unknown. Finally, the stomatal conductance $k_{\textit{st}}$ can be determined by solving \cref{eq:lagrangian1}:
 \begin{equation}
 \pde{\mathcal{L}}{k_{st}} = \pde{f_c}{k_{st}} - \lambda \pde{f_v}{k_{st}} = 0
 \label{eq:lagrangian2}
@@ -664,14 +776,14 @@ k_{\textit{st}} = \frac{a_1}{a_2 + s\,c_a} \left( -1 + \sqrt{\frac{c_a}{a_c\, \l
 \end{equation}
 where $k_{\textit{st,n}}$ (mol\,m$^{-2}$\,s$^{-1}$) is the nocturnal stomatal conductance ($k_{\textit{st,n}} = 0.018$ mol\,m$^{-2}$\,s$^{-1}$, \citep{Manoli2014}). 
 
-Thus, we obtain a stomatal model that is a function of the CO$_2$ assimilation (through parameters $a_1$, $a_2$ and $c_a$), atmospheric evaporative demand (AED) (through parameter $\textit{VPD}$), and the Lagrangian multiplier $\lambda$ which represents the marginal water cost of plant carbon gain. Therefore, $\lambda$ reflects the sensitivity to water availability is also commonly known as the \textit{marginal water use efficiency}. It is empirically related to the leaf water potential $\lambda = \lambda(\psi_L)$ \citep{Manoli2014,Katul2010} and so, the stomatal response change to water availability is reflected through the change in leaf water potential $\psi_L$. The marginal WUE is determined from experimental measurements of plant photosynthesis, transpiration and stomatal conductance, and solving for the gradient of 
+Thus, we obtain a stomatal model that is a function of the CO$_2$ assimilation (through parameters $a_1$, $a_2$ and $c_a$), atmospheric evaporative demand (AED) (through parameter $\textit{VPD}$), and the Lagrangian multiplier $\lambda$ which represents the marginal water cost of plant carbon gain. Therefore, $\lambda$ reflects the sensitivity to water availability and is also commonly known as the \textit{marginal water use efficiency}. It is empirically related to the leaf water potential $\lambda = \lambda(\psi_L)$ \citep{Manoli2014,Katul2010} and so, the stomatal response change to water availability is reflected through the change in leaf water potential $\psi_L$. The marginal WUE is determined from experimental measurements of plant photosynthesis, transpiration and stomatal conductance, and solving for the gradient of 
 \begin{equation}
 \lambda \left(\psi_L\right) = \lambda_{\textit{max}}^* \frac{c_a}{c_a^*}\exp \left\{-\beta \Big( \langle \psi_L \rangle_{\textit{24h}} - \psi_{\textit{L,max}}\Big)^2\right\}
 \label{eq:mwue}
 \end{equation}
 where $\psi_L$ is assumed to vary slowly such that $\langle \psi_L \rangle_{\textit{24h}}$ is fixed within the secant iteration, $\lambda_{max}^*$ is the marginal WUE under well-watered soil condition at reference CO$_2$ concentration $c_a^*=400$ $\mu$mol~mol$^{-1}$ or parts-per-million (ppm), $\beta$ is the plant-specific sensitivity parameter \citep{Huang2017}.
 
-Now that, we have closed $k_{\textit{st}}$ through \cref{eq:kst}, the intercellular CO$_2$ equation can be further simplified. Substituting \cref{eq:kst} into \cref{eq:ci}, it becomes:
+Now that, we have closed the model for determining $k_{\textit{st}}$ through \cref{eq:kst}, the intercellular CO$_2$ equation can be further simplified. Substituting \cref{eq:kst} into \cref{eq:ci}, it becomes:
 \begin{equation}
 c_i = \left(c_a - \sqrt{a_c\,\lambda\, \textit{VPD}\, c_a} \right)
 \label{eq:ci2}
@@ -705,7 +817,7 @@ As the photosynthesis can either be \textit{light-limited} or \textit{Rubisco-li
 \begin{equation}
 f_c = \min \left(f_{c}^l, f_c^r\right) 
 \end{equation}
-where $f_c^l$ is the assimilated limited by light and $f_c^r$ is assimilation rate limited by RuBisCO. Note that it is also possible to incorporate the dark (or night) respiration and in that case $f_c = \min \left(f_c^l, f_c^r\right) - r_d$, but is not modeled in our study.
+where $f_c^l$ is the assimilation rate limited by light and $f_c^r$ is assimilation rate limited by RuBisCO. Note that it is also possible to incorporate the dark (or night) respiration and in that case $f_c = \min \left(f_c^l, f_c^r\right) - r_d$, but is not modeled in our study.
 	
 \subsubsection*{Light-limited}
 
@@ -726,10 +838,10 @@ c_p = \frac{K_c}{2\,K_o} C_{\textit{o,a}} \frac{k_o}{k_c}
 \end{equation}
 where $k_c = 2.5$ s$^{-1}$ and $k_o = 0.18 k_c$, and:
 \begin{align}
-K_c &= K_{c,25} \exp\left\{ \gamma_c \left(T_l - 298.15\right)\right\} \\
-K_o &= K_{o,25} \exp\left\{ \gamma_o \left(T_l - 298.15\right)\right\}
+K_c &= K_{c,25} \exp\left\{ \gamma_c \left(T_{\textit{leaf}} - 298.15\right)\right\} \\
+K_o &= K_{o,25} \exp\left\{ \gamma_o \left(T_{\textit{leaf}} - 298.15\right)\right\}
 \end{align}
-are Michaelis constant for CO$_2$ and O$_2$ inhibition (referenced at $25$ $^{\circ}$C), and $C_{\textit{o,a}} = 0.21$ mol\,mol$^{-1}$ is the oxygen concentration in the atmosphere \citep{Farquhar1980}, with $K_{c,25} = \num{3e-3}$ mol\,mol$^{-1}$, and $K_{o,25} = 0.3$ mol\,mol$^{-1}$. Thus, substituting \cref{eq:cp} into \cref{eq:fcl_a2}, and  \cref{eq:fcl_a1,eq:fcl_a2} into \cref{eq:fc2}, we get the light-limited assimilation rate $f_c^l$ as:
+are Michaelis constants for CO$_2$ and O$_2$ inhibition (referenced at $25$ $^{\circ}$C), and $C_{\textit{o,a}} = 0.21$ mol\,mol$^{-1}$ is the oxygen concentration in the atmosphere \citep{Farquhar1980}, with $K_{c,25} = \num{3e-3}$ mol\,mol$^{-1}$, and $K_{o,25} = 0.3$ mol\,mol$^{-1}$. Thus, substituting \cref{eq:cp} into \cref{eq:fcl_a2}, and  \cref{eq:fcl_a1,eq:fcl_a2} into \cref{eq:fc2}, we get the light-limited assimilation rate $f_c^l$ as:
 \begin{equation}
 f_c^l = \frac{\gamma\,Q_p\,c_i}{2\,c_p + s\,c_a}
 \end{equation}
@@ -748,9 +860,9 @@ a_2 = K_c \left(1 + \frac{C_{\textit{o,a}}}{K_o}\right)
 \end{equation} 
 where $V_{\textit{c,max}}$ (mol\,m$^{-2}$\,s$^{-1}$) is the maximum carboxylation capacity (referenced at $25$ $^{\circ}$C). The maximum carboxylation capacity is given as:
 \begin{equation}
-V_{\textit{cmax}} = V_{\textit{cmax,25}} \frac{ \exp\left\{ 0.088 \left(T_l - 298.15\right)\right\} }{1 + \exp\left\{0.29\left(T_l - 314.15\right)\right\} }
+V_{\textit{cmax}} = V_{\textit{cmax,25}} \frac{ \exp\left\{ 0.088 \left(T_{\textit{leaf}} - 298.15\right)\right\} }{1 + \exp\left\{0.29\left(T_{\textit{leaf}} - 314.15\right)\right\} }
 \end{equation}
-where $T_l$ (K) is the leaf temperature, $V_{\textit{cmax,25}} = \num{5.9e-5}$ mol\,m$^{-2}$\,s$^{-1}$,
+where $T_{\textit{leaf}}$ (K) is the leaf temperature, $V_{\textit{cmax,25}} = \num{5.9e-5}$ mol\,m$^{-2}$\,s$^{-1}$,
 $\gamma_c = 0.074$, and $\gamma_o = 0.015$. Thus, substituting \cref{eq:fcr_a1,eq:fcr_a2} into \cref{eq:fc2}, the Rubsico-limited assimilation rate is given as:
 \begin{equation}
 f_c^r = \frac{V_{\textit{cmax}}\,c_i}{K_c \left(1 + \frac{C_{o,a}}{K_o}\right) + s\,c_a}
@@ -934,9 +1046,8 @@ where the initial estimate of $\psi_L^{j=0} = 0$ MPa and $\psi_L^{j=1} = -10$ MP
 \section{Radiation model}
 \label{sec:radiationmodel}
 
-The vegetation model is integrated with radiative heat transfer model developed by \cite{Kubilay2018}. The model decomposes short-wave (i.e., solar) and long-wave (terrestrial) radiative heat fluxes using ``\textit{radiosity approach}''. The air in the \textit{air} domain is considered to be non-participating such that surface-to-surface (S2S) transfers describe the radiative exchanges within the urban area. The model is modified to incorporate vegetation as a participating medium which interacts with the short-wave and long-wave radiative heat fluxes. A detailed description of the short-wave radiation model for a scenario which is only 2D and at solar-noon is given in \cref{sec:vegradiation}. In this section, the region model is modified for 3D simulation, diurnal solar pattern, and interaction which urban surfaces.
-
-The radiative heat flux absorbed by the leaf ${q_{\mathit{rad,leaf}}}$ (W\,m$^{-3}$) in \cref{eq:energybalance2} is defined as:
+% In this section, the region model is modified for 3D simulation, diurnal solar pattern, and interaction which urban surfaces.
+The radiative heat flux absorbed by the leaf ${q_{\mathit{rad,leaf}}}$ (W\,m$^{-3}$) in \cref{eq:energybalance} is defined as:
 \begin{equation}
 \underbrace{q_{\mathit{rad,leaf}}}_{\mathrm{absorbed\ by\ leaf}} = \frac {\overbrace{\nabla  \cdot \mvec{q}_s}^{\mathrm{short-wave}} + \overbrace{\nabla  \cdot \mvec{q}_r}^{\mathrm{long-wave}}}{a}
 \label{eq:qradleaf2}
@@ -950,31 +1061,59 @@ where $\mvec{q}_s$ (W\,m$^{-2}$) is the short-wave radiative heat flux, and $\mv
 	\label{fig:radiation_shortwave}
 \end{figure}
 
-
-The short-wave radiation absorption due to vegetation is described through Beer-Lambert law. The Beer-Lambert law describes the radiative extinction of $\mvec{q}_s$ along the path $r$ as:
+\highlightpara{
+The short-wave radiation absorption due to vegetation is split into solar direct and reflected/diffused component (i.e., arriving from nearby surfaces)
 \begin{equation}
-\mvec{q}_s(r) = \mvec{q}_{\textit{s,0}}\,\exp\left\{ - \beta \int{a\left( r \right)} \;\mathrm{d}r \right\}
+\nabla \cdot \mvec{q}_s = \nabla \cdot \left(\mvec{q}_{\textit{s,dir}} + \mvec{q}_{\textit{s,dif}} \right)
+\end{equation}
+}
+
+The Beer-Lambert law describes the radiative extinction of $\mvec{q}_{s,dir}$ directly from the sun along the path $r$ as:
+\begin{equation}
+\mvec{q}_{\textit{s,dir}}(r) = \mvec{q}_{\textit{s,dir,0}}\,\exp\left\{ - \beta \int{a\left( r \right)} \;\mathrm{d}r \right\}
 \label{eq:beerlambert2}
 \end{equation}
-where $q_{\textit{s,0}}$ (W\,m$^{-2}$) is the short-wave radiative flux above vegetation, and $\beta$ is the extinction coefficient for short-wave radiation. Figure \cref{fig:radiation_shortwave} depicts the decay of a single ray along the path $r$ with solar altitude $\phi$. Therefore, to determine the extinction of short-wave radiation within the foliage, the leaf area density $a$ is integrate along the path $r$. The path $r$ depends on the solar altitude $\phi$ at a given time of the day.
+where $q_{\textit{s,0}}$ (W\,m$^{-2}$) is the short-wave radiative flux above vegetation, and $\beta$ is the extinction coefficient for short-wave radiation. Figure \cref{fig:radiation_shortwave} depicts the decay of a single ray along the path $r$ with solar altitude $\phi$. Therefore, to determine the extinction of short-wave radiation within the foliage, the leaf area density $a$ is integrate along the path $r$. The path $r$ depends on the solar altitude $\phi$ at a given time of the day. \highlight{We assume that direct solar irradiation is composed of parallel beams all with angle of incident} $\phi$.
 
 	\begin{figure}[t]
 		\centering
-		\includegraphics[width=0.5\textwidth]{\figdir/radiation_longwave-crop.pdf}
+		\includegraphics[width=0.7\textwidth]{\figdir/radiation_longwave_v2-crop.pdf}
 		\caption{Surface flux approximation of long-wave radiative flux $\mvec{q}_r$ (W\,m$^{-2}$) at the boundary of plant foliage, defined by \cref{eq:qrlw12}.}
 		\label{fig:radiation_longwave}
 	\end{figure}
 
-The long-wave radiative heat flux $\mvec{q}_r$ component absorbed by vegetation (in \cref{eq:qradleaf2}), i.e.:
+\highlightpara{
+The reflected/diffused short-wave radiation is determined using determined using Gauss theorem simplification. It is assumed that the net reflected/diffused short-wave radiative heat flux absorbed inside the vegetation is equivalent to the short-wave radiative flux at the boundary of the vegetation: 
+\begin{equation}
+\nabla \cdot \mvec{q}_{\textit{s,diff}} = \frac{\int_{\partial \Omega_{\textit{veg}}} \mvec{q}_{\textit{s,diff}} \cdot \hat{\mvec{n}}~\mathrm{d}S}{\int_{\Omega_{\textit{veg}}}\mathrm{d}V}
+\label{eq:qssw12}
+\end{equation}
+The vegetation domain is defined as $\Omega_{\textit{veg}}$, with a boundary $\partial \Omega_{\textit{veg}}$ and normal vector $\hat{n}$ oriented outward. Similarly, the long-wave radiative heat flux $\mvec{q}_r$ component absorbed by vegetation (in \cref{eq:qradleaf2}), i.e.:
 \begin{equation}
 \nabla \cdot \mvec{q}_r 
 \end{equation}
-is determined using Gauss theorem simplification. It is assumed that the net long-wave radiative heat flux absorbed inside the vegetation is equivalent to the long-wave radiative flux at the boundary of the vegetation: 
+is also determined using Gauss theorem simplification, assuming the net long-wave radiative heat flux absorbed inside the vegetation is equivalent to the long-wave radiative flux at the boundary of the vegetation: 
 \begin{equation}
 \nabla \cdot \mvec{q}_r = \frac{\int_{\partial \Omega_{\textit{veg}}} \mvec{q}_r \cdot \hat{\mvec{n}}~\mathrm{d}S}{\int_{\Omega_{\textit{veg}}}\mathrm{d}V}
 \label{eq:qrlw12}
 \end{equation}
-assuming that $\nabla \cdot \mvec{q}_r$ is constant inside the vegetation. The vegetation domain is defined as $\Omega_{\textit{veg}}$, with a boundary $\partial \Omega_{\textit{veg}}$ and normal vector $\hat{n}$ oriented outward. 
+Thus, we assuming that the reflected/diffused radiation is uniformly distributed inside inside the vegetation. However, this assumption might not hold if vegetation is near a high-albedo surface such as a mirror. This is one of the limitation of the present radiation model.}
+
+\highlightpara{
+The vegetation model is integrated with radiative heat transfer model developed by \cite{Kubilay2018} based on the approach detailed in \cite{Saneinejad2013}. The model decomposes short-wave (i.e., solar) and long-wave (terrestrial) radiative heat fluxes using ``\textit{radiosity approach}'' (or sometimes referred to as view factor model) and treats surfaces as gray and diffuse. The air in the \textit{air} domain is considered to be non-participating such that surface-to-surface (S2S) transfers describe the radiative exchanges within the urban area. The model is modified to incorporate vegetation as a semi-transparent medium which interacts with the short-wave and long-wave radiative heat fluxes and directly effects the leaf energy balance. The radiative exchange between surfaces $i$ and surface $k$ is calculated as:
+\begin{align}
+q_{\textit{rad,s,k}} &= \left(1 - \alpha_k\right) q_{\textit{s,dir,k}} + \sum_{i=1}^{N} \frac{A_i}{A_k} G_{i,k} \left( \alpha_i q_{\textit{s,dir,i}} + q_{\textit{s,dif,i}} \right)\\
+q_{\textit{rad,r,k}} &= \epsilon_k \sigma T_k^5 - \sum_{i=1}^{N}  \frac{A_i}{A_k} \epsilon_i \sigma T_i^4 G_{i,k}
+\label{eq:qradsurf}
+\end{align}
+where $Q_{\textit{s,k}}$ (W) is the short-wave radiative flux for surface $k$, $Q_{\textit{r,k}}$ short-wave radiative flux for surface $k$, $A$ (m$^2$) is surface area, $T$ (K) is the surface temperature, $\sigma = \num{5.67e-8}$ W\,m$^{-2}$\,K$^{-4}$ is the Stefan-Boltzmann constant, $\epsilon$ is the emissivity, $\alpha$ is the albedo, $q_{\textit{s,dir,k}}$ (W\,m$^{-2}$) is the short-wave radiation directly from the sun arriving at surface $k$, $q_{\textit{s,dir,i}}$ (W\,m$^{-2}$) is the direct short-wave radiation reflected from surfaces $i$, $q_{\textit{s,dif,i}}$ (W\,m$^{-2}$) is the diffused short-wave radiation from other surfaces and $G$ is the Gebhart factor. The Gebhart factor is calculated using the view factor $F_{\textit{i,k}}$ between surfaces $i$ and $k$
+\begin{equation}
+\mathbf{G} = \left(\mathbf{I} - \mathbf{F}\bar{\bar{\rho}}\right)^{-1} \mathbf{F}\left(1-\bar{\bar{\rho}}\right)
+\end{equation}
+where $\bar{\bar{\rho}}$ is the reflectivity matrix. For more description on the implementation, see \citep{Saneinejad2013}.
+}
+
+
 
 %
 %
@@ -1028,10 +1167,10 @@ The numerical models for air domain, solid domains (soil, ground, building facad
 
 The air domain is solved using $m$ pseudo steady-state timestep, discretizing the diurnal cycle of a day into $\num{8640}$ pseudo steady-state timesteps of $\Delta t^m = 10$ min (i.e., $8640$ time steps in a $24$ hrs). At each $m^{\mathrm{th}}$ step, a steady-state RANS model is solved for the fluid equations: $\rho$, $\mvec{u}$, $h$, $k$, and $\varepsilon$. During the steady-state computation, the \textit{leaf energy balance} (LEB) model is solved to determine the heat and mass fluxes, $q_{\textit{sen,leaf}}$ and $g_{\textit{v,leaf}}$, respectively. The algorithm for solving the air domain from $t^{m}\rightarrow t^{m+1}$ (as shown in \cref{fig:coupling}) is as follows:
 \begin{enumerate}
-	\item Update the radiation fields in the air domain using $q_{\textit{rad}}$ from building surfaces and determined $q_{\textit{r,lw}}$ and $q_{\textit{r,sw}}$.
+	\item Update the radiation fields in the air domain using $q_{\textit{rad}}$ from building surfaces to determine $q_{\textit{r}}$ and $q_{\textit{s}}$ in the vegetation zone.
 	\item Solve \textit{leaf energy balance} (LEB) model:
 	\begin{enumerate}
-		\item Calculate radiative flux $q_{\mathit{rad,leaf}}$ using \cref{eq:qradleaf}.
+		\item Calculate radiative flux $q_{\mathit{rad,leaf}}$ using \cref{eq:qradleaf2}.
 		\item Calculate the stomatal and aerodynamic resistances $r_{s}$ and $r_{a}$ using \cref{eq:ra} and \cref{eq:rs}, respectively.
 		\item Perform an initial estimate of leaf temperature $T_{\mathit{leaf}}=T$.
 		\item Calculate saturated vapor pressure at the leaf surface $p_{\mathit{vsat,leaf}}=f(T_{\mathit{leaf}})$.
@@ -1039,9 +1178,9 @@ The air domain is solved using $m$ pseudo steady-state timestep, discretizing th
 		\item Correct leaf temperature $T_{\mathit{leaf}}$ using \cref{eq:solveleaft}.
 		\item Repeat steps (d) to (f) until the leaf temperature has converged ($\epsilon < \num{e-8}$).
 	\end{enumerate}
-	\item Calculate all vegetation source terms $s_\rho$, $\mvec{s}_u$, $s_T$, $s_w$, $s_k$ and $s_{\varepsilon}$ using \cref{eq:source_density,eq:source_mom,eq:source_temp,eq:source_humi,eq:source_k,eq:source_eps}.
-	\item Solve for the steady-state airflow field for $t^{m+1}$, \crefrange{eq:conservationeq_incompressible1}{eq:conservationeq_incompressible6}.
-	\item Repeat steps (2) to (4) until residuals of \crefrange{eq:conservationeq_incompressible1}{eq:conservationeq_incompressible6} have reached the convergence limit of $\epsilon < \num{e-6}$.
+	\item Calculate all vegetation source terms $s_\rho$, $\mvec{s}_u$, $s_T$, $s_w$, $s_k$ and $s_{\varepsilon}$ (see \cref{sec:airdomain}).
+	\item Solve for the steady-state airflow field for $t^{m+1}$.
+	\item Repeat steps (2) to (4) until residuals have reached the convergence limit of $\epsilon < \num{e-6}$.
 \end{enumerate}
 
 \subsection{Solid domain}
@@ -1071,3 +1210,11 @@ The solid domain describes the heat and mass transport in urban structures such 
 	\item Use the final surface temperature $T_s^{N}$ to update $q_{\textit{r,lw}}$ fluxes at all surfaces.
 	\item Final surface temperature $T_s^N$ and moisture fluxes $g_{v}^N$ are boundary conditions for the air domain at the following timestep $t^{m+1}$.
 \end{enumerate}
+
+\section{Conclusion}
+
+\highlightpara{
+In conclusion, the present chapter provided a detailed description of the fully coupled numerical model for modeling the vegetation inside an urban area. The model consists of two domains (air and solid) which are coupled together. The radiation model is modified to take in account of the radiative exchanges between the plant foliage and the surrounding environment. The radiation model is optimized to predict the shadowing provided by vegetation on building facades throughout the day. To take in account of the sensitivity of plant transpiration two the water availability, the soil-plant-atmosphere continuum modeling approach is utilized to describe the water transport through vegetation. To facilitate the verification and validation of the leaf energy balance and it's impact on the microclimate, a parametric study if performed in \cref{ch:parametricstudy} and validated with experimental study of \cref{ch:microclimatestudy} in \cref{ch:wtcfdcomparison}. In \cref{ch:impactofvegetation}, the full model (i.e., the soil moisture dependent transpiration and radiative exchanges between buildings  ) is used to simulation vegetation in various urban areas. The validation of the fully coupled model is currently out present scope of the thesis. However, components of the numerical model have been validates in past studies \citep{Kubilay2018}.
+}
+
+

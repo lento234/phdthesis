@@ -401,7 +401,6 @@ useprefix=true,
 
 %natbib=true,
 
-\newcommand{\updated}[1]{\hl{#1}}
 \newcommand{\citep}[1]{\autocite{#1}}
 \renewcommand{\cite}[1]{\textcite{#1}}
 
@@ -486,3 +485,13 @@ useprefix=true,
 % Chapter thumbs (in the end)
 \usepackage{style/chapterthumbs}
 %------------------------------------------------------------
+
+%\usepackage[bordercolor=white,backgroundcolor=gray!30,linecolor=black,colorinlistoftodos]{todonotes}
+%\newcommand{\updated}[1]{\todo[color=yellow,inline]{#1}}
+
+
+\newcommand{\highlight}[1]{\hl{#1}}
+
+\newcommand{\highlightpara}[1]{\noindent\colorbox{yellow}{%
+	\parbox{\dimexpr\linewidth-2\fboxsep}% a box with line-breaks that's just wide enough
+	{#1} } }

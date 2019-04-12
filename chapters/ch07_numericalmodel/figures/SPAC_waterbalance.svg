@@ -26,7 +26,7 @@
      inkscape:current-layer="layer2"
      inkscape:document-units="mm"
      inkscape:cy="712.57826"
-     inkscape:cx="55.41897"
+     inkscape:cx="-125.58103"
      inkscape:zoom="1"
      inkscape:pageshadow="2"
      inkscape:pageopacity="0.0"
@@ -154,7 +154,7 @@
     <path
        inkscape:connector-curvature="0"
        id="path6179"
-       d="M 56.761393,160.85308 V 121.15277"
+       d="M 109.96016,150.49191 V 110.7916"
        style="fill:none;fill-rule:evenodd;stroke:#2980b9;stroke-width:2.20900011;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker6195)" />
     <g
        id="g9103"
@@ -246,7 +246,7 @@
            id="path9233" /></g>    </g>
     <g
        id="g9391"
-       transform="matrix(0.62822788,0,0,0.62822788,-31.939365,82.574747)">
+       transform="matrix(0.62822788,0,0,0.62822788,8.8064683,91.041414)">
       <g
          word-spacing="normal"
          letter-spacing="normal"
