@@ -490,8 +490,12 @@ useprefix=true,
 %\newcommand{\updated}[1]{\todo[color=yellow,inline]{#1}}
 
 
-\newcommand{\highlight}[1]{\hl{#1}}
+%\newcommand{\highlight}[1]{\hl{#1}}
 
-\newcommand{\highlightpara}[1]{\noindent\colorbox{yellow}{%
-	\parbox{\dimexpr\linewidth-2\fboxsep}% a box with line-breaks that's just wide enough
-	{#1} } }
+\newcommand{\highlight}[1]{\textcolor{blue}{#1}}
+
+\newcommand{\highlightpara}[1]{\textcolor{blue}{#1}}
+
+%\newcommand{\highlightpara}[1]{\noindent\colorbox{yellow}{%
+%	\parbox{\dimexpr\linewidth-2\fboxsep}% a box with line-breaks that's just wide enough
+%	{#1} } }
