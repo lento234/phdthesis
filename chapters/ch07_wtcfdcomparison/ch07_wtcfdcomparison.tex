@@ -24,11 +24,11 @@ The simulation setup consisting of the numerical domain and its boundary conditi
 	\begin{figure}[t]
 		\centering
 		\includegraphics[width=0.8\textwidth]{\figdir/WT_CFD_comparison_setup_v3.png}
-		\caption{Numerical domain used for the wind-tunnel-CFD comparison study with plant-canopy height $H = 0.21$ m (not to scale).}
+		\caption{\highlight{Numerical domain used for the wind-tunnel-CFD comparison study with plant-canopy height $H = 0.21$ m (not to scale).}}
 		\label{fig:WT_CFD_comparison_setup}
 	\end{figure}
 
-The numerical domain is based on the geometry of the wind tunnel test-section with a wind tunnel height $H=1.3$ m and a lateral dimension $W=1.9$ m, as depicted in \cref{fig:WT_CFD_comparison_setup}. The upstream and downstream dimension is chosen based on CFD best practices \citep{Blocken2015, Franke2007, Tominaga2008}. \highlight{The inlet is located $15 H$ upstream from the plant and the outlet is located at $32 H$ downstream from the plant, well above the recommended values of best practice guidelines. Thus, the downstream fetch of the numerical domain after the plant ensures a developed flow at the outlet of the numerical domain. Furthermore, the numerical scheme is also chosen to satisfy the best practice guidelines } (see \cref{subsec:numericalsolution_wtcomp}). \highlight{ The numerical domain is discretized into} $\num{413820}$ \highlight{hexahedral cells with minimum cell size of} $\num{7.81e-6}$ m$^{-3}$ \highlight{(near the plant is present with a regular hexahedron) and a maximum cell size of }$\num{2.2e-3}$ m$^{-3}$ at the top-outlet region. \highlight{A grid refinement study was used to determine the sufficient mesh resolution. The ground and later} $y^+$ is determined to be $37.9$ and $83.8$, respectively, satisfying the requirement for a valid wall function \citep{Franke2007}.
+The numerical domain is based on the geometry of the wind tunnel test-section with a wind tunnel height $H=1.3$ m and a lateral dimension $W=1.9$ m, as depicted in \cref{fig:WT_CFD_comparison_setup}. \highlight{ The upstream and downstream dimension is chosen based on CFD best practices \citep{Blocken2015, Franke2007, Tominaga2008}. The inlet is located $15 H$ upstream from the plant and the outlet is located at $32 H$ downstream from the plant, well above the recommended values of best practice guidelines. Thus, the downstream fetch of the numerical domain after the plant ensures a developed flow at the outlet of the numerical domain. Furthermore, the numerical scheme is also chosen to satisfy the best practice guidelines (see \cref{subsec:numericalsolution_wtcomp}). The numerical domain is discretized into $\num{413820}$ \highlight{hexahedral cells with minimum cell size of} $\num{7.81e-6}$ m$^{-3}$ (near the plant is present with a regular hexahedron) and a maximum cell size of $\num{2.2e-3}$ m$^{-3}$ at the top-outlet region. A grid refinement study was used to determine the sufficient mesh resolution. The ground and later $y^+$ is determined to be $37.9$ and $83.8$, respectively, satisfying the requirement for a valid wall function \citep{Franke2007}.}
 
 
  %The plant frontal area is $A_{f} = 0.52$ m$^{2}$ and with a wind tunnel cross-sectional area of $A_{w}=3.04$ m$^2$, has a small blockage ration of $1.7$\%.
@@ -53,7 +53,7 @@ where $\tavg{u}(z)$ (m\,s$^{-1}$) is the mean horizontal velocity, $u_*= \num{0.
 
 \subsection{Vegetation: Leaf area density}
 
-The vegetation is modeled as a porous medium parameterized using a leaf area density $a$ (m$^2$\,m$^{-3}$) distribution and a constant leaf drag coefficient $c_d$. For a detailed description, see \cref{sec:sourceterms}. The source terms for momentum $\mvec{s}_u$ (N\,m$^{-3}$) , turbulence kinetic energy $s_k$ (W\,m$^{-3}$), and the turbulence dissipation rate $s_{\varepsilon}$ (W\,m$^{-3}$\,s$^{-1}$) are given as:
+The vegetation is modeled as a porous medium parameterized using a leaf area density $a$ (m$^2$\,m$^{-3}$) distribution and a constant leaf drag coefficient $c_d$. For a detailed description, see \cref{sec:airdomain}. The source terms for momentum $\mvec{s}_u$ (N\,m$^{-3}$) , turbulence kinetic energy $s_k$ (W\,m$^{-3}$), and the turbulence dissipation rate $s_{\varepsilon}$ (W\,m$^{-3}$\,s$^{-1}$) are given as:
 	\begin{align}
 		\mvec{s}_u &=  - \rho {c_d}a\left| \tavg{\mvec{u}} \right|\tavg{\mvec{u}} 	\label{eq:source_veg1}	 \\
 		s_k &= \rho {c_d}a\left( \beta _p \left| \tavg{\mvec{u}} \right|^3 - \beta _d\left| \tavg{\mvec{u}} \right|k \right) \label{eq:source_veg2} \\
@@ -119,7 +119,7 @@ pos = t,]{lll}{}{
 	\centering
 	%\includegraphics[width=\textwidth]{\figdir/basecase_horizprofile_UTKE_inlettype3-crop.pdf}
 	\includegraphics[width=\textwidth]{\figdir/basecase_horizprofile_UWTKE_inlettype3-crop.pdf}
-	\caption{Mean vertical profiles at 7 streamwise positions $\hat{x}$, at center-line of the plant $\hat{y} = 0$: \subfig{a} streamwise velocity $\overline{u}/U_H$, \subfig{b} vertical velocity $\overline{w}/U_H$\subfig{b} turbulent kinetic energy $k/U_H^2$. The numerical and experimental results (obtained from \cref{fig:verticalprofile}) are plotted using solid smooth (---) and marked line ($-\bullet-$), respectively. }
+	\caption{\highlight{Mean vertical profiles at 7 streamwise positions $\hat{x}$, at center-line of the plant $\hat{y} = 0$: \subfig{a} streamwise velocity $\overline{u}/U_H$, \subfig{b} vertical velocity $\overline{w}/U_H$\subfig{b} turbulent kinetic energy $k/U_H^2$. The numerical and experimental results (obtained from \cref{fig:verticalprofile}) are plotted using solid smooth (---) and marked line ($-\bullet-$), respectively.}}
 	\label{fig:basecase_horizprofile_UTKE}
 \end{sidewaysfigure}
 
