@@ -212,8 +212,11 @@ Another aspect that also plays an important role is water availability. With an 
 
 \section{Case study: Muensterhof}
 
+The Muensterhof case study demonstrates the application of the developed model to a realistic urban setting. The Muensterhof is a town square within the city of Zurich with that currently lacks vegetation. In this study, we investigate the influence of vegetation and the impact on the atmospheric conditions such as air temperature, relative humidity and furthermore, the contribution of foliage to intercepting the short-wave radiation. 
+
 \subsection{Simulation setup}
 
+The simulation is performed focusing on the Muensterhof square. Therefore, highest level of building details is found near the square and to increase the computation performance, the level of detail is reduced further away from the square. Similarly, the mesh is refined with highest level of refinement inside the Muensterhof square. \cref{fig:mesh_resolution_muensterhof_tree} shows the surface layer close to the building walls with a single isolated tree inside the square. The numerical domain is discretized into $\num{4432297}$ cells with minimum cell size of $\num{2.38e-3}$ m$^{3}$ near the building.
 
 \begin{sidewaysfigure}[p]
 	\centering
@@ -222,7 +225,125 @@ Another aspect that also plays an important role is water availability. With an 
 	\label{fig:mesh_resolution_muensterhof_tree}
 \end{sidewaysfigure}
 
+\begin{figure}[t]
+	\centering
+	\includegraphics[width=0.8\textwidth]{\figdir/muensterhof_view.png}
+	\caption{Satellite view of the Muensterhof obtained from Google Map Data showing top view (i.e., eagle eyes view) and a west-looking view of the Muensterhof square.}
+	\label{fig:muensterhof_view}
+\end{figure}
+
+The location of the tree is chosen based on the requirements of the city of Zurich. The eastern exit towards the river Limmat is required to be unrestricted to enable transport to and from Muensterhof square. Furthermore, the center of the Muensterhof is required to be unrestricted to provide space of public events. A possible region that can be utilized for trees is near the north-east corner of the square, as indicated in \cref{fig:mesh_resolution_muensterhof_tree}. Therefore, a tree was placed at this location to study the influence of vegetation. The tree has a radius of $4$ m and a high of $10$ m with foliage base at $2$ m. The simulation is driven with boundary condition obtained from mesoscale simulation of Zurich. The solar radiation intensity and the wall function are applied as described in the previous sections. Similarly, the plant properties are set to similar that of the previous study of vegetation in the urban street canyon. 
 
 \subsection{Results and Discussion}
 
+The simulation is ran for two different configuration: \textit{with} and \textit{without} tree. \cref{fig:T_muensterhof} shows the air temperature $T$ ($^{\circ}$C) at $z=4$ m (i.e., $x-y$ plane) at 3 different time of the day (9 am, 12 pm, and 3 pm). The tree is outlined using a white outline to indicate its location. We see that there is a small drop in the air temperature in the vicinity of the foliage. Furthermore, near-tree building wall temperature is lower, especially at $12$:$00$. Although, it is apparent that the magnitude of temperature change resulted from the tree is much lower than the spatial variability in temperature in the domain. For examples, the eastern exit is seen to convect cool air into the Muensterhof with air temperature lower than the transpirative cooling provided by vegetation. We see that the contribution of a single tree in this domain provides a negligible change in the air temperature. A more interesting question would be the influence of transpirative cooling with a much higher vegetation density in the Muensterhof. The main limitation of such research is whether is it applicable in reality due to design constraints in the square, limited by the regulations.
+
+\begin{figure}[p]
+	\centering
+	\begin{subfigure}[b]{.45\linewidth}
+		\includegraphics[width=\linewidth]{\figdir/T_basecase_0900.png}
+		\caption{$09$:$00$}\label{fig:T_basecase_0900}
+	\end{subfigure}\hspace*{\fill}
+	\begin{subfigure}[b]{.45\linewidth}
+		\includegraphics[width=\linewidth]{\figdir/T_tree_0900.png}
+		\caption{$09$:$00$}\label{fig:T_tree_0900}
+	\end{subfigure}
+	\medskip
+	\begin{subfigure}[b]{.45\linewidth}
+	\includegraphics[width=\linewidth]{\figdir/T_basecase_1200.png}
+	\caption{$12$:$00$}\label{fig:T_basecase_1200}
+	\end{subfigure}\hspace*{\fill}
+	\begin{subfigure}[b]{.45\linewidth}
+		\includegraphics[width=\linewidth]{\figdir/T_tree_1200.png}
+		\caption{$12$:$00$}\label{fig:T_tree_1200}
+	\end{subfigure}
+	\medskip
+	\begin{subfigure}[b]{.45\linewidth}
+		\includegraphics[width=\linewidth]{\figdir/T_basecase_1500.png}
+		\caption{$15$:$00$}\label{fig:T_basecase_1500}
+	\end{subfigure}\hspace*{\fill}
+	\begin{subfigure}[b]{.45\linewidth}
+		\includegraphics[width=\linewidth]{\figdir/T_tree_1500.png}
+		\caption{$15$:$00$}\label{fig:T_tree_1500}
+	\end{subfigure}
+	\caption{Air temperature $T$ ($^{\circ}$C) at $z=4$ m at 3 different time of the day (9 am, 12 pm, and 3 pm). \subfig{a,c,d} \textit{without} tree and \subfig{b,d,f} \textit{with} tree. The region of tree is indicated by a white outline. }
+	\label{fig:T_muensterhof}
+\end{figure}
+
+\begin{figure}[p]
+	\centering
+	\begin{subfigure}[b]{.45\linewidth}
+		\includegraphics[width=\linewidth]{\figdir/w_basecase_0900.png}
+		\caption{$09$:$00$}\label{fig:w_basecase_0900}
+	\end{subfigure}\hspace*{\fill}
+	\begin{subfigure}[b]{.45\linewidth}
+		\includegraphics[width=\linewidth]{\figdir/w_tree_0900.png}
+		\caption{$09$:$00$}\label{fig:w_tree_0900}
+	\end{subfigure}
+	
+	\medskip
+	\begin{subfigure}[b]{.45\linewidth}
+		\includegraphics[width=\linewidth]{\figdir/w_basecase_1200.png}
+		\caption{$12$:$00$}\label{fig:w_basecase_1200}
+	\end{subfigure}\hspace*{\fill}
+	\begin{subfigure}[b]{.45\linewidth}
+		\includegraphics[width=\linewidth]{\figdir/w_tree_1200.png}
+		\caption{$12$:$00$}\label{fig:w_tree_1200}
+	\end{subfigure}
+	
+	\medskip
+	\begin{subfigure}[b]{.45\linewidth}
+		\includegraphics[width=\linewidth]{\figdir/w_basecase_1500.png}
+		\caption{$15$:$00$}\label{fig:w_basecase_1500}
+	\end{subfigure}\hspace*{\fill}
+	\begin{subfigure}[b]{.45\linewidth}
+		\includegraphics[width=\linewidth]{\figdir/w_tree_1500.png}
+		\caption{$15$:$00$}\label{fig:w_tree_1500}
+	\end{subfigure}
+	
+	\caption{Humidity ratio $w$ (g\,kg$^{-1}$) at $z=4$ m at 3 different time of the day (9 am, 12 pm, and 3 pm). \subfig{a,c,d} \textit{without} tree and \subfig{b,d,f} \textit{with} tree. The region of tree is indicated by a white outline. }
+	\label{fig:w_muensterhof}
+\end{figure}
+
+
+\begin{figure}[p]
+	\centering
+	\begin{subfigure}[b]{.45\linewidth}
+		\includegraphics[width=\linewidth]{\figdir/qsdir_basecase_0900.png}
+		\caption{$09$:$00$}\label{fig:qrdir_basecase_0900}
+	\end{subfigure}\hspace*{\fill}
+	\begin{subfigure}[b]{.45\linewidth}
+		\includegraphics[width=\linewidth]{\figdir/qsdir_tree_0900.png}
+		\caption{$09$:$00$}\label{fig:qrdir_tree_0900}
+	\end{subfigure}
+	
+	\medskip
+	\begin{subfigure}[b]{.45\linewidth}
+		\includegraphics[width=\linewidth]{\figdir/qsdir_basecase_1200.png}
+		\caption{$12$:$00$}\label{fig:qsdir_basecase_1200}
+	\end{subfigure}\hspace*{\fill}
+	\begin{subfigure}[b]{.45\linewidth}
+		\includegraphics[width=\linewidth]{\figdir/qsdir_tree_1200.png}
+		\caption{$12$:$00$}\label{fig:qsdir_tree_1200}
+	\end{subfigure}
+	
+	\medskip
+	\begin{subfigure}[b]{.45\linewidth}
+		\includegraphics[width=\linewidth]{\figdir/qsdir_basecase_1500.png}
+		\caption{$15$:$00$}\label{fig:qsdir_basecase_1500}
+	\end{subfigure}\hspace*{\fill}
+	\begin{subfigure}[b]{.45\linewidth}
+		\includegraphics[width=\linewidth]{\figdir/qsdir_tree_1500.png}
+		\caption{$15$:$00$}\label{fig:qsdir_tree_1500}
+	\end{subfigure}
+	
+	\caption{Direct short-wave radiation intensity $q_{\textit{s,dir}}$ (W\,m$^{-2}$) arriving at the surface at 3 different time of the day (9 am, 12 pm, and 3 pm). \subfig{a,c,d} \textit{without} tree and \subfig{b,d,f} \textit{with} tree. The region of tree is indicated by a white surface. }
+	\label{fig:qsdir_muensterhof}	
+\end{figure}
+
+\cref{fig:w_muensterhof} shows the humidity ratio  $w$ (g\,kg$^{-1}$) at $z=4$ m for the three times of the day. We see that vegetation is an important source of humidity in the Muensterhof as high values of humidity ratio is convected from the foliage. Due to the wind direction, the humidity is most convected towards the building. It could potential have an influence on the moisture content of the building walls and thereby influencing cooling from evaporative drying of the surfaces. \cref{fig:qsdir_muensterhof} shows direct short-wave radiation intensity $q_{\textit{s,dir}}$ (W\,m$^{-2}$) and the interception of solar radition by the foliage. It is apparent that tree provides shading throughout the day. As we determined in the previous section, solar radiation is an important contributor to thermal comfort. We see that depending on the solar angle, the location of shading provided by the tree varies in location. Therefore, the location of the tree can be modified (to a certain extend) to optimize for the cool effect of vegetation due shading.
+
 \subsection{Conclusion}
+
+The goal of the present study was to demonstrate the application of the developed numerical model in a realistic setup. Muensterhof in Zurich was chosen due to its high interest in urban reforestation by the Zurich city council (DE: Stadrat). The study showed how vegetation modifies the air temperature, humidity ratio and the short-wave radiation inside Muensterhof. It was seen that the air temperature change due to a single tree in minimal in the domain in contrast to the heating of the air due to buildings. A similar conclusion was obtained in the previous section, investigating the influence of vegetation in an urban street canyon. It was found that the most significant contributor towards improving thermal comfort is solar radiation. In Muensterhof, it was seen that the tree provides shading throughout the day with shadowing depending on the solar angle. In the future, more detailed studies can be performed to optimize the shadowing providing in the Muensterhof square. It is recommended that focusing on the shading can provide the maximum improvement in thermal comfort. Furthermore, building walls will also have a cooler temperature due to the reduced solar radiation absorption. However, it must be noted that the location of the tree is highly limited by city regulations. The exits of the square and the center of the square are required to be undisturbed to enable transit and public event use, respectively. 
+
