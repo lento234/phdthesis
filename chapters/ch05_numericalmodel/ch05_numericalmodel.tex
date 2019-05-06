@@ -128,7 +128,7 @@ where:
 \mu_t = \rho C_\mu \frac{k^2}{\varepsilon}
 \end{equation}
 
-\highlight{
+In this study, we employ realizable $k-\varepsilon$ equations for determining the eddy-viscosity. The system of equations is given as:
 \begin{align}
 \frac{{\partial \rho k}}{{\partial t}} + \nabla \cdot \left(\rho k \tavg{\mvec{u}} \right)   &= \nabla  \cdot \left[ {\left( {\mu  + \frac{{{\mu _t}}}{{{\sigma _k}}}} \right)\nabla k} \right] + {P_k} - \rho \varepsilon  + s_k,\\
 \frac{{\partial \rho \varepsilon }}{{\partial t}} +  \nabla \cdot \left(\rho \varepsilon \tavg{\mvec{u}} \right) &= \nabla  \cdot \left[ {\left( {\mu  + \frac{{{\mu _t}}}{{{\sigma _\varepsilon }}}} \right)\nabla \varepsilon } \right] + \rho{C_{1\varepsilon }}{P_k}\frac{\varepsilon }{k} - \rho{C_{2\varepsilon }}\frac{{{\varepsilon ^2}}}{{k + \sqrt {\nu \varepsilon } }} + s_\varepsilon
@@ -141,8 +141,8 @@ P_k = - \rho \overline{\mvec{u}'\mvec{u}'}:\nabla \tavg{\mvec{u}} = 2 \mu_t |\ma
 The mean strain-rate $\mathbf{S}$ is defined as
 \begin{equation}
 \mathbf{S} = \frac{1}{2} \left( \nabla \tavg{\mvec{u}} +  \nabla \tavg{\mvec{u}}^T \right)
-\end{equation}}
-\highlight{
+\end{equation}
+
 The TKE source $s_k$ (W\,m$^{-3}$) is given as: 
 \begin{equation}
 s_k = \rho {c_d}a\left( \beta _p \left| \tavg{\mvec{u}} \right|^3 - \beta _d\left| \tavg{\mvec{u}} \right|k \right)
@@ -153,12 +153,12 @@ and the TDR source term $s_{\varepsilon}$ (W\,m$^{-3}$\,s$^{-1}$) is given as:
 s_\varepsilon = \rho {c_d}a\left( {{\beta _p}{C_{4\varepsilon }}{{\left| \tavg{\mvec{u}} \right|}^3}\frac{\varepsilon }{k} - {\beta _d}{C_{5\varepsilon }}\left| \tavg{\mvec{u}} \right|\varepsilon } \right)
 \label{eq:source_eps}		 	
 \end{equation}
-with model constants $C_{4\varepsilon}=0.9$ and $C_{5\varepsilon}=0.9$ \citep{Katul2004, Kenjeres2013, Sanz2003}. The constants $\beta_p=1.0$ is the fraction of mean kinetic energy converted into turbulent kinetic energy and $\beta_d=5.1$ describes the reduction in TKE and TDR due to vegetation \citep{Sanz2003}. \cite{Kenjeres2013} compared various RANS model coefficients for vegetation in an urban area and found the coefficients provided by \cite{Katul2004} to be reasonably accurate and the coefficients show good numerical stability. Therefore, these parameters are used in this thesis.}
+with model constants $C_{4\varepsilon}=0.9$ and $C_{5\varepsilon}=0.9$ \citep{Katul2004, Kenjeres2013, Sanz2003}. The constant $\beta_p=1.0$ is the fraction of mean kinetic energy converted into turbulent kinetic energy and $\beta_d=5.1$ describes the reduction in TKE and TDR due to vegetation \citep{Sanz2003}. \cite{Kenjeres2013} compared various RANS model coefficients for vegetation in an urban area and found the coefficients provided by \cite{Katul2004} to be reasonably accurate showing good numerical stability. Therefore, these parameters are used in this thesis.
 
 \section{Leaf energy balance}
 \label{sec:leafenergy}
 
-\highlightpara{The heat and mass exchanges between the tree canopy and the air are simulated using a leaf energy model. The heat and mass exchanges between the tree canopy and the air are simulated using a leaf energy balance as shown in \cref{fig:leaf_energybalance}. We assume a stationary leaf energy balance and that the dynamic thermal storage of heat in leaves can be neglected. }
+The heat and mass exchanges between the tree canopy and the air are simulated using a leaf energy model. The heat and mass exchanges between the tree canopy and the air are simulated using a leaf energy balance as shown in \cref{fig:leaf_energybalance}. We assume a stationary leaf energy balance and that the dynamic thermal storage of heat in leaves can be neglected.
 
 \begin{figure}[h]
 	\centering
@@ -168,7 +168,6 @@ with model constants $C_{4\varepsilon}=0.9$ and $C_{5\varepsilon}=0.9$ \citep{Ka
 	\label{fig:leaf_energybalance}
 \end{figure}
 
-\highlightpara{
 The stationary energy balance is given as:
 \begin{equation}
 {q_{\mathit{rad},\mathit{leaf}}} - {q_{\mathit{lat},\mathit{leaf}}} - {q_{\mathit{sen},\mathit{leaf}}} = 0
@@ -178,10 +177,10 @@ where ${q_{\mathit{rad},\mathit{leaf}}}$ (W\,m$^{-2}$) is the radiative flux, ${
 \begin{equation}
 {q_{\mathit{sen,leaf}}} = {h_{c,h}} \left( {{T_{\mathit{leaf}}} - T} \right) = \frac{{2\rho {c_p}}}{{{r_a}}} \left( {{T_{\mathit{leaf}}} - T} \right)
 \label{eq:sensibleheatflux}
-\end{equation}}
-\highlightpara{where $h_{c,h}$ (W\,m$^{-2}$\,K$^{-1}$] is the convective heat transfer coefficient (CHTC), $T_{\mathit{leaf}}$ (K) is the leaf surface temperature, $T$ (K) is the air temperature and $r_a$ (s\,m$^{-1}$) is the aerodynamic resistance of the boundary layer around the leaf. A factor 2 is present in the equation as the sensible heat flux occurs on both sides of the leaf. Substituting \cref{eq:sensibleheatflux} into \cref{eq:sh} gives the source of heat from vegetation in conservation of energy.}
+\end{equation}
+where $h_{c,h}$ (W\,m$^{-2}$\,K$^{-1}$] is the convective heat transfer coefficient (CHTC), $T_{\mathit{leaf}}$ (K) is the leaf surface temperature, $T$ (K) is the air temperature and $r_a$ (s\,m$^{-1}$) is the aerodynamic resistance of the boundary layer around the leaf. A factor 2 is present in the equation as the sensible heat flux occurs on both sides of the leaf. Substituting \cref{eq:sensibleheatflux} into \cref{eq:sh} gives the source of heat from vegetation in conservation of energy.
 
-\highlightpara{The aerodynamic resistance $r_a$ (s\,m$^{-1}$) is given as \citep{Dauzat2001, Robitu2006}:
+The aerodynamic resistance $r_a$ (s\,m$^{-1}$) is given as \citep{Dauzat2001, Robitu2006}:
 \begin{equation}
 {r_a} = C\;{\left( {\frac{l}{{\left| {\bar{\mvec{u}}} \right|}}} \right)^{1/2}}
 \label{eq:ra}
@@ -201,7 +200,7 @@ where $h_{c,m}$ (s\,m$^{-1}$) is the convective mass transfer coefficient (CMTC)
 {T_{\mathit{leaf}}} = T + \frac{{{q_{\mathit{rad,leaf}}} - {q_{\mathit{lat,leaf}}}}}{{{h_{c,h}}}}
 \label{eq:solveleaft}
 \end{equation}
-where the equation is solved iteratively as $q_{\mathit{lat,leaf}}$ is dependent on the leaf temperature.}
+where the equation is solved iteratively as $q_{\mathit{lat,leaf}}$ is dependent on the leaf temperature.
 
 So, the source of moisture in the air domain, i.e., \cref{eq:xv2}, is obtained from \cref{eq:vapourflux2} as:
 \begin{equation}
@@ -508,7 +507,7 @@ and so, the atmospheric evaporative demand (AED) is dependent on the water avail
 \begin{figure}[t]
 	\centering
 	\includegraphics[width=0.5\textwidth]{\figdir/SPAC_waterbalance_v2-crop.pdf}
-	\caption{\highlight{Soil-Plant-Atmosphere Continuum: The water balance between plant transpiration and root water uptake, $G_{\textit{v,root}} = G_{\textit{v,xylem}} = G_{\textit{v,leaf}}$.}}
+	\caption{Soil-Plant-Atmosphere Continuum: The water balance between plant transpiration and root water uptake, $G_{\textit{v,root}} = G_{\textit{v,xylem}} = G_{\textit{v,leaf}}$.}
 	\label{fig:SPAC_waterbalance}
 \end{figure}
 
@@ -547,7 +546,7 @@ where $\Delta z$ is the vertical height of the root layer mesh and $\beta = \num
 \begin{figure}[t]
 	\centering
 	\includegraphics[width=0.65\textwidth]{\figdir/SPAC_root_v3-crop.pdf}
-	\caption{\highlight{Soil-Plant-Atmosphere Continuum: The water transport in soil-root system.}}
+	\caption{Soil-Plant-Atmosphere Continuum: The water transport in soil-root system.}
 	\label{fig:SPAC_root}
 \end{figure}
 
@@ -1061,19 +1060,17 @@ where $\mvec{q}_s$ (W\,m$^{-2}$) is the short-wave radiative heat flux, and $\mv
 	\label{fig:radiation_shortwave}
 \end{figure}
 
-\highlightpara{
 The short-wave radiation absorption due to vegetation is split into solar direct and reflected/diffused component (i.e., arriving from nearby surfaces)
 \begin{equation}
 \nabla \cdot \mvec{q}_s = \nabla \cdot \left(\mvec{q}_{\textit{s,dir}} + \mvec{q}_{\textit{s,dif}} \right)
 \end{equation}
-}
 
 The Beer-Lambert law describes the radiative extinction of $\mvec{q}_{s,dir}$ directly from the sun along the path $r$ as:
 \begin{equation}
 \mvec{q}_{\textit{s,dir}}(r) = \mvec{q}_{\textit{s,dir,0}}\,\exp\left\{ - \beta \int{a\left( r \right)} \;\mathrm{d}r \right\}
 \label{eq:beerlambert2}
 \end{equation}
-where $q_{\textit{s,0}}$ (W\,m$^{-2}$) is the short-wave radiative flux above vegetation, and $\beta$ is the extinction coefficient for short-wave radiation. Figure \cref{fig:radiation_shortwave} depicts the decay of a single ray along the path $r$ with solar altitude $\phi$. Therefore, to determine the extinction of short-wave radiation within the foliage, the leaf area density $a$ is integrate along the path $r$. The path $r$ depends on the solar altitude $\phi$ at a given time of the day. \highlight{We assume that direct solar irradiation is composed of parallel beams all with angle of incident} $\phi$.
+where $q_{\textit{s,0}}$ (W\,m$^{-2}$) is the short-wave radiative flux above vegetation, and $\beta$ is the extinction coefficient for short-wave radiation. Figure \cref{fig:radiation_shortwave} depicts the decay of a single ray along the path $r$ with solar altitude $\phi$. Therefore, to determine the extinction of short-wave radiation within the foliage, the leaf area density $a$ is integrate along the path $r$. The path $r$ depends on the solar altitude $\phi$ at a given time of the day. We assume that direct solar irradiation is composed of parallel beams all with angle of incident $\phi$.
 
 	\begin{figure}[t]
 		\centering
@@ -1082,8 +1079,7 @@ where $q_{\textit{s,0}}$ (W\,m$^{-2}$) is the short-wave radiative flux above ve
 		\label{fig:radiation_longwave}
 	\end{figure}
 
-\highlightpara{
-The reflected/diffused short-wave radiation is determined using determined using Gauss theorem simplification. It is assumed that the net reflected/diffused short-wave radiative heat flux absorbed inside the vegetation is equivalent to the short-wave radiative flux at the boundary of the vegetation: 
+The reflected/diffused short-wave radiation is determined using Gauss theorem simplification. It is assumed that the net reflected/diffused short-wave radiative heat flux absorbed inside the vegetation is equivalent to the short-wave radiative flux at the boundary of the vegetation: 
 \begin{equation}
 \nabla \cdot \mvec{q}_{\textit{s,diff}} = \frac{\int_{\partial \Omega_{\textit{veg}}} \mvec{q}_{\textit{s,diff}} \cdot \hat{\mvec{n}}~\mathrm{d}S}{\int_{\Omega_{\textit{veg}}}\mathrm{d}V}
 \label{eq:qssw12}
@@ -1092,26 +1088,24 @@ The vegetation domain is defined as $\Omega_{\textit{veg}}$, with a boundary $\p
 \begin{equation}
 \nabla \cdot \mvec{q}_r 
 \end{equation}
-is also determined using Gauss theorem simplification, assuming the net long-wave radiative heat flux absorbed inside the vegetation is equivalent to the long-wave radiative flux at the boundary of the vegetation: 
+is also determined using the Gauss theorem simplification, assuming the net long-wave radiative heat flux absorbed inside the vegetation is equivalent to the long-wave radiative flux at the boundary of the vegetation: 
 \begin{equation}
 \nabla \cdot \mvec{q}_r = \frac{\int_{\partial \Omega_{\textit{veg}}} \mvec{q}_r \cdot \hat{\mvec{n}}~\mathrm{d}S}{\int_{\Omega_{\textit{veg}}}\mathrm{d}V}
 \label{eq:qrlw12}
 \end{equation}
-Thus, we assuming that the reflected/diffused radiation is uniformly distributed inside inside the vegetation. However, this assumption might not hold if vegetation is near a high-albedo surface such as a mirror. This is one of the limitation of the present radiation model.}
+Thus, we assume that the reflected/diffused radiation is uniformly distributed inside the vegetation. However, this assumption might not hold if vegetation is near a high-albedo surface such as a mirror. This is one of the limitations of the present radiation model.
 
-\highlightpara{
-The vegetation model is integrated with radiative heat transfer model developed by \cite{Kubilay2018} based on the approach detailed in \cite{Saneinejad2013}. The model decomposes short-wave (i.e., solar) and long-wave (terrestrial) radiative heat fluxes using ``\textit{radiosity approach}'' (or sometimes referred to as view factor model) and treats surfaces as gray and diffuse. The air in the \textit{air} domain is considered to be non-participating such that surface-to-surface (S2S) transfers describe the radiative exchanges within the urban area. The model is modified to incorporate vegetation as a semi-transparent medium which interacts with the short-wave and long-wave radiative heat fluxes and directly effects the leaf energy balance. The radiative exchange between surfaces $i$ and surface $k$ is calculated as:
+The vegetation model is integrated with the radiative heat transfer model developed by \cite{Kubilay2018} based on the approach detailed in \cite{Saneinejad2013}. The model decomposes short-wave (i.e., solar) and long-wave (terrestrial) radiative heat fluxes using a ``\textit{radiosity approach}'' (or sometimes referred to as view factor model) and treats surfaces as gray and diffuse. The air in the \textit{air} domain is considered to be non-participating such that surface-to-surface (S2S) transfers describe the radiative exchanges within the urban area. The model is modified to incorporate vegetation as a semi-transparent medium which interacts with the short-wave and long-wave radiative heat fluxes and directly affects the leaf energy balance. The radiative exchange between surfaces $i$ and surface $k$ is calculated as:
 \begin{align}
 q_{\textit{rad,s,k}} &= \left(1 - \alpha_k\right) q_{\textit{s,dir,k}} + \sum_{i=1}^{N} \frac{A_i}{A_k} G_{i,k} \left( \alpha_i q_{\textit{s,dir,i}} + q_{\textit{s,dif,i}} \right)\\
 q_{\textit{rad,r,k}} &= \epsilon_k \sigma T_k^5 - \sum_{i=1}^{N}  \frac{A_i}{A_k} \epsilon_i \sigma T_i^4 G_{i,k}
 \label{eq:qradsurf}
 \end{align}
-where $Q_{\textit{s,k}}$ (W) is the short-wave radiative flux for surface $k$, $Q_{\textit{r,k}}$ short-wave radiative flux for surface $k$, $A$ (m$^2$) is surface area, $T$ (K) is the surface temperature, $\sigma = \num{5.67e-8}$ W\,m$^{-2}$\,K$^{-4}$ is the Stefan-Boltzmann constant, $\epsilon$ is the emissivity, $\alpha$ is the albedo, $q_{\textit{s,dir,k}}$ (W\,m$^{-2}$) is the short-wave radiation directly from the sun arriving at surface $k$, $q_{\textit{s,dir,i}}$ (W\,m$^{-2}$) is the direct short-wave radiation reflected from surfaces $i$, $q_{\textit{s,dif,i}}$ (W\,m$^{-2}$) is the diffused short-wave radiation from other surfaces and $G$ is the Gebhart factor. The Gebhart factor is calculated using the view factor $F_{\textit{i,k}}$ between surfaces $i$ and $k$
+where $Q_{\textit{s,k}}$ (W) is the short-wave radiative flux for surface $k$, $Q_{\textit{r,k}}$ short-wave radiative flux for surface $k$, $A$ (m$^2$) is surface area, $T$ (K) is the surface temperature, $\sigma = \num{5.67e-8}$ W\,m$^{-2}$\,K$^{-4}$ is the Stefan-Boltzmann constant, $\epsilon$ is the emissivity, $\alpha$ is the albedo, $q_{\textit{s,dir,k}}$ (W\,m$^{-2}$) is the short-wave radiation directly from the sun arriving at surface $k$, $q_{\textit{s,dir,i}}$ (W\,m$^{-2}$) is the direct short-wave radiation reflected from surfaces $i$, $q_{\textit{s,dif,i}}$ (W\,m$^{-2}$) is the diffused short-wave radiation from other surfaces and $G$ is the Gebhart factor. The Gebhart factor is calculated using the view factor $F_{\textit{i,k}}$ between surfaces $i$ and $k$ using:
 \begin{equation}
 \mathbf{G} = \left(\mathbf{I} - \mathbf{F}\bar{\bar{\rho}}\right)^{-1} \mathbf{F}\left(1-\bar{\bar{\rho}}\right)
 \end{equation}
 where $\bar{\bar{\rho}}$ is the reflectivity matrix. For more description on the implementation, see \citep{Saneinejad2013}.
-}
 
 
 
@@ -1213,8 +1207,5 @@ The solid domain describes the heat and mass transport in urban structures such 
 
 \section{Conclusion}
 
-\highlightpara{
-In conclusion, the present chapter provided a detailed description of the fully coupled numerical model for modeling the vegetation inside an urban area. The model consists of two domains (air and solid) which are coupled together. The radiation model is modified to take into account of the radiative exchanges between the plant foliage and the surrounding environment. The radiation model is optimized to predict the shadowing provided by vegetation on building facades throughout the day. To take into account of the sensitivity of plant transpiration two the water availability, the soil-plant-atmosphere continuum modeling approach is utilized to describe the water transport through vegetation. To facilitate the verification and validation of the leaf energy balance and its impacts on the microclimate, a parametric study is performed in \cref{ch:parametricstudy} and validated with the experimental study of \cref{ch:microclimatestudy} in \cref{ch:wtcfdcomparison}. In \cref{ch:impactofvegetation}, the full model (i.e., the soil moisture dependent transpiration and radiative exchanges between buildings) is used to simulation vegetation in various urban areas. The validation of the fully coupled model is currently out the present scope of the thesis. However, components of the numerical model have been validated in past studies \citep{Kubilay2018}.
-}
-
+In conclusion, the present chapter provided a detailed description of the fully coupled numerical model for modeling the vegetation inside an urban area. The model consists of two domains (air and solid) which are coupled together. The radiation model is modified to take into account radiative exchanges between the plant foliage and the surrounding environment. The radiation model is optimized to predict the shadowing provided by vegetation on building facades throughout the day. To take into account the sensitivity of plant transpiration towards the water availability, the soil-plant-atmosphere continuum modeling approach is utilized to describe the water transport through vegetation. To facilitate the verification and validation of the leaf energy balance and its impacts on the microclimate, a parametric study is performed in \cref{ch:parametricstudy} and validated with the experimental study of \cref{ch:microclimatestudy} in \cref{ch:wtcfdcomparison}. In \cref{ch:impactofvegetation}, the full model (i.e., the soil moisture dependent transpiration and radiative exchanges between buildings) is used to simulate vegetation in various urban areas. The validation of the fully coupled model is currently out the present scope of the thesis. \textbf{However, components of the numerical model have been validated in past studies} \citep{Kubilay2018}.
 
