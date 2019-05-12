@@ -257,7 +257,7 @@ The Muensterhof case study demonstrates the application of the developed model t
 	\label{fig:muensterhof_view}
 \end{figure}
 
-The simulation is performed focusing on the Muensterhof square (see \cref{fig:muensterhof_view}). Therefore, highest level of building details is found near the square and to increase the computation performance, the level of detail is reduced further away from the square. Similarly, the mesh is refined with highest level of refinement inside the Muensterhof square. \cref{fig:mesh_resolution_muensterhof_tree} shows the surface layer close to the building walls with \highlight{i) a single isolated tree inside the square, and ii) multiple tree configuration with 4 identical trees. In the first case, the numerical domain is discretized into $\num{4432297}$ cells with minimum cell size of $\num{2.38e-3}$ m$^{3}$ near the building and similarly, $\num{4453514}$ cells in the second case with multiple trees.}
+The simulation is performed focusing on the Muensterhof square (see \cref{fig:muensterhof_view}). Therefore, highest level of building details is found near the square and to increase the computation performance, the level of detail is reduced further away from the square. Similarly, the mesh is refined with highest level of refinement inside the Muensterhof square. \cref{fig:mesh_resolution_muensterhof_tree} shows the surface layer close to the building walls with i) a single isolated tree inside the square, and ii) multiple tree configuration with 4 identical trees. In the first case, the numerical domain is discretized into $\num{4432297}$ cells with minimum cell size of $\num{2.38e-3}$ m$^{3}$ near the building and similarly, $\num{4453514}$ cells in the second case with multiple trees.
 
 %\begin{sidewaysfigure}[p]
 %	\centering
@@ -308,22 +308,29 @@ The location of the trees are chosen based on the requirements of the city of Zu
 
 \begin{figure}[p]
 	\centering
-	\includegraphics[width=\textwidth]{\figdir/mhof_tree_and_notree_T-crop.pdf}
+	\includegraphics[width=\textwidth]{\figdir/mhof_tree_and_notree_T_type2-crop.pdf}
 	\caption{Air temperature $T$ ($^{\circ}$C) at $z=4$ m at 3 different times of the day (09:00, 12:00, and 15:00 (HH:MM)). The region of tree is indicated by a red outline.}
 	\label{fig:T_muensterhof}
 \end{figure}
 
 \begin{figure}[p]
 	\centering
-	\includegraphics[width=\textwidth]{\figdir/mhof_tree_vs_notree_T-crop.pdf}
-	\caption{Air temperature difference between the cases \textit{with} (T) and \textit{without} (NT) tree: $T_{T}-T_{\textit{NT}}$ ($^{\circ}$C) at $z=4$ m at 6 different times of the day (03:00, 06:00, 09:00, 12:00, 15:00, and 18:00 (HH:MM)). The region of tree is indicated by a red outline.}
+	\includegraphics[width=\textwidth]{\figdir/mhof_tree_vs_notree_T_type2-crop.pdf}
+	\caption{Air temperature difference between the cases \textit{with} (T) and \textit{without} (NT) tree: $T_{T}-T_{\textit{NT}}$ ($^{\circ}$C) at $z=4$ m at 6 different times of the day (03:00, 06:00, 09:00, 12:00, 15:00, and 18:00 (HH:MM)).}
 	\label{fig:Tdiff_muensterhof}
 \end{figure}
 
 \begin{figure}[p]
 	\centering
-	\includegraphics[width=\textwidth]{\figdir/mhof_tree_vs_notree_w-crop.pdf}
-	\caption{Humidity ratio difference between the cases \textit{with} (T) and \textit{without} (NT) tree: $w_{T}-w_{\textit{NT}}$ (g\,kg$^{-1}$) at $z=4$ m at 6 different times of the day (03:00, 06:00, 09:00, 12:00, 15:00, and 18:00 (HH:MM)). The region of tree is indicated by a red outline.}
+	\includegraphics[width=\textwidth]{\figdir/mhof_tree_vs_notree_T_hourlyaveraged_type2-crop.pdf}
+	\caption{\highlight{Hourly-averaged air temperature difference between the cases \textit{with} (T) and \textit{without} (NT) tree: $T_{T}-T_{\textit{NT}}$ ($^{\circ}$C) at $z=4$ m between 6 different times of the day (03:00 - 04:00, 06:00 - 07:00, 09:00 - 10:00, 12:00 - 13:00, 15:00 - 16:00, and 18:00 - 19:00 (HH:MM))}.}
+	\label{fig:Tdiff_muensterhof_hourly}
+\end{figure}
+
+\begin{figure}[p]
+	\centering
+	\includegraphics[width=\textwidth]{\figdir/mhof_tree_vs_notree_w_hourlyaveraged_type2-crop.pdf}
+	\caption{\highlight{Hourly-averaged humidity ratio difference between the cases \textit{with} (T) and \textit{without} (NT) tree: $w_{T}-w_{\textit{NT}}$ (g\,kg$^{-1}$) at $z=4$ m between 6 different times of the day (03:00 - 04:00, 06:00 - 07:00, 09:00 - 10:00, 12:00 - 13:00, 15:00 - 16:00, and 18:00 - 19:00 (HH:MM)).}}
 	\label{fig:wdiff_muensterhof}
 \end{figure}
 
@@ -367,12 +374,12 @@ The single tree case simulation is ran for two different configuration: \textit{
 
 \begin{figure}[p]
 	\centering
-	\includegraphics[width=\textwidth]{\figdir/mhof_tree_vs_notree_Tmrt-crop.png}
-	\caption{Mean radiant temperature difference between the cases \textit{with} (T) and \textit{without} (NT) tree: $T_{\textit{mrt,T}}-T_{\textit{mrt,NT}}$ ($^{\circ}$C) at Muensterhof square ground at 6 different times of the day (03:00, 06:00, 09:00, 12:00, 15:00, and 18:00 (HH:MM)).}
+	\includegraphics[width=\textwidth]{\figdir/mhof_tree_vs_notree_Tmrt_hourlyaveraged_ground-crop.png}
+	\caption{\highlight{Hourly-averaged mean radiant temperature difference between the cases \textit{with} (T) and \textit{without} (NT) tree: $T_{\textit{mrt,T}}-T_{\textit{mrt,NT}}$ ($^{\circ}$C) at Muensterhof square ground between 6 different times of the day (03:00 - 04:00, 06:00 - 07:00, 09:00 - 10:00, 12:00 - 13:00, 15:00 - 16:00, and 18:00 - 19:00 (HH:MM)).}}
 	\label{fig:Tmrtdiff_muensterhof}
 \end{figure}
 
-\cref{fig:qsdir_muensterhof} shows direct short-wave radiation intensity $q_{\textit{s,dir}}$ (W\,m$^{-2}$) and the interception of solar radition by the foliage. It is apparent that tree provides shading throughout the day. As we determined in the previous section, solar radiation is an important contributor to mean radiant temperature and the thermal comfort. \highlight{\cref{fig:Tmrtdiff_muensterhof} shows the mean radiant temperature difference between the cases \textit{with} (T) and \textit{without} (NT) tree $T_{\textit{mrt,T}}-T_{\textit{mrt,NT}}$ ($^{\circ}$C) of the ground of the Muensterhof square. We see that shading provided by the tree substantially reduces the mean radiation temperature. We see that depending on the solar angle, the location of shading provided by the tree varies in time. However, during night below the foliage, we observe a rise in mean radiant temperature instead. This indicates the radiation trapping at the vicinity of the foliage. Thus, the location of the tree should be optimized to provide the maximum transpirative and cooling due to shading and minimize the negative effect of radiation trapping.} 
+\cref{fig:qsdir_muensterhof} shows direct short-wave radiation intensity $q_{\textit{s,dir}}$ (W\,m$^{-2}$) and the interception of solar radition by the foliage. It is apparent that tree provides shading throughout the day. As we determined in the previous section, solar radiation is an important contributor to mean radiant temperature and the thermal comfort. \cref{fig:Tmrtdiff_muensterhof} shows the mean radiant temperature difference between the cases \textit{with} (T) and \textit{without} (NT) tree $T_{\textit{mrt,T}}-T_{\textit{mrt,NT}}$ ($^{\circ}$C) of the ground of the Muensterhof square. We see that shading provided by the tree substantially reduces the mean radiation temperature. We see that depending on the solar angle, the location of shading provided by the tree varies in time. However, during night below the foliage, we observe a rise in mean radiant temperature instead. This indicates the radiation trapping at the vicinity of the foliage. Thus, the location of the tree should be optimized to provide the maximum transpirative and cooling due to shading and minimize the negative effect of radiation trapping.
 
 
 % We see that there is a small drop in the air temperature in the vicinity of the foliage. Furthermore, near-tree building wall temperature is lower, especially at $12$:$00$.
@@ -453,26 +460,36 @@ The single tree case simulation is ran for two different configuration: \textit{
 
 	\begin{figure}[p]
 		\centering
-		\includegraphics[width=\textwidth]{\figdir/mhof_treegroupA_vs_notree_T-crop.pdf}
-		\caption{Air temperature difference between the cases \textit{with} (T) and \textit{without} (NT) trees: $T_{T}-T_{\textit{NT}}$ ($^{\circ}$C) at $z=4$ m at 6 different times of the day (03:00, 06:00, 09:00, 12:00, 15:00, and 18:00 (HH:MM)). The region of tree is indicated by a red outline.}
+		\includegraphics[width=\textwidth]{\figdir/mhof_treegroupA_vs_notree_T_hourlyaveraged-crop.pdf}
+		\caption{\highlight{Hourly-averaged air temperature difference between the cases \textit{with} (T) and \textit{without} (NT) tree: $T_{T}-T_{\textit{NT}}$ ($^{\circ}$C) at $z=4$ m between 6 different times of the day (03:00 - 04:00, 06:00 - 07:00, 09:00 - 10:00, 12:00 - 13:00, 15:00 - 16:00, and 18:00 - 19:00 (HH:MM))}}
 		\label{fig:mTdiff_muensterhof}
 	\end{figure}
 	
 	\begin{figure}[p]
 		\centering
-		\includegraphics[width=\textwidth]{\figdir/mhof_treegroupA_vs_notree_w-crop.pdf}
-		\caption{Humidity ratio difference between the cases \textit{with} (T) and \textit{without} (NT) trees: $w_{T}-w_{\textit{NT}}$ (g\,kg$^{-1}$) at $z=4$ m at 6 different time of the day (03:00, 06:00, 09:00, 12:00, 15:00, and 18:00 (HH:MM)). The region of tree is indicated by a red outline.}
+		\includegraphics[width=\textwidth]{\figdir/mhof_treegroupA_vs_notree_w_hourlyaveraged-crop.pdf}
+		\caption{\highlight{Hourly-averaged humidity ratio difference between the cases \textit{with} (T) and \textit{without} (NT) tree: $w_{T}-w_{\textit{NT}}$ (g\,kg$^{-1}$) at $z=4$ m between 6 different times of the day (03:00 - 04:00, 06:00 - 07:00, 09:00 - 10:00, 12:00 - 13:00, 15:00 - 16:00, and 18:00 - 19:00 (HH:MM)).}}
 		\label{fig:mwdiff_muensterhof}
 	\end{figure}
 
 		
 	\begin{figure}[p]
 		\centering
-		\includegraphics[width=\textwidth]{\figdir/mhof_treegroupA_vs_notree_Tmrt-crop.png}
-		\caption{Mean radiant temperature difference between the cases \textit{with} (T) and \textit{without} (NT) trees: $T_{\textit{mrt,T}}-T_{\textit{mrt,NT}}$ ($^{\circ}$C) at Muensterhof square ground at 6 different times of the day (03:00, 06:00, 09:00, 12:00, 15:00, and 18:00 (HH:MM)).}
+		\includegraphics[width=\textwidth]{\figdir/mhof_treegroupA_vs_notree_Tmrt_hourlyaveraged_ground-crop.png}
+		\caption{\highlight{Hourly-averaged mean radiant temperature difference between the cases \textit{with} (T) and \textit{without} (NT) tree: $T_{\textit{mrt,T}}-T_{\textit{mrt,NT}}$ ($^{\circ}$C) at Muensterhof square ground between 6 different times of the day (03:00 - 04:00, 06:00 - 07:00, 09:00 - 10:00, 12:00 - 13:00, 15:00 - 16:00, and 18:00 - 19:00 (HH:MM)).}}
 		\label{fig:mTmrtdiff_muensterhof}
 	\end{figure}
 
+
+\subsection{Comparison of the cases}
+
+
+\begin{figure}[p]
+	\centering
+	\includegraphics[width=\textwidth]{\figdir/mhof_treegroupA_vs_tree_vs_notree_TandTmrt_timeplot_type2-crop.pdf}
+	\caption{\highlight{Diurnal profile comparing three cases: no trees (\textit{None}), single tree (\textit{1 tree}), four trees (\textit{4 trees}): \subfig{a} average air temperature $T$ ($^{\circ}$C), \subfig{b} average mean radiant temperature $\textit{T}_{\textit{mrt}}$ ($^{\circ}$C), \subfig{c} air temperature difference with no tree case, and \subfig{d} mean radiant temperature with no tree case. The values are averaged over the entire Muensterhof square ground.}}
+	\label{fig:mhofprofile_T_Tmrt}
+\end{figure}
 
 \subsection{Conclusion}
 
