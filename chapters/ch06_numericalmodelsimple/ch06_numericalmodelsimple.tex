@@ -207,7 +207,7 @@ The vegetation model, described in \cref{sec:cons_incompressible,sec:simplifieds
 \subsection{Simulation domain}
 The simulation of single row of trees is represented by a 2D porous domain ($x\times z$ axis) consisting of a $1\times1$ m$^2$ ($x\times z$ axis) porous vegetation region as shown in \cref{fig:domain}, while infinitely long in the y-direction, where the source terms (\cref{sec:airdomain}) are non-zero. In this study, we want to focus on the physics behind the transpiration driven phenomena. Therefore, the dimension of the tree does not necessary require to be conform with reality and was simply based on computational efficiency for a rigorous parametric study. The computational domain is $35\times11.5$ m$^2$ ($x\times z$ axis) and the mesh resolution is determined by performing a grid sensitivity analysis. The domain is discretized into a regular grid with \num{40000} rectangular cuboidal cells. The smallest cell is at the edge of the tree row ($\Delta x = \Delta z = 0.01$ m) and the expansion ratio to the outflow, inlet, ground and top boundaries are 1.05, 1.05, 1.05, and 1.15, respectively. 
 
-	\begin{figure}[h]
+	\begin{figure}[t]
 	\centering
 	\includegraphics[width=\textwidth]{\figdir/domain-crop.pdf}
 	\caption{Simulation domain of the reference case with $H=1$ m with description of the domain and the boundary conditions. The porous vegetation region is indicated in green ({\color{flatuidarkgreen}$\blacksquare$}) where leaf area density $a=10$ m$^2$\,m$^{-3}$ and zero everywhere else. The red point ({\color{flatuidarkred}$\bullet$}) indicate the upstream $(x=-1.5H,y=H)$, blue ({\color{flatuidarkblue}$\bullet$}) indicate the downstream $(x=1.5H,y=H)$, and black ($\bullet$) indicate the shaded $(x=0,y=H/4)$ data sampling location.}
@@ -288,7 +288,7 @@ The algorithm of the vegetation model is implemented as an OpenFOAM C++ library.
 
 The vegetation model is first validated against the numerical and experiment study of \cite{Kichah2012}. The study provides measurement and numerical (CFD) results of flow through impatiens (jewelweed) plants in a greenhouse. The study investigates the heat and moisture exchanges between vegetation and the air and provides a comprehensive dataset of the response of vegetation to environmental conditions. The simulation domain is adapted according to the study, where the impatiens plants are placed on a table, \cref{fig:domain_validation}.
 
-	\begin{figure}[h]
+	\begin{figure}[t]
 		\centering
 		\includegraphics[width=\textwidth]{\figdir/domain_validation-crop.pdf}
 		\caption{Simulation domain and boundary conditions for the validation case \cite{Kichah2012}. The impatiens plant in indicated in green ({\color{flatuidarkgreen}$\blacksquare$}) and plant plot in orange ({\color{flatuiorange}$\blacksquare$}). Both are regions are modeled as porous zone with drag coefficients $c_d=0.32$ and $c_d=1$, respectively. The boundary conditions of the simulation are tabulated in \cref{tab:validationparameters} and correspond to 14:00 on June 15$^{\mathrm{th}}$, 2009.}
@@ -297,7 +297,7 @@ The vegetation model is first validated against the numerical and experiment stu
 
 The plants and the pots are both modeled as porous medium with different drag coefficients. The drag coefficient of the plant and pot are $c_d=0.32$ and $c_d=1$, respectively. The table is modeled as an internal wall (i.e. baffle) that enforces a standard wall boundary condition. The boundary condition of the ground is $T=T_g$ and standard wall functions are used. The top boundary is a symmetry plane. The outlet is taken to be far enough to ensure zero-normal gradient for all variables and a zero pressure is imposed. The inlet boundary conditions are tabulated in \cref{tab:validationparameters}, corresponding to a greenhouse in a sunny day on 15$^{\mathrm{th}}$ July 2009 at 14:00. Based on a mesh sensitivity analysis, (i.e., a grid refinement and solution convergence check), a regular grid discretization is chosen with smallest cells at the edge of the vegetation ($\Delta x=0.01,\,\Delta y=\num{0.0055}$) and a total number of cells of \num{24000}. The grid expansion ratio from the vegetation edges to the outflow, inlet, ground and top boundaries are $1.05$, $1.11$, $1.13$ and $1.15$, respectively. 
 
-	\begin{figure}[h]
+	\begin{figure}[t]
 	\centering
 	\includegraphics[width=\textwidth]{\figdir/comparions_TL_updated.png}
 	\caption{Comparison of leaf temperature $T_\mathit{leaf}$ ($^{\circ}$C) within vegetation ($-1.5\le x \le 1.5$) and ($0.9 \le z \le 1.35$): \subfig{a} present study and \subfig{b} numerical simulation results from \citep{Kichah2012}. The three dots (\textit{bottom}: $z=0.9$ m, \textit{middle}: $z=1.125$ m and \textit{top}: $z=1.35$ m) indicate the temperature probe positions, \cref{tab:comparisonT}.}

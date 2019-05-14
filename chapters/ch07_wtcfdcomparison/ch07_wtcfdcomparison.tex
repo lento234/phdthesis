@@ -69,7 +69,7 @@ where $A_l$ (m$^{2}$) is the net plant leaf area (both sides of the leaves) and 
 
 \subsection{Numerical solution}
 \label{subsec:numericalsolution_wtcomp}
-The problem is solved using the SIMPLE pressure-velocity coupling algorithm, obtaining a steady-state solution. The gradient terms are discretized using Gauss integration and interpolated using second-order central differencing scheme (\texttt{linear}). Similarly, the divergence terms are interpolated using a second-order linear upwind differencing scheme (\texttt{linearUpwind}). The pressure is solved using geometric-algebraic multi-grid (GAMG) solver and preconditioned with diagonal incomplete-Cholesky (DIG) smoother, whereas velocity is solved using Preconditioned bi-conjugate gradient (PBiCG) solver with diagonal incomplete-LU (DILU) preconditioner. The matrix solvers are iteratively solved until the residuals of pressure are below $\num{1e-5}$ and below $\num{1e-6}$ for all the other variables. Furthermore, under-relaxation factors are used with $\alpha_p = 0.3$ for pressure, $\alpha_u = 0.7$ for velocity (ensuring $\alpha_p + \alpha_u = 1$) and $\alpha_k = \alpha_{\varepsilon}=0.5$. The under-relaxation factors are modified to $\alpha_p=0.7$ and $\alpha_u=0.3$ when solving for non-isothermal case to ensure stable convergence.
+The problem is solved using the SIMPLE pressure-velocity coupling algorithm, obtaining a steady-state solution. The gradient terms are discretized using Gauss integration and interpolated using second-order central differenc\-ing sch\-eme (\texttt{linear}). Similarly, the divergence terms are interpolated using a second-order linear upwind differenc\-ing scheme (\texttt{linearUpwind}). The pressure is solved using geometric-algebraic multi-grid (GAMG) solver and preconditioned with diagonal incomplete-Cholesky (DIG) smoother, whereas velocity is solved using Preconditioned bi-conjugate gradient (PBiCG) solver with diagonal in\-comp\-lete-LU (DILU) pre\-conditioner. The matrix solvers are iterative\-ly solved until the residuals of pressure are below $\num{1e-5}$ and below $\num{1e-6}$ for all the other variables. Furthermore, under-relaxation factors are used with $\alpha_p = 0.3$ for pressure, $\alpha_u = 0.7$ for velocity (ensuring $\alpha_p + \alpha_u = 1$) and $\alpha_k = \alpha_{\varepsilon}=0.5$. The under-relaxation factors are modified to $\alpha_p=0.7$ and $\alpha_u=0.3$ when solving for non-iso\-thermal case to ensure stable convergence.
 
 \section{Flow field}
 \label{sec:flowfield}
@@ -91,9 +91,7 @@ pos = t,]{lll}{}{
 	 																		& &		 por. $k-\varepsilon$, por. real. $k-\varepsilon$]	                
 	\LL}
 
-	
-
-\begin{figure}[h]
+\begin{figure}[t]
 	\centering
 	\includegraphics[width=\textwidth]{\figdir/basecase_vertical_UTKEstreamline_inlettype3-crop.pdf}
 	\caption{Vertical plane at the center-line (i.e., at $\hat{y}=0$) from numerical simulation: \subfig{a} normalized  streamwise velocity $\overline{u}/U_H$ and \subfig{b} normalized  turbulent kinetic energy $k/U_H^2$ around the plant. The heterogeneous leaf area density $a$ is indicated with red iso-contour lines of $a = [20$, $40$, $60$, $80$, $100$, $120$, $140]$ m$^2$\,m$^{-3}$ and the drag coefficient is $c_d=0.5$.}
@@ -198,7 +196,7 @@ where $\mvec{c}=({{c_\mu },{c_{1\varepsilon }},{c_{2\varepsilon }},{c_{4\varepsi
 
 Finally, the numerical prediction of the thermal impact of the plant is compared with the hygrothermal wind tunnel measurements with ambient conditions $T = 21$ $^{\circ}$C, $25$\% relative humidity and plant-canopy incident solar radiation levels $q_{\textit{r,sw}} = \left[0,\ 100\right]$ W\,m$^{-2}$. To study the hygrothermal conditions, the temperature and humidity equations are solved where the additional plant source is determined using the leaf energy balance approach described in \cref{ch:parametricstudy}. Additionally, the resistance-based aerodynamic and stomatal models described in the chapter are used to parameterize the heat and mass flux between the foliage and air. The minimum stomatal resistance of the plant is set to $r_{\textit{s,min}} = 400$ s\,m$^{-1}$ (in \cref{eq:rs}), a typical value for deciduous plants \citep{Baille1994,Bruse1998}. Furthermore, it is equivalent to a stomatal conductance of $k_{\textit{st}} = 40$ mmol\,m$^{-2}$\,s$^{-1}$ (see \cref{eq:ksteff} ), typical of a \textit{Buxus} \textit{sempervirens} \citep{Rodriguez-Calcerrada2013a,Letts2012}. In our study, the characteristic plant leaf size is set to $l=3$ cm, obtained from measurements.
 
-\begin{figure}[h]
+\begin{figure}[t]
 	\centering
 	\includegraphics[width=\textwidth]{\figdir/vert_hygrothermal_plane_inlettype3-crop.pdf}
 	\caption{Center-plane (i.e., $y=0$) hygrothermal condition of the flow at day-time with $T = 21$ $^{\circ}$C, $\textit{RH}=25$\% and $q_{\textit{r,sw,0}} = 100$ W\,m$^{-2}$: \subfig{a} air temperature $T$ ($^{\circ}$C) and \subfig{b} relative humidity $\mathit{RH}$ (\%).}

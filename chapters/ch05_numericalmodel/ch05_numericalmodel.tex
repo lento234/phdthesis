@@ -7,7 +7,7 @@
 
 \lettrine[lines=3,nindent=0em,loversize=0.1]{I}{n} this chapter, the numerical method for modeling vegetation inside an urban area is described. The numerical model consists of air domain model (\cref{sec:airdomain}), solid domain model (\cref{sec:soliddomain}) and the radiation model \cref{sec:radiationmodel}. \cref{fig:fullmodelcoupling} shows the coupling between these three models and the parameters that are communicated between them. A detailed description of the coupling algorithm is provided in \cref{sec:couplingalgorithm}. 
 
-\begin{figure}[h]
+\begin{figure}[t]
 	\centering
 	\includegraphics[width=\textwidth]{\figdir/fullmodelcoupling-crop.pdf}
 	\caption{Coupling of the \textit{vegetation} model with \textit{air} domain solver, \textit{solid} domain solver, and the \textit{radiation} model. The parameters and the arrow indicate the transfer of information to couple the models. }
@@ -160,7 +160,7 @@ with model constants $C_{4\varepsilon}=0.9$ and $C_{5\varepsilon}=0.9$ \citep{Ka
 
 The heat and mass exchanges between the tree canopy and the air are simulated using a leaf energy model. The heat and mass exchanges between the tree canopy and the air are simulated using a leaf energy balance as shown in \cref{fig:leaf_energybalance}. We assume a stationary leaf energy balance and that the dynamic thermal storage of heat in leaves can be neglected.
 
-\begin{figure}[h]
+\begin{figure}[t]
 	\centering
 	\includegraphics[width=0.8\textwidth]{\figdir/leafsurface-crop.pdf}
 	\caption{Schematic representation of leaf surface with energy balance as given by \cref{eq:energybalance}. The radiative flux $q_{\mathit{rad,leaf}}$  absorbed by the leaf is balanced by the sensible $q_{\mathit{sen,leaf}}$ and the latent heat flux $q_{\mathit{lat,leaf}}$ leaving the leaf surface. The stomatal resistance 
