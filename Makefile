@@ -8,7 +8,8 @@ FILE 	 = thesis
 
 # Tools
 LATEX 	 = latex
-PDFLATEX = pdflatex -shell-escape
+PDFLATEX = pdflatex -synctex=1 -interaction=nonstopmode
+#PDFLATEX = pdflatex -shell-escape
 BIBTEX   = biber
 MKINDEX  = makeindex
 
@@ -38,6 +39,7 @@ index: fast
 	@echo "------------------------------------------------------------------"
 	@echo "------------------------------------------------------------------"
 	$(MKINDEX) $(FILE).idx
+	$(MKINDEX) $(FILE).idx
 	@echo "------------------------  D O N E  -------------------------------"
 	@echo ""
 	@echo ""
@@ -48,6 +50,7 @@ bib: fast
 	@echo "------------  M A K I N G    B I B L I O G R A P H Y  ------------"
 	@echo "------------------------------------------------------------------"
 	@echo "------------------------------------------------------------------"
+	$(BIBTEX) $(FILE).bcf
 	$(BIBTEX) $(FILE).bcf
 	@echo "------------------------  D O N E  -------------------------------"
 	@echo ""
