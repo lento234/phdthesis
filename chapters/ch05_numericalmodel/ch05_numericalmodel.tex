@@ -5,7 +5,7 @@
 
 \section{Introduction}
 
-\lettrine[lines=3,nindent=0em,loversize=0.1]{I}{n} this chapter, the numerical method for modeling vegetation inside an urban area is described. The numerical model consists of air domain model (\cref{sec:airdomain}), solid domain model (\cref{sec:soliddomain}) and the radiation model \cref{sec:radiationmodel}. \cref{fig:fullmodelcoupling} shows the coupling between these three models and the parameters that are communicated between them. A detailed description of the coupling algorithm is provided in \cref{sec:couplingalgorithm}. 
+\lettrine[lines=3,nindent=0em,loversize=0.1]{I}{n} this chapter, the numerical method for modeling vegetation inside an urban area is described. The numerical model consists of air domain model (\cref{sec:airdomain}), solid domain model (\cref{sec:soliddomain}) and the radiation model (\cref{sec:radiationmodel}). \cref{fig:fullmodelcoupling} shows the coupling between these three models and the parameters that are communicated between them. A detailed description of the coupling algorithm is provided in \cref{sec:couplingalgorithm}. 
 
 \begin{figure}[t]
 	\centering
@@ -18,11 +18,11 @@ The \textit{air} domain model describes the transport of moist air through veget
 
 \section{Air domain: Transport of moist air}
 \label{sec:airdomain}
-The simplified vegetation model is described in \cref{ch:parametricstudy}, introduction the governing equation for moist flow through vegetation. The vegetation model, consisting of the ``\textit{leaf energy balance}'' (LEB) model, provides the necessary source (or sink) terms for heat, mass and momentum exchanges between vegetation and air as described in \cref{sec:cons_incompressible}. For the reader, a detailed derivation of the thermodynamics of the moist air is given in \cref{app:thermodynamics} and a detailed derivation of the governing equation of moist flow is given in \cref{app:conservation}. In this section, we summarize the pseudo-compressible form of governing equation for moist flow through vegetation where the buoyancy force is directly obtained from the density field.  
+The simplified vegetation model is described in \cref{ch:parametricstudy}, introduction the governing equation for moist flow through vegetation. The vegetation model, consisting of the ``\textit{leaf energy balance}'' (LEB) model, provides the necessary source (or sink) terms for heat, mass and momentum exchanges between vegetation and air as described in \cref{sec:cons_incompressible}. For the reader, a detailed derivation of the thermodynamics of the moist air is given in \cref{app:thermodynamics} and a detailed derivation of the governing equation of moist flow is given in \cref{app:conservation}. In this section, we summarize the pseudo-compressible \highlight{form of the governing equation} for moist flow through vegetation where the buoyancy force is directly obtained from the density field.  
 
 
 \subsection*{Conservation of species}
-The governing equation consists of conservation of mass, momentum, energy, and species. The conservation equations are given in differential form in a Cartesian coordinate system described by the triplet $\mvec{x} = (x,y,z)$. In our study, the species of interest is water vapor (subscript $v$) and carbon-dioxide (CO$_2$) (subscript $c$). The conservation of species $i$ is given as:
+The governing equation consists of conservation of mass, momentum, energy, and species. The conservation equations are given in differential form in a Cartesian coordinate system described by the triplet $\mvec{x} = (x,y,z)$. In our study, the species of interest \highlight{are} water vapor (subscript $v$) and carbon-dioxide (CO$_2$) (subscript $c$). The conservation of species $i$ is given as:
 \begin{equation}
 \frac{\partial \rho x_i}{\partial t} + \nabla  \cdot \left( \rho x_i \mvec{u} \right) = - \nabla \cdot \mvec{g}_{\textit{d,i}} + s_i
 \label{eq:xi}
@@ -119,7 +119,7 @@ Applying this averaging operator to the NS equations, resulting Reynolds-Average
 \begin{equation}
 \frac{\partial \overline{\rho}\,\overline{\mvec{u}}}{\partial t}  + \nabla \cdot \left(\overline{\rho}\,\overline{\mvec{u}}\,\overline{\mvec{u}}\right) = -\nabla \overline{p} + \mu \nabla^2 \overline{\mvec{u}} - \nabla \cdot \left(\overline{\rho \mvec{u}' \mvec{u}'}\right)+ \rho \mvec{g} + s_u
 \end{equation}
-where $\overline{\rho \mvec{u}' \mvec{u}'}$ is the Reynolds stresses. The Reynolds stresses are modeled using Bousinessq eddy-viscosity assumption:
+where $\overline{\rho \mvec{u}' \mvec{u}'}$ is the \highlight{Reynolds stress tensor}. The Reynolds stresses are modeled using Bousinessq eddy-viscosity assumption:
 \begin{equation}
 - \overline{\rho \mvec{u}' \mvec{u}'} = \mu_t \left(\nabla u + \nabla u^T\right) - \frac{2}{3}\rho k \mvec{I}
 \end{equation}
@@ -128,7 +128,7 @@ where:
 \mu_t = \rho C_\mu \frac{k^2}{\varepsilon}
 \end{equation}
 
-In this study, we employ realizable $k-\varepsilon$ equations for determining the eddy-viscosity. The system of equations is given as:
+In this study, we employ realizable $k-\varepsilon$ equations for determining the eddy-viscosity \citep{Shih1995}. The system of equations is given as:
 \begin{align}
 \frac{{\partial \rho k}}{{\partial t}} + \nabla \cdot \left(\rho k \tavg{\mvec{u}} \right)   &= \nabla  \cdot \left[ {\left( {\mu  + \frac{{{\mu _t}}}{{{\sigma _k}}}} \right)\nabla k} \right] + {P_k} - \rho \varepsilon  + s_k,\\
 \frac{{\partial \rho \varepsilon }}{{\partial t}} +  \nabla \cdot \left(\rho \varepsilon \tavg{\mvec{u}} \right) &= \nabla  \cdot \left[ {\left( {\mu  + \frac{{{\mu _t}}}{{{\sigma _\varepsilon }}}} \right)\nabla \varepsilon } \right] + \rho{C_{1\varepsilon }}{P_k}\frac{\varepsilon }{k} - \rho{C_{2\varepsilon }}\frac{{{\varepsilon ^2}}}{{k + \sqrt {\nu \varepsilon } }} + s_\varepsilon
@@ -1174,7 +1174,7 @@ The air domain is solved using $m$ pseudo steady-state timestep, discretizing th
 	\end{enumerate}
 	\item Calculate all vegetation source terms $s_\rho$, $\mvec{s}_u$, $s_T$, $s_w$, $s_k$ and $s_{\varepsilon}$ (see \cref{sec:airdomain}).
 	\item Solve for the steady-state airflow field for $t^{m+1}$.
-	\item Repeat steps (2) to (4) until residuals have reached the convergence limit of $\epsilon < \num{e-6}$.
+	\item Repeat steps (2) to (4) until \highlight{scaled residuals} have reached the convergence limit of $\epsilon < \num{e-6}$.
 \end{enumerate}
 
 \subsection{Solid domain}

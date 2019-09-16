@@ -47,11 +47,11 @@ The numerical domain is based on the geometry of the wind tunnel test-section wi
 	\varepsilon  &= \frac{{u_*^3}}{{\kappa \left( {z + {z_0}} \right)}}
 	\label{eq:ableq}
 \end{align}
-where $\tavg{u}(z)$ (m\,s$^{-1}$) is the mean horizontal velocity, $u_*= \num{0.05052531}$ m\,s$^{-1}$ is  the friction velocity, $\kappa=0.41$ is von K\'arm\'an constant, $z_0 = \num{0.00133508}$ m is the aerodynamic roughness height and $C_{\mu}=0.09$. The inlet turbulent intensity is $I = \sqrt{2/3\,k}/U_{ref} = 12.1 \%$. The roughness height $z_0$ and the friction velocity $u_*$ is obtained using curve-fit of the measured PIV profile. The outlet boundary condition is defined as pressure outlet with a static pressure $p=0$. A zero-gradient boundary condition is enforced for $\mvec{u}$, $k$, and $\varepsilon$. The remaining boundaries (i.e., top-wall and side-walls) are modeled as no-slip wall-boundary and with standard wall functions.
+where $\tavg{u}(z)$ (m\,s$^{-1}$) is the mean horizontal velocity, $u_*= \num{5.053e-2}$ m\,s$^{-1}$ is  the friction velocity, $\kappa=0.41$ is von K\'arm\'an constant, $z_0 = \num{1.335e-3}$ m is the \highlight{aerodynamic roughness length} and $C_{\mu}=0.09$. The inlet turbulent intensity is $\textit{I} = \sqrt{2/3\,k}/U_{ref} = 12.1 \%$. The \highlight{roughness length} $z_0$ and the friction velocity $u_*$ is obtained using curve-fit of the measured PIV profile. The outlet boundary condition is defined as pressure outlet with a static pressure $p=0$. A zero-gradient boundary condition is enforced for $\mvec{u}$, $k$, and $\varepsilon$. The remaining boundaries (i.e., top-wall and side-walls) are modeled as no-slip wall-boundary and with standard wall functions.
 
 \subsection{Vegetation: Leaf area density}
 
-The vegetation is modeled as a porous medium parameterized using a leaf area density $a$ (m$^2$\,m$^{-3}$) distribution and a constant leaf drag coefficient $c_d$. For a detailed description, see \cref{sec:airdomain}. The source terms for momentum $\mvec{s}_u$ (N\,m$^{-3}$) , turbulence kinetic energy $s_k$ (W\,m$^{-3}$), and the turbulence dissipation rate $s_{\varepsilon}$ (W\,m$^{-3}$\,s$^{-1}$) are given as:
+The vegetation is modeled as a porous medium parameterized using a leaf area density $a$ (m$^2$\,m$^{-3}$) distribution and a constant leaf drag coefficient $c_d$. For a detailed description, see \cref{sec:airdomain}. The source terms for momentum $\mvec{s}_u$ (N\,m$^{-3}$) , turbulence kinetic energy $s_k$ (W\,m$^{-3}$), and the turbulence dissipation rate $s_{\varepsilon}$ (W\,m$^{-3}$\,s$^{-1}$) are given as \citep{Katul2004, Kenjeres2013, Sanz2003}:
 	\begin{align}
 		\mvec{s}_u &=  - \rho {c_d}a\left| \tavg{\mvec{u}} \right|\tavg{\mvec{u}} 	\label{eq:source_veg1}	 \\
 		s_k &= \rho {c_d}a\left( \beta _p \left| \tavg{\mvec{u}} \right|^3 - \beta _d\left| \tavg{\mvec{u}} \right|k \right) \label{eq:source_veg2} \\
@@ -69,7 +69,7 @@ where $A_l$ (m$^{2}$) is the net plant leaf area (both sides of the leaves) and 
 
 \subsection{Numerical solution}
 \label{subsec:numericalsolution_wtcomp}
-The problem is solved using the SIMPLE pressure-velocity coupling algorithm, obtaining a steady-state solution. The gradient terms are discretized using Gauss integration and interpolated using second-order central differenc\-ing sch\-eme (\texttt{linear}). Similarly, the divergence terms are interpolated using a second-order linear upwind differenc\-ing scheme (\texttt{linearUpwind}). The pressure is solved using geometric-algebraic multi-grid (GAMG) solver and preconditioned with diagonal incomplete-Cholesky (DIG) smoother, whereas velocity is solved using Preconditioned bi-conjugate gradient (PBiCG) solver with diagonal in\-comp\-lete-LU (DILU) pre\-conditioner. The matrix solvers are iterative\-ly solved until the residuals of pressure are below $\num{1e-5}$ and below $\num{1e-6}$ for all the other variables. Furthermore, under-relaxation factors are used with $\alpha_p = 0.3$ for pressure, $\alpha_u = 0.7$ for velocity (ensuring $\alpha_p + \alpha_u = 1$) and $\alpha_k = \alpha_{\varepsilon}=0.5$. The under-relaxation factors are modified to $\alpha_p=0.7$ and $\alpha_u=0.3$ when solving for non-iso\-thermal case to ensure stable convergence.
+The problem is solved using the SIMPLE pressure-velocity coupling algorithm, obtaining a steady-state solution. The gradient terms are discretized using Gauss integration and interpolated using second-order central differenc\-ing sch\-eme (\texttt{linear}). Similarly, the divergence terms are interpolated using a second-order linear upwind differenc\-ing scheme (\texttt{linearUpwind}). The pressure is solved using geometric-algebraic multi-grid (GAMG) solver and preconditioned with diagonal incomplete-Cholesky (DIG) smoother, whereas velocity is solved using Preconditioned bi-conjugate gradient (PBiCG) solver with diagonal in\-comp\-lete-LU (DILU) pre\-conditioner. The matrix solvers are iterative\-ly solved until the \highlight{scaled residuals} of pressure are below $\num{1e-5}$ and below $\num{1e-6}$ for all the other variables. Furthermore, under-relaxation factors are used with $\alpha_p = 0.3$ for pressure, $\alpha_u = 0.7$ for velocity (ensuring $\alpha_p + \alpha_u = 1$) and $\alpha_k = \alpha_{\varepsilon}=0.5$. The under-relaxation factors are modified to $\alpha_p=0.7$ and $\alpha_u=0.3$ when solving for non-iso\-thermal case to ensure stable convergence.
 
 \section{Flow field}
 \label{sec:flowfield}
@@ -91,23 +91,65 @@ pos = t,]{lll}{}{
 	 																		& &		 por. $k-\varepsilon$, por. real. $k-\varepsilon$]	                
 	\LL}
 
-\begin{figure}[t]
+%\begin{figure}[t]
+%	\centering
+%	\includegraphics[width=\textwidth]{\figdir/basecase_vertical_UTKEstreamline_inlettype3-crop.pdf}
+%	\caption{Vertical plane at the center-line (i.e., at $\hat{y}=0$) from numerical simulation: \subfig{a} normalized  streamwise velocity $\overline{u}/U_H$ and \subfig{b} normalized  turbulent kinetic energy $k/U_H^2$ around the plant. The heterogeneous leaf area density $a$ is indicated with red iso-contour lines of $a = [20$, $40$, $60$, $80$, $100$, $120$, $140]$ m$^2$\,m$^{-3}$ and the drag coefficient is $c_d=0.5$.}
+%	\label{fig:basecase_vertical_UTKEstreamline}
+%\end{figure}
+
+\begin{sidewaysfigure}[p]
 	\centering
-	\includegraphics[width=\textwidth]{\figdir/basecase_vertical_UTKEstreamline_inlettype3-crop.pdf}
+	\includegraphics[width=0.9\textwidth]{\figdir/basecase_vertical_UTKEstreamline_inlettype3_corrected-crop.pdf}
 	\caption{Vertical plane at the center-line (i.e., at $\hat{y}=0$) from numerical simulation: \subfig{a} normalized  streamwise velocity $\overline{u}/U_H$ and \subfig{b} normalized  turbulent kinetic energy $k/U_H^2$ around the plant. The heterogeneous leaf area density $a$ is indicated with red iso-contour lines of $a = [20$, $40$, $60$, $80$, $100$, $120$, $140]$ m$^2$\,m$^{-3}$ and the drag coefficient is $c_d=0.5$.}
 	\label{fig:basecase_vertical_UTKEstreamline}
-\end{figure}
+\end{sidewaysfigure}
 
 \cref{fig:basecase_vertical_UTKEstreamline} shows the stream-wise velocity $\overline{u}/U_H$ and TKE $k/U_H^2$ around (and within) the plant. The leaf area density is depicted using the iso-contour lines of $a = [20$, $40$, $60$, $80$, $100$, $120$, $140]$ m$^2$\,m$^{-3}$ determined using \cref{eq:leafdensitywteq}. It is seen to vary in space with peak density located approximately in the middle of the plant ($\hat{x}=-0.5$, $\hat{z}=0.5$). The velocity field is plotted together with the streamlines (\cref{fig:basecase_vertical_UTKEstreamline}a). The near-wake of the plant is consists of recirculation zone below $\hat{z} = 0.5$, indicated by negative stream-wise velocity. The highest TKE is observed at the plant-canopy height $\hat{z} = 1$, with peak TKE at approximately $\hat{x} = 1$. Therefore, the wake turbulence is seen to dominantly affected by the shear-zone generated by the plant canopy.
 
 \cref{fig:basecase_horiz_U} show the normalized mean velocity magnitude at 8 horizontal planes where the PIV measurement were obtained in \cref{ch:microclimatestudy} as shown in \cref{fig:meanflow}. Additionally, the velocity field is plotted together with the streamlines. Comparing with experimental data, we see that both the numerical model and experiment measurement shows a recirculation zone behind the tree at $\hat{z}=$ [$0.29$,\,$0.43$]. However, at $\hat{z}= 0.57$ and $\hat{z}=0.71$, the numerical prediction deviates from the experimental observations. The complex streamlines as observed from experimental data are not present in the numerical simulation but instead show more of a bleed type of flow. Furthermore, the velocity deficit predicted by the simulation at $\hat{z}\le 1$ is slightly lower than in the experimental observation. This minor discrepancy can be attributed to the plant foliage is represented in the simulation. We have employed a porous media approach, where instead of directly representing the topology of the plant, we have parameterized it using leaf area density. Essentially, a spatial low pass filter has been applied to the plant topology and is represented by a density function. Such representation is known to comprise the prediction of spatial variability of the wake velocity statistics \citep{Endalew2009}.  
 
-\begin{sidewaysfigure}[p]
+%\begin{sidewaysfigure}[p]
+%	\centering
+%	\includegraphics[width=\textwidth]{\figdir/basecase_horiz_U_inlettype3-crop.pdf}
+%	\caption{Normalized mean velocity magnitude $|\tavg{\mvec{u}}|/U_H$ at 8 horizontal planes, $\hat{z}=$ [$0.29$,\,$0.43$,\,$0.57$, $0.71$, $0.86$, $1.0$, $1.14$, $1.29]$. The experimental results of the same location at shown in \cref{fig:meanflow}.}
+%	\label{fig:basecase_horiz_U}
+%\end{sidewaysfigure}
+%
+%\begin{sidewaysfigure}[p]
+%	\centering
+%	\includegraphics[width=\textwidth]{\figdir/hAll_flow_mean_updated.png}
+%	\caption{Normalized mean velocity magnitude $|\tavg{\mvec{u}}|/U_H$ at 8 horizontal planes, $\hat{z}=$ [$0.29$,\,$0.43$,\,$0.57$, $0.71$, $0.86$, $1.0$, $1.14$, $1.29]$ where the red shaded area indicates the location of the tree. The horizontal plane location is indicated by the red line in the in the sub-box.}
+%	\label{fig:meanflow}
+%\end{sidewaysfigure}
+%
+%\begin{sidewaysfigure}[p]
+%	\centering
+%	\includegraphics[width=\textwidth]{\figdir/basecase_horiz_U_inlettype3-crop.pdf}
+%	\caption{Normalized mean velocity magnitude $|\tavg{\mvec{u}}|/U_H$ at 8 horizontal planes, $\hat{z}=$ [$0.29$,\,$0.43$,\,$0.57$, $0.71$, $0.86$, $1.0$, $1.14$, $1.29]$. The experimental results of the same location at shown in \cref{fig:meanflow}.}
+%	\label{fig:basecase_horiz_U}
+%\end{sidewaysfigure}
+
+\begin{figure}[p]
 	\centering
-	\includegraphics[width=\textwidth]{\figdir/basecase_horiz_U_inlettype3-crop.pdf}
-	\caption{Normalized mean velocity magnitude $|\tavg{\mvec{u}}|/U_H$ at 8 horizontal planes, $\hat{z}=$ [$0.29$,\,$0.43$,\,$0.57$, $0.71$, $0.86$, $1.0$, $1.14$, $1.29]$. The experimental results of the same location at shown in \cref{fig:meanflow}.}
+	\begin{subfigure}[b]{\textwidth}
+		\includegraphics[width=\textwidth]{\figdir/hAll_flow_mean_updated.png}
+		\caption{PIV measurement}
+		\label{fig:gull}
+	\end{subfigure}
+	~
+	
+	%add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc. 
+	%(or a blank line to force the subfigure onto a new line)
+	\begin{subfigure}[b]{0.99\textwidth}
+		\includegraphics[width=\textwidth]{\figdir/basecase_horiz_U_inlettype3-crop.pdf}
+		\caption{CFD simulation}
+		\label{fig:tiger}
+	\end{subfigure}
+	\caption{Normalized mean velocity magnitude $|\tavg{\mvec{u}}|/U_H$ at 8 horizontal planes, $\hat{z}=$ [$0.29$,\,$0.43$,\,$0.57$, $0.71$, $0.86$, $1.0$, $1.14$, $1.29]$.}
 	\label{fig:basecase_horiz_U}
-\end{sidewaysfigure}
+\end{figure}
+
 
 
 \begin{sidewaysfigure}[p]

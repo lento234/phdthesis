@@ -382,8 +382,8 @@ vmargin=2.5cm, % top and bottom margins
 
 %If you are compiling your thesis on linux (or OSX), use the backend biber
 
-% \usepackage[backend=biblatex,
-\usepackage[backend=biber,
+ \usepackage[backend=bibtex,
+%\usepackage[backend=biber,
 style=authoryear,
 dashed=false,
 doi=false,
@@ -406,11 +406,7 @@ useprefix=true,
 \renewcommand{\cite}[1]{\textcite{#1}}
 
 %\addbibresource{frontbackmatter/bibliography.bib}
-
-%\addbibresource{/Users/lento/Documents/phd/literature/library.bib} % mac empa
-%\addbibresource{/Users/Lento/Documents/phd/publications/library.bib} % personal 
-
-\addbibresource{frontbackmatter/library.bib}
+\addbibresource{frontbackmatter/library_final.bib}
 
 %\bibliography{../../publications/library.bib}
 %\addbibresource{../../literature/library.bib}

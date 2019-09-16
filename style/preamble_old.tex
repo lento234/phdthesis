@@ -1,0 +1,502 @@
+% document options
+
+%------------------------------------------------------------
+% Formatting packages
+\usepackage{blindtext}
+\usepackage{scrlayer-scrpage}
+%\usepackage[raggedright]{titlesec}
+\usepackage[titletoc]{appendix}
+\usepackage{rotating}
+\usepackage{setspace}
+%\usepackage{flipbook}
+%------------------------------------------------------------
+
+%------------------------------------------------------------
+% character encoding and languages
+%\usepackage[russian, american, ngerman]{babel}
+\usepackage[american, ngerman]{babel}
+\usepackage[T2A, T1]{fontenc}
+\usepackage[utf8]{inputenc}
+%\input glyphtounicode
+%\pdfgentounicode=1
+%------------------------------------------------------------
+
+%------------------------------------------------------------
+% math packages
+%\usepackage{bm}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{mathtools}
+%\usepackage{math}
+\usepackage{xfrac}
+\usepackage{siunitx} % use SI unit
+
+%------------------------------------------------------------
+\DeclareSymbolFont{sfletters}{OML}{cmbrm}{b}{it}
+
+\DeclareMathSymbol{\salpha}{\mathord}{sfletters}{"0B}
+\DeclareMathSymbol{\sbeta}{\mathord}{sfletters}{"0C}
+\DeclareMathSymbol{\sgamma}{\mathord}{sfletters}{"0D}
+\DeclareMathSymbol{\sdelta}{\mathord}{sfletters}{"0E}
+\DeclareMathSymbol{\sepsilon}{\mathord}{sfletters}{"0F}
+\DeclareMathSymbol{\szeta}{\mathord}{sfletters}{"10}
+\DeclareMathSymbol{\seta}{\mathord}{sfletters}{"11}
+\DeclareMathSymbol{\stheta}{\mathord}{sfletters}{"12}
+\DeclareMathSymbol{\siota}{\mathord}{sfletters}{"13}
+\DeclareMathSymbol{\skappa}{\mathord}{sfletters}{"14}
+\DeclareMathSymbol{\slambda}{\mathord}{sfletters}{"15}
+\DeclareMathSymbol{\smu}{\mathord}{sfletters}{"16}
+\DeclareMathSymbol{\snu}{\mathord}{sfletters}{"17}
+\DeclareMathSymbol{\sxi}{\mathord}{sfletters}{"18}
+\DeclareMathSymbol{\spi}{\mathord}{sfletters}{"19}
+\DeclareMathSymbol{\srho}{\mathord}{sfletters}{"1A}
+\DeclareMathSymbol{\ssigma}{\mathord}{sfletters}{"1B}
+\DeclareMathSymbol{\stau}{\mathord}{sfletters}{"1C}
+\DeclareMathSymbol{\supsilon}{\mathord}{sfletters}{"1D}
+\DeclareMathSymbol{\sphi}{\mathord}{sfletters}{"1E}
+\DeclareMathSymbol{\schi}{\mathord}{sfletters}{"1F}
+\DeclareMathSymbol{\spsi}{\mathord}{sfletters}{"20}
+\DeclareMathSymbol{\somega}{\mathord}{sfletters}{"21}
+\DeclareMathSymbol{\svarepsilon}{\mathord}{sfletters}{"22}
+\DeclareMathSymbol{\svartheta}{\mathord}{sfletters}{"23}
+\DeclareMathSymbol{\svarpi}{\mathord}{sfletters}{"24}
+\DeclareMathSymbol{\svarrho}{\mathord}{sfletters}{"25}
+\DeclareMathSymbol{\svarsigma}{\mathord}{sfletters}{"26}
+\DeclareMathSymbol{\svarphi}{\mathord}{sfletters}{"27}
+%------------------------------------------------------------
+
+%------------------------------------------------------------
+% thesis style
+\usepackage[%
+%    drafting,
+%    minionpro,
+%    minionprospacing,
+    dottedtoc,
+    floatperchapter,
+    parts,
+	eulerchapternumbers,
+]{classicthesis}
+%\usepackage{MnSymbol}
+%\usepackage[authordate]{biblatex-chicago}
+
+\titleformat{\chapter}[display]%
+{\relax}{\vspace*{0\baselineskip}\makebox[\linewidth][r]{\color{halfgray}\chapterNumber\thechapter}}{15pt}%
+{\large\raggedright\spacedallcaps}[\normalsize\vspace*{.8\baselineskip}\titlerule]%
+
+
+%------------------------------------------------------------
+
+%------------------------------------------------------------
+% define page size and margins for the final print
+\usepackage{geometry}
+% for e-version
+%\geometry{paperwidth=17.00cm,paperheight=24.589cm,
+% for print, with large margin
+\geometry{paperwidth=18.91cm,paperheight=24.589cm,
+bindingoffset=0.89cm, %print version
+%bindingoffset=0cm, % e-version
+inner=2cm, % inside margin
+outer=2.5cm, %for print version
+%%outer=2cm, %for e-version
+vmargin=2.5cm, % top and bottom margins
+%marginparsep=0.6cm,
+%marginparwidth=3cm,
+}
+%------------------------------------------------------------
+
+%------------------------------------------------------------
+% Counters
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
+%------------------------------------------------------------
+
+%------------------------------------------------------------
+% Figures, Tables, captions
+\usepackage{tabularx}
+\usepackage{ltablex} 
+\usepackage{longtable}
+\newcommand{\tableheadline}[1]{\multicolumn{1}{c}{\spacedlowsmallcaps{#1}}}
+%------------------------------------------------------------
+
+
+%------------------------------------------------------------
+% algorithms
+\usepackage[chapter]{algorithm}
+\usepackage{algorithmic}
+%\usepackage{listing} % 
+%\usepackage{minted} % for source codes
+%\usepackage{ifthen}
+\usepackage{enumitem}
+
+%------------------------------------------------------------
+
+
+%------------------------------------------------------------
+% notation
+\usepackage{style/notation}
+%------------------------------------------------------------
+
+
+%------------------------------------------------------------
+% fixes for marginpar and latex
+\usepackage{mparhack}
+\usepackage{fixltx2e} 
+\usepackage{tocstyle}
+
+%------------------------------------------------------------
+
+
+%------------------------------------------------------------
+% indexing
+\usepackage{makeidx}
+\makeindex
+%------------------------------------------------------------
+
+%------------------------------------------------------------
+% graphics, figures, captions
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{tikz} % flowchart
+%------------------------------------------------------------
+
+%------------------------------------------------------------
+% tikz setup
+
+% Flowchart definition
+\usetikzlibrary{calc,trees,positioning,arrows,chains,shapes.geometric,%
+	decorations.pathreplacing,decorations.pathmorphing,shapes,%
+	matrix,shapes.symbols}
+
+\tikzset{
+	>=stealth',
+	punktchain/.style={
+		rectangle, 
+		%rounded corners, 
+		fill=black!10,
+		%draw=black, % very thick,
+		text width=15em, 
+		minimum height=3em, 
+		text centered, 
+		on chain},
+	line/.style={draw, thick, <-},
+	element/.style={
+		tape,
+		top color=white,
+		bottom color=blue!50!black!60!,
+		minimum width=8em,
+		draw=blue!40!black!90, very thick,
+		text width=10em, 
+		minimum height=3.5em, 
+		text centered, 
+		on chain},
+	every join/.style={->, thick,shorten >=1pt},
+	decoration={brace},
+	tuborg/.style={decorate},
+	tubnode/.style={midway, right=2pt},
+}
+
+\tikzset{
+	>=stealth',
+	punktchainN/.style={
+		rectangle, 
+		%rounded corners, 
+		fill=black!5,
+		%draw=black, % very thick,
+		text width=15em, 
+		minimum height=3em, 
+		text centered, 
+		on chain},
+	line/.style={draw, thick, <-},
+	element/.style={
+		tape,
+		top color=white,
+		bottom color=blue!50!black!60!,
+		minimum width=8em,
+		draw=blue!40!black!90, very thick,
+		text width=10em, 
+		minimum height=3.5em, 
+		text centered, 
+		on chain},
+	every join/.style={->, thick,shorten >=1pt},
+	decoration={brace},
+	tuborg/.style={decorate},
+	tubnode/.style={midway, right=2pt},
+}
+
+\tikzset{
+	>=stealth',
+	punktchainO/.style={
+		rectangle, 
+		dashed,
+		%rounded corners, 
+		%fill=black!10,
+		draw=black!80, % very thick,
+		text=black!80,
+		text width=15em, 
+		minimum height=3em, 
+		text centered, 
+		on chain},
+	%line/.style={draw, thick, <-},
+	element/.style={
+		tape,
+		top color=white,
+		bottom color=blue!50!black!60!,
+		minimum width=8em,
+		draw=blue!40!black!90, very thick,
+		text width=10em, 
+		minimum height=3.5em, 
+		text centered, 
+		on chain},
+	every join/.style={->, thick,shorten >=1pt},
+	decoration={brace},
+	tuborg/.style={decorate},
+	tubnode/.style={midway, right=2pt},
+}
+
+\tikzset{
+	>=stealth',
+	punktchainS/.style={
+		rectangle, 
+		draw=red,
+		%rounded corners, 
+		fill=red!30,
+		%draw=black, % very thick,
+		text width=15em, 
+		minimum height=3em, 
+		text centered, 
+		on chain},
+	%line/.style={draw, thick, <-},
+	element/.style={
+		tape,
+		top color=white,
+		bottom color=blue!50!black!60!,
+		minimum width=8em,
+		draw=blue!40!black!90, very thick,
+		text width=10em, 
+		minimum height=3.5em, 
+		text centered, 
+		on chain},
+	every join/.style={->, thick,shorten >=1pt},
+	decoration={brace},
+	tuborg/.style={decorate},
+	tubnode/.style={midway, right=2pt},
+}
+
+% Tikz stypes
+%\tikzstyle{every node}=[draw=black,thick,anchor=west]
+%\tikzstyle{optional}=[dashed,fill=gray!20]
+%\tikzstyle{selected}=[draw=red,fill=red!30]
+
+% Tikz stypes
+\tikzstyle{every node}=[draw=black,thick,anchor=west]
+\tikzstyle{optional}=[dashed,fill=gray!20]
+\tikzstyle{selected}=[draw=red,fill=red!30]
+
+\tikzstyle{line}=[draw,-latex']
+
+\tikzstyle{class}=[draw,fill=blue!20]
+\tikzstyle{module}=[draw,fill=orange!50!red!50!white]
+\tikzstyle{script}=[draw,fill=yellow!20]
+\newcommand\mybox[2][]{\tikz[overlay]\node[fill=blue!20,inner sep=2pt, anchor=text, rectangle,#1] {#2};\phantom{#2}}
+%------------------------------------------------------------
+
+
+%------------------------------------------------------------
+% table
+\usepackage{style/slashbox}
+\usepackage{rotating}
+\usepackage{multirow}
+%\usepackage{booktabs}
+%%\usepackage{longtable}
+\usepackage{ctable} % better tables
+%\usepackage{booktabs} %
+
+%------------------------------------------------------------
+
+
+%------------------------------------------------------------
+% new colors
+
+\definecolor{flautuiorange}{HTML}{f39c12}
+
+\definecolor{flatuired}{HTML}{e74c3c}
+\definecolor{flatuidarkred}{HTML}{c0392b}
+
+\definecolor{flatuigreen}{HTML}{2ecc71}
+\definecolor{flatuidarkgreen}{HTML}{27ae60}
+
+\definecolor{flatuiblue}{HTML}{3498db}
+\definecolor{flatuidarkblue}{HTML}{2980b9}
+
+\definecolor{flatuiturquoise}{HTML}{1abc9c}
+\definecolor{flatuigreensea}{HTML}{16a085}
+\definecolor{flatuipurple}{HTML}{8e44ad}
+\definecolor{flatuiorange}{HTML}{e67e22}
+
+\definecolor{flatuidark}{HTML}{2c3e50}
+\definecolor{flatuigrey}{HTML}{95a5a6}
+\definecolor{flatuilight}{HTML}{ecf0f1}
+
+%------------------------------------------------------------
+
+
+
+%------------------------------------------------------------
+% hyperref
+\usepackage{hyperref}
+\hypersetup{%
+    %draft,	% = no hyperlinking at all (useful in b/w printouts)
+    colorlinks=true, linktocpage=true, pdfstartpage=1, pdfstartview=FitV,%
+    % uncomment the following line if you want to have black links (e.g., for printing)
+    %colorlinks=false, linktocpage=false, pdfborder={0 0 0}, pdfstartpage=1, pdfstartview=FitV,% 
+    breaklinks=true, pdfpagemode=UseNone, pageanchor=true, pdfpagemode=UseOutlines,%
+    plainpages=false, bookmarksnumbered, bookmarksopen=true, bookmarksopenlevel=1,%
+    hypertexnames=true, pdfhighlight=/O,%hyperfootnotes=true,%nesting=true,%frenchlinks,%
+    urlcolor=webbrown, linkcolor=RoyalBlue, citecolor=webgreen, %pagecolor=RoyalBlue,%
+%    urlcolor=flatuidarkred, linkcolor=flatuidarkblue, citecolor=flatuidarkgreen, %pagecolor=RoyalBlue,%
+%    urlcolor=Black, linkcolor=Black, citecolor=Black, %pagecolor=Black,%
+    pdftitle={\myTitle},
+    pdfauthor={\myName},
+    pdfsubject={},%
+    pdfkeywords={},%
+}
+%------------------------------------------------------------
+
+
+%------------------------------------------------------------
+% Custom commands
+\renewcommand{\subsubsectionautorefname}{Subsubsection}   
+\renewcommand{\subsectionautorefname}{Subsection}
+\renewcommand{\sectionautorefname}{Section}
+\renewcommand{\chapterautorefname}{Chapter}
+\def\algorithmautorefname{Algorithm}
+\renewcommand{\arraystretch}{1.2}
+%------------------------------------------------------------
+
+
+%------------------------------------------------------------
+% bibliography
+
+%If you are compiling your thesis on linux (or OSX), use the backend biber
+
+% \usepackage[backend=biblatex,
+\usepackage[backend=biber,
+style=authoryear,
+dashed=false,
+doi=false,
+isbn=false,
+url=false,
+natbib=false,
+maxcitenames=2,
+%sortcites=true,
+sorting=nyt,
+maxbibnames=99,
+%firstinits=true,
+%uniquename=false,
+%useprefix=true,
+]{biblatex}
+%style=chicago-authordate,
+
+%natbib=true,
+
+\newcommand{\citep}[1]{\autocite{#1}}
+\renewcommand{\cite}[1]{\textcite{#1}}
+
+%\addbibresource{frontbackmatter/bibliography.bib}
+
+%\addbibresource{/Users/lento/Documents/phd/literature/library.bib} % mac empa
+%\addbibresource{/Users/Lento/Documents/phd/publications/library.bib} % personal 
+
+\addbibresource{frontbackmatter/library_final.bib}
+
+%\bibliography{../../publications/library.bib}
+%\addbibresource{../../literature/library.bib}
+%\bibliographystyle{spbasic}      % basic style, author-year citations
+%------------------------------------------------------------
+
+
+%------------------------------------------------------------
+% theorems, definitions
+%\newtheorem{theorem}{Theorem}[chapter]
+%\newtheorem{lemma}{Lemma}[chapter]
+%\providecommand*{\lemmaautorefname}{Lemma}
+%\newtheorem{proposition}[theorem]{Proposition}
+%\theoremstyle{definition}
+%\newtheorem{definition}[theorem]{Definition}
+%\newtheorem{example}[theorem]{Example}
+%\theoremstyle{remark}
+%\newtheorem*{remark}{Remark}
+
+%\theoremstyle{definition}
+\newtheoremstyle{mystyle}% name
+{\topsep}% Space above
+{\topsep}% Space below
+{\itshape}% Body font
+{}% Indent amount
+{\bfseries}% Theorem head font
+{:}%Punctuation after theorem head
+{.5em}%Space after theorem head
+{}% theorem head spec
+\theoremstyle{mystyle}
+\newtheorem*{assumption}{Assumption}
+%\newtheorem*{assumption}{Assumption}[section]
+%------------------------------------------------------------
+
+
+%------------------------------------------------------------
+% acronyms
+\PassOptionsToPackage{printonlyused,smaller}{acronym}
+\usepackage{style/acronym} % nice macros for handling all acronyms in the thesis
+\renewcommand{\bflabel}[1]{{#1}\hfill} % fix the list of acronyms
+%------------------------------------------------------------
+
+% dummy counter for correct TOC etc
+\newcounter{dummy}
+%------------------------------------------------------------
+
+%------------------------------------------------------------
+% for cover page
+\usepackage{pdfpages}
+%------------------------------------------------------------
+
+%------------------------------------------------------------
+% Font design
+% \usepackage{mathptmx}
+%\usepackage{lmodern}
+\usepackage{mathpazo}
+%\usepackage[scaled]{helvet}
+\usepackage{textcomp}
+\usepackage{textgreek}
+\usepackage{epigraph}
+\usepackage{soul,color}
+\usepackage[capitalize]{cleveref}
+\usepackage{lettrine}
+\renewcommand{\LettrineTextFont}{}
+%------------------------------------------------------------
+
+%------------------------------------------------------------	
+% Custom shortcuts
+\usepackage{style/shortcuts}
+%------------------------------------------------------------
+
+%------------------------------------------------------------
+% Chapter thumbs (in the end)
+\usepackage{style/chapterthumbs}
+%------------------------------------------------------------
+
+%\usepackage[bordercolor=white,backgroundcolor=gray!30,linecolor=black,colorinlistoftodos]{todonotes}
+%\newcommand{\updated}[1]{\todo[color=yellow,inline]{#1}}
+
+
+%\newcommand{\highlight}[1]{\hl{#1}}
+
+\newcommand{\highlight}[1]{\textcolor{blue}{#1}}
+
+\newcommand{\highlightpara}[1]{\textcolor{blue}{#1}}
+
+%\newcommand{\highlightpara}[1]{\noindent\colorbox{yellow}{%
+%	\parbox{\dimexpr\linewidth-2\fboxsep}% a box with line-breaks that's just wide enough
+%	{#1} } }
