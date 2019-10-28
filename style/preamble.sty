@@ -92,9 +92,9 @@
 % define page size and margins for the final print
 \usepackage{geometry}
 % for e-version
-%\geometry{paperwidth=17.00cm,paperheight=24.589cm,
+\geometry{paperwidth=17.00cm,paperheight=24.589cm,
 % for print, with large margin
-\geometry{paperwidth=18.91cm,paperheight=24.589cm,
+%\geometry{paperwidth=18.91cm,paperheight=24.589cm,
 bindingoffset=0.89cm, %print version
 %bindingoffset=0cm, % e-version
 inner=2cm, % inside margin
@@ -480,7 +480,7 @@ useprefix=true,
 
 %------------------------------------------------------------
 % Chapter thumbs (in the end)
-\usepackage{style/chapterthumbs}
+%\usepackage{style/chapterthumbs}
 %------------------------------------------------------------
 
 %\usepackage[bordercolor=white,backgroundcolor=gray!30,linecolor=black,colorinlistoftodos]{todonotes}
@@ -489,9 +489,11 @@ useprefix=true,
 
 %\newcommand{\highlight}[1]{\hl{#1}}
 
-\newcommand{\highlight}[1]{\textcolor{blue}{#1}}
+%\newcommand{\highlight}[1]{\textcolor{blue}{#1}}
 
-\newcommand{\highlightpara}[1]{\textcolor{blue}{#1}}
+%\newcommand{\highlight}[1]{\colorbox{yellow}{\textcolor{blue}{#1}}}
+
+%\newcommand{\highlightpara}[1]{\textcolor{blue}{#1}}
 
 %\newcommand{\highlightpara}[1]{\noindent\colorbox{yellow}{%
 %	\parbox{\dimexpr\linewidth-2\fboxsep}% a box with line-breaks that's just wide enough
