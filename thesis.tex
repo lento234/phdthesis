@@ -3,8 +3,8 @@
 % Create document
 \documentclass[
 % 10pt,
- a5paper,
-% a4paper,
+% a5paper,
+ a4paper,
  footinclude=true,
  headinclude=true,
  numbers=noenddot,
@@ -43,27 +43,22 @@
 		\include{frontbackmatter/titleback}
 		%------------------------------------------------------------
 	
-%		%------------------------------------------------------------
-%		% The cool front citation
-%		\include{frontbackmatter/frontquote}
-%		%------------------------------------------------------------
-	
 		%------------------------------------------------------------
 		% The cool front citation
-		%\include{frontbackmatter/propositions}
+		\include{frontbackmatter/frontquote}
 		%------------------------------------------------------------
-		
+	
 		%------------------------------------------------------------
 		% Abstract
 		\cleardoublepage		
 		\include{frontbackmatter/abstract}
 		%------------------------------------------------------------
 		
-%		%------------------------------------------------------------
-%		% Acknowledgements
-%		%\cleardoublepage
-%		\include{frontbackmatter/acknowledgements}
-%		%------------------------------------------------------------
+		%------------------------------------------------------------
+		% Acknowledgements
+		\cleardoublepage
+		\include{frontbackmatter/acknowledgements}
+		%------------------------------------------------------------
 		
 		%------------------------------------------------------------
 		% Publications
@@ -168,11 +163,6 @@
 		% Bibliography
 		\cleardoublepage		
 		\include{frontbackmatter/bibliography}
-		%------------------------------------------------------------
-	
-		%------------------------------------------------------------
-		% Afterword
-		%\include{frontbackmatter/afterword}
 		%------------------------------------------------------------
 	
 		%------------------------------------------------------------
