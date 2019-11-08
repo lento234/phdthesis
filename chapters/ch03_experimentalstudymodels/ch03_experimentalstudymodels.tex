@@ -62,16 +62,16 @@ A range of model and natural trees with different heights and porosities is used
 \end{equation}
 where the exponent is obtained from a wind tunnel drag study of realistic tree-like windbreak models \citep{Guan2003}. The study shows that this formulation provides a good estimate for 3D tree models and has been applied by others to estimate the aerodynamic porosity for individual trees \citep{Bitog2011b,Lee2014565,Rosenfeld2010}.
 
-	\begin{figure}[p]
+	\begin{sidewaysfigure}[p]
 	\centering
-	\includegraphics[width=\textwidth]{\figdir/threshold_indexed-crop.pdf}
+	\includegraphics[width=0.9\textwidth]{\figdir/threshold_indexed-crop.pdf}
 	\caption{Frontal thresholded images of model and natural trees at rest: \subfig{a} model tree 1, \subfig{b} model tree 2, \subfig{c} model tree 3, \subfig{d} cypress, \subfig{e} holly and \subfig{f} holly (defoliated). The red region indicates the frontal area of the tree. The frontal area of holly is used as a reference for both foliated and defoliated holly.}
 	\label{fig:thresholdindexed}
-	\end{figure}
+	\end{sidewaysfigure}
 
 \cref{fig:thresholdindexed} shows the thresholded frontal view of the model and natural trees used during the experiment. The thresholded images are used for the calculation of optical porosity and the resulting aerodynamic porosity. The optical porosity is defined as the ratio of white area to the total area within the silhouette of the tree, which is delineated in red on \cref{fig:thresholdindexed}. To note is that this silhouette area is considered as the frontal area of the tree $A$ used in \cref{eq:aerodynamicporosity} and also required for calculating the drag coefficient $C_d$ (further explained in \cref{subsec:loadcell}). The drag measurements are performed for all the trees listed in the table and PIV measurements are performed for a selected number of trees (two model and two natural trees as indicated in \cref{tab:modeltrees}. These trees are chosen based on their distinct differences in morphology and porosity. Model trees 1 and 2 are small model trees made of polymeric materials with different porosity and shape. These are H$0$ scale (i.e. 1:87, a standardized scaled typically used for rail transport modeling) broad-leaf model trees. Model tree 3 is a larger model, with individual polymeric thin leaves mimicking those of a natural tree. The model trees are commercially available and have been designed to capture the geometrical characteristics of the natural trees. Such scaled models are commonly used in wind-tunnel studies of urban microclimate research, to represent the impact of trees on the airflow field around scaled model buildings \citep{Gromke2018a,Gromke2008,Gromke2007,Guan2003,R.N.Meroney1968}. Note however that designing trees to match the mechanical properties of the actual trees of interest would be most realistic. The design of model trees that have the mechanical properties of the natural trees such as moment of elasticity (MOE) or the bending stiffness requires careful attention. In the past, various types of materials such as plastic-simulated boughs \citep{R.N.Meroney1968}, Nylon-66 stems with low-density Polyethylene (LDPE) branches \citep{Stacey1994} have been used to provide flexibility to the tree models. Tree models with crowns made of wood-wool, sisal fiber or porous foam on a stiff trunk \citep{Gromke2008a} have also been designed to provide appropriate porosity and drag coefficient. Even though rigid model trees can be deemed appropriate to capture the static response, the dynamic response of the natural trees is not captured due to their rigidity. Therefore, one of the objectives of the study is to see to which extent the flexible model trees, such as H$0$ scale trees, can provide more accurate airflow fields for wind tunnel studies, due to their flexibility. 
 
-	\ctable[
+\ctable[
 caption = {Specifications of the model and natural trees used for drag and PIV measurements. The trees used for PIV measurements are indicated with an asterisk (*).},
 label   = {tab:modeltrees},
 pos = t,
@@ -105,12 +105,7 @@ The natural trees used in the present study are divided into two categories: har
 		\label{fig:profiles}
 	\end{figure}
 
-
-
 The wind tunnel experiments are performed in the ETHZ / Empa Atmospheric Boundary Layer (ABL) wind tunnel. It is a closed circuit G\"ottingen type wind tunnel with a test section cross-section of $1.9$ m (width) by $1.3$ m (height). The wind tunnel can provide wind speeds ranging from \numrange{0.5}{25} m\,s$^{-1}$. \cref{fig:setupimage} shows the setup used for combined measurement of drag force and the flow field behind the trees. The origin of the $x$, $y$, $z$  coordinate system is located at the bottom-center of the tree foliage. The corresponding instantaneous velocity components of the velocity vector $\mvec{u}$ are $u$, $v$, and $w$, oriented along the streamwise, spanwise and vertical directions, respectively. The mean and fluctuating velocities of the velocity vector $\mvec{u}$ are defined $\tavg{\mvec{u}}$ and $\mvec{u}'$, with the overbar denoting an ensemble average. The tree is mounted on the pole-load cell configuration, away from the wind tunnel floor. The trees are mounted in this fashion to reduce the influence of the wind tunnel boundary layer, the load cell and the traverse system at the measurement region. \cref{fig:profiles} shows the normalized mean velocity and the turbulence intensity for two wind speeds of $U_{\textit{ref}}=1$ and $10$ m\,s$^{-1}$. \cref{fig:profiles}a displays a nearly-uniform approach flow wind profile, with a maximum deflection from the mean value less than \num{5e-3} m\,s$^{-1}$ ($0.5\%$). Furthermore, the measurement was performed for a low upstream turbulence with an average turbulence intensity of $I=0.4$\% (\cref{fig:profiles}b). A nearly-uniform wind profile with a low turbulence level is used instead of an atmospheric boundary layer (ABL) to ensure that all trees, which have varying heights, are subjected to the similar velocity profile. However, it must be note that such profile is strictly used to ensure accurate cross-comparison and does not represent the real flow condition in an urban environment.
-
-
-
 
 \section{Measurement setup}
 

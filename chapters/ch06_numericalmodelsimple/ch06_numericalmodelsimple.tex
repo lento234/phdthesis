@@ -207,20 +207,17 @@ The vegetation model, described in \cref{sec:cons_incompressible,sec:simplifieds
 \subsection{Simulation domain}
 The simulation of single row of trees is represented by a 2D porous domain ($x\times z$ axis) consisting of a $1\times1$ m$^2$ ($x\times z$ axis) porous vegetation region as shown in \cref{fig:domain}, while infinitely long in the y-direction, where the source terms (\cref{sec:airdomain}) are non-zero. In this study, we want to focus on the physics behind the transpiration driven phenomena. Therefore, the dimension of the tree does not necessary require to be conform with reality and was simply based on computational efficiency for a rigorous parametric study. The computational domain is $35\times11.5$ m$^2$ ($x\times z$ axis) and the mesh resolution is determined by performing a grid sensitivity analysis. The domain is discretized into a regular grid with \num{40000} rectangular cuboidal cells. The smallest cell is at the edge of the tree row ($\Delta x = \Delta z = 0.01$ m) and the expansion ratio to the outflow, inlet, ground and top boundaries are 1.05, 1.05, 1.05, and 1.15, respectively. 
 
-	\begin{figure}[t]
+	\begin{figure}[p]
 	\centering
 	\includegraphics[width=\textwidth]{\figdir/domain-crop.pdf}
 	\caption{Simulation domain of the reference case with $H=1$ m with description of the domain and the boundary conditions. The porous vegetation region is indicated in green ({\color{flatuidarkgreen}$\blacksquare$}) where leaf area density $a=10$ m$^2$\,m$^{-3}$ and zero everywhere else. The red point ({\color{flatuidarkred}$\bullet$}) indicate the upstream $(x=-1.5H,y=H)$, blue ({\color{flatuidarkblue}$\bullet$}) indicate the downstream $(x=1.5H,y=H)$, and black ($\bullet$) indicate the shaded $(x=0,y=H/4)$ data sampling location.}
 	\label{fig:domain}
 	\end{figure}
 
-The environmental factors that are varied for the parametric study are wind speed, ambient air temperature, relative humidity (RH) and solar radiation intensity. The environmental factors are tabulated in \cref{tab:environmentalcond}.  Similarly, the properties of the vegetation are tabulated in \cref{tab:plantcond} and the parameters that are varied are leaf area density, stomatal resistance, leaf size, tree height and number of tree rows, which are presumed to have an influence on the transpirative cooling effect of vegetation. The upper and lower bounds of the parameters are chosen based on values from literature. The reference tree is chosen to be a densely foliated garden hedgerow in a midday conditions. 
-
-
 \ctable[
 caption = {Environmental factors varied in the parametric study},
 label   = {tab:environmentalcond},
-pos = t,
+pos = p,
 mincapwidth = \textwidth,
 ]{lrr}{}{
 	\FL
@@ -235,8 +232,9 @@ mincapwidth = \textwidth,
 \ctable[
 caption = {Plant properties varied in the parametric study},
 label   = {tab:plantcond},
-pos = t,
+pos = p,
 mincapwidth = \textwidth,
+sideways
 ]{lrr}{}{
 	\FL
 	Parameter 									& Range 	& Reference 
@@ -247,6 +245,10 @@ mincapwidth = \textwidth,
 	Tree height , $H$   								& $[1, 2, 3, 5, 10]$ & $1$		 \\
 	$\mathcal{N}^{\underline{o}}$\, of tree rows, $n$   						& $[1, 2, 5, 10]$ & $1$	
 	\LL}
+
+The environmental factors that are varied for the parametric study are wind speed, ambient air temperature, relative humidity (RH) and solar radiation intensity. The environmental factors are tabulated in \cref{tab:environmentalcond}.  Similarly, the properties of the vegetation are tabulated in \cref{tab:plantcond} and the parameters that are varied are leaf area density, stomatal resistance, leaf size, tree height and number of tree rows, which are presumed to have an influence on the transpirative cooling effect of vegetation. The upper and lower bounds of the parameters are chosen based on values from literature. The reference tree is chosen to be a densely foliated garden hedgerow in a midday conditions. 
+
+
 
 
 \subsection{Boundary conditions}
@@ -295,21 +297,17 @@ The vegetation model is first validated against the numerical and experiment stu
 		\label{fig:domain_validation}
 	\end{figure}
 
-The plants and the pots are both modeled as porous medium with different drag coefficients. The drag coefficient of the plant and pot are $c_d=0.32$ and $c_d=1$, respectively. The table is modeled as an internal wall (i.e. baffle) that enforces a standard wall boundary condition. The boundary condition of the ground is $T=T_g$ and standard wall functions are used. The top boundary is a symmetry plane. The outlet is taken to be far enough to ensure zero-normal gradient for all variables and a zero pressure is imposed. The inlet boundary conditions are tabulated in \cref{tab:validationparameters}, corresponding to a greenhouse in a sunny day on 15$^{\mathrm{th}}$ July 2009 at 14:00. Based on a mesh sensitivity analysis, (i.e., a grid refinement and solution convergence check), a regular grid discretization is chosen with smallest cells at the edge of the vegetation ($\Delta x=0.01$ m, $\Delta y=\num{0.0055}$ m) and a total number of cells of \num{24000}. The grid expansion ratio from the vegetation edges to the outflow, inlet, ground and top boundaries are $1.05$, $1.11$, $1.13$ and $1.15$, respectively. 
-
-	\begin{figure}[t]
+	\begin{figure}[p]
 	\centering
 	\includegraphics[width=\textwidth]{\figdir/comparions_TL_updated.png}
 	\caption{Comparison of leaf temperature $T_\mathit{leaf}$ ($^{\circ}$C) within vegetation ($-1.5\le x \le 1.5$) and ($0.9 \le z \le 1.35$): \subfig{a} present study and \subfig{b} numerical simulation results from \citep{Kichah2012}. The three dots (\textit{bottom}: $z=0.9$ m, \textit{middle}: $z=1.125$ m and \textit{top}: $z=1.35$ m) indicate the temperature probe positions, \cref{tab:comparisonT}.}
 	\label{fig:comparions_TL_updated}
-	\end{figure}
-
-\cref{fig:comparions_TL_updated} shows the leaf temperature $T_{\mathit{leaf}}$ distribution of the vegetation and is compared with numerical results from the original study \citep{Kichah2012}. We see that the temperature ranges (between $25$ $^{\circ}$C and $31$ $^{\circ}$C) are in good agreement. However, the leaf temperature contours are different between the two simulations. The general trend in vertical temperature distribution is in agreement, with peak temperatures appearing close to the top of the vegetation due to radiation absorption. The difference observed between the present model and \cite{Kichah2012} could be due to the use of a turbulence model as the turbulence production and dissipation due to vegetation (Eqs. (11) and (12)) is not done in \cite{Kichah2012}. However, it is shown by \cite{Sanz2003} that the influence of vegetation on turbulence has to be modeled to ensure physically accurate turbulence characteristics. Moreover, we employ the porous realizable $k-\varepsilon$ turbulence closure in contrast to the standard porous $k-\varepsilon$ used by \cite{Kichah2012}. The porous realizable $k-\varepsilon$ model is chosen as it provides more accurate wake characteristics leeward of a porous medium \citep{Santiago2007, Shih1995}. The choice of turbulence model is known to have an impact on parameters such as recirculation length \citep{Santiago2007} and this could result in some difference in the leaf temperature contours. 
+\end{figure}
 
 \ctable[
 caption = {Environmental conditions used in \cite{Kichah2012}. Data obtained for condition at 14:00 on June 15$^{\mathrm{th}}$, 2009.},
 label   = {tab:validationparameters},
-pos = b,
+pos = p,
 mincapwidth = \textwidth,
 ]{lr}{}{
 	\FL
@@ -322,31 +320,34 @@ mincapwidth = \textwidth,
 	Long-wave radiation, $q_{\mathit{r,lw},\downarrow}$	& $522$ W\,m$^{-2}$
 	\LL}
 
-Furthermore, the validation is performed by comparing the leaf and air temperatures with the numerical and experimental results from \cite{Kichah2012}. The numerical and experimental values of leaf temperature $T_{\mathit{leaf}}$ values are obtained for three positions: ``\textit{bottom}'' $(x=0,\,z=0.9)$, ``\textit{middle}'' $(x=0,\,z=1.125)$ and ``\textit{top}'' $(x=0,\,z=1.35)$. The numerical and experimental values of the air temperature $T_{\mathit{leaf}}$ at position ``\textit{middle}'' are also compared, as shown in \cref{tab:comparisonT}. The comparison shows that the numerical results from the present study are in better agreement with the experiments than the numerical results of \cite{Kichah2012}. At the top of the vegetation, the difference between the numerical and experimental results are the highest with $T^{\mathit{num}}-T^{\mathit{exp}}=1.0$ $^{\circ}$C for both the present study and  \cite{Kichah2012}. The deviation on the top between the predicted and the measured temperatures could be due to the simplification in the leaf distribution. The numerical models assume the leaf area density to be homogeneously distributed, however, in reality, it varies in height. This influences the radiation absorption within vegetation and will impact the heat and mass exchanges. Generally, the leaf temperature trend is seen to be slightly overestimated and the air temperature to be slightly underestimated. However, as the deviation is only within $1.0$ $^{\circ}$C, we consider the predicted results to be sufficiently accurate.  
+The plants and the pots are both modeled as porous medium with different drag coefficients. The drag coefficient of the plant and pot are $c_d=0.32$ and $c_d=1$, respectively. The table is modeled as an internal wall (i.e. baffle) that enforces a standard wall boundary condition. The boundary condition of the ground is $T=T_g$ and standard wall functions are used. The top boundary is a symmetry plane. The outlet is taken to be far enough to ensure zero-normal gradient for all variables and a zero pressure is imposed. The inlet boundary conditions are tabulated in \cref{tab:validationparameters}, corresponding to a greenhouse in a sunny day on 15$^{\mathrm{th}}$ July 2009 at 14:00. Based on a mesh sensitivity analysis, (i.e., a grid refinement and solution convergence check), a regular grid discretization is chosen with smallest cells at the edge of the vegetation ($\Delta x=0.01$ m, $\Delta y=\num{0.0055}$ m) and a total number of cells of \num{24000}. The grid expansion ratio from the vegetation edges to the outflow, inlet, ground and top boundaries are $1.05$, $1.11$, $1.13$ and $1.15$, respectively. 
 
 \ctable[
 caption = {Comparison of leaf temperature $T_{\mathit{leaf}}$ at various heights and air temperature $T$ in the middle of vegetation. Experimental and numerical data obtained from \citep{Kichah2012}.},
 label   = {tab:comparisonT},
 pos = p,
-mincapwidth = \textwidth,
+mincapwidth = 0.9\textwidth,
 sideways,
 ]{lrrrrr}{}{
 	\FL
-	\multirow{2}{*}{Parameter} 					& \multirow{2}{0.25\linewidth}{Experimental \citep{Kichah2012}} 	& \multicolumn{2}{c}{Numerical} & \multicolumn{2}{c}{$T^{\mathit{num}}-T^{\mathit{exp}}$} \\
-												& 						& \citep{Kichah2012} & Present & \citep{Kichah2012} & $T^{\mathit{present}}-T^{\mathit{exp}}$
+	\multirow{2}{*}{Parameter} 					& \multirow{2}{0.30\linewidth}{Experimental \citep{Kichah2012}} 	& \multicolumn{2}{c}{Numerical} & \multicolumn{2}{c}{$T^{\mathit{num}}-T^{\mathit{exp}}$} \\
+	& 						& \citep{Kichah2012} & Present & \citep{Kichah2012} & $T^{\mathit{present}}-T^{\mathit{exp}}$
 	\ML
-							 &  &  &  & & \\ 
+	&  &  &  & & \\ 
 	\multicolumn{6}{l}{Leaf temperature $T_{\mathit{leaf}}$ ($^{\circ}$C)} \\
-
+	
 	\hspace{2em}\textit{top} ($z = 1.35$ m) & $29.5$ & $30.5$ & $30.5$ & $1.0$ & $1.0$\\ 
 	\hspace{2em}\textit{middle} ($z = 1.125$ m) & $26.7$ & $28.0$ & $27.0$ & $1.3$ & $0.3$\\ 	
 	\hspace{2em}\textit{bottom} ($z = 0.9$ m) & $26.1$ & $27.6$ & $26.2$ & $1.5$ & $0.1$\\ 
-								 &  &  &  & & \\ 
+	&  &  &  & & \\ 
 	\multicolumn{6}{l}{Air temperature $T$ ($^{\circ}$C)} \\	
 	\hspace{2em}\textit{middle} ($z = 1.125$ m) & $28.11$ & $28.5$ & $27.9$ & $-0.4$ & $-0.2$ \\
 	
 	\LL}
 
+\cref{fig:comparions_TL_updated} shows the leaf temperature $T_{\mathit{leaf}}$ distribution of the vegetation and is compared with numerical results from the original study \citep{Kichah2012}. We see that the temperature ranges (between $25$ $^{\circ}$C and $31$ $^{\circ}$C) are in good agreement. However, the leaf temperature contours are different between the two simulations. The general trend in vertical temperature distribution is in agreement, with peak temperatures appearing close to the top of the vegetation due to radiation absorption. The difference observed between the present model and \cite{Kichah2012} could be due to the use of a turbulence model as the turbulence production and dissipation due to vegetation (Eqs. (11) and (12)) is not done in \cite{Kichah2012}. However, it is shown by \cite{Sanz2003} that the influence of vegetation on turbulence has to be modeled to ensure physically accurate turbulence characteristics. Moreover, we employ the porous realizable $k-\varepsilon$ turbulence closure in contrast to the standard porous $k-\varepsilon$ used by \cite{Kichah2012}. The porous realizable $k-\varepsilon$ model is chosen as it provides more accurate wake characteristics leeward of a porous medium \citep{Santiago2007, Shih1995}. The choice of turbulence model is known to have an impact on parameters such as recirculation length \citep{Santiago2007} and this could result in some difference in the leaf temperature contours. 
+
+Furthermore, the validation is performed by comparing the leaf and air temperatures with the numerical and experimental results from \cite{Kichah2012}. The numerical and experimental values of leaf temperature $T_{\mathit{leaf}}$ values are obtained for three positions: ``\textit{bottom}'' $(x=0,\,z=0.9)$, ``\textit{middle}'' $(x=0,\,z=1.125)$ and ``\textit{top}'' $(x=0,\,z=1.35)$. The numerical and experimental values of the air temperature $T_{\mathit{leaf}}$ at position ``\textit{middle}'' are also compared, as shown in \cref{tab:comparisonT}. The comparison shows that the numerical results from the present study are in better agreement with the experiments than the numerical results of \cite{Kichah2012}. At the top of the vegetation, the difference between the numerical and experimental results are the highest with $T^{\mathit{num}}-T^{\mathit{exp}}=1.0$ $^{\circ}$C for both the present study and  \cite{Kichah2012}. The deviation on the top between the predicted and the measured temperatures could be due to the simplification in the leaf distribution. The numerical models assume the leaf area density to be homogeneously distributed, however, in reality, it varies in height. This influences the radiation absorption within vegetation and will impact the heat and mass exchanges. Generally, the leaf temperature trend is seen to be slightly overestimated and the air temperature to be slightly underestimated. However, as the deviation is only within $1.0$ $^{\circ}$C, we consider the predicted results to be sufficiently accurate.  
 
 \section{Impact of row of trees on the microclimate}
 \label{sec:impactofrows}

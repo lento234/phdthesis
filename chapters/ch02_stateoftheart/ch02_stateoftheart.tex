@@ -29,7 +29,7 @@
 
 \begin{figure}[p]
 	\centering
-	\includegraphics[width=0.7\textwidth]{\figdir/lengthtimescales.png}
+	\includegraphics[width=0.9\textwidth]{\figdir/lengthtimescales.png}
 	\caption{Time and length scale of phenomena in urban climate \citep{Oke2017a}.}
 	\label{fig:lengthtimescales}
 \end{figure}
@@ -95,19 +95,18 @@ One of the key aspects of the urban microclimate study is its impact on the urba
 where $Q_m$ (W\,m$^{-2}$) is the heat produced from metabolism, $Q_w$ (W\,m$^{-2}$) is muscular activity, $Q_s$ (W\,m$^{-2}$) is sensible heat flux, $Q_l$ (W\,m$^{-2}$) is latent heat flux, $Q_t$ (W\,m$^{-2}$) is heat produced from respiration, and $\Delta Q_s$ (W\,m$^{-2}$) is the rate of energy storage. Various comfort models have been developed to solve the energy balance. The Munich Energy-Balance Model for Individuals (MEMI) solves energy balance with a two-node system solving the heat flux from the skin to the body core and heat fluxes through clothing \citep{Hoppe1999}. 
 
 	\begin{figure}[p]
-		\centering
-		\includegraphics[width=\textwidth]{\figdir/thermalindex.png}
-		\caption{Range, relation and physiological response for different parameters of the comfort indexes \citep{Oke2017a,Matzarakis1999,Bazejczyk2013}.}
-		\label{fig:thermalindex}
-	\end{figure}
-	
-	\begin{figure}[p]
 	\centering
-	\includegraphics[width=\textwidth]{\figdir/energymassbudget.png}
-	\caption{Coupling between radiative, energy and water budget \citep{Sawinski2011}.}
-	\label{fig:energymassbudget}
+	\includegraphics[width=\textwidth]{\figdir/thermalindex.png}
+	\caption{Range, relation and physiological response for different parameters of the comfort indexes \citep{Oke2017a,Matzarakis1999,Bazejczyk2013}.}
+	\label{fig:thermalindex}
 	\end{figure}
 
+	\begin{figure}[p]
+		\centering
+		\includegraphics[width=0.9\textwidth]{\figdir/energymassbudget.png}
+		\caption{Coupling between radiative, energy and water budget \citep{Sawinski2011}.}
+		\label{fig:energymassbudget}
+	\end{figure}
 
 A more realistic model is the UTCI-Fiala model that uses a 12 element (head, face, neck, shoulder, thorax, abdomen, upper and lower arm, hands, upper and lower legs, and feet), 187-node model \citep{Fiala2001,Brode2012,Blazejczyk2012,Jendritzky2012,Bazejczyk2013,Lokys2015}. The physiological response can then quantify using various thermal/human comfort indexes such as predicted mean vote (PMV), perceived temperature (PT), OUT-SET*, physiological equivalent temperature (PET), universal thermal climate index (UTCI). The UTCI ($^{\circ}$C) is determined as:
 \begin{equation}
@@ -186,7 +185,7 @@ where $h_{c,h}$ is the convective heat transfer coefficient (CHTC) (W\,m$^{-2}$\
 
 \begin{figure}[p]
 	\centering
-	\includegraphics[width=0.5\textwidth]{\figdir/leaftemperature_range.png}
+	\includegraphics[width=0.7\textwidth]{\figdir/leaftemperature_range.png}
 	\caption{Typical daily range of air and leaf temperature of glabrous green winter leaves and pubescent white summer leaves of \textit{Encelia farinosa} (brittlebush) \citep{Lambers2008}. }
 	\label{fig:leaftemperature_range}
 \end{figure}
@@ -218,11 +217,18 @@ An important variable used to define the state of water in various domains (e.g.
 \end{equation}
 where $\mvec{g}$ is the water flux, $k$ is the conductance, and $\psi$ is the water potential. Therefore, for water to be supplied at the leaf from roots for transpiration, a sufficient gradient is required between the soil water potential and the leaf water potential. As the water demand at the leaves increases, a larger gradient will be required. Following this logic, water stress (i.e., difference between leaf water potential and soil water potential) is minimal before dawn and maximum during midday. 
 
-\begin{figure}[t]
+\begin{figure}[p]
 	\centering
-	\includegraphics[width=0.7\textwidth]{\figdir/soilmoisture.png}
+	\includegraphics[width=\textwidth]{\figdir/soilmoisture.png}
 	\caption{Various degrees of soil moisture: $V_w$ is volume of water, $V_a$ is volume of air and $V_s$ is volume of soil.}
 	\label{fig:soilmoisture}
+\end{figure}
+
+\begin{figure}[p]
+	\centering
+	\includegraphics[width=0.9\textwidth]{\figdir/soilwatercontent.png}
+	\caption{Soil water content for various soil types: sand, sandy loam, loam, silty loam, clay loam, and clay \citep{nobel2009physicochemical}. }
+	\label{fig:soilwatercontent}
 \end{figure}
 
 The water stress is magnified as the soil dries. Figure \ref{fig:soilmoisture} shows the various degrees of soil moisture that can exist. The volumetric water (or moisture) content $\theta$ (\%) is defined as the ratio of mass of water $V_w$ to the total volume $V$ (i.e. $V=V_w+V_a+V_s$),
@@ -234,13 +240,6 @@ and provides a relative measure of volume of water. Similarly, the soil moisture
 \theta = \frac{m_w}{V}
 \end{equation}
 
-\begin{figure}[t]
-	\centering
-	\includegraphics[width=0.7\textwidth]{\figdir/soilwatercontent.png}
-	\caption{Soil water content for various soil types: sand, sandy loam, loam, silty loam, clay loam, and clay \citep{nobel2009physicochemical}. }
-	\label{fig:soilwatercontent}
-\end{figure}
-
 The water content in the soil is maximum at saturated conditions, and as the soil dries, the soil moisture reaches the field capacity. The field capacity is the equilibrium state after an excess amount of water has drained away. As the soil dries further, the soil moisture reaches the permanent wilting point (PWP) or wilting point. Below the wilting point, plants start to wilt (i.e., the plant cells loose turgidity) and can no longer recover from the water stress. Typically, the wilting point is defined to be at a water potential of $\psi=-1.5$ \si{\MPa}. However, the water content associated with this water potential depends on the soil type. Figure \ref{fig:soilwatercontent} shows the regimes of field capacity and wilting point for various soil types. 
 	
 %	\begin{figure}[p]
@@ -250,16 +249,16 @@ The water content in the soil is maximum at saturated conditions, and as the soi
 %		\label{fig:soilwatercontent_soilpotential}
 %	\end{figure}
 
-\begin{sidewaysfigure}[p]
+	\begin{sidewaysfigure}[p]
 		\centering
-		\includegraphics[width=0.9\textwidth]{\figdir/soilwatercontent_soilpotential.png}
+		\includegraphics[width=0.8\textwidth]{\figdir/soilwatercontent_soilpotential.png}
 		\caption{A typical relation of soil water potential $\psi$ as a function of soil water content $\theta$ \citep{nobel2009physicochemical}.}
 		\label{fig:soilwatercontent_soilpotential}
 	\end{sidewaysfigure}
 	
-	\begin{figure}[p]
+	\begin{figure}[t]
 		\centering
-		\includegraphics[width=0.7\textwidth]{\figdir/waterpotential_diurnal.png}
+		\includegraphics[width=0.8\textwidth]{\figdir/waterpotential_diurnal.png}
 		\caption{Schematic representation  of diurnal change in soil, root, and leaf water potential \citep{nobel2009physicochemical}.}
 		\label{fig:waterpotential_diurnal}
 	\end{figure}	
@@ -353,7 +352,7 @@ Furthermore, measurement techniques such as Particle Image Velocimetry provide a
 	
 	\begin{figure}[p]
 		\centering
-		\includegraphics[width=0.7\textwidth]{\figdir/dragcoefficientree.png}
+		\includegraphics[width=0.8\textwidth]{\figdir/dragcoefficientree.png}
 		\caption{Drag measurement study of small trees in windtunnel \citep{Cao2012}.}
 		\label{fig:dragcoefficientree}
 	\end{figure}
