@@ -5,7 +5,7 @@
 ## Cover
 
 <p align="center">
-    <img src="https://github.com/lento234/phdthesis/blob/master/frontbackmatter/cover/cover.png" height="400" alt="Cover" />
+    <img src="frontbackmatter/cover/cover.png" width="800" alt="Cover" />
 </p>
 
 ## Abstract
