@@ -2,6 +2,12 @@
 
 - ETH Research Collection: [Direct link](https://www.research-collection.ethz.ch/handle/20.500.11850/379379), [DOI](https://doi.org/10.3929/ethz-b-000379379) 
 
+## Cover
+
+<p align="center">
+    <img src="https://github.com/lento234/phdthesis/blob/master/frontbackmatter/cover/cover.png" height="400" alt="Cover" />
+</p>
+
 ## Abstract
 Vegetation in cities is seen as an effective strategy to combat the growing UHI
 as it provided natural cooling. Vegetation offers natural cooling primarily by 
