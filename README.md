@@ -1,6 +1,6 @@
 # PhD thesis: Impact of vegetationon urban microclimate
 
-[ETH Research Collection](https://doi.org/10.3929/ethz-b-000379379) 
+- ETH Research Collection: [Direct link](https://www.research-collection.ethz.ch/handle/20.500.11850/379379), [DOI](https://doi.org/10.3929/ethz-b-000379379) 
 
 ## Abstract
 Vegetation in cities is seen as an effective strategy to combat the growing UHI
