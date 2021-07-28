@@ -2,9 +2,9 @@
 ---
 cff-version: 1.2.0
 message: "If you use this software, please cite it as below."
-#authors:
-#  - family-names: "Manickathan"
-#    given-names: "Lento"
+authors:
+  - family-names: "Manickathan"
+    given-names: "Lento"
 title: "Impact of vegetation on urban microclimate"
 doi: 10.3929/ethz-b-000379379
 date-released: 2019-06-24
@@ -14,12 +14,12 @@ date-released: 2019-06-24
 #publisher:
 #  - name: "ETH Zurich"
 #type: thesis 
-authors:
-- family-names: "Lisa"
-  given-names: "Mona"
-  orcid: "https://orcid.org/0000-0000-0000-0000"
-- family-names: "Bot"
-  given-names: "Hew"
-  orcid: "https://orcid.org/0000-0000-0000-0000"
+#authors:
+#- family-names: "Lisa"
+#  given-names: "Mona"
+#  orcid: "https://orcid.org/0000-0000-0000-0000"
+#- family-names: "Bot"
+#  given-names: "Hew"
+#  orcid: "https://orcid.org/0000-0000-0000-0000"
 version: 1.0
 url: "https://github.com/lento234/phdthesis"
