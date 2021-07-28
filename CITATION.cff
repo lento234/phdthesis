@@ -21,5 +21,5 @@ authors:
 - family-names: "Bot"
   given-names: "Hew"
   orcid: "https://orcid.org/0000-0000-0000-0000"
-version: 2.0.4
-url: "https://github.com/github/linguist"
+version: 1.0
+url: "https://github.com/lento234/phdthesis"
