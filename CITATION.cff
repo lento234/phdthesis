@@ -1,0 +1,23 @@
+# YAML 1.2
+---
+authors:
+  - family-names: Manickathan
+    given-names: Lento
+cff-version: 1.1.0
+#date-released: 2019-06-24
+doi: 10.3929/ethz-b-000379379
+institution:
+  - name: ETH Zurich
+keywords:
+  - "vegetation"
+  - "urban microclimate"
+  - "CFD"
+  - "PIV"
+  - "X-ray tomography"
+message: "If you use this software, please cite it using these metadata."
+pages: 357
+publisher:
+  - name: ETH Zurich
+title: Impact of vegetation on urban microclimate
+type: thesis 
+year: 2019
