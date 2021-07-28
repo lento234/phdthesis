@@ -6,7 +6,7 @@ message: "If you use this software, please cite it as below."
 #  - family-names: "Manickathan"
 #    given-names: "Lento"
 title: "Impact of vegetation on urban microclimate"
-#doi: 10.3929/ethz-b-000379379
+doi: 10.3929/ethz-b-000379379
 #date-released: 2019-06-24
 #institution:
 #  - name: "ETH Zurich"
@@ -22,6 +22,6 @@ authors:
   given-names: "Hew"
   orcid: "https://orcid.org/0000-0000-0000-0000"
 version: 2.0.4
-doi: 10.5281/zenodo.1234
+#doi: 10.5281/zenodo.1234
 date-released: 2017-12-18
 url: "https://github.com/github/linguist"
