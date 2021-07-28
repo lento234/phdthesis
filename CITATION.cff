@@ -1,3 +1,5 @@
+# YAML 1.2
+---
 cff-version: 1.2.0
 message: "If you use this software, please cite it using these metadata."
 authors:
@@ -5,10 +7,10 @@ authors:
     given-names: "Lento"
 title: "Impact of vegetation on urban microclimate"
 doi: 10.3929/ethz-b-000379379
-institution:
-  - name: "ETH Zurich"
-pages: 357
-publisher:
-  - name: "ETH Zurich"
-type: thesis 
-year: 2019
+date-released: 2019-06-24
+#institution:
+#  - name: "ETH Zurich"
+#pages: 357
+#publisher:
+#  - name: "ETH Zurich"
+#type: thesis 
