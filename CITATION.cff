@@ -8,12 +8,12 @@ authors:
 title: "Impact of vegetation on urban microclimate"
 doi: 10.3929/ethz-b-000379379
 date-released: 2019-06-24
-#institution:
-#  - name: "ETH Zurich"
-#pages: 357
-#publisher:
-#  - name: "ETH Zurich"
-#type: thesis 
+institution:
+  - name: "ETH Zurich"
+pages: 357
+publisher:
+  - name: "ETH Zurich"
+type: thesis 
 #authors:
 #- family-names: "Lisa"
 #  given-names: "Mona"
