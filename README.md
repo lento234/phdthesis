@@ -1,5 +1,11 @@
-# PhD thesis: Impact of vegetationon urban microclimate
+# PhD thesis: Impact of vegetation on urban microclimate
 
+
+## Metadata:
+- **Supervisors**: Prof. Dr. Thijs Defraeye, Dr. Jonas Allegrini, 
+    Dr. Dominique Derome, Prof. Dr. Jan Carmeliet
+- **Examiners**: Prof. Dr. Jan Carmeliet, Prof. Dr. Bert Blocken, 
+    Prof. Dr. Peter Edwards
 - ETH Research Collection: [Direct link](https://www.research-collection.ethz.ch/handle/20.500.11850/379379), [DOI](https://doi.org/10.3929/ethz-b-000379379) 
 
 ## Cover
@@ -63,9 +69,3 @@ challenges of representing trees in urban flow wind tunnel studies with model
 trees. Furthermore, the microclimate measurement of the small natural plant 
 provide an understanding of the dynamic response of a plant and more a basis 
 for the validation of the numerical model.
-
-## Metadata:
-- **Supervisors**: Prof. Dr. Thijs Defraeye, Dr. Jonas Allegrini, 
-    Dr. Dominique Derome, Prof. Dr. Jan Carmeliet
-- **Examiners**: Prof. Dr. Jan Carmeliet, Prof. Dr. Bert Blocken, 
-    Prof. Dr. Peter Edwards
